@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+
+
 # 2024-T0008-EC06-G03
 Repositório do grupo 2024-T0008-EC06-G03
 
@@ -59,7 +60,16 @@ cd docs
 npm i
 npm start
 ```
-=======
-# 2024-1B-T08-EC06-G03
-Repositório do grupo 2024-1B-T08-EC06-G03
->>>>>>> 5603cb3 (Initial commit)
+
+
+
+
+
+
+
+
+
+
+
+
+
