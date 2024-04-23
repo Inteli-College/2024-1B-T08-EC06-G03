@@ -1,0 +1,8 @@
+{
+  "label": "Negócios",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Para que um projeto seja bem sucedido, não basta que ele resolva o problema de pessoas; é necessário que ele seja viável também. Para isso, deve-se realizar uma análise do moelo de negócios com a finalidade de compreender qual o valor do projeto a ser desenvolvido e quais são os seus potenciais riscos. Sendo assim essa seção inclui um Business Model Canvas e uma Matriz de risco."
+  }
+}
