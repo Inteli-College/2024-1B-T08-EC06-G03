@@ -1,0 +1,8 @@
+{
+  "label": "Arquitetura de Solução",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Essa seção inclui a definição dos requisitos do sistema, assim como a elaboração de uma proposta inicial da arquitetura do sistema. Sendo assim, os itens contidos nela são: Requisitos Funcionais, Requisitos Não Funcionais, Proposta Inicial da Arquitetura (contendo Descrição dos Módulos, Integração entre Módulos, Diagrama de Arquitetura)"
+  }
+}

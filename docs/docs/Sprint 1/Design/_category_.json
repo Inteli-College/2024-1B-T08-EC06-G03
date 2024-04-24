@@ -1,0 +1,8 @@
+{
+  "label": "Design",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "A proposta de design do projeto contempla a arquitetura da informação prevista para a interface do usuário. Para isso, foi realizada uma análise detalhada para compreender o perfil do usuário final. Sendo assim, nesse entregável, contém: a descrição do perfil completo de duas personas que utilizarão o sistema em desenvolvimento. A descrição das personas inclui: dados demográficos (nome, idade, gênero, escolaridade) perfil profissional (cargo/função ocupado atualmente, habilidades/capacidades, nível de letramento digital); dores/necessidades/desejos; cenário(s) de uso."
+  }
+}
