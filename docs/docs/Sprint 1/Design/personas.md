@@ -32,3 +32,22 @@ A partir dessa persona, é possível mapear as seguintes **user stories**:
 
 - User Story 3: “Como **engenheiro de manutenção**, quero que o **robô detecte corretamente** quais canos ficaram sujos, para ter **acesso a dados confiáveis**”
 
+<div align="center">
+
+**Persona 2 - Danillo**
+
+![Descrição da persona Operador de Máquias - Danillo Chrystian](../../../static/img/Danillo.png)
+
+**Fonte:** Elaborado pela equipe Rebólins
+
+</div>
+
+O Danillo é um operador de máquinas da Atvos. Ele é responsável por operar o sistema utilizado para controlar o robô na limpagem do reboiler, e por isso, precisa de uma interface clara, intuitiva e fácil de ser utilizada.
+
+A partir dessa persona, é possível mapear as seguintes **user stories**:
+
+- User Story 1: “Como **operador de máquinas**, quero que **o robô consiga mapear o espaço embaixo do reboiler em uma operação prévia**, para que a **inspeção autônoma ocorra com precisão e eficiência após esse processo**”
+
+- User Story 2: “Como **operador de máquinas**, quero uma **plataforma intuitiva e clara** de operação do robô, para poder **acionar a inspeção no momento desejado e com facilidade**”
+
+- User Story 3: “Como **operador de máquinas**, quero que **a plataforma me informe ao final da inspeção se há algum cano sujo**, para que eu possa **reportar à equipe de limpeza a necessidade de uma nova limpeza**”
