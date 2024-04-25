@@ -22,3 +22,8 @@ A seção de Requisitos Funcionais detalha as especificações cruciais que o si
 
 - **RF07:** O robô deve ser capaz de comunicar o status da inspeção e quaisquer problemas detectados em tempo real ao operador ou ao sistema central.
 
+## Conclusão
+
+Esta documentação detalha os requisitos funcionais essenciais para o desenvolvimento e implementação de um robô de inspeção autônomo destinado a melhorar a eficiência e precisão da manutenção dos canos de reboilers na indústria de processamento de cana-de-açúcar. Ao atender a esses requisitos, o robô fornecerá suporte confiável tanto para o operador de máquinas quanto para o engenheiro de manutenção, facilitando suas tarefas diárias e garantindo uma operação mais segura e otimizada. Com a integração de tecnologias avançadas de automação, processamento de imagens e análise de dados, este sistema não apenas cumpre sua função principal de inspeção, mas também serve como uma ferramenta estratégica para o planejamento e execução de manutenções preventivas e corretivas, contribuindo significativamente para a longevidade e eficiência do maquinário envolvido.
+
+
