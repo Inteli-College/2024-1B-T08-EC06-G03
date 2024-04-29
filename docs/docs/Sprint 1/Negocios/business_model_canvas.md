@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 579a42c (docs: adds business model canvas page)
 # Business Model Canvas
 
 O Business Model Canvas é uma ferramenta de gestão estratégica que permite às organizações desenvolver e esboçar modelos de negócios novos ou existentes. É um mapa visual que descreve as bases sobre as quais uma empresa cria, entrega e captura valor. Composto por nove segmentos fundamentais que abrangem as áreas mais críticas de uma empresa, desde a oferta de valor até a infraestrutura, clientes e finanças, o canvas ajuda a construir uma clara compreensão do funcionamento de um negócio. Dessa forma, permite aos empreendedores e gerentes visualizar e reinventar suas operações, promovendo inovação, alinhamento estratégico e eficiência operacional.
@@ -94,7 +88,3 @@ Fluxos de receita são as maneiras pelas quais uma empresa gera dinheiro de cada
 
 - Compra do robô e do software;
 - Suporte (serviços de manutenção e atualizações) por assinatura ou baseado em necessidade.
-<<<<<<< HEAD
-=======
->>>>>>> f22c7bd (docs: adds business model canvas page)
->>>>>>> 579a42c (docs: adds business model canvas page)
