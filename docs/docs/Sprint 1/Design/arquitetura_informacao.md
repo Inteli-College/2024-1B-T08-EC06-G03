@@ -17,7 +17,7 @@ A arquitetura de relação descreve como os componentes do sistema estão interl
     - Notificações de tarefas completas ou pendentes.
 
 - **Sistema de Controle do Robô:**
-  - Recebe comandos para iniciar, pausar, ou parar limpezas.
+  - Recebe comandos para iniciar, pausar, ou parar inspeções.
   - Envia status operacional para a interface do usuário.
 
 - **Sistema de Monitoramento e Análise de Dados:**
@@ -49,3 +49,15 @@ Este diagrama mostra as etapas envolvidas em uma operação típica de inspeçã
    - Danillo recebe notificação sobre necessidade de limpeza adicional.
    - Jairo tem acesso a visualizações de dados acerca da condição de limpeza dos tubos.
 
+Uma visualização do sistema apresentado acima pode ser visto no diagrama abaixo:
+
+
+<div align="center">
+
+**Arquitetura de Informação**
+
+![Diagrama de sequência](../../../static/img/Arquitetura%20de%20Informação.jpg)
+
+**Fonte:** Elaborado pela equipe Rebólins
+
+</div>
