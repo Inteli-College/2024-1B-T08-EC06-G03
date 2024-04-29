@@ -1,12 +1,7 @@
-
-
-<<<<<<< HEAD
 # 2024-T0008-EC06-G03
 Repositório do grupo 2024-T0008-EC06-G03
 
 ## Descrição do Projeto
-
-
 
 ## Objetivos do Projeto
 
