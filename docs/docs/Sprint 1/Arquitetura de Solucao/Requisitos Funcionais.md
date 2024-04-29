@@ -10,17 +10,19 @@ A seção de Requisitos Funcionais detalha as especificações cruciais que o si
 
 ## 2. Operação Autônoma
 
-- **RF03:** O robô deve ter a capacidade de detectar e ajustar-se automaticamente a mudanças no ambiente, como variações na superfície de inspeção, a quantidade de tubos a serem inspecionados e o tamanho do reboiler.
+- **RF03:** O robô deve ter a capacidade de detectar e ajustar-se automaticamente a mudanças no ambiente, como variações na superfície de inspeção, a quantidade de tubos a serem inspecionados, o tamanho do reboiler e obstáculos.
 - **RF04:** Deve haver um sistema de navegação autônomo que permita ao robô seguir um caminho pré-determinado ou ajustar sua rota em tempo real com base nas condições internas dos canos.
 
 ## 3. Processamento de Imagens e Análise de Dados
 
 - **RF05:** O sistema deve processar as imagens capturadas em tempo real para identificar sujeira ou resíduos, utilizando algoritmos de visão computacional.
 - **RF06:** O robô deve integrar dados de sensores adicionais para a análise do espaço a ser inspecionado.
+- **RF07:** O robô deve enviar os dados referentes à limpreza de cada tubo para uma base de dados central.
+
 
 ## 4. Comunicação e Relatórios
 
-- **RF07:** O robô deve ser capaz de comunicar o status da inspeção e quaisquer problemas detectados em tempo real ao operador ou ao sistema central.
+- **RF08:** O robô deve ser capaz de comunicar o status da inspeção e quaisquer problemas detectados em tempo real ao operador ou ao sistema central.
 
 ## Conclusão
 
