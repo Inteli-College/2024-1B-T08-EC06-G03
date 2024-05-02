@@ -6,6 +6,25 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 ## Objetivos do Projeto
 - Garantir que todos os reboilers estão completamente limpos;
 - Disponibilizar de forma sistemática dados relacionados a limpeza dos tubos;
+
+## 👨‍🎓 Integrantes: 
+- <a href="https://www.linkedin.com/in/eduardosbarreto/">Eduardo Santos Barreto</a>
+- <a href="https://www.linkedin.com/in/fernando-vasconcellos-/">Fernando Antonio Sampaio Cabral de Vasconcelos</a>
+- <a href="https://www.linkedin.com/in/eduardo-franca-porto/">Gabrielle Dias Cartaxo</a>
+- <a href="https://www.linkedin.com/in/guilherme-ferreira-linhares-8638411a1/">Guilherme Ferreira Linhares</a>
+- <a href="https://www.linkedin.com/in/naruto/">Ivan Gonçalves Ferreira</a>
+- <a href="hhttps://www.linkedin.com/in/luiza-rubim/">Luiza Souza Rubim</a>
+
+## 👩‍🏫 Professores:
+### Orientador
+- <a href="https://www.linkedin.com/in/rodrigo-mangoni-nicola-537027158/">Rodrigo Nicola</a>
+### Instrutores
+- <a href="https://www.linkedin.com/in/gui-cestari/">Guilherme Cestari</a>
+- <a href="https://www.inteli.edu.br/">Geraldo Vasconcelos</a> 
+- <a href="https://www.linkedin.com/in/lisane-valdo/">Lisane Valdo</a> 
+- <a href="https://www.linkedin.com/in/monica-anastassiu-d-sc-2568522/">Mônica Anastassiu</a>
+- <a href="https://www.linkedin.com/in/murilo-zanini-de-carvalho-0980415b/">Murilo Zanini de Carvalho</a>
+
 ## Estrutura de Pastas
 ```
 └── 📁2024-1B-T08-EC06-G03
@@ -50,11 +69,7 @@ git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
 
 ### Documentação
 
-A documentação é feita com o [Docussaurus](https://docusaurus.io/), para executá-la, basta executar os seguintes comandos:
+Para acessar a nossa [documentação](https://inteli-college.github.io/2024-1B-T08-EC06-G03/), clique [aqui](https://inteli-college.github.io/2024-1B-T08-EC06-G03/)!
 
-```sh
-cd docs
-npm i
-npm start
-```
-
+## 📋 Licença/License
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Desencana!</span> - por <span property="cc:attributionName"> <a href="https://www.linkedin.com/in/eduardosbarreto/">Eduardo Barreto</a>, <a href="https://www.linkedin.com/in/fernando-vasconcellos-/">Fernando Vasconcelos</a>, <a href="https://www.linkedin.com/in/eduardo-franca-porto/">Gabrielle Cartaxo</a>, <a href="https://www.linkedin.com/in/guilherme-ferreira-linhares-8638411a1/">Guilherme Linhares</a>, <a href="https://www.linkedin.com/in/naruto/">Ivan Ferreira</a>, <a href="hhttps://www.linkedin.com/in/luiza-rubim/">Luiza Rubim</a> e <a href="https://www.linkedin.com/in/olincosta/">Olin Costa</a></span> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
