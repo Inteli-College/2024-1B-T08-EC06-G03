@@ -21,8 +21,6 @@ User Story: User Story 2 do Danillo Chrystian
 - Os passos para iniciar a execução estão claramente descritos.
 - Não há ambiguidades nos passos indicados pela interface.
 
-Com certeza, vamos aprimorar o teste 2 para incluir um nível mais detalhado de verificação:
-
 ### Caso de Teste 2: Verificar Movimentação Precisa do Robô com Base no Input da Planta
 
 Requisito Funcional: RF02
@@ -112,8 +110,6 @@ User Story: User Story 2 do Jairo Santos
 - O sistema identifica corretamente sujeira ou resíduos nas imagens.
 - Não há falsos positivos ou negativos na identificação.
 
-Vamos aprimorar o teste 6 para incluir mais detalhes:
-
 ### Caso de Teste 6: Verificar Emissão de Alertas em Caso de Problemas
 
 Requisito Funcional: RF06
@@ -140,8 +136,6 @@ User Story: User Story 3 do Jairo Santos
 
 - Comparar a resposta do robô a diferentes tipos de falhas ou situações de erro para avaliar a consistência do sistema de alerta.
 - Analisar a eficácia dos alertas emitidos pelo robô em diferentes condições ambientais (por exemplo, com ruído de fundo) para garantir que sejam percebidos pelo operador em todas as situações.
-
-Vamos detalhar o teste 7 para garantir uma cobertura completa:
 
 ### Caso de Teste 7: Verificar Envio de Dados para Base de Dados Central
 
@@ -170,8 +164,6 @@ User Story: User Story 3 do Jairo Santos
 
 - Comparar os dados registrados pelo robô com as informações fornecidas pelos operadores para garantir a consistência e integridade dos dados enviados para a base de dados central.
 - Analisar o tempo necessário para o envio e processamento dos dados na base de dados central para identificar possíveis gargalos ou atrasos no sistema de comunicação.
-
-Vamos detalhar os casos de teste 8, 9 e 10:
 
 ### Caso de Teste 8: Verificar Controle Remoto em Casos de Emergência
 
