@@ -8,6 +8,8 @@ rclpy.init()
 node = rclpy.create_node("move_robot_publisher")
 pub = node.create_publisher(Twist, "/cmd_vel", 10)
 
+last_command = Twist()
+
 
 def move_robot(direction):
     """
@@ -17,7 +19,9 @@ def move_robot(direction):
     :type direction: str
     """
 
-    msg = Twist()
+    global last_command
+
+    msg = last_command
 
     match direction:
         case "front":
@@ -29,10 +33,13 @@ def move_robot(direction):
         case "right":
             msg.angular.z = -0.9
         case _:
+            msg.linear.x = 0.0
+            msg.angular.z = 0.0
             pass
 
     node.get_logger().info(f"Sending movement command: {msg}")
     pub.publish(msg)
+    last_command = msg
 
 
 @app.route("/move", methods=["POST"])
