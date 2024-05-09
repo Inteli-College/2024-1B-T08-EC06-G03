@@ -15,11 +15,12 @@ setup(
     zip_safe=True,
     maintainer='fvasconcellos',
     maintainer_email='fernando.asv@uol.com.br',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='Controle teleoperado do Turtlebot',
+    license='CC0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+		"bot = robot_navigation.bot:main",
         ],
     },
 )
