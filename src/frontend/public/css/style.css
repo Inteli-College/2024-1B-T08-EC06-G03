@@ -1,0 +1,36 @@
+.D-Pad {
+    --button-size: calc(5.834vmin + 1.25rem);
+    --button-text: calc(0.556vmin + 0.625rem);
+}
+
+.D-Pad, .D-Pad>* {
+    display: flex; justify-content: center; align-items: center;
+}
+.D-Pad, .btn-col {
+    flex-direction: column;
+}
+.btn-col {
+    width: var(--button-size);
+}
+.btn-row { 
+    width: calc(3 * var(--button-size));
+    justify-content: space-between;
+}
+.btn-col > *,
+.btn-row > * {
+    font-size: var(--button-text);
+
+    width: var(--button-size);
+    aspect-ratio: 1;
+}
+
+*             { box-sizing: border-box }
+body          { margin: 0; min-height: 100vh }
+body, .center { display: grid; place-items: center; text-align: center }
+.center       { padding: 0.5em }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
