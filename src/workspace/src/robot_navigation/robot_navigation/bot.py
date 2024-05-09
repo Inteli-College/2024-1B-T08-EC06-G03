@@ -1,60 +1,68 @@
 import rclpy
 from geometry_msgs.msg import Twist
-from flask import Flask,request, jsonify
-
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
 rclpy.init()
-node = rclpy.create_node('move_robot_publisher')
-pub = node.create_publisher(Twist, '/cmd_vel', 10)
+node = rclpy.create_node("move_robot_publisher")
+pub = node.create_publisher(Twist, "/cmd_vel", 10)
 
 
-#Função de movimentação do robô
 def move_robot(direction):
-    msg = Twist() #tipo de mensagem recebida pelo cmd/vel
+    """
+    Move the robot in the specified direction
 
-    # Define as velocidades lineares e angulares de acordo com a direção
-    if direction == 'frente':
-        msg.linear.x = 0.1  # velocidade linear para frente
-        msg.angular.z = 0.0
-    elif direction == 'trás':
-        msg.linear.x = -0.1  # velocidade linear para trás
-        msg.angular.z = 0.0
-    elif direction == 'esquerda':
-        msg.linear.x = 0.0
-        msg.angular.z = 0.05  # velocidade angular para girar para a esquerda
-    elif direction == 'direita':
-        msg.linear.x = 0.0
-        msg.angular.z = -0.05  # velocidade angular para girar para a direita
-    else:
-        # Se a direção não for reconhecida, pare o robô (aka movimentação de emergência)
-        msg.linear.x = 0.0
-        msg.angular.z = 0.0
+    :param direction: The direction in which the robot should move
+    :type direction: str
+    """
 
-    print(msg)
+    msg = Twist()
 
+    match direction:
+        case "front":
+            msg.linear.x = 0.2
+        case "back":
+            msg.linear.x = -0.2
+        case "left":
+            msg.angular.z = 0.9
+        case "right":
+            msg.angular.z = -0.9
+        case _:
+            pass
+
+    node.get_logger().info(f"Sending movement command: {msg}")
     pub.publish(msg)
 
 
-
-@app.route('/move', methods=['POST'])
+@app.route("/move", methods=["POST"])
 def move():
-    if not request.is_json:
-        return jsonify({"error": "Missing JSON in request"}), 400
-    data = request.get_json()
-    direction = data.get('direction')
+    """
+    Move the robot in the specified direction
+
+    :param direction: The direction in which the robot should move
+
+    :return: JSON response with the status of the movement command
+    :rtype: flask.Response
+    """
+    data = request.form
+    if data is None or len(data) == 0:
+        data = request.json
+
+    direction = data.get("direction")
+
     if not direction:
-        return jsonify({"error": "Missing 'direction' in JSON"}), 400
+        return jsonify({"error": "Missing 'direction' in payload"}), 400
+
     move_robot(direction)
     return jsonify({"status": "Movement command executed"}), 200
 
+
 def main():
-    app.run()
-    # Desliga o nó ao finalizar
+    app.run(host="0.0.0.0", port=5000, debug=True)
     node.destroy_node()
     rclpy.shutdown()
 
-if __name__ == '__main__':
-    main()
 
+if __name__ == "__main__":
+    main()
