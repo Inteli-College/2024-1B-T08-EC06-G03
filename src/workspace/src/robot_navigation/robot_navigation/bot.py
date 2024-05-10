@@ -1,8 +1,10 @@
 import rclpy
 from geometry_msgs.msg import Twist
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all routes
 
 rclpy.init()
 node = rclpy.create_node("move_robot_publisher")
@@ -25,9 +27,9 @@ def move_robot(direction):
 
     match direction:
         case "front":
-            msg.linear.x = 0.2
-        case "back":
             msg.linear.x = -0.2
+        case "back":
+            msg.linear.x = 0.2
         case "left":
             msg.angular.z = 0.9
         case "right":
@@ -52,7 +54,8 @@ def move():
     :return: JSON response with the status of the movement command
     :rtype: flask.Response
     """
-    data = request.form
+    data = request.json
+    print(data)
     if data is None or len(data) == 0:
         data = request.json
 
@@ -63,7 +66,6 @@ def move():
 
     move_robot(direction)
     return jsonify({"status": "Movement command executed"}), 200
-
 
 def main():
     app.run(host="0.0.0.0", port=5000, debug=True)
