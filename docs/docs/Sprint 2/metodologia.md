@@ -18,7 +18,7 @@ Após isso, foi criado um workspace para acomodar o pacote que se chama robot_na
 - `cd workspace/src`
 - `ros2 pkg create --build-type ament_python robot_navigation`
 
-Depois, algumas mudanças foram necessárias, como por exemplo editar o arquivo *package.xml* e adicionar as depenências de execução do rclpy e std_msgs. Além disso, também foi preciso mexer no arquivo *setup.py, na parte de **entry_points**, adicionando na lista (que até então ainda estava vazia) a estrutura "<nome do comando> = <nome do pacote>.<nome do arquivo executável>:<função principal, nesse caso a main>.
+Depois, algumas mudanças foram necessárias, como por exemplo editar o arquivo *package.xml* e adicionar as depenências de execução do rclpy e std_msgs. Além disso, também foi preciso mexer no arquivo *setup.py*, na parte de **entry_points**, adicionando na lista (que até então ainda estava vazia) a estrutura "< nome do comando > = < nome do pacote >.< nome do arquivo executável >:< função principal, nesse caso a main >.
 
 Após essas mudanças, foi utilizado um script para compilar, executando `source run.sh`, finalizando assim a estruturação do workspace e do pacote.
 
