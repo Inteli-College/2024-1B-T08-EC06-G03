@@ -11,6 +11,7 @@ node = rclpy.create_node("move_robot_publisher")
 pub = node.create_publisher(Twist, "/cmd_vel", 10)
 
 last_command = Twist()
+killed = False
 
 
 def move_robot(direction):
@@ -21,7 +22,10 @@ def move_robot(direction):
     :type direction: str
     """
 
-    global last_command
+    global killed, last_command
+
+    if killed:
+        return
 
     msg = last_command
 
@@ -42,6 +46,16 @@ def move_robot(direction):
     node.get_logger().info(f"Sending movement command: {msg}")
     pub.publish(msg)
     last_command = msg
+
+
+def kill_robot():
+    """
+    Stop the robot from moving
+    """
+    global killed
+
+    move_robot("stop")
+    killed = True
 
 
 @app.route("/move", methods=["POST"])
@@ -66,6 +80,32 @@ def move():
 
     move_robot(direction)
     return jsonify({"status": "Movement command executed"}), 200
+
+
+@app.route("/kill")
+def kill():
+    """
+    Stop the robot from moving
+
+    :return: JSON response with the status of the kill command
+    :rtype: flask.Response
+    """
+    kill_robot()
+    return jsonify({"status": "Robot killed"}), 200
+
+
+@app.route("/reset")
+def reset():
+    """
+    Reset the robot to its initial state
+
+    :return: JSON response with the status of the reset command
+    :rtype: flask.Response
+    """
+    global killed
+    killed = False
+    return jsonify({"status": "Robot reset"}), 200
+
 
 def main():
     app.run(host="0.0.0.0", port=5000, debug=True)
