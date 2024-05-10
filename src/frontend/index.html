@@ -53,7 +53,7 @@
             } else if (keyCode === 83) {  // 83 is the key code for the 'S' key
                 delete keyState['S'];
                 document.getElementById('south').style.backgroundColor = '';
-            }
+            } 
             if (keyCode === 32) {  // 32 is the key code for the space bar
                 sendRequest('parar');
             }
@@ -84,13 +84,13 @@
         <div class="row">
             <div class="col">
                 <div class="D-Pad">
-                    <div class="btn-col"><button class="direction-button" id="north">Front</button></div>
+                    <div class="btn-col"><button class="direction-button btn btn-secondary" id="north">Front</button></div>
                     <div class="btn-row">
-                        <button class="direction-button" id="west">Left</button>
+                        <button class="direction-button btn btn-secondary" id="west">Left</button>
                         <div class="center">.</div>
-                        <button class="direction-button" id="east">Right</button>
+                        <button class="direction-button btn btn-secondary" id="east">Right</button>
                     </div>
-                    <div class="btn-col"><button class="direction-button" id="south">Back</button></div>
+                    <div class="btn-col"><button class="direction-button btn btn-secondary" id="south">Back</button></div>
                 </div>
             </div>
         </div>
