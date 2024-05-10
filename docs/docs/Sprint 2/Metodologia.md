@@ -1,5 +1,3 @@
-## Metodologia
-
 ## Movimentação do robô
 
 O objetivo dessa sprint foi o desenvolvimento de um sistema (nesse caso, uma aplicação web) que é capaz de se comunicar com o robô e fazê-lo se mover. 
