@@ -4,8 +4,8 @@ Estes casos de teste foram desenvolvidos para garantir a qualidade e a conformid
 
 ### Caso de Teste 1: Verificar Interface de Usuário para Iniciar a Execução
 
-Requisito Funcional: RF01
-User Story: User Story 2 do Danillo Chrystian
+Requisito Funcional relacionado: RF01
+User Story relacionada: User Story 2 do Danillo Chrystian
 
 **Descrição:** Verificar se a interface de usuário apresenta os passos corretos para iniciar a execução de forma simples e intuitiva.
 
@@ -23,9 +23,9 @@ User Story: User Story 2 do Danillo Chrystian
 
 ### Caso de Teste 2: Verificar Movimentação Precisa do Robô com Base no Input da Planta
 
-Requisito Funcional: RF02
+Requisito Funcional relacionado: RF02
 
-User Story: User Story 1 do Danillo Chrystian
+User Story relacionada: User Story 1 do Danillo Chrystian
 
 **Descrição:** Verificar se o robô se movimenta de forma precisa e eficiente com base no input da planta do reboiler enviado na interface do usuário.
 
@@ -52,8 +52,8 @@ User Story: User Story 1 do Danillo Chrystian
 
 ### Caso de Teste 3: Verificar Tempo de Parada do Robô ao Cancelar Inspeção
 
-Requisito Funcional: RF03
-User Story: User Story 4 do Danillo Chrystian
+Requisito Funcional relacionado: RF03
+User Story relacionada: User Story 4 do Danillo Chrystian
 
 **Descrição:** Verificar se o robô para sua ação em no máximo 10 segundos quando a inspeção é cancelada.
 
@@ -70,8 +70,8 @@ User Story: User Story 4 do Danillo Chrystian
 
 ### Caso de Teste 4: Verificar Melhoria na Captação de Imagem com Iluminação
 
-Requisito Funcional: RF04
-User Story: User Story 3 do Jairo Santos
+Requisito Funcional relacionado: RF04
+User Story relacionada: User Story 3 do Jairo Santos
 
 **Descrição:** Verificar se o sistema de iluminação do robô melhora a captação da imagem do tubo em comparação com a ausência de iluminação.
 
@@ -95,8 +95,8 @@ Com essa comparação entre os resultados obtidos com e sem a iluminação do ro
 
 ### Caso de Teste 5: Verificar Identificação de Sujeira ou Resíduos em Imagens
 
-Requisito Funcional: RF05
-User Story: User Story 2 do Jairo Santos
+Requisito Funcional relacionado: RF05
+User Story relacionada: User Story 2 do Jairo Santos
 
 **Descrição:** Verificar se o sistema identifica sujeira ou resíduos nas imagens capturadas em tempo real.
 
@@ -112,8 +112,8 @@ User Story: User Story 2 do Jairo Santos
 
 ### Caso de Teste 6: Verificar Emissão de Alertas em Caso de Problemas
 
-Requisito Funcional: RF06
-User Story: User Story 3 do Jairo Santos
+Requisito Funcional relacionado: RF06
+User Story relacionada: User Story 3 do Jairo Santos
 
 **Descrição:** Verificar se o robô emite alertas de forma adequada quando identifica problemas em seu funcionamento durante a inspeção.
 
@@ -139,8 +139,8 @@ User Story: User Story 3 do Jairo Santos
 
 ### Caso de Teste 7: Verificar Envio de Dados para Base de Dados Central
 
-Requisito Funcional: RF07
-User Story: User Story 3 do Jairo Santos
+Requisito Funcional relacionado: RF07
+User Story relacionada: User Story 3 do Jairo Santos
 
 **Descrição:** Verificar se o robô envia corretamente os dados referentes à limpeza de cada tubo para uma base de dados central após a conclusão da inspeção.
 
@@ -167,8 +167,8 @@ User Story: User Story 3 do Jairo Santos
 
 ### Caso de Teste 8: Verificar Controle Remoto em Casos de Emergência
 
-Requisito Funcional: RF08
-User Story: User Story 5 do Danillo Chrystian
+Requisito Funcional relacionado: RF08
+User Story relacionada: User Story 5 do Danillo Chrystian
 
 **Descrição:** Verificar se o robô pode ser controlado remotamente em casos de emergência ou irregularidades da inspeção.
 
@@ -189,8 +189,8 @@ User Story: User Story 5 do Danillo Chrystian
 
 ### Caso de Teste 9: Verificar Informações Fornecidas ao Final da Inspeção
 
-Requisito Funcional: RF01
-User Story: User Story 2 do Danillo Chrystian
+Requisito Funcional relacionado: RF01
+User Story relacionada: User Story 2 do Danillo Chrystian
 
 **Descrição:** Verificar se a plataforma informa ao operador se há algum cano sujo ao final da inspeção.
 
