@@ -66,8 +66,52 @@ A execução depende da parte do projeto que deve ser executada, mas um passo im
 ```sh
 git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
 ```
+### 1. Conexão com o Robô via SSH
+Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Execute os seguintes passos no seu terminal:
 
-### Documentação
+1. **Inicie o Robô**: Certifique-se de que o robô esteja ligado e pronto para conexão.
+2. **Conectar via SSH**:
+   - Abra um terminal no seu computador.
+   - Digite o comando SSH para estabelecer uma conexão segura. Confirme o comando exato e o IP na documentação de metodologia. Um exemplo de comando é:
+     ```bash
+     ssh -p 1238 bobolins@10.128.0.16
+     ```
+   - Quando solicitado, digite a senha para autenticação, por exemplo: `reboiler123`.
+
+### 2. Inicialização do Robô
+Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes necessários do robô.
+
+1. **Executar o Comando de Bring Up**:
+   - No terminal SSH, execute o comando que inicializa os processos necessários no robô. Este comando pode ser encontrado na documentação técnica ou em tutoriais relevantes. Um exemplo comum para robôs baseados em ROS pode ser algo como:
+     ```bash
+     ros2 launch turtlebot3_bringup robot.launch.py
+     ```
+   - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
+
+### 3. Execução do Software de Controle
+Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô.
+
+1. **Preparar o Ambiente de Software**:
+   - No seu computador (não no terminal SSH), abra um novo terminal.
+   - Navegue até o diretório do projeto e entre na pasta do código fonte 
+     ```bash
+     cd src/workspace
+     ```
+   - Execute o script que inicia o servidor ou o software de controle:
+     ```bash
+     ./run.sh
+     ```
+
+2. **Abrir Interface de Controle**:
+   - Localize o arquivo HTML responsável pela interface de controle. O caminho exato deve ser verificado na documentação do projeto.
+   - Abra o arquivo HTML diretamente com um navegador para acessar a interface de controle do robô.
+
+### 4. Controle do Robô
+- Utilize as teclas especificadas na interface HTML para controlar o robô.
+
+**Nota:** É importante confirmar todos os comandos e caminhos exatos com a documentação técnica disponível para garantir que as instruções estejam corretas e atualizadas.
+
+## Documentação
 
 Para acessar a nossa [documentação](https://inteli-college.github.io/2024-1B-T08-EC06-G03/), clique [aqui](https://inteli-college.github.io/2024-1B-T08-EC06-G03/)!
 
