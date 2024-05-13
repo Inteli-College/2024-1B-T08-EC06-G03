@@ -1,0 +1,80 @@
+[0.000000] (-) TimerEvent: {}
+[0.000600] (robot_navigation) JobQueued: {'identifier': 'robot_navigation', 'dependencies': OrderedDict()}
+[0.001249] (robot_navigation) JobStarted: {'identifier': 'robot_navigation'}
+[0.099571] (-) TimerEvent: {}
+[0.200137] (-) TimerEvent: {}
+[0.300849] (-) TimerEvent: {}
+[0.401357] (-) TimerEvent: {}
+[0.502085] (-) TimerEvent: {}
+[0.602880] (-) TimerEvent: {}
+[0.703596] (-) TimerEvent: {}
+[0.804653] (-) TimerEvent: {}
+[0.905310] (-) TimerEvent: {}
+[1.006134] (-) TimerEvent: {}
+[1.106637] (-) TimerEvent: {}
+[1.207257] (-) TimerEvent: {}
+[1.307737] (-) TimerEvent: {}
+[1.408543] (-) TimerEvent: {}
+[1.509483] (-) TimerEvent: {}
+[1.610120] (-) TimerEvent: {}
+[1.710666] (-) TimerEvent: {}
+[1.811495] (-) TimerEvent: {}
+[1.912102] (-) TimerEvent: {}
+[2.012688] (-) TimerEvent: {}
+[2.113683] (-) TimerEvent: {}
+[2.214806] (-) TimerEvent: {}
+[2.315478] (-) TimerEvent: {}
+[2.416618] (-) TimerEvent: {}
+[2.517107] (-) TimerEvent: {}
+[2.617590] (-) TimerEvent: {}
+[2.718205] (-) TimerEvent: {}
+[2.818795] (-) TimerEvent: {}
+[2.919482] (-) TimerEvent: {}
+[3.020186] (-) TimerEvent: {}
+[3.120956] (-) TimerEvent: {}
+[3.221554] (-) TimerEvent: {}
+[3.322599] (-) TimerEvent: {}
+[3.423474] (-) TimerEvent: {}
+[3.524113] (-) TimerEvent: {}
+[3.624618] (-) TimerEvent: {}
+[3.725505] (-) TimerEvent: {}
+[3.826218] (-) TimerEvent: {}
+[3.926761] (-) TimerEvent: {}
+[4.027583] (-) TimerEvent: {}
+[4.128519] (-) TimerEvent: {}
+[4.229354] (-) TimerEvent: {}
+[4.306590] (robot_navigation) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/robot_navigation', 'build', '--build-base', '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/build/robot_navigation/build', 'install', '--record', '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/build/robot_navigation/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/src/robot_navigation', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'pt_BR:en', 'USER': 'bielle', 'LC_TIME': 'pt_BR.UTF-8', 'GIO_MODULE_DIR': '/home/bielle/snap/code/common/.cache/gio-modules', 'XDG_SESSION_TYPE': 'wayland', 'GIT_ASKPASS': '/snap/code/159/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'GTK_EXE_PREFIX_VSCODE_SNAP_ORIG': '', 'GDK_BACKEND_VSCODE_SNAP_ORIG': '', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/bielle', 'CHROME_DESKTOP': 'code-url-handler.desktop', 'LOCPATH_VSCODE_SNAP_ORIG': '', 'OLDPWD': '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src', 'TERM_PROGRAM_VERSION': '1.89.1', 'DESKTOP_SESSION': 'ubuntu', 'GTK_PATH': '/snap/code/159/usr/lib/x86_64-linux-gnu/gtk-3.0', 'NVM_BIN': '/home/bielle/.nvm/versions/node/v20.13.1/bin', 'NVM_INC': '/home/bielle/.nvm/versions/node/v20.13.1/include/node', 'GTK_IM_MODULE_FILE': '/home/bielle/snap/code/common/.cache/immodules/immodules.cache', 'GIO_LAUNCHED_DESKTOP_FILE': '/var/lib/snapd/desktop/applications/code_code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'GSETTINGS_SCHEMA_DIR_VSCODE_SNAP_ORIG': '', 'VSCODE_GIT_ASKPASS_MAIN': '/snap/code/159/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'LC_MONETARY': 'pt_BR.UTF-8', 'VSCODE_GIT_ASKPASS_NODE': '/snap/code/159/usr/share/code/code', 'MANAGERPID': '918', 'SYSTEMD_EXEC_PID': '1204', 'IM_CONFIG_CHECK_ENV': '1', 'GOROOT': '/usr/local/go', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '7651', 'NVM_DIR': '/home/bielle/.nvm', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'humble', 'LOGNAME': 'bielle', 'JOURNAL_STREAM': '8:20016', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_CONFIG_DIRS_VSCODE_SNAP_ORIG': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_SESSION_CLASS': 'user', 'XDG_DATA_DIRS_VSCODE_SNAP_ORIG': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'USERNAME': 'bielle', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/home/bielle/.nvm/versions/node/v20.13.1/bin:/opt/ros/humble/bin:/home/bielle/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/bielle/go/bin', 'SESSION_MANAGER': 'local/bielle-dc:@/tmp/.ICE-unix/1148,unix/bielle-dc:/tmp/.ICE-unix/1148', 'GTK_EXE_PREFIX': '/snap/code/159/usr', 'INVOCATION_ID': 'ca5ebdc647524d5b870353a4222a5e38', 'PAPERSIZE': 'a4', 'XDG_MENU_PREFIX': 'gnome-', 'LC_ADDRESS': 'pt_BR.UTF-8', 'BAMF_DESKTOP_FILE_HINT': '/var/lib/snapd/desktop/applications/code_code.desktop', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':0', 'LOCPATH': '/snap/code/159/usr/lib/locale', 'LANG': 'pt_BR.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'LC_TELEPHONE': 'pt_BR.UTF-8', 'GIO_MODULE_DIR_VSCODE_SNAP_ORIG': '', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.L99NN2', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-b3012b5a6a.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'GSETTINGS_SCHEMA_DIR': '/home/bielle/snap/code/159/.local/share/glib-2.0/schemas', 'ROS_DOMAIN_ID': '231', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'LC_NAME': 'pt_BR.UTF-8', 'GOPATH': '/home/bielle/go', 'QT_ACCESSIBILITY': '1', 'NO_AT_BRIDGE': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GTK_PATH_VSCODE_SNAP_ORIG': '', 'GTK_IM_MODULE_FILE_VSCODE_SNAP_ORIG': '', 'LC_MEASUREMENT': 'pt_BR.UTF-8', 'GJS_DEBUG_OUTPUT': 'stderr', 'LC_IDENTIFICATION': 'pt_BR.UTF-8', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/build/robot_navigation', 'TURTLEBOT3_MODEL': 'burger', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'NVM_CD_FLAGS': '', 'XDG_DATA_DIRS': '/home/bielle/snap/code/159/.local/share:/home/bielle/snap/code/159:/snap/code/159/usr/share:/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/build/robot_navigation/prefix_override:/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/install/robot_navigation/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages:/home/bielle/.local/lib/python3.10/site-packages', 'LC_NUMERIC': 'pt_BR.UTF-8', 'LC_PAPER': 'pt_BR.UTF-8', 'COLCON': '1'}, 'shell': False}
+[4.329476] (-) TimerEvent: {}
+[4.429972] (-) TimerEvent: {}
+[4.530728] (-) TimerEvent: {}
+[4.631609] (-) TimerEvent: {}
+[4.732581] (-) TimerEvent: {}
+[4.820291] (robot_navigation) StdoutLine: {'line': b'running egg_info\n'}
+[4.823091] (robot_navigation) StdoutLine: {'line': b'writing ../../build/robot_navigation/robot_navigation.egg-info/PKG-INFO\n'}
+[4.823655] (robot_navigation) StdoutLine: {'line': b'writing dependency_links to ../../build/robot_navigation/robot_navigation.egg-info/dependency_links.txt\n'}
+[4.824003] (robot_navigation) StdoutLine: {'line': b'writing entry points to ../../build/robot_navigation/robot_navigation.egg-info/entry_points.txt\n'}
+[4.824267] (robot_navigation) StdoutLine: {'line': b'writing requirements to ../../build/robot_navigation/robot_navigation.egg-info/requires.txt\n'}
+[4.832722] (-) TimerEvent: {}
+[4.835201] (robot_navigation) StdoutLine: {'line': b'writing top-level names to ../../build/robot_navigation/robot_navigation.egg-info/top_level.txt\n'}
+[4.838963] (robot_navigation) StdoutLine: {'line': b"reading manifest file '../../build/robot_navigation/robot_navigation.egg-info/SOURCES.txt'\n"}
+[4.854075] (robot_navigation) StdoutLine: {'line': b"writing manifest file '../../build/robot_navigation/robot_navigation.egg-info/SOURCES.txt'\n"}
+[4.854579] (robot_navigation) StdoutLine: {'line': b'running build\n'}
+[4.854733] (robot_navigation) StdoutLine: {'line': b'running build_py\n'}
+[4.855009] (robot_navigation) StdoutLine: {'line': b'copying robot_navigation/bot.py -> /home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/build/robot_navigation/build/lib/robot_navigation\n'}
+[4.855999] (robot_navigation) StdoutLine: {'line': b'running install\n'}
+[4.857864] (robot_navigation) StdoutLine: {'line': b'running install_lib\n'}
+[4.860904] (robot_navigation) StdoutLine: {'line': b'copying /home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/build/robot_navigation/build/lib/robot_navigation/bot.py -> /home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/install/robot_navigation/lib/python3.10/site-packages/robot_navigation\n'}
+[4.862277] (robot_navigation) StdoutLine: {'line': b'byte-compiling /home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/install/robot_navigation/lib/python3.10/site-packages/robot_navigation/bot.py to bot.cpython-310.pyc\n'}
+[4.865695] (robot_navigation) StdoutLine: {'line': b'running install_data\n'}
+[4.866104] (robot_navigation) StdoutLine: {'line': b'running install_egg_info\n'}
+[4.870145] (robot_navigation) StdoutLine: {'line': b"removing '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/install/robot_navigation/lib/python3.10/site-packages/robot_navigation-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[4.870717] (robot_navigation) StdoutLine: {'line': b'Copying ../../build/robot_navigation/robot_navigation.egg-info to /home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/install/robot_navigation/lib/python3.10/site-packages/robot_navigation-0.0.0-py3.10.egg-info\n'}
+[4.884617] (robot_navigation) StdoutLine: {'line': b'running install_scripts\n'}
+[4.932904] (-) TimerEvent: {}
+[4.933737] (robot_navigation) StdoutLine: {'line': b'Installing bot script to /home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/install/robot_navigation/lib/robot_navigation\n'}
+[4.934761] (robot_navigation) StdoutLine: {'line': b"writing list of installed files to '/home/bielle/Documentos/Github/2024-1B-T08-EC06-G03/src/workspace/build/robot_navigation/install.log'\n"}
+[5.005160] (robot_navigation) CommandEnded: {'returncode': 0}
+[5.033083] (-) TimerEvent: {}
+[5.133736] (-) TimerEvent: {}
+[5.216504] (robot_navigation) JobEnded: {'identifier': 'robot_navigation', 'rc': 0}
+[5.218403] (-) EventReactorShutdown: {}
