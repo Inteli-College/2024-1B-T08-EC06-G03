@@ -1,3 +1,7 @@
+---
+title: Testes 
+sidebar_position: 2
+---
 # Testes
 
 Estes casos de teste foram desenvolvidos para garantir a qualidade e a conformidade do sistema de inspeção de reboiler. O sistema foi projetado para fornecer uma interface simplificada para iniciar a execução da inspeção, controlar o movimento do robô, identificar problemas durante a inspeção e enviar dados relevantes para uma base de dados central. Além disso, o sistema deve atender às necessidades específicas das personas Jairo e Danillo, conforme detalhado nas user stories relacionadas.
