@@ -1,3 +1,0 @@
-[console_scripts]
-bot = robot_navigation.bot:main
-
