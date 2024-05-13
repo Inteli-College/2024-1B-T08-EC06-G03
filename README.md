@@ -27,36 +27,63 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 
 ## Estrutura de Pastas
 ```
-└── 📁2024-1B-T08-EC06-G03
-    └── 📁.github
-        └── 📁workflows
-            └── static.yml
-    └── 📁docs
-        └── 📁.docusaurus
-        └── .gitignore
-        └── babel.config.js
-        └── 📁docs
+└── 📂2024-1B-T08-EC06-G03
+    └── 📂.github
+        └── 📂workflows
+            └── 📜static.yml
+    └── 📂docs
+        └── 📂.docusaurus
+        └── 📜.gitignore
+        └── 📜babel.config.js
+        └── 📂docs
             └── index.md
-            └── 📁Sprint 1
-                └── 📁Arquitetura de Solucao
-                └── 📁Design
-                └── 📁Negocios
-            └── 📁Sprint 2
-            └── 📁Sprint 3
-            └── 📁Sprint 4
-            └── 📁Sprint 5
-        └── docusaurus.config.js
-        └── package-lock.json
-        └── package.json
+            └── 📂Sprint 1
+                └── 📂Arquitetura de Solucao
+                └── 📂Design
+                └── 📂Negocios
+            └── 📂Sprint 2
+            └── 📂Sprint 3
+            └── 📂Sprint 4
+            └── 📂Sprint 5
+        └── 📜docusaurus.config.js
+        └── 📜package-lock.json
+        └── 📜package.json
+        └── 📜README.md
+        └── 📂src
+            └── 📂components
+                └── 📂HomepageFeatures
+            └── 📂css
+        └── 📂static
+            └── 📂img
         └── README.md
-        └── 📁src
-            └── 📁components
-                └── 📁HomepageFeatures
-            └── 📁css
-        └── 📁static
-            └── 📁img
-        └── README.md
-    ├── src
+    ├── 📂src
+        └── 📂frontend
+           └── 📂public
+            └── 📂css
+                └── 📜style.css
+            └── 📂img
+                └── 📜noSignal.jpg
+            └── 📂js
+                └── 📜script.js
+           ┗ 📜index.html
+        └──📂workspace
+            └── 📂src
+               └── 📂robot_navigation
+                   └── 📂resource
+                      └── 📜robot_navigation
+                   └── 📂robot_navigation
+                      └── 📜__init__.py
+                      └── 📜bot.py
+                   └── 📂test
+                      └── 📜test_copyright.py
+                      └── 📜test_flake8.py
+                      └──📜test_pep257.py
+                      └── 📜package.xml
+                    └── 📜setup.cfg
+                    └── 📜setup.py
+        └── 📜run.sh
+    └── 📜README.md
+    └── 📜.gitignore
 ```
 
 ## Execução do Projeto
