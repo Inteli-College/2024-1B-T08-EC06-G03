@@ -88,13 +88,13 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 
 ## Execução do Projeto
 
-A execução depende da parte do projeto que deve ser executada, mas um passo importante antes de qualquer uma é clonar o projeto
+É necessário clonar o projeto para iniciar a execução do projeto.
 
 ```sh
 git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
 ```
 ### 1. Conexão com o Robô via SSH
-Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Execute os seguintes passos no seu terminal:
+Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Há um tutorial de como deve ser feito o [setup do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint%202/Metodologia) Execute os seguintes passos no seu terminal:
 
 1. **Inicie o Robô**: Certifique-se de que o robô esteja ligado e pronto para conexão.
 2. **Conectar via SSH**:
@@ -131,7 +131,7 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
 
 2. **Abrir Interface de Controle**:
    - Localize o arquivo HTML responsável pela interface de controle. O caminho exato deve ser verificado na documentação do projeto.
-   - Abra o arquivo HTML diretamente com um navegador para acessar a interface de controle do robô.
+   - Abra o arquivo HTML diretamente com um navegador para acessar a interface de controle do robô. É indicado abrir através da extensão `Live Server`, porém pode ser aberto como um arquivo normal, apenas executando ele.
 
 ### 4. Controle do Robô
 - Utilize as teclas especificadas na interface HTML para controlar o robô.
