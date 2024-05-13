@@ -1,3 +1,8 @@
+---
+title: Metodologia
+sidebar_position: 1
+---
+
 ## Movimentação do robô
 
 O objetivo dessa sprint foi o desenvolvimento de um sistema (nesse caso, uma aplicação web) que é capaz de se comunicar com o robô e fazê-lo se mover. 
@@ -34,7 +39,7 @@ A interface de usuário "Central de Controle Desencana!" foi criada para facilit
 
 **Interface de controle**
 
-
+![Central de controle Desencana!](../../static/img/interface_principal.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
