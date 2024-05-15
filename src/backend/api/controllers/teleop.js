@@ -2,7 +2,9 @@ const WebSocket = require('ws');
 const config = require('config');
 
 class TeleopController {
+
     constructor() {
+        this.startTeleopWS = this.startTeleopWS.bind(this);
         this.onConnection = this.onConnection.bind(this);
         this.onMessage = this.onMessage.bind(this);
         this.onError = this.onError.bind(this);
