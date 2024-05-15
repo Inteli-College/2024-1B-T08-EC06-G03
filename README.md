@@ -14,6 +14,7 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 - <a href="https://www.linkedin.com/in/guilherme-ferreira-linhares-8638411a1/">Guilherme Ferreira Linhares</a>
 - <a href="https://www.linkedin.com/in/naruto/">Ivan Gonçalves Ferreira</a>
 - <a href="https://www.linkedin.com/in/luiza-rubim/">Luiza Souza Rubim</a>
+- <a href="https://www.linkedin.com/in/olincosta/">Ólin Medeiros Costa</a>
 
 ## 👩‍🏫 Professores:
 ### Orientador
@@ -103,7 +104,6 @@ Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. H�
      ```bash
      ssh -p 1238 bobolins@10.128.0.16
      ```
-   - Quando solicitado, digite a senha para autenticação, por exemplo: `reboiler123`.
 
 ### 2. Inicialização do Robô
 Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes necessários do robô.
