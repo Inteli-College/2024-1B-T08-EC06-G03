@@ -1,12 +1,15 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Float32
+from std_msgs.msg import  Float32, Bool
 from geometry_msgs.msg import Twist
 import subprocess
 
+MAX_LINEAR_VEL = 0.22
+MAX_ANGULAR_VEL = 2.84
 
-TURTLESIM = False
 
+def map(x, in_min, in_max, out_min, out_max):
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
 class TeleopService(Node):
     def __init__(self):
@@ -15,8 +18,9 @@ class TeleopService(Node):
         """
         super().__init__("teleop_service")
         self.teleop_process = None
+        self.killed = False
         self.kill_subscriber = self.create_subscription(
-            String, "kill_button", self.kill_callback, 10
+            Bool, "kill_button", self.kill_callback, 10
         )
         self.linear_speed = 0.0
         self.angular_speed = 0.0
@@ -30,40 +34,18 @@ class TeleopService(Node):
 
         self.get_logger().info("Node de serviço de teleop inicializado.")
 
-    def start_teleop_service(self):
-        """
-        Inicia o serviço de teleop.
-        """
-        if TURTLESIM:
-            self.teleop_process = subprocess.Popen(
-                ["ros2", "run", "turtlesim", "turtlesim_node"]
-            )
-        else:
-            self.teleop_process = subprocess.Popen(
-                ["ros2", "launch", "turtlebot3_bringup", "robot.launch.py"]
-            )
-        self.get_logger().info("Serviço de teleop iniciado.")
-
-    def stop_teleop_service(self):
-        """
-        Encerra o serviço de teleop.
-        """
-        if self.teleop_process:
-            self.teleop_process.terminate()
-            self.teleop_process = None
-            self.get_logger().info("Serviço de teleop encerrado.")
-
     def kill_callback(self, msg):
         """
         Callback para encerrar o serviço de teleop.
         """
-        self.stop_teleop_service()
+        self.killed = msg.data
+        self.get_logger().info(f"Killed recebeu: {self.killed}")
 
     def linear_callback(self, msg):
         """
         Callback para receber velocidade linear.
         """
-        self.linear_speed = msg.data
+        self.linear_speed = map(msg.data, -100, 100, -MAX_LINEAR_VEL, MAX_LINEAR_VEL)
         self.publish_velocity()
         self.get_logger().info(f"Velocidade linear: {self.linear_speed}")
 
@@ -71,7 +53,7 @@ class TeleopService(Node):
         """
         Callback para receber velocidade angular.
         """
-        self.angular_speed = msg.data
+        self.angular_speed = map(msg.data, -100, 100, -MAX_ANGULAR_VEL, MAX_ANGULAR_VEL)
         self.publish_velocity()
         self.get_logger().info(f"Velocidade angular: {self.angular_speed}")
 
@@ -82,13 +64,18 @@ class TeleopService(Node):
         twist = Twist()
         twist.linear.x = self.linear_speed
         twist.angular.z = self.angular_speed
+        
+        if self.killed:
+            twist.linear.x = 0.0
+            twist.angular.z = 0.0
+        
         self.cmd_vel_publisher.publish(twist)
+            
 
 
 def main(args=None):
     rclpy.init(args=args)
     teleop_node = TeleopService()
-    teleop_node.start_teleop_service()
     rclpy.spin(teleop_node)
     teleop_node.destroy_node()
     rclpy.shutdown()
