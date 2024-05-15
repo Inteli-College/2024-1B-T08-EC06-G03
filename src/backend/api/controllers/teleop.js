@@ -9,6 +9,7 @@ class TeleopController {
         this.onMessage = this.onMessage.bind(this);
         this.onError = this.onError.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.socket = null;
     }
 
     async onConnection(ws) {
@@ -34,13 +35,19 @@ class TeleopController {
     async startTeleopWS(req, res) {
         try {
             const wsPort = process.env.WS_PORT || config.get('server.teleop.port');
-            const wsServer = new WebSocket.Server({ port: wsPort });
 
-            wsServer.on('connection', this.onConnection);
+            if (this.socket) {
+                res.status(400).json({ error: 'WebSocket server already started', port: wsPort });
+                return;
+            }
+
+            this.socket = new WebSocket.Server({ port: wsPort });
+            this.socket.on('connection', this.onConnection);
 
             res.status(200).json({ message: 'WebSocket server started', port: wsPort });
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
+
             res.status(500).json({ error: 'Internal Server Error' });
         }
     }
