@@ -74,12 +74,12 @@ class TeleopController {
         try {
             const wsTeleopPath = process.env.WS_TELEOP_PATH || config.get('server.teleop.path');
             const wsPort = process.env.WS_PORT || config.get('server.teleop.port');
+            const wsURL = `ws://localhost:${wsPort}${wsTeleopPath}`;
 
             if (this.socket) {
-                res.status(400).json({
+                res.status(200).json({
                     error: 'WebSocket server already started',
-                    port: wsPort,
-                    path: wsTeleopPath
+                    url: wsURL
                 });
                 return;
             }
@@ -92,7 +92,7 @@ class TeleopController {
             this.socket.on('connection', this.onConnection);
 
             res.status(200).json({
-                message: 'WebSocket server started', port: wsPort, path: wsTeleopPath
+                message: 'WebSocket server started', url: wsURL
             });
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
