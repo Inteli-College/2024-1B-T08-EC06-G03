@@ -1,0 +1,15 @@
+{
+    "server": {
+        "port": 8000,
+        "cors": {
+            "origin": "*",
+            "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+            "preflightContinue": false,
+            "optionsSuccessStatus": 204
+        },
+        "teleop": {
+            "port": 8001,
+            "path": "/teleop"
+        }
+    }
+}
