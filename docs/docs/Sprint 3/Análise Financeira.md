@@ -10,6 +10,8 @@ No contexto do projeto "Desencana!", a análise financeira é vital para estimar
 
 ### Estimativa de custos
 
+A prova de conceito do projeto "Desencana!" envolve a implementação de um robô autônomo equipado com uma câmera para realizar a inspeção visual de rebóilers, essenciais para a produção de cana-de-açúcar. A seguir, são apresentados os custos estimados para a aquisição dos equipamentos necessários e a hospedagem do software na nuvem.
+
 #### Tabela de preços líquidos (custos iniciais de capital):
 
 | Produto | Preço (R$) |
@@ -22,7 +24,7 @@ Esta tabela contempla os custos de capital necessários para a implementação d
 
 #### Cálculo do preço bruto do robô:
 
-Considerando o preço líquido do _TurtleBot3 Burger RPi4 2GB_ como R$ 3.381,81 (com uma taxa de câmbio de 1 USD = 5,12 BRL) de acordo com o site [Robotis](https://robotis.us), e as taxas de frete (shipping) e imposto de importação de 60% do total pago, de acordo com o [Afinz blog](https://afinz.com.br/blog/mercado/taxa-de-importacao-2024/), é possível fazer a seguinte relação:
+Considerando que o _TurtleBot3 Burger RPi4 2GB_ deve ser importado dos EUA para que o preço seja mais acessível, sabendo do preço líquido atual de R$ 3.381,81 (com uma taxa de câmbio de 1 USD = 5,12 BRL), de acordo com o site [Robotis](https://robotis.us), e as taxas de frete (shipping) e imposto de importação de 60% do total pago, de acordo com o [Afinz blog](https://afinz.com.br/blog/mercado/taxa-de-importacao-2024/), é possível fazer a seguinte relação:
 
 ```
 Preço bruto = Preço líquido + Frete + Imposto de importação
@@ -54,7 +56,6 @@ Total de custos recorrentes em um ano: R$ 4.382,47
 **Nota:** _Os custos de capital foram calculados com base nos preços dos produtos e serviços no mercado atual, e os custos recorrentes foram calculados com base nos valores de hospedagem da AWS (Amazon Web Services)._
 
 **Referências:**
-- [Imposto de importação](https://afinz.com.br/blog/mercado/taxa-de-importacao-2024/)
 - [Turtlebot3 Burger RPi 3 1 GB](https://www.robotis.us/turtlebot-3-burger-rpi4-2gb-us/)
 - [Webcam Logitech c270i 720P](https://shopee.com.br/product/262478502/22330419188?gsht=MaNhXjMRjbKbgyH1&srsltid=AfmBOopaSwARWyrtlfVf-7e3quru0LbAZvq_vpcg_x0qEs1xuaAutDcxfTU)
 - [Notebook Ultra UB445](https://www.kabum.com.br/produto/393587/notebook-ultra-com-windows-11-home-processador-intel-core-i3-8gb-240gb-ssd-tela-14-1-pol-hd-tecla-netflix-prata-ub445) (aparelho para usar o software)
