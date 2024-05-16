@@ -1,8 +1,11 @@
 import "../styles/joystick.css";
-
 import React, { useState, useEffect, useRef } from "react";
 
-const Joystick: React.FC = () => {
+interface JoystickProps {
+    sendMessage: (message: string) => void;
+}
+
+const Joystick: React.FC<JoystickProps> = ({ sendMessage }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const joystickRef = useRef<HTMLDivElement>(null);
@@ -11,24 +14,22 @@ const Joystick: React.FC = () => {
     var lastAngular = 0;
 
     const sendJoystickData = (linear: number, angular: number) => {
-        let string = ""
-        if (linear != lastLinear) {
-            string += "linear: " + linear;
+        linear = Math.round(linear);
+        angular = Math.round(angular);
+
+        if (linear !== lastLinear) {
+            sendMessage(JSON.stringify({ "linear_speed": linear }));
+            console.log("linear: " + linear);
         }
 
-        if (angular != lastAngular) {
-            string += " angular: " + angular;
+        if (angular !== lastAngular) {
+            sendMessage(JSON.stringify({ "angular_speed": angular }));
+            console.log("angular: " + angular);
         }
-
-        if (string == "") {
-            return;
-        }
-
-        console.log(string);
 
         lastLinear = linear;
         lastAngular = angular;
-    }
+    };
 
     const handleMouseDown = () => {
         setIsDragging(true);
@@ -41,7 +42,6 @@ const Joystick: React.FC = () => {
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-
         if (!isDragging || !joystickRef.current || !innerCircleRef.current) {
             return;
         }

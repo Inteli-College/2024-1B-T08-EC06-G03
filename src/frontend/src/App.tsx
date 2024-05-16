@@ -65,7 +65,7 @@ const App: React.FC = () => {
             <div className="absolute bottom-0 right-0 flex items-end justify-end w-1/2 h-1/2 p-4">
                 <div className="relative w-full h-full flex items-center justify-center">
                     <div className="absolute transform translate-x-full">
-                        <Joystick />
+                        <Joystick sendMessage={sendMessage} />
                     </div>
                 </div>
             </div>

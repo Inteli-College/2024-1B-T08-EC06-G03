@@ -39,12 +39,12 @@ class TeleopController {
             return;
         }
 
-        if (message.linear_speed) {
+        if (message.linear_speed != null) {
             console.log('Publishing linear speed:', message.linear_speed);
             this.linear_speed_publisher.publish(message.linear_speed);
         }
 
-        if (message.angular_speed) {
+        if (message.angular_speed != null) {
             console.log('Publishing angular speed:', message.angular_speed);
             this.angular_speed_publisher.publish(message.angular_speed);
         }
