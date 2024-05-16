@@ -17,11 +17,11 @@ class TeleopService(Node):
         Inicializa o nó de serviço de teleop.
         """
         super().__init__("teleop_service")
-        
+
         self.angular_speed = 0.0
         self.linear_speed = 0.0
         self.killed = False
-        
+
         self.kill_subscriber = self.create_subscription(
             Bool, "kill_button", self.kill_callback, 10
         )
@@ -48,7 +48,7 @@ class TeleopService(Node):
         Callback para receber velocidade linear.
         """
         self.linear_speed = map(msg.data, -100, 100, -MAX_LINEAR_VEL, MAX_LINEAR_VEL)
-        self.publish_velocity()
+        self.publish_velocities()
         self.get_logger().info(f"Velocidade linear: {self.linear_speed}")
 
     def angular_callback(self, msg):
@@ -56,7 +56,7 @@ class TeleopService(Node):
         Callback para receber velocidade angular.
         """
         self.angular_speed = map(msg.data, -100, 100, -MAX_ANGULAR_VEL, MAX_ANGULAR_VEL)
-        self.publish_velocity()
+        self.publish_velocities()
         self.get_logger().info(f"Velocidade angular: {self.angular_speed}")
 
     def publish_velocities(self):
