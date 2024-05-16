@@ -20,15 +20,23 @@ class TeleopController {
         console.log('WebSocket connection established');
 
         await rclnodejs.init();
-        const teleop_backend_node = new rclnodejs.Node('teleop_node');
-        this.linear_speed_publisher = teleop_backend_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
-        this.angular_speed_publisher = teleop_backend_node.createPublisher('std_msgs/msg/Float32', 'angular_speed');
-        this.kill_button_publisher = teleop_backend_node.createPublisher('std_msgs/msg/Bool', 'kill_button');
+        const teleop_node = new rclnodejs.Node('teleop_node');
+        this.linear_speed_publisher = teleop_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
+        this.angular_speed_publisher = teleop_node.createPublisher('std_msgs/msg/Float32', 'angular_speed');
+        this.kill_button_publisher = teleop_node.createPublisher('std_msgs/msg/Bool', 'kill_button');
         console.log('Teleop connection established');
     }
 
     async onMessage(ws, data) {
-        const message = JSON.parse(data);
+        let message = null;
+
+        try {
+            message = JSON.parse(data);
+        } catch (error) {
+            ws.send('Message was not in JSON');
+            console.log(error);
+            return;
+        }
 
         if (message.linear_speed) {
             console.log('Publishing linear speed:', message.linear_speed);
@@ -40,9 +48,9 @@ class TeleopController {
             this.angular_speed_publisher.publish(message.angular_speed);
         }
 
-        if (message.kill_node) {
-            console.log('Publishing kill node:', message.kill_node);
-            this.kill_button_publisher.publish(message.kill_node);
+        if (message.kill_button != null) {
+            console.log('Publishing kill button:', message.kill_button);
+            this.kill_button_publisher.publish(message.kill_button);
         }
 
         ws.send('Message received');
@@ -71,7 +79,6 @@ class TeleopController {
             res.status(200).json({ message: 'WebSocket server started', port: wsPort });
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
-
             res.status(500).json({ error: 'Internal Server Error' });
         }
     }
