@@ -11,6 +11,7 @@ class TeleopController {
         this.onError = this.onError.bind(this);
         this.onClose = this.onClose.bind(this);
         this.socket = null;
+        this.teleop_node = null;
     }
 
     async onConnection(ws) {
@@ -20,10 +21,10 @@ class TeleopController {
         console.log('WebSocket connection established');
 
         await rclnodejs.init();
-        const teleop_node = new rclnodejs.Node('teleop_node');
-        this.linear_speed_publisher = teleop_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
-        this.angular_speed_publisher = teleop_node.createPublisher('std_msgs/msg/Float32', 'angular_speed');
-        this.kill_button_publisher = teleop_node.createPublisher('std_msgs/msg/Bool', 'kill_button');
+        this.teleop_node = new rclnodejs.Node('teleop_node');
+        this.linear_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
+        this.angular_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'angular_speed');
+        this.kill_button_publisher = this.teleop_node.createPublisher('std_msgs/msg/Bool', 'kill_button');
         console.log('Teleop connection established');
     }
 
@@ -61,22 +62,38 @@ class TeleopController {
     }
 
     async onClose(ws) {
+        this.socket.close();
+        this.socket = null;
+        this.teleop_node.destroy();
+        rclnodejs.shutdown();
+
         console.log('WebSocket connection closed');
     }
 
     async startTeleopWS(req, res) {
         try {
+            const wsTeleopPath = process.env.WS_TELEOP_PATH || config.get('server.teleop.path');
             const wsPort = process.env.WS_PORT || config.get('server.teleop.port');
 
             if (this.socket) {
-                res.status(400).json({ error: 'WebSocket server already started', port: wsPort });
+                res.status(400).json({
+                    error: 'WebSocket server already started',
+                    port: wsPort,
+                    path: wsTeleopPath
+                });
                 return;
             }
 
-            this.socket = new WebSocket.Server({ port: wsPort });
+
+            this.socket = new WebSocket.Server({
+                path: wsTeleopPath,
+                port: wsPort
+            });
             this.socket.on('connection', this.onConnection);
 
-            res.status(200).json({ message: 'WebSocket server started', port: wsPort });
+            res.status(200).json({
+                message: 'WebSocket server started', port: wsPort, path: wsTeleopPath
+            });
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
             res.status(500).json({ error: 'Internal Server Error' });
