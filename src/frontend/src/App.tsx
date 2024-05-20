@@ -4,7 +4,7 @@ import Joystick from './components/Joystick'; // Adjust the path based on your p
 import KillButton from './components/Kill'; // Import the KillButton component
 import HamburgerMenu from './components/HamburgerMenu';
 
-const API_URL = 'http://127.0.0.1:8000';
+const API_URL = `http://${window.location.hostname}:8000`;
 
 const App: React.FC = () => {
     const [teleopData, setTeleopData] = useState<any>({});
@@ -58,7 +58,7 @@ const App: React.FC = () => {
             <div className="absolute bottom-0 left-0 flex items-start justify-start w-1/2 h-1/2 p-4">
                 <div className="relative w-full h-full flex items-center justify-center">
                     <div className="absolute transform translate-x-[-9rem]">
-                        <KillButton />
+                        <KillButton sendMessage={sendMessage} />
                     </div>
                 </div>
             </div>

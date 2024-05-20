@@ -24,7 +24,8 @@ class TeleopController {
         this.teleop_node = new rclnodejs.Node('teleop_node');
         this.linear_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
         this.angular_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'angular_speed');
-        this.kill_button_publisher = this.teleop_node.createPublisher('std_msgs/msg/Bool', 'kill_button');
+        this.kill_robot_client = this.teleop_node.createClient('std_srvs/srv/Trigger', 'kill_robot_service');
+
         console.log('Teleop connection established');
     }
 
@@ -49,9 +50,13 @@ class TeleopController {
             this.angular_speed_publisher.publish(message.angular_speed);
         }
 
-        if (message.kill_button != null) {
-            console.log('Publishing kill button:', message.kill_button);
-            this.kill_button_publisher.publish(message.kill_button);
+        if (message.kill_robot != null) {
+            console.log('Calling kill button service');
+            const request = {}
+            this.kill_robot_client.sendRequest(request, (response) => {
+                console.log('Kill button service response:', response);
+                ws.send(`Kill button response: ${JSON.stringify(response)}`);
+            });
         }
 
         ws.send('Message received');
@@ -84,7 +89,6 @@ class TeleopController {
                 return;
             }
 
-
             this.socket = new WebSocket.Server({
                 path: wsTeleopPath,
                 port: wsPort
@@ -92,7 +96,8 @@ class TeleopController {
             this.socket.on('connection', this.onConnection);
 
             res.status(200).json({
-                message: 'WebSocket server started', url: wsURL
+                message: 'WebSocket server started',
+                url: wsURL
             });
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
