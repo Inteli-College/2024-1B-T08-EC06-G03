@@ -42,6 +42,21 @@ const Joystick: React.FC<JoystickProps> = ({ sendMessage }) => {
     };
 
     const handleMouseMove = (event: MouseEvent) => {
+        handleDrag(event.clientX, event.clientY);
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+        const touch = event.touches[0];
+        handleDrag(touch.clientX, touch.clientY);
+        setIsDragging(true);
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+        const touch = event.touches[0];
+        handleDrag(touch.clientX, touch.clientY);
+    };
+
+    const handleDrag = (clientX: number, clientY: number) => {
         if (!isDragging || !joystickRef.current || !innerCircleRef.current) {
             return;
         }
@@ -50,8 +65,8 @@ const Joystick: React.FC<JoystickProps> = ({ sendMessage }) => {
         const innerRect = innerCircleRef.current.getBoundingClientRect();
         const maxRadius = rect.width / 2 + innerRect.width / 20;
 
-        let x = event.clientX - rect.left - rect.width / 2;
-        let y = event.clientY - rect.top - rect.height / 2;
+        let x = clientX - rect.left - rect.width / 2;
+        let y = clientY - rect.top - rect.height / 2;
 
         // Limit the movement to the bounds of the outer circle plus 50% of the inner circle's radius
         const distance = Math.sqrt(x * x + y * y);
@@ -79,9 +94,13 @@ const Joystick: React.FC<JoystickProps> = ({ sendMessage }) => {
     useEffect(() => {
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
+        document.addEventListener("touchmove", handleTouchMove);
+        document.addEventListener("touchend", handleMouseUp);
         return () => {
             document.removeEventListener("mousemove", handleMouseMove);
             document.removeEventListener("mouseup", handleMouseUp);
+            document.removeEventListener("touchmove", handleTouchMove);
+            document.removeEventListener("touchend", handleMouseUp);
         };
     }, [isDragging]);
 
@@ -89,6 +108,7 @@ const Joystick: React.FC<JoystickProps> = ({ sendMessage }) => {
         <div
             ref={joystickRef}
             onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
             className="relative w-40 h-40 rounded-full"
             style={{
                 backgroundColor: "rgba(217, 217, 217, 0.5)",

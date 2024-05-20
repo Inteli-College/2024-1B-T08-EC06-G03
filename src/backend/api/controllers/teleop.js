@@ -20,6 +20,12 @@ class TeleopController {
         ws.on('close', () => this.onClose(ws));
         console.log('WebSocket connection established');
 
+
+        if (this.teleop_node != null) {
+            console.log('Teleop connection already established');
+            return;
+        }
+
         await rclnodejs.init();
         this.teleop_node = new rclnodejs.Node('teleop_node');
         this.linear_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
@@ -71,6 +77,7 @@ class TeleopController {
         this.socket = null;
         this.teleop_node.destroy();
         rclnodejs.shutdown();
+        this.teleop_node = null;
 
         console.log('WebSocket connection closed');
     }
@@ -79,7 +86,8 @@ class TeleopController {
         try {
             const wsTeleopPath = process.env.WS_TELEOP_PATH || config.get('server.teleop.path');
             const wsPort = process.env.WS_PORT || config.get('server.teleop.port');
-            const wsURL = `ws://localhost:${wsPort}${wsTeleopPath}`;
+            const host = req.get('host').split(':')[0];
+            const wsURL = `ws://${host}:${wsPort}${wsTeleopPath}`;
 
             if (this.socket) {
                 res.status(200).json({
