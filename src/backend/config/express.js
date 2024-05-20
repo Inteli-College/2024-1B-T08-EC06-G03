@@ -14,6 +14,7 @@ module.exports = () => {
     app.use(morgan('dev'));
 
     app.set('port', process.env.PORT || config.get('server.port'));
+    app.set('host', process.env.HOST || config.get('server.host'));
     app.use(json());
 
     app.use('/teleop', teleopRouter);
