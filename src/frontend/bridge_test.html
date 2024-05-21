@@ -27,11 +27,9 @@
   // Topic to receive video frames
   var videoTopic = new ROSLIB.Topic({
     ros : ros,
-    name : '/video_frames',
+    name : '/camera_feed',
     messageType : 'sensor_msgs/CompressedImage'
   });
-
-
 
   // Function to handle incoming video frames
   videoTopic.subscribe(function(message) {
