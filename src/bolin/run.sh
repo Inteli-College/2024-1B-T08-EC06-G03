@@ -7,3 +7,5 @@ colcon build
 source install/local_setup.bash
 
 ros2 run bolin bolin 
+
+ros2 run bolin_camera camera

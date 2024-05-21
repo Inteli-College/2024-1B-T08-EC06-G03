@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
   var ros = new ROSLIB.Ros({
-    url : 'ws://localhost:9090'
+    url: 'ws://localhost:9090'
   });
 
   ros.on('connection', function() {
@@ -31,8 +31,24 @@
     messageType : 'sensor_msgs/CompressedImage'
   });
 
+
+
   // Function to handle incoming video frames
   videoTopic.subscribe(function(message) {
+    var receiveTime = new Date().getTime();
+    
+    // Extract the timestamp from the ROS message header
+    var messageSec = message.header.stamp.sec;
+    var messageNanosec = message.header.stamp.nanosec;
+    var messageTime = new Date(messageSec * 1000 + messageNanosec / 1000000).getTime();
+    
+    // Calculate latency
+    var latency = receiveTime - messageTime;
+    console.log('Latency:', latency, 'ms');
+    
+    // Display the latency in the HTML
+    document.getElementById('latency').innerText = 'Latency: ' + latency + ' ms';
+    console.log('Received video frame:', message);
     var img = document.getElementById('videoStream');
     img.src = 'data:image/jpeg;base64,' + message.data;
   });
@@ -46,5 +62,6 @@
 <body>
   <h1>Real-time Video Stream from ROS2 Topic</h1>
   <img id="videoStream" alt="Video Stream" style="width: 750px; height: 480px;" />
+  <p id="latency">Latency: calculating...</p>
 </body>
 </html> 
