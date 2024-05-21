@@ -81,7 +81,7 @@ const Joystick: React.FC<JoystickProps> = ({ sendMessage }) => {
         let angular = (x / maxRadius) * 100;
         let linear = -(y / maxRadius) * 100;
 
-        if (Math.abs(angular) < 20) {
+        if (Math.abs(angular) < 25) {
             angular = 0;
         }
         if (Math.abs(linear) < 20) {
