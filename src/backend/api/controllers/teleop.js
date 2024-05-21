@@ -20,11 +20,18 @@ class TeleopController {
         ws.on('close', () => this.onClose(ws));
         console.log('WebSocket connection established');
 
+
+        if (this.teleop_node != null) {
+            console.log('Teleop connection already established');
+            return;
+        }
+
         await rclnodejs.init();
         this.teleop_node = new rclnodejs.Node('teleop_node');
         this.linear_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
         this.angular_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'angular_speed');
-        this.kill_button_publisher = this.teleop_node.createPublisher('std_msgs/msg/Bool', 'kill_button');
+        this.kill_robot_client = this.teleop_node.createClient('std_srvs/srv/Trigger', 'kill_robot_service');
+
         console.log('Teleop connection established');
     }
 
@@ -39,19 +46,23 @@ class TeleopController {
             return;
         }
 
-        if (message.linear_speed) {
+        if (message.linear_speed != null) {
             console.log('Publishing linear speed:', message.linear_speed);
             this.linear_speed_publisher.publish(message.linear_speed);
         }
 
-        if (message.angular_speed) {
+        if (message.angular_speed != null) {
             console.log('Publishing angular speed:', message.angular_speed);
             this.angular_speed_publisher.publish(message.angular_speed);
         }
 
-        if (message.kill_button != null) {
-            console.log('Publishing kill button:', message.kill_button);
-            this.kill_button_publisher.publish(message.kill_button);
+        if (message.kill_robot != null) {
+            console.log('Calling kill button service');
+            const request = {}
+            this.kill_robot_client.sendRequest(request, (response) => {
+                console.log('Kill button service response:', response);
+                ws.send(`Kill button response: ${JSON.stringify(response)}`);
+            });
         }
 
         ws.send('Message received');
@@ -66,6 +77,7 @@ class TeleopController {
         this.socket = null;
         this.teleop_node.destroy();
         rclnodejs.shutdown();
+        this.teleop_node = null;
 
         console.log('WebSocket connection closed');
     }
@@ -74,16 +86,16 @@ class TeleopController {
         try {
             const wsTeleopPath = process.env.WS_TELEOP_PATH || config.get('server.teleop.path');
             const wsPort = process.env.WS_PORT || config.get('server.teleop.port');
+            const host = req.get('host').split(':')[0];
+            const wsURL = `ws://${host}:${wsPort}${wsTeleopPath}`;
 
             if (this.socket) {
-                res.status(400).json({
+                res.status(200).json({
                     error: 'WebSocket server already started',
-                    port: wsPort,
-                    path: wsTeleopPath
+                    url: wsURL
                 });
                 return;
             }
-
 
             this.socket = new WebSocket.Server({
                 path: wsTeleopPath,
@@ -92,7 +104,8 @@ class TeleopController {
             this.socket.on('connection', this.onConnection);
 
             res.status(200).json({
-                message: 'WebSocket server started', port: wsPort, path: wsTeleopPath
+                message: 'WebSocket server started',
+                url: wsURL
             });
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
