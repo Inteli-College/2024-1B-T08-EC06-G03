@@ -44,7 +44,6 @@ class TeleopService(Node):
         """
         self.get_logger().info("Sinal de Kill recebido")
         self.is_killed = True
-        self.stop_robot()
         response.success = True
         response.message = "Kill signal received. Robot stopped."
         return response
@@ -61,7 +60,7 @@ class TeleopService(Node):
         """
         Callback para receber velocidade angular.
         """
-        self.angular_speed = map(msg.data, -100, 100, -MAX_ANGULAR_VEL, MAX_ANGULAR_VEL)
+        self.angular_speed = map(msg.data, 100, -100, -MAX_ANGULAR_VEL, MAX_ANGULAR_VEL)
         self.publish_velocities()
         self.get_logger().info(f"Velocidade angular: {self.angular_speed}")
 
