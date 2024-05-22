@@ -15,20 +15,21 @@ class CameraController {
     async startCameraController() {
         await rclnodejs.init();
         this.camera_node = new rclnodejs.Node('camera_node');
-        this.cameraSubscriber = node.createSubscription(
-            'std_msgs/msg/CompressedImage',
-            '/video_frames',
+        this.cameraSubscriber = this.camera_node.createSubscription(
+            'sensor_msgs/msg/CompressedImage',
+            '/camera_feed',
             (msg) => this.video_frames_callback(msg)
         );
         console.log('Camera controller started');
-        rclnodejs.spin(node);
+        this.camera_node.spin();
     }
 
     async onConnection(ws) {
-        // ws.on('message', data => this.onMessage(ws, data));
-        // ws.on('error', error => this.onError(ws, error));
-        // ws.on('close', () => this.onClose(ws));
+        ws.on('message', data => this.onMessage(ws, data));
+        ws.on('error', error => this.onError(ws, error));
+        ws.on('close', () => this.onClose(ws));
         console.log('WebSocket connection established');
+        this.startCameraController();
     }
 
 
