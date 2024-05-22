@@ -6,6 +6,6 @@ const router = Router();
 
 router.use(json());
 
-router.post('/camera', cameraController.startTeleopWS);
+router.post('/start', cameraController.startCameraWS);
 
 module.exports = router;

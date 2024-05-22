@@ -34,7 +34,46 @@ class CameraController {
 
     async video_frames_callback(msg) {
         console.log('Received video frame');
-        // this.socket.send(msg);
+        const imageData = Buffer.from(msg.data); // Convert data to Buffer
+        const base64Image = imageData.toString('base64'); // Encode to Base64
+        if (this.socket) {
+          this.socket.clients.forEach((ws) => ws.send(base64Image));
+        }
+      }
+      
+
+    async startCameraWS(req, res) {
+        try {
+            const wsCameraPath = process.env.WS_CAMERA_PATH || config.get('server.camera.path');
+            const wsPort = process.env.WS_PORT || config.get('server.camera.port');
+            const host = req.get('host').split(':')[0];
+            const wsURL = `ws://${host}:${wsPort}${wsCameraPath}`;
+
+            if (this.socket) {
+                res.status(200).json({
+                    error: 'WebSocket server already started',
+                    url: wsURL
+                });
+                return;
+            }
+
+            this.socket = new WebSocket.Server({
+                path: wsCameraPath,
+                port: wsPort
+            });
+
+            this.socket.on('connection', this.onConnection);
+
+            res.status(200).json({
+                message: 'WebSocket server started',
+                url: wsURL
+            });
+
+            this.socket.on('listening', () => {});
+        } catch (error) {
+            console.error('Error starting WebSocket server:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 }
 
