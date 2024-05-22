@@ -7,7 +7,7 @@ title: Revisão da arquitetura do sistema
 Nesta seção, fornecemos uma visão abrangente da arquitetura de solução do nosso sistema de controle de robôs. A arquitetura é dividida em três principais subsistemas: Back-End, Robô e Front-End. Cada subsistema desempenha um papel crucial na comunicação e operação do robô.
 
 - O [**Robô**](./Robô) executa nodes específicos para controle de movimento, aquisição de imagens e detecção de obstáculos, todos desenvolvidos em ROS2.
-- O [**Back-End**](./Back-end) orquestra a comunicação entre o Front-End e o Robô, utilizando tecnologias como ROS2 e WebSockets.
+- O [**Back-End**](./Back-End) orquestra a comunicação entre o Front-End e o Robô, utilizando tecnologias como ROS2 e WebSockets.
 - O [**Front-End**](./Front-End) fornece uma interface intuitiva para os usuários controlarem o robô e visualizarem informações em tempo real.
 
 ## Diagrama de Arquitetura
