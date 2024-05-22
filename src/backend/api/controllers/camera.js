@@ -6,8 +6,8 @@ class CameraController {
     constructor() {
         this.startCameraWS = this.startCameraWS.bind(this);
         this.onConnection = this.onConnection.bind(this);
-        // this.onError = this.onError.bind(this);
-        // this.onClose = this.onClose.bind(this);
+        this.onError = this.onError.bind(this);
+        this.onClose = this.onClose.bind(this);
         this.socket = null;
         this.camera_node = null;
     }
@@ -33,13 +33,29 @@ class CameraController {
     }
 
 
+    async onError(ws, error) {
+        console.log(`WebSocket error => ${error}`);
+    }
+
+    async onClose(ws) {
+        this.socket.close();
+        this.socket = null;
+        this.teleop_node.destroy();
+        rclnodejs.shutdown();
+        this.teleop_node = null;
+
+        console.log('WebSocket connection closed');
+    }
+
+
     async video_frames_callback(msg) {
+        if (!this.socket) {
+            return console.log('WebSocket server not started');
+        } 
         console.log('Received video frame');
         const imageData = Buffer.from(msg.data); // Convert data to Buffer
         const base64Image = imageData.toString('base64'); // Encode to Base64
-        if (this.socket) {
-          this.socket.clients.forEach((ws) => ws.send(base64Image));
-        }
+        this.socket.clients.forEach((ws) => ws.send(base64Image));
       }
       
 
