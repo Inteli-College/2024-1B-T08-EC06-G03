@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const teleopRouter = require('../api/routes/teleop');
+const cameraRouter = require('../api/routes/camera');
 
 module.exports = () => {
     const app = express();
@@ -18,6 +19,7 @@ module.exports = () => {
     app.use(json());
 
     app.use('/teleop', teleopRouter);
+    app.use('/camera', cameraRouter);
 
     return app;
 };
