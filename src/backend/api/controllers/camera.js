@@ -40,9 +40,9 @@ class CameraController {
     async onClose(ws) {
         this.socket.close();
         this.socket = null;
-        this.teleop_node.destroy();
+        this.camera_node.destroy();
         rclnodejs.shutdown();
-        this.teleop_node = null;
+        this.camera_node = null;
 
         console.log('WebSocket connection closed');
     }
