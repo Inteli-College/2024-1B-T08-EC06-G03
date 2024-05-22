@@ -11,6 +11,10 @@
     "teleop": {
       "port": 8001,
       "path": "/teleop"
+    },
+    "camera": {
+      "port": 8001,
+      "path": "/camera"
     }
   }
 }
