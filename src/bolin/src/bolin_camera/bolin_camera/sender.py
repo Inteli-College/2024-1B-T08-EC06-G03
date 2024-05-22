@@ -5,10 +5,11 @@ from std_msgs.msg import Header
 import cv2
 import time
 
+
 class CameraPublisher(Node):
     def __init__(self):
-        super().__init__('camera_publisher')
-        self.publisher_ = self.create_publisher(CompressedImage, '/camera_feed', 40)
+        super().__init__("camera_publisher")
+        self.publisher_ = self.create_publisher(CompressedImage, "/camera_feed", 40)
         self.cap = cv2.VideoCapture(0)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
@@ -21,23 +22,26 @@ class CameraPublisher(Node):
                 ret, frame = self.cap.read()
                 if ret:
                     encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-                    _, buffer = cv2.imencode('.jpg', frame)
+                    _, buffer = cv2.imencode(".jpg", frame)
                     msg = CompressedImage()
                     msg.header = Header()
                     msg.header.stamp = self.get_clock().now().to_msg()
                     msg.format = "jpeg"
                     msg.data = buffer.tobytes()
                     self.publisher_.publish(msg)
-                    time_after = time_before = self.get_clock().now()
-                    print(f"Latencia: {time_after - time_before} ms")
+                    time_after = self.get_clock().now()
+                    print(
+                        f"Latencia: {(time_after - time_before).nanoseconds / 1e6} ms"
+                    )
 
                 rclpy.spin_once(self, timeout_sec=0.0001)
 
         except Exception as e:
             self.get_logger().error(f"An error occurred: {e}")
-        
+
         finally:
             self.cap.release()
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -46,5 +50,6 @@ def main(args=None):
     camera_publisher.destroy_node()
     rclpy.shutdown()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
