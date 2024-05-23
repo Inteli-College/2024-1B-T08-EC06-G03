@@ -12,11 +12,12 @@ Esta página descreve o desenvolvimento e funcionamento do Front-End do nosso si
 
 ## Funcionalidades e Telas
 
-### Tela de Teleop
-
 A tela de teleop combina controle do robô com visualização da câmera. Nela, o usuário pode interagir com o robô em tempo real.
-
 ![Tela de teleop](/img/screenshot-frontend-teleop.png)
+
+### Transmissão de imagem
+
+A transmissão de imagem é feita em tempo real, permitindo ao usuário visualizar o ambiente em que o robô estar e facilitar sua locomoção. Também é exibida a latência da transmissão para que o usuário possa ter uma noção da qualidade da conexão. O cálculo da latência foi realizado considerando a diferença de tempo de recebimento entre dois frames. 
 
 #### Joystick
 
