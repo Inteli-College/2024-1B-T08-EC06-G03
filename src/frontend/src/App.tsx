@@ -11,6 +11,7 @@ const App: React.FC = () => {
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
     const [cameraData, setCameraData] = useState<any>({});
     const [cameraSocketUrl, setCameraSocketUrl] = useState<string | null>(null);
+    const [image, setImage] = useState<string | null>(null);
 
     const fetchData = useCallback(async () => {
         try {
@@ -62,7 +63,7 @@ const App: React.FC = () => {
         onOpen: () => console.log('WebSocket connection established.'),
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
-        onMessage: (event) => console.log('WebSocket message received:', event),
+        onMessage: (event) => console.log('WebSocket message:', event.data),
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });
 
@@ -71,11 +72,7 @@ const App: React.FC = () => {
         onOpen: () => console.log('WebSocket connection established.'),
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
-        onMessage: (event) => {
-            const image = document.getElementById('image');
-            // Assuming the image data is in base64 format (adjust if needed)
-            image.src = `data:image/png;base64,${event.data}`;
-        },
+        onMessage: (event) => {setImage(event.data)},
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });
 
@@ -92,8 +89,8 @@ const App: React.FC = () => {
         }
     }, [cameraWebSocket.readyState, cameraWebSocket.sendMessage]);
 
-    return (
-        <div className="relative h-screen bg-black p-4" id="image">
+    return (<>
+        <img className="relative h-screen p-4" src= {`data:image/jpeg;base64,${image}`}></img>
             <div className="absolute top-0 left-0 p-4">
                 <HamburgerMenu />
             </div>
@@ -111,7 +108,7 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
