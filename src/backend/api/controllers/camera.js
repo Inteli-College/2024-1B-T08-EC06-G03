@@ -13,10 +13,14 @@ class CameraController {
     }
 
     async startCameraController() {
-        await rclnodejs.init();
-        if (this.camera_node != null) {
-            console.log('Teleop connection already established');
-            return;
+        try {
+            if (!rclnodejs.init?.called) {  // Check for existence and called flag
+              console.log('Initializing rclnodejs');
+              await rclnodejs.init();
+            }
+          } catch (error) {
+            console.error('Error initializing rclnodejs:', error);
+            // Handle initialization error appropriately (e.g., close the connection, display an error message)
         }
         this.camera_node = new rclnodejs.Node('camera_node');
         this.cameraSubscriber = this.camera_node.createSubscription(
@@ -32,10 +36,19 @@ class CameraController {
         ws.on('message', data => this.onMessage(ws, data));
         ws.on('error', error => this.onError(ws, error));
         ws.on('close', () => this.onClose(ws));
-        console.log('WebSocket connection established');
+        console.log('Websocket connection established');
+
+        if (this.camera_node != null) {
+            console.log('Camera connection already established');
+            return;
+        }
+
         this.startCameraController();
     }
 
+    async onMessage(ws, data) {
+        console.log(`WebSocket message => ${data}`);
+    }
 
     async onError(ws, error) {
         console.log(`WebSocket error => ${error}`);
