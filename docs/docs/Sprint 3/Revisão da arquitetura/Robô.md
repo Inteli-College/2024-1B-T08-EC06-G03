@@ -9,13 +9,13 @@ Esta página fornece uma visão detalhada sobre os componentes e funcionalidades
 
 ## Descrição Geral
 
-Toda a comunicação e programação relacionadas ao robô são realizadas em ROS2 [ROS2](https://index.ros.org/doc/ros2/). Rodamos vários nodes para diferentes funcionalidades, como a câmera, a teleoperação e o lidar. Utilizamos um launchfile para inicializá-los.
+Toda a comunicação e programação relacionadas ao robô são realizadas em [ROS2](https://index.ros.org/doc/ros2/). Rodamos vários nós para diferentes funcionalidades, como a câmera, a teleoperação e o lidar. Utilizamos um launchfile para inicializá-los.
 
-## Nodes em Execução
+## Nós em Execução
 
-- **Node da Câmera**
-- **Nodes de Teleop**
-- **Node do Lidar**
+- **Nó da Câmera**
+- **Nós de Teleop**
+- **Nó do Lidar**
 
 ### Bolin_Teleop
 
@@ -31,7 +31,7 @@ O node `bolin_teleop` é responsável por ouvir os tópicos `linear_speed` e `an
 
 ### Bolin_Camera
 
-O node `bolin_camera` utiliza OpenCV [OpenCV](https://opencv.org/) para capturar imagens da câmera. As imagens são comprimidas e enviadas no tópico `/camera_feed`.
+O node `bolin_camera` utiliza[OpenCV](https://opencv.org/) para capturar imagens da câmera. As imagens são comprimidas e enviadas no tópico `/camera_feed`.
 
 #### Transmissão de Imagens
 

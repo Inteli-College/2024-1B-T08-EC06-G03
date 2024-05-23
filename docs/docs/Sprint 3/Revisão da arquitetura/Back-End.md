@@ -3,7 +3,7 @@ title: Back-End
 sidebar_position: 3
 ---
 
-Esta página documenta a arquitetura e implementação do Back-End do nosso sistema de controle do robô. O Back-End, desenvolvido em JavaScript utilizando o framework Express, é responsável por orquestrar a comunicação entre o Front-End e o robô através de ROS2 e Websockets. Exploraremos as tecnologias utilizadas, a estrutura de arquivos do projeto, e detalhes específicos sobre os componentes de teleoperação, câmera e lidar. Além disso, discutiremos considerações futuras para melhorar a performance e manutenibilidade do sistema.
+Esta página documenta a arquitetura e implementação do Back-End do nosso sistema de controle do robô. O Back-End, desenvolvido em *JavaScript* utilizando o framework *Express*, é responsável por orquestrar a comunicação entre o Front-End e o robô através de ROS2 e Websockets. Exploraremos as tecnologias utilizadas, a estrutura de arquivos do projeto, e detalhes específicos sobre os componentes de teleoperação, câmera e lidar. Além disso, discutiremos considerações futuras para melhorar a performance e manutenibilidade do sistema.
 
 ## Tecnologias Utilizadas
 
@@ -18,7 +18,7 @@ Esta página documenta a arquitetura e implementação do Back-End do nosso sist
 
 ### Comunicação com o Robô (ROS2)
 
-O Back-End utiliza `rclnodejs` para se comunicar com o robô através de ROS2. Isso envolve a criação de nodes ROS2 que publicam e subscrevem em tópicos, bem como a chamada de serviços.
+O Back-End utiliza `rclnodejs` para se comunicar com o robô através de ROS2. Isso envolve a criação de nós ROS2 que publicam e subscrevem em tópicos, bem como a chamada de serviços.
 
 ### Comunicação com o Front-End (WebSockets)
 
@@ -99,14 +99,14 @@ A teleoperação é gerenciada por um WebSocket aberto na rota `/teleop`. Esta c
 
 ## Câmera
 
-A funcionalidade da câmera é implementada de forma semelhante à teleoperação. Temos um node ROS que se subscreve no tópico `camera_feed`, recebe cada frame, descompacta a imagem e publica no WebSocket aberto na rota `/camera_feed`. As imagens são enviadas ao Front-End em formato base64.
+A funcionalidade da câmera é implementada de forma semelhante à teleoperação. Temos um nó ROS que se subscreve no tópico `camera_feed`, recebe cada frame, descompacta a imagem e publica no WebSocket aberto na rota `/camera_feed`. As imagens são enviadas ao Front-End em formato base64.
 
 ## Lidar
 
-O node lidar se subscreve no tópico `/scan` e processa os dados de distância recebidos. As informações são então publicadas no WebSocket, permitindo que o Front-End receba e processe as distâncias das extremidades em tempo real.
+O nó lidar se subscreve no tópico `/scan` e processa os dados de distância recebidos. As informações são então publicadas no WebSocket, permitindo que o Front-End receba e processe as distâncias das extremidades em tempo real.
 
 ## Considerações e Próximos Passos
 
-- **Isolamento do ROS2**: Consideramos usar `rosbridge` [rosbridge](https://wiki.ros.org/rosbridge_suite) para rodar os WebSockets diretamente no robô, isolando o ROS2 do resto do sistema e garantindo melhores práticas. No entanto, isso pode afetar a performance e precisa ser testado.
-- **Desempenho da Câmera**: Estamos estudando a possibilidade de escrever o node da câmera em C++ para melhorar a performance, embora isso possa dificultar a manutenção devido à menor familiaridade com a linguagem.
-- **cv_bridge**: Avaliamos o uso de `cv_bridge` [cv_bridge](https://wiki.ros.org/cv_bridge) para facilitar a transmissão das imagens.
+- **Isolamento do ROS2**: Consideramos usar [rosbridge](https://wiki.ros.org/rosbridge_suite) para rodar os WebSockets diretamente no robô, isolando o ROS2 do resto do sistema e garantindo melhores práticas. No entanto, isso pode afetar a performance e precisa ser testado.
+- **Desempenho da Câmera**: Estamos estudando a possibilidade de escrever o nó da câmera em C++ para melhorar a performance, embora isso possa dificultar a manutenção devido à menor familiaridade com a linguagem.
+- **cv_bridge**: Avaliamos o uso de [cv_bridge](https://wiki.ros.org/cv_bridge) para facilitar a transmissão das imagens.

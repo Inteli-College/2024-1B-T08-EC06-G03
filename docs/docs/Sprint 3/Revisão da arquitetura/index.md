@@ -6,7 +6,7 @@ title: Revisão da arquitetura do sistema
 
 Nesta seção, fornecemos uma visão abrangente da arquitetura de solução do nosso sistema de controle de robôs. A arquitetura é dividida em três principais subsistemas: Back-End, Robô e Front-End. Cada subsistema desempenha um papel crucial na comunicação e operação do robô.
 
-- O [**Robô**](./Robô) executa nodes específicos para controle de movimento, aquisição de imagens e detecção de obstáculos, todos desenvolvidos em ROS2.
+- O [**Robô**](./Robô) executa nós específicos para controle de movimento, aquisição de imagens e detecção de obstáculos, todos desenvolvidos em ROS2.
 - O [**Back-End**](./Back-end) orquestra a comunicação entre o Front-End e o Robô, utilizando tecnologias como ROS2 e WebSockets.
 - O [**Front-End**](./Front-End) fornece uma interface intuitiva para os usuários controlarem o robô e visualizarem informações em tempo real.
 
@@ -14,36 +14,15 @@ Nesta seção, fornecemos uma visão abrangente da arquitetura de solução do n
 
 O diagrama abaixo representa a comunicação entre os subsistemas Back-End, Robô e Front-End, destacando os componentes de teleoperação, câmera e lidar.
 
-```mermaid
-graph TD;
-    subgraph Back-End
-        BE_Teleop[Teleop]
-        BE_Camera[Camera]
-        BE_Lidar[Lidar]
-    end
+<div align="center">
 
-    subgraph Robô
-        Robot_Teleop[Teleop]
-        Robot_Camera[Camera]
-        Robot_Lidar[Lidar]
-    end
+**Arquitetura**
 
-    subgraph Front-End
-        FE_Teleop[Teleop]
-        FE_Camera[Camera]
-        FE_Lidar[Lidar]
-    end
+![Diagrama de Arquitetura](../../../static/img/Diagrama%20de%20arquitetura.png)
 
-    BE_Teleop <-- ws://linear_speed --> FE_Teleop
-    BE_Teleop <-- ws://angular_speed --> FE_Teleop
-    BE_Camera <-- ws://camera_feed --> FE_Camera
-    BE_Lidar <-- ws://lidar --> FE_Lidar
+**Fonte:** Elaborado pela equipe Rebólins
 
-    Robot_Teleop <-- ROS2 /linear_speed --> BE_Teleop
-    Robot_Teleop <-- ROS2 /angular_speed --> BE_Teleop
-    Robot_Camera <-- ROS2 /camera_feed --> BE_Camera
-    Robot_Lidar <-- ROS2 /lidar --> BE_Lidar
-```
+</div>
 
 # Instruções de execução
 
@@ -69,7 +48,11 @@ cd src/bolin/
 3. Execute o robô
 
 ```bash
-source ./run.sh
+ros2 run bolin bolin
+
+ros2 run  bolin_lidar bolin_lidar
+
+ros2 run bolin_camera camera
 ```
 
 ## Back-End
