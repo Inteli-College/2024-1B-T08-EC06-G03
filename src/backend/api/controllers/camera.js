@@ -14,6 +14,10 @@ class CameraController {
 
     async startCameraController() {
         await rclnodejs.init();
+        if (this.camera_node != null) {
+            console.log('Teleop connection already established');
+            return;
+        }
         this.camera_node = new rclnodejs.Node('camera_node');
         this.cameraSubscriber = this.camera_node.createSubscription(
             'sensor_msgs/msg/CompressedImage',
