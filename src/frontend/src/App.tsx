@@ -41,7 +41,7 @@ const App: React.FC = () => {
             const jsonData = await response.json();
             setCameraData(jsonData)
         } catch (error) {
-            console.error('Error fetching teleop data:', error);
+            console.error('Error fetching camera:', error);
         }
     }, []);
 
