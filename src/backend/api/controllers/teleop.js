@@ -26,7 +26,16 @@ class TeleopController {
             return;
         }
 
-        await rclnodejs.init();
+        try {
+            if (!rclnodejs.init?.called) {  // Check for existence and called flag
+              console.log('Initializing rclnodejs');
+              await rclnodejs.init();
+            }
+          } catch (error) {
+            console.error('Error initializing rclnodejs:', error);
+            // Handle initialization error appropriately (e.g., close the connection, display an error message)
+        }
+
         this.teleop_node = new rclnodejs.Node('teleop_node');
         this.linear_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'linear_speed');
         this.angular_speed_publisher = this.teleop_node.createPublisher('std_msgs/msg/Float32', 'angular_speed');
