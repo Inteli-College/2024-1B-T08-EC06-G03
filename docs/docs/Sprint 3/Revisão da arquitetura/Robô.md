@@ -31,11 +31,21 @@ O node `bolin_teleop` é responsável por ouvir os tópicos `linear_speed` e `an
 
 ### Bolin_Camera
 
-O node `bolin_camera` utiliza[OpenCV](https://opencv.org/) para capturar imagens da câmera. As imagens são comprimidas e enviadas no tópico `/camera_feed`.
+O node `bolin_camera` utiliza OpenCV [OpenCV](https://opencv.org/) para capturar imagens da câmera. As imagens são comprimidas e enviadas no tópico `/camera_feed`. As imagens são enviadas em um spin em vez de um timer callback, como utilizado inicialmente, para melhorar a performance.
 
 #### Transmissão de Imagens
 
-- Avaliamos o uso de `cv_bridge` [cv_bridge](https://wiki.ros.org/cv_bridge) para facilitar a transmissão das imagens. As imagens são recebidas pelo back-end para processamento e envio ao Front-End.
+- Avaliamos o uso de `cv_bridge` [cv_bridge](https://wiki.ros.org/cv_bridge) para facilitar a transmissão das imagens. As imagens são recebidas pelo back-end para processamento e envio ao Front-End. No entanto, considerando o tempo de entrega do projeto, foi decidido manter a transmissão de imagens diretamente pelo ROS2 e será considerado o teste na sprint seguinte.
+
+- Também consideramos utilizar escrever o nó em C++ para melhorar a performance e diminuit a latência na transmissão. No entanto, após testes, percebemos que a diferença não era significativa. Segue abaixo os testes realizados:
+
+##### Teste com C++
+![Teste de Performance com C++](../../../static/img/teste_camera_cpp.jpeg)
+
+##### Teste com Python
+![Teste de Performance com Python](../../../static/img/teste_camera_python.jpeg)
+
+Portanto, a partir dessa comparação, foi decidido que o nó continuaria sendo escrito em Python.
 
 ### Bolin_Lidar
 
