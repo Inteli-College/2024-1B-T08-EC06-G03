@@ -7,7 +7,6 @@ const morgan = require('morgan');
 
 const teleopRouter = require('../api/routes/teleop');
 const cameraRouter = require('../api/routes/camera');
-const lidarRouter = require('../api/routes/lidar');
 
 module.exports = () => {
     const app = express();
@@ -21,7 +20,6 @@ module.exports = () => {
 
     app.use('/teleop', teleopRouter);
     app.use('/camera', cameraRouter);
-    app.use('/lidar', lidarRouter);
 
     return app;
 };
