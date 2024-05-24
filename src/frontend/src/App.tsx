@@ -3,15 +3,29 @@ import useWebSocket from 'react-use-websocket';
 import Joystick from './components/Joystick'; // Adjust the path based on your project structure
 import KillButton from './components/Kill'; // Import the KillButton component
 import HamburgerMenu from './components/HamburgerMenu';
+import DetectionInterface from './components/DetectionInterface';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
+type Direction = 
+  | 'front'
+  | 'front-right'
+  | 'right'
+  | 'back-right'
+  | 'back'
+  | 'back-left'
+  | 'left'
+  | 'front-left';
+
 const App: React.FC = () => {
+
+    const directions: Direction[] = ['front', 'right', 'back-left'];
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
     const [cameraData, setCameraData] = useState<any>({});
     const [cameraSocketUrl, setCameraSocketUrl] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
+    
 
     const fetchData = useCallback(async () => {
         try {
@@ -107,6 +121,9 @@ const App: React.FC = () => {
                         <Joystick sendMessage={teleopWebSocket.sendMessage} />
                     </div>
                 </div>
+            </div>
+            <div>
+                    <DetectionInterface directions={directions} />
             </div>
         </>
     );
