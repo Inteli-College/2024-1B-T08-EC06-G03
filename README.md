@@ -94,6 +94,8 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 ```sh
 git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
 ```
+Além disso, é importante ter instalado o [ROS2](https://docs.ros.org/en/humble/Installation.html).
+
 ### 1. Conexão com o Robô via SSH
 Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Há um tutorial de como deve ser feito o [setup do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint%202/Metodologia) Execute os seguintes passos no seu terminal:
 
@@ -115,26 +117,70 @@ Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes
      ```
    - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
 
+2. **Executar os comando de controle e sensores**:
+
+    - Acesse a pasta do robô
+
+    ```bash
+    cd src/bolin/
+    ```
+
+    - Execute o robô
+
+    ```bash
+    source ./run.sh
+    ```
+
 ### 3. Execução do Software de Controle
 Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô.
 
-1. **Preparar o Ambiente de Software**:
-   - No seu computador (não no terminal SSH), abra um novo terminal.
-   - Navegue até o diretório do projeto e entre na pasta do código fonte 
-     ```bash
-     cd src/workspace
-     ```
-   - Execute o script que inicia o servidor ou o software de controle:
-     ```bash
-     ./run.sh
-     ```
+1. **Inicialização do Back-End**:
+    - Instale o [Node.js](https://nodejs.org/en/download/)
+    - No seu computador (não no terminal SSH), abra um novo terminal.
+    - Acesse a pasta do Back-End
 
-2. **Abrir Interface de Controle**:
-   - Localize o arquivo HTML responsável pela interface de controle. O caminho exato deve ser verificado na documentação do projeto.
-   - Abra o arquivo HTML diretamente com um navegador para acessar a interface de controle do robô. É indicado abrir através da extensão `Live Server`, porém pode ser aberto como um arquivo normal, apenas executando ele.
+    ```bash
+    cd src/backend/
+    ```
+
+    - Instale as dependências
+
+    ```bash
+    npm install
+    ```
+
+    - Execute o Back-End
+
+    ```bash
+    npm start
+    ```
+    
+2. **Inicialização do Front-End**:
+    - Instale o [Node.js](https://nodejs.org/en/download/)
+    - No seu computador (não no terminal SSH), abra um novo terminal.
+    - Acesse a pasta do Front-End
+
+    ```bash
+    cd src/frontend/
+    ```
+
+    - Instale as dependências
+
+    ```bash
+    npm install
+    ```
+
+    - Execute o Front-End
+
+    ```bash
+    npm run dev
+    ```
+
+    - Acesse [http://localhost:5173](http://localhost:5173) no seu navegador.
 
 ### 4. Controle do Robô
-- Utilize as teclas especificadas na interface HTML para controlar o robô.
+- Utilize o joystick para controlar o robô.
+
 
 **Nota:** É importante confirmar todos os comandos e caminhos exatos com a documentação técnica disponível para garantir que as instruções estejam corretas e atualizadas.
 
