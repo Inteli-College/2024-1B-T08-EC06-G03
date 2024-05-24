@@ -20,7 +20,6 @@ setup(
     entry_points={
         "console_scripts": [
             "bolin = bolin.bolin:main",
-            "lidar = lidar.lidar:main",
            ],
     },
 )
