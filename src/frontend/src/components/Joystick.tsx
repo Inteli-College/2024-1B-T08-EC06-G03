@@ -10,25 +10,15 @@ const Joystick: React.FC<JoystickProps> = ({ sendMessage }) => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const joystickRef = useRef<HTMLDivElement>(null);
     const innerCircleRef = useRef<HTMLDivElement>(null);
-    var lastLinear = 0;
-    var lastAngular = 0;
 
     const sendJoystickData = (linear: number, angular: number) => {
         linear = Math.round(linear);
         angular = Math.round(angular);
 
-        if (linear !== lastLinear) {
-            sendMessage(JSON.stringify({ "linear_speed": linear }));
-            console.log("linear: " + linear);
-        }
-
-        if (angular !== lastAngular) {
-            sendMessage(JSON.stringify({ "angular_speed": angular }));
-            console.log("angular: " + angular);
-        }
-
-        lastLinear = linear;
-        lastAngular = angular;
+        sendMessage(JSON.stringify({ "linear_speed": linear }));
+        sendMessage(JSON.stringify({ "angular_speed": angular }));
+        console.log("linear: " + linear);
+        console.log("angular: " + angular);
     };
 
     const handleMouseDown = () => {
