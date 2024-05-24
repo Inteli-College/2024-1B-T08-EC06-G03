@@ -3,15 +3,29 @@ import useWebSocket from 'react-use-websocket';
 import Joystick from './components/Joystick'; // Adjust the path based on your project structure
 import KillButton from './components/Kill'; // Import the KillButton component
 import HamburgerMenu from './components/HamburgerMenu';
+import DetectionInterface from './components/DetectionInterface';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
+type Direction = 
+  | 'front'
+  | 'front-right'
+  | 'right'
+  | 'back-right'
+  | 'back'
+  | 'back-left'
+  | 'left'
+  | 'front-left';
+
 const App: React.FC = () => {
+
+    const [directions, setDirections] = useState<Direction[]>([]);
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
     const [cameraData, setCameraData] = useState<any>({});
     const [cameraSocketUrl, setCameraSocketUrl] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
+
     const [fps, setFps] = useState<number>(0);
     const messageTimestamps = useRef<number[]>([]);
     const now = Date.now(); // Capture the current timestamp
@@ -66,7 +80,16 @@ const App: React.FC = () => {
         onOpen: () => console.log('WebSocket connection established.'),
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
-        onMessage: (event) => console.log('WebSocket message:', event.data),
+        onMessage: (event) => {
+            console.log('WebSocket message:', event.data);
+            try {
+              const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
+              setDirections(receivedDirections);
+            } catch (error) {
+              console.log('Error parsing WebSocket message:', error);
+            }
+
+          },
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });
 
@@ -120,6 +143,9 @@ const App: React.FC = () => {
                         <Joystick sendMessage={teleopWebSocket.sendMessage} />
                     </div>
                 </div>
+            </div>
+            <div>
+                    <DetectionInterface directions={directions} />
             </div>
         </>
     );
