@@ -19,7 +19,7 @@ type Direction =
 
 const App: React.FC = () => {
 
-    const directions: Direction[] = ['front', 'right', 'back-left'];
+    const [directions, setDirections] = useState<Direction[]>([]);
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
     const [cameraData, setCameraData] = useState<any>({});
@@ -77,7 +77,15 @@ const App: React.FC = () => {
         onOpen: () => console.log('WebSocket connection established.'),
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
-        onMessage: (event) => console.log('WebSocket message:', event.data),
+        onMessage: (event) => {
+            console.log('WebSocket message:', event.data);
+            try {
+              const receivedDirections: Direction[] = JSON.parse(event.data);
+              setDirections(receivedDirections);
+            } catch (error) {
+              console.error('Error parsing WebSocket message:', error);
+            }
+          },
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });
 
