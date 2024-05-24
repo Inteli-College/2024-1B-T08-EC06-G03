@@ -80,11 +80,12 @@ const App: React.FC = () => {
         onMessage: (event) => {
             console.log('WebSocket message:', event.data);
             try {
-              const receivedDirections: Direction[] = JSON.parse(event.data);
+              const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
               setDirections(receivedDirections);
             } catch (error) {
-              console.error('Error parsing WebSocket message:', error);
+              console.log('Error parsing WebSocket message:', error);
             }
+
           },
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });

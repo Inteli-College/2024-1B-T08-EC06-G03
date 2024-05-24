@@ -39,14 +39,18 @@ const DetectionInterface: React.FC<DetectionInterfaceProps> = ({ directions }) =
   };
 
   return (
-    <div>
+    <>
+    {directions.length != 0 && (
+<div>
       {directions.map((direction, index) => (
         <div
           key={index}
-          className={`absolute w-4 h-4 bg-red-500 rounded-full ${getIndicatorPosition(direction)}`}
+          className={`absolute w-20 h-20 bg-red-500 rounded-full ${getIndicatorPosition(direction)}`}
         ></div>
       ))}
     </div>
+    )}
+    </>
   );
 };
 
