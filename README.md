@@ -125,10 +125,14 @@ Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes
     cd src/bolin/
     ```
 
-    - Execute o robô
+    - Execute o robô (rode cada comando abaixo em um terminal diferente)
 
-    ```bash
-    source ./run.sh
+   ```bash
+    ros2 run bolin bolin
+    
+    ros2 run  bolin_lidar bolin_lidar
+    
+    ros2 run bolin_camera camera
     ```
 
 ### 3. Execução do Software de Controle
