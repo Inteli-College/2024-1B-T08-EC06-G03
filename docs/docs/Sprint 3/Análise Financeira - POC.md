@@ -1,4 +1,4 @@
-# Análise Financeira
+# Análise Financeira - Proba de conceito
 
 ## Introdução
 
@@ -58,33 +58,32 @@ Como 7 desenvolvedores trabalharam no projeto, o custo total é de R$ 35.000,00.
 
 #### Cálculo dos tributos
 
-Devido a tributação brasileira, é necessário calcular os impostos que incidem sobre o preço do componente. Considerando um imposto único de 20% , o cálculo dos tributos é feito da seguinte forma:
+Devido a tributação brasileira, é necessário calcular os impostos por dentro que incidem sobre o preço do componente, ou seja, que já está incluso no valor do produto. Considerando um imposto único com base na alíquota de 20%, o cálculo dos tributos é feito da seguinte forma:
 
 ```
-Imposto = Preço do componente * 0,2
-Total = Preço do componente + Imposto
+Imposto = Preço do componente / (1 - Alíquota)
 ```
 
-##### Tabela de preços com tributos inclusos:
+#### Tabela de preços dos componentes com tributos e custos adicionais inclusos:
 
 | Produto | Preço (R$) |
 |---------|-------|
-| TurtleBot3 Burger RPi4 2GB      | 9.058,4    |
-| Bateria Li-po Prismatica 3,7v 1800mah          | 108,8     |
-| Webcam Logitech c270i 720P           | 170,24     |
-| Aparelho para usar o software          | 2.242,8     |
+| TurtleBot3 Burger RPi4 2GB      | 9.435,83    |
+| Bateria Li-po Prismatica 3,7v 1800mah          | 106,25     |
+| Webcam Logitech c270i 720P           | 166,62     |
+| Aparelho para usar o software          | 2.336,25     |
 
 #### Valor final da implementação (com fretes, custos adicionais  e tributos inclusos):
 
 | Produto | Preços finais (R$) |
 |---------|-------|
-| TurtleBot3 Burger RPi4 2GB      | 9.058,4    |
-| Bateria Li-po Prismatica 3,7v 1800mah          | 108,8     |
-| Webcam Logitech c270i 720P           | 170,24     |
-| Aparelho para usar o software          | 2.242,8     |
+| TurtleBot3 Burger RPi4 2GB      | 9.435,83    |
+| Bateria Li-po Prismatica 3,7v 1800mah          | 106,25     |
+| Webcam Logitech c270i 720P           | 166,62     |
+| Aparelho para usar o software          | 2.336,25     |
 | Hospedagem do software          | 4.382,47/ano     |
 | Custos dos desenvolvedores          | 35.000,00     |
-| **Total**          | **R$ 50.962,31**     |
+| **Total**          | **R$ 51.427,42**     |
 
 **Nota:** _Os custos de capital foram calculados com base nos preços dos produtos e serviços no mercado atual, e os custos recorrentes foram calculados com base nos valores de hospedagem da AWS (Amazon Web Services)._
 
@@ -94,11 +93,11 @@ Para calcular o lucro da implementação, pode-se tomar como base um valor de 20
 
 ```
 Lucro = Custo total * 0,2
-Lucro = R$ 50.962,31 * 0,2
-Lucro = R$ 10.192,46
+Lucro = R$ 51.427,42 * 0,2
+Lucro = R$ 10.285,48
 ```
 
-Preço final da implementação com lucro: R$ 61.154,77
+Preço final da implementação com lucro: R$ 61.712,90
 
 **Referências:**
 - [Turtlebot3 Burger RPi 3 1 GB](https://www.robotis.us/turtlebot-3-burger-rpi4-2gb-us/)
@@ -169,13 +168,13 @@ Para diminuir o custo da proposta, é possível considerar as seguintes estraté
 #### Exemplo de Aplicação Prática
 
 **Cenário Atual:**
-- TurtleBot3 Burger RPi4 2GB: R$ 9.058,4
-- Bateria: R$ 108,8
-- Webcam: R$ 170,24
-- Aparelho para usar o software: R$ 2.242,08
+- TurtleBot3 Burger RPi4 2GB: R$ 9.435,83
+- Bateria: R$ 106,25
+- Webcam: R$ 166,62
+- Aparelho para usar o software: R$ 2.336,25
 - Hospedagem do software: R$ 365,20/mês (R$ 4.382,47/ano)
 - Desenvolvedores: R$ 35.000,00
-- **Total:** R$ 50.962,31
+- **Total:** R$ 51.427,42
 
 **Cenário Otimizado:**
 - Substituição do TurtleBot3 por um robô semelhante alternativo, como o Elegoo Smart Robot Car Kit V4.0, que custo aproximadamente [R$ 600,00](https://pt.aliexpress.com/item/1005005949127058.html?aff_platform=true&aff_short_key=UneMJZVf&isdl=y&src=bing&pdp_npi=3%40dis%21BRL%21446.21%21314.18%21%21%210%21%21%40%2112000034984229010%21ppc%21%21&albch=shopping&acnt=135095331&isdl=y&albcp=554793319&albag=1298524354642739&slnk=&trgt=pla-4584757337621584&plac=&crea=81157826239697&netw=o&device=c&mtctp=e&utm_source=Bing&utm_medium=shopping&utm_campaign=PA_Bing_BR_PC_customlabel1-20231214&utm_content=customlable1%3D6&utm_term=Elegoo%20Smart%20Robot%20Car%20Kit%20V4.0&msclkid=fc1674f9fc6811d941d912b7ad614e1f)
