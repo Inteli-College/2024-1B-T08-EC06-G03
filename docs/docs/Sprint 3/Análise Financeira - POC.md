@@ -1,4 +1,4 @@
-# Análise Financeira - Proba de conceito
+# Análise Financeira - Prova de conceito
 
 ## Introdução
 
