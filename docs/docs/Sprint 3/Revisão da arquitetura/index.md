@@ -1,5 +1,6 @@
 ---
 title: Revisão da arquitetura do sistema
+sidebar_position: 1
 ---
 
 ## Introdução
@@ -14,7 +15,7 @@ Nesta seção, fornecemos uma visão abrangente da arquitetura de solução do n
 
 ## Diagrama de Arquitetura
 
-O diagrama abaixo representa a comunicação entre os subsistemas Back-End, Robô e Front-End, destacando os componentes de teleoperação, câmera e lidar.
+O diagrama abaixo representa a comunicação entre os subsistemas Back-End, Robô e Front-End, destacando os componentes de teleoperação, câmera e lidar. Caso queira ter uma melhor visualização do diagrama abaixo, também pode vê-lo [aqui](https://drive.google.com/file/d/1H0yqpZD8s6u_Ah7Jclvx53MnB_qDc-Hp/view?usp=sharing).
 
 <div align="center">
 
