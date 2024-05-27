@@ -18,14 +18,29 @@ Utilizamos WebSockets para garantir comunicação em tempo real entre o Front-En
 ### Tela de Teleop
 A tela de teleop combina o controle do robô com a visualização da câmera, proporcionando ao usuário uma interface centralizada para todas as ações necessárias. A escolha de integrar o controle e a visualização na mesma tela visa minimizar o tempo de resposta do usuário e facilitar a tomada de decisões rápidas durante a operação do robô.
 
-![Tela de teleop](/img/front-controle.png)
-![Tela de teleop](/img/front-controle-menu.png)
+<div align="center">
+
+*Tela de Teleoperação*
+
+![Tela de Teleoperação](/img/front-controle.png)
+*Fonte:* Elaborado pela equipe Rebólins
+
+</div>
+
+<div align="center">
+
+*Tela de Teleoperação - Menu Lateral*
+
+![Tela de Teleoperação](/img/front-controle-menu.png)
+*Fonte:* Elaborado pela equipe Rebólins
+
+</div>
 
 ### Transmissão de Imagem
 A transmissão de imagem em tempo real permite ao usuário visualizar o ambiente em que o robô está, facilitando sua locomoção e manobras. Exibir a latência da transmissão fornece ao usuário uma noção da qualidade da conexão, essencial para ajustes de operação em ambientes com variabilidade de rede. O cálculo da latência foi realizado considerando a diferença de tempo de recebimento entre dois frames, garantindo precisão na medição.
 
 ### Joystick
-Implementamos um joystick virtual que permite ao usuário controlar a velocidade linear e angular do robô. A escolha do joystick se deve à sua familiaridade e facilidade de uso em interfaces de controle remoto, proporcionando um controle intuitivo e preciso.
+Implementamos um joystick virtual que permite ao usuário controlar a velocidade linear e angular do robô. A escolha do joystick se deve à sua familiaridade e facilidade de uso em interfaces de controle remoto, proporcionando um controle intuitivo e preciso. Além disso, o controle é otimizado na utilização de dispositivos móveis.
 
 ### Botão de Kill
 O botão de Kill aciona o kill_service no Back-End para parar imediatamente o robô em situações de emergência. Esta funcionalidade crítica foi projetada com destaque visual e fácil acesso para garantir a segurança durante a operação do robô.
@@ -46,6 +61,33 @@ Recebe e exibe as informações do lidar em tempo real, proporcionando feedback 
 
 ## Considerações e Próximos Passos
 
+### Implementação da Interface de Ajuda
+Iremos implementar uma interface para orientar o operados acerca das funcionalidades no display:
+
+<div align="center">
+
+*Tela de Teleoperação*
+
+![Tela de Teleoperação](/img/ajuda2.png)
+
+
+</div>
+<div align="center">
+*Fonte:* Elaborado pela equipe Rebólins
+</div>
+
+<div align="center">
+
+*Tela de Teleoperação - Menu Lateral*
+
+![Tela de Teleoperação](/img/ajuda-menu.png)
+
+</div>
+<div align="center">
+*Fonte:* Elaborado pela equipe Rebólins
+</div>
+
+
 ### Melhoria da Interface
 Planejamos aprimorar a interface do usuário para torná-la mais intuitiva e responsiva. Isso inclui a revisão contínua do layout e a implementação de feedback visual mais claro para as ações do usuário.
 
@@ -53,8 +95,9 @@ Planejamos aprimorar a interface do usuário para torná-la mais intuitiva e res
 Implementaremos uma landing page para que os usuários não caiam diretamente na interface de controle, melhorando assim a navegabilidade pelas diferentes funções da plataforma. Ademais, criaremos uma página que exibirá dashboards referentes aos dados coletados na operação do robô.
 
 ### Feedback do Usuário
-Implementaremos um sistema de feedback para entender melhor as necessidades dos usuários e melhorar a aplicação. Coletar e analisar o feedback permitirá ajustes e melhorias contínuas, garantindo que a interface evolua de acordo com as expectativas e demandas dos usuários.
+Implementaremos modificações e ajustes conforme feedbacks do parceiro de projeto.
 
+Conclusão
 ---
 
 Ao longo do processo criativo, nossa prioridade foi criar uma interface que oferecesse controle preciso e feedback em tempo real, elementos essenciais para a operação segura e eficiente do robô. A escolha de tecnologias e a estrutura da interface foram guiadas pelo objetivo de proporcionar uma experiência de usuário robusta, intuitiva e confiável.
