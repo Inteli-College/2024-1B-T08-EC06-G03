@@ -1,4 +1,4 @@
-# Análise Financeira - Prova de conceito
+# Análise Financeira - Prova de conceito (POC)
 
 ## Introdução
 

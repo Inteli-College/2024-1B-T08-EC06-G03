@@ -54,7 +54,7 @@ const config = {
             }),
         ],
     ],
-    themes : ['@docusaurus/theme-mermaid'],
+    themes: ['@docusaurus/theme-mermaid'],
 
     themeConfig:
         /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -92,6 +92,7 @@ const config = {
                 darkTheme: prismThemes.dracula,
             },
         }),
+    staticDirectories: ['static'],
 };
 
 export default config;

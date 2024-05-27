@@ -1,3 +1,8 @@
+---
+title: Análise Financeira - Solução final
+sidebar_position: 3
+---
+
 ## Solução Final
 A solução final proposta pelo grupo "Rebólins" para a Atvos terá finalidade de implementar, na prática, o conceito teórico demonstrado de forma resumida na prova de conceito.
 

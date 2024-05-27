@@ -14,6 +14,7 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 - <a href="https://www.linkedin.com/in/guilherme-ferreira-linhares-8638411a1/">Guilherme Ferreira Linhares</a>
 - <a href="https://www.linkedin.com/in/naruto/">Ivan Gonçalves Ferreira</a>
 - <a href="https://www.linkedin.com/in/luiza-rubim/">Luiza Souza Rubim</a>
+- <a href="https://www.linkedin.com/in/olincosta/">Ólin Medeiros Costa</a>
 
 ## 👩‍🏫 Professores:
 ### Orientador
@@ -93,6 +94,8 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 ```sh
 git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
 ```
+Além disso, é importante ter instalado o [ROS2](https://docs.ros.org/en/humble/Installation.html).
+
 ### 1. Conexão com o Robô via SSH
 Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Há um tutorial de como deve ser feito o [setup do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint%202/Metodologia) Execute os seguintes passos no seu terminal:
 
@@ -103,7 +106,6 @@ Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. H�
      ```bash
      ssh -p 1238 bobolins@10.128.0.16
      ```
-   - Quando solicitado, digite a senha para autenticação, por exemplo: `reboiler123`.
 
 ### 2. Inicialização do Robô
 Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes necessários do robô.
@@ -115,26 +117,74 @@ Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes
      ```
    - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
 
+2. **Executar os comando de controle e sensores**:
+
+    - Acesse a pasta do robô
+
+    ```bash
+    cd src/bolin/
+    ```
+
+    - Execute o robô (rode cada comando abaixo em um terminal diferente)
+
+   ```bash
+    ros2 run bolin bolin
+    
+    ros2 run  bolin_lidar bolin_lidar
+    
+    ros2 run bolin_camera camera
+    ```
+
 ### 3. Execução do Software de Controle
 Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô.
 
-1. **Preparar o Ambiente de Software**:
-   - No seu computador (não no terminal SSH), abra um novo terminal.
-   - Navegue até o diretório do projeto e entre na pasta do código fonte 
-     ```bash
-     cd src/workspace
-     ```
-   - Execute o script que inicia o servidor ou o software de controle:
-     ```bash
-     ./run.sh
-     ```
+1. **Inicialização do Back-End**:
+    - Instale o [Node.js](https://nodejs.org/en/download/)
+    - No seu computador (não no terminal SSH), abra um novo terminal.
+    - Acesse a pasta do Back-End
 
-2. **Abrir Interface de Controle**:
-   - Localize o arquivo HTML responsável pela interface de controle. O caminho exato deve ser verificado na documentação do projeto.
-   - Abra o arquivo HTML diretamente com um navegador para acessar a interface de controle do robô. É indicado abrir através da extensão `Live Server`, porém pode ser aberto como um arquivo normal, apenas executando ele.
+    ```bash
+    cd src/backend/
+    ```
+
+    - Instale as dependências
+
+    ```bash
+    npm install
+    ```
+
+    - Execute o Back-End
+
+    ```bash
+    npm start
+    ```
+    
+2. **Inicialização do Front-End**:
+    - Instale o [Node.js](https://nodejs.org/en/download/)
+    - No seu computador (não no terminal SSH), abra um novo terminal.
+    - Acesse a pasta do Front-End
+
+    ```bash
+    cd src/frontend/
+    ```
+
+    - Instale as dependências
+
+    ```bash
+    npm install
+    ```
+
+    - Execute o Front-End
+
+    ```bash
+    npm run dev
+    ```
+
+    - Acesse [http://localhost:5173](http://localhost:5173) no seu navegador.
 
 ### 4. Controle do Robô
-- Utilize as teclas especificadas na interface HTML para controlar o robô.
+- Utilize o joystick para controlar o robô.
+
 
 **Nota:** É importante confirmar todos os comandos e caminhos exatos com a documentação técnica disponível para garantir que as instruções estejam corretas e atualizadas.
 
@@ -143,4 +193,4 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
 Para acessar a nossa [documentação](https://inteli-college.github.io/2024-1B-T08-EC06-G03/), clique [aqui](https://inteli-college.github.io/2024-1B-T08-EC06-G03/)!
 
 ## 📋 Licença/License
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Desencana!</span> - por <span property="cc:attributionName"> <a href="https://www.linkedin.com/in/eduardosbarreto/">Eduardo Barreto</a>, <a href="https://www.linkedin.com/in/fernando-vasconcellos-/">Fernando Vasconcelos</a>, <a href="https://www.linkedin.com/in/eduardo-franca-porto/">Gabrielle Cartaxo</a>, <a href="https://www.linkedin.com/in/guilherme-ferreira-linhares-8638411a1/">Guilherme Linhares</a>, <a href="https://www.linkedin.com/in/naruto/">Ivan Ferreira</a>, <a href="hhttps://www.linkedin.com/in/luiza-rubim/">Luiza Rubim</a> e <a href="https://www.linkedin.com/in/olincosta/">Olin Costa</a></span> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Desencana!</span> - por <span property="cc:attributionName"> <a href="https://www.linkedin.com/in/eduardosbarreto/">Eduardo Barreto</a>, <a href="https://www.linkedin.com/in/fernando-vasconcellos-/">Fernando Vasconcelos</a>, <a href="https://www.linkedin.com/in/eduardo-franca-porto/">Gabrielle Cartaxo</a>, <a href="https://www.linkedin.com/in/guilherme-ferreira-linhares-8638411a1/">Guilherme Linhares</a>, <a href="https://www.linkedin.com/in/naruto/">Ivan Ferreira</a>, <a href="https://www.linkedin.com/in/luiza-rubim/">Luiza Rubim</a> e <a href="https://www.linkedin.com/in/olincosta/">Olin Costa</a></span> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>

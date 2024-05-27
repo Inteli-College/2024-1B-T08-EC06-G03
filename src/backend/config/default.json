@@ -1,0 +1,20 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "cors": {
+      "origin": "*",
+      "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+      "preflightContinue": false,
+      "optionsSuccessStatus": 204
+    },
+    "teleop": {
+      "port": 8001,
+      "path": "/teleop"
+    },
+    "camera": {
+      "port": 8002,
+      "path": "/camera"
+    }
+  }
+}

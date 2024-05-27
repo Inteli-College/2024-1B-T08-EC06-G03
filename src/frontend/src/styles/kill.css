@@ -1,0 +1,18 @@
+/* KillButton.css */
+
+button:active {
+    animation: click-animation 1.0s;
+  }
+  
+  @keyframes click-animation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.80);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
