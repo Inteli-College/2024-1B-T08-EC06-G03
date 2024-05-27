@@ -52,8 +52,8 @@ No entanto, esta análise financeira não entrará no mérito de separar os impo
 
 Então:
 ```
-Custo(mão de obra + materiais + imposto) = 1085604*1.17
-Custo(mão de obra + materiais + imposto) = 1270156.68
+Custo(mão de obra + materiais + imposto) = 1085604/(1 - 0.17)
+Custo(mão de obra + materiais + imposto) = 1307956.62
 ```
 
 ### Lucro
@@ -61,12 +61,12 @@ O lucro é também um importante aspecto a ser considerado na análise financeir
 
 Então:
 ```
-Custo(mão de obra + materiais + imposto + lucro) = 1270156.68*1.20
-Custo(mão de obra + materiais + imposto + lucro) = 1524188.016
+Custo(mão de obra + materiais + imposto + lucro) = 1307956.62*1.20
+Custo(mão de obra + materiais + imposto + lucro) = 1569547.94
 ```
 
 ### Sugestão de como diminuir o custo
-Para tentar reduzir o custo do projeto, até aqui calculado em R$1,524,188.01, é possível diminuir o período de contratação de alguns profissionais. Isso pode ser feito por meio da divisão de períodos determinados para construir partes específicas do robô. Por exemplo, considerando que um engenheiro mecânico consiga idealizar, prototipar e produzir todas as dependências mecânicas do robô em seis meses, não seria necessário que ele estivesse contratado durante os seis meses restantes. A mesma coisa vale para os engenheiros elétricos e da computação.
+Para tentar reduzir o custo do projeto, até aqui calculado em R$1,569,547.94, é possível diminuir o período de contratação de alguns profissionais. Isso pode ser feito por meio da divisão de períodos determinados para construir partes específicas do robô. Por exemplo, considerando que um engenheiro mecânico consiga idealizar, prototipar e produzir todas as dependências mecânicas do robô em seis meses, não seria necessário que ele estivesse contratado durante os seis meses restantes. A mesma coisa vale para os engenheiros elétricos e da computação.
 
 No entanto, vale ressaltar que, caso assim fosse feito, não seria possível, por exemplo, ajustar a mecânica do robô no período dos últimos meses. Da mesma forma, se considerado que os engenheiros elétricos pudessem concluir a parte elétrica do robô em três meses - o que os dispensaria do projeto pelos meses restantes a fim de diminuir custo -, então o trabalho realizado durante os outros meses teriam de ser feitos com base nessa parte elétrica específica, sem qualquer chance de ela se adaptar a eventuais necessidades.
 
@@ -77,12 +77,12 @@ Custo(mão de obra) = 9100*1*12 + 9875*2*3 + 10051*2*6 + 9674*2*3 + 9667*1*6 = 4
 
 Custo(mão de obra + materiais) = 405108 + 150000 = 555108
 
-Custo(mão de obra + materiais + imposto) = 555108*1.17 = 649476.36
+Custo(mão de obra + materiais + imposto) = 555108/(1 - 0.17) = 668804.81
 
-Custo(mão de obra + materiais + imposto + lucro) = 649476.36*1.20 = 779371.632
+Custo(mão de obra + materiais + imposto + lucro) = 668804.81*1.20 = 802565.77
 ```
 
-Por fim, o custo passaria de R$1,524,188.01 para um custo mínimo de R$779,371.63. Isso representa uma redução de R$744,816.38.
+Por fim, o custo passaria de R$1,569,547.94 para um custo mínimo de R$802,565.77. Isso representa uma redução de R$766,982.17.
 
 ## Bibliografia
 [1]: Boston Dynamics. Ask a Roboticist: Q&A with Josh, a Mechanical Engineer at Boston Dynamics. Disponível em: https://bostondynamics.com/blog/ask-a-roboticist-qa-with-josh-a-mechanical-engineer-at-boston-dynamics/. Acesso em: 21 maio 2024.
