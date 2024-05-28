@@ -124,7 +124,7 @@ const App: React.FC = () => {
         }
     }, [cameraWebSocket.readyState, cameraWebSocket.sendMessage]);
 
-    return (<>
+    return (<div className='relative overflow-hidden h-screen'>
         <img className="relative h-screen p-4" src= {`data:image/jpeg;base64,${image}`}></img>
             <div className="absolute top-0 left-0 p-4">
                 <HamburgerMenu />
@@ -145,9 +145,10 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div>
-                    <DetectionInterface directions={directions} />
+                {/*<DetectionInterface directions={directions} />*/}
+                
             </div>
-        </>
+        </div>
     );
 };
 

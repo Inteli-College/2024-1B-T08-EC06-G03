@@ -18,21 +18,21 @@ const DetectionInterface: React.FC<DetectionInterfaceProps> = ({ directions }) =
   const getIndicatorPosition = (direction: Direction) => {
     switch (direction) {
       case 'front':
-        return 'top-0 left-1/2 transform -translate-x-1/2';
+        return 'absolute w-3/4 h-96 bg-red-500 opacity-40 rounded-full -top-64 left-1/2 transform -translate-x-1/2';
       case 'front-right':
-        return 'top-0 right-0';
+        return 'absolute w-96 h-96 bg-red-500 opacity-40 rounded-full -top-40 -right-40';
       case 'right':
-        return 'top-1/2 right-0 transform -translate-y-1/2';
+        return 'absolute w-96 h-3/4 bg-red-500 opacity-40 rounded-full top-1/2 -right-64 transform -translate-y-1/2';
       case 'back-right':
-        return 'bottom-0 right-0';
+        return 'absolute w-96 h-96 bg-red-500 opacity-40 rounded-full -bottom-40 -right-40';
       case 'back':
-        return 'bottom-0 left-1/2 transform -translate-x-1/2';
+        return 'absolute w-3/4 h-96 bg-red-500 opacity-40 rounded-full -bottom-64 left-1/2 transform -translate-x-1/2';
       case 'back-left':
-        return 'bottom-0 left-0';
+        return 'absolute w-96 h-96 bg-red-500 opacity-40 rounded-full -bottom-40 -left-40';
       case 'left':
-        return 'top-1/2 left-0 transform -translate-y-1/2';
+        return 'absolute w-96 h-3/4 bg-red-500 opacity-40 rounded-full top-1/2 -left-64 transform -translate-y-1/2';
       case 'front-left':
-        return 'top-0 left-0';
+        return 'absolute w-96 h-96 bg-red-500 opacity-40 rounded-full -top-40 -left-40';
       default:
         return '';
     }
@@ -45,7 +45,7 @@ const DetectionInterface: React.FC<DetectionInterfaceProps> = ({ directions }) =
       {directions.map((direction, index) => (
         <div
           key={index}
-          className={`absolute w-20 h-20 bg-red-500 rounded-full ${getIndicatorPosition(direction)}`}
+          className={`${getIndicatorPosition(direction)}`}
         ></div>
       ))}
     </div>
