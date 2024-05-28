@@ -145,7 +145,7 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div>
-                {/*<DetectionInterface directions={directions} />*/}
+                <DetectionInterface directions={directions} />
                 
             </div>
         </div>
