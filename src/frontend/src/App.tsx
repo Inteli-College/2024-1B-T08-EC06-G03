@@ -8,15 +8,15 @@ import DetectionInterface from './components/DetectionInterface';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
-type Direction = 
-  | 'front'
-  | 'front-right'
-  | 'right'
-  | 'back-right'
-  | 'back'
-  | 'back-left'
-  | 'left'
-  | 'front-left';
+type Direction =
+    | 'front'
+    | 'front-right'
+    | 'right'
+    | 'back-right'
+    | 'back'
+    | 'back-left'
+    | 'left'
+    | 'front-left';
 
 const App: React.FC = () => {
 
@@ -82,30 +82,31 @@ const App: React.FC = () => {
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
         onMessage: (event) => {
-            console.log('WebSocket message:', event.data);
             try {
-              const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
-              setDirections(receivedDirections);
+                const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
+                setDirections(receivedDirections);
             } catch (error) {
-              console.log('Error parsing WebSocket message:', error);
+                console.log('Error parsing WebSocket message:', error);
             }
 
-          },
+        },
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });
 
-    
+
     const cameraWebSocket = useWebSocket(cameraSocketUrl, {
         onOpen: () => console.log('WebSocket connection established.'),
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
-        onMessage: (event) => {setImage(event.data);// Add the current timestamp to the list
+        onMessage: (event) => {
+            setImage(event.data);
+            // Add the current timestamp to the list
             messageTimestamps.current.push(now);
-        
+
             // Remove timestamps older than one second
             const oneSecondAgo = now - 1000;
             messageTimestamps.current = messageTimestamps.current.filter(timestamp => timestamp >= oneSecondAgo);
-        
+
             // Calculate FPS as the number of messages received in the last second
             setFps(messageTimestamps.current.length);
         },
