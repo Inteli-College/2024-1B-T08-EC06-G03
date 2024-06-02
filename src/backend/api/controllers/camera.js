@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 const config = require('config');
-const rclnodejs = require('rclnodejs');
+const ROSLIB = require('roslib');
 
 class CameraController {
     constructor() {
@@ -9,27 +9,34 @@ class CameraController {
         this.onError = this.onError.bind(this);
         this.onClose = this.onClose.bind(this);
         this.socket = null;
-        this.camera_node = null;
+        this.ros = null;
+        this.cameraSubscriber = null;
     }
 
-    async startCameraController() {
-        try {
-            if (!rclnodejs.init?.called) {  // Check for existence and called flag
-              console.log('Initializing rclnodejs');
-              await rclnodejs.init();
-            }
-          } catch (error) {
-            console.error('Error initializing rclnodejs:', error);
-            // Handle initialization error appropriately (e.g., close the connection, display an error message)
-        }
-        this.camera_node = new rclnodejs.Node('camera_node');
-        this.cameraSubscriber = this.camera_node.createSubscription(
-            'sensor_msgs/msg/CompressedImage',
-            '/camera_feed',
-            (msg) => this.video_frames_callback(msg)
-        );
-        console.log('Camera controller started');
-        this.camera_node.spin();
+    startCameraController() {
+        this.ros = new ROSLIB.Ros({
+            url: 'ws://localhost:9090'
+        });
+
+        this.ros.on('connection', () => {
+            console.log('Connected to rosbridge server.');
+            this.cameraSubscriber = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/camera_feed',
+                messageType: 'sensor_msgs/CompressedImage'
+            });
+
+            this.cameraSubscriber.subscribe((msg) => this.video_frames_callback(msg));
+            console.log('Camera controller started and subscribed to /camera_feed');
+        });
+
+        this.ros.on('error', (error) => {
+            console.error('Error connecting to rosbridge server:', error);
+        });
+
+        this.ros.on('close', () => {
+            console.log('Connection to rosbridge server closed.');
+        });
     }
 
     async onConnection(ws) {
@@ -38,7 +45,7 @@ class CameraController {
         ws.on('close', () => this.onClose(ws));
         console.log('Websocket connection established');
 
-        if (this.camera_node != null) {
+        if (this.ros != null) {
             console.log('Camera connection already established');
             return;
         }
@@ -55,26 +62,32 @@ class CameraController {
     }
 
     async onClose(ws) {
-        this.socket.close();
-        this.socket = null;
-        this.camera_node.destroy();
-        rclnodejs.shutdown();
-        this.camera_node = null;
+        if (this.socket) {
+            this.socket.close();
+            this.socket = null;
+        }
+        if (this.cameraSubscriber) {
+            this.cameraSubscriber.unsubscribe();
+            this.cameraSubscriber = null;
+        }
+        if (this.ros) {
+            this.ros.close();
+            this.ros = null;
+        }
 
         console.log('WebSocket connection closed');
     }
 
-
-    async video_frames_callback(msg) {
+    video_frames_callback(msg) {
         if (!this.socket) {
             return console.log('WebSocket server not started');
-        } 
+        }
+
         console.log('Received video frame');
-        const imageData = Buffer.from(msg.data); // Convert data to Buffer
-        const base64Image = imageData.toString('base64'); // Encode to Base64
+        const imageData = Buffer.from(msg.data);
+        const base64Image = imageData.toString('base64');
         this.socket.clients.forEach((ws) => ws.send(base64Image));
-      }
-      
+    }
 
     async startCameraWS(req, res) {
         try {
@@ -103,7 +116,7 @@ class CameraController {
                 url: wsURL
             });
 
-            this.socket.on('listening', () => {});
+            this.socket.on('listening', () => { });
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
             res.status(500).json({ error: 'Internal Server Error' });
