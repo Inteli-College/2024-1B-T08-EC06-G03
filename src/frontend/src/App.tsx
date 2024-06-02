@@ -7,15 +7,15 @@ import DetectionInterface from './components/DetectionInterface';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
-type Direction = 
-  | 'front'
-  | 'front-right'
-  | 'right'
-  | 'back-right'
-  | 'back'
-  | 'back-left'
-  | 'left'
-  | 'front-left';
+type Direction =
+    | 'front'
+    | 'front-right'
+    | 'right'
+    | 'back-right'
+    | 'back'
+    | 'back-left'
+    | 'left'
+    | 'front-left';
 
 const App: React.FC = () => {
 
@@ -81,30 +81,31 @@ const App: React.FC = () => {
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
         onMessage: (event) => {
-            console.log('WebSocket message:', event.data);
             try {
-              const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
-              setDirections(receivedDirections);
+                const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
+                setDirections(receivedDirections);
             } catch (error) {
-              console.log('Error parsing WebSocket message:', error);
+                console.log('Error parsing WebSocket message:', error);
             }
 
-          },
+        },
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });
 
-    
+
     const cameraWebSocket = useWebSocket(cameraSocketUrl, {
         onOpen: () => console.log('WebSocket connection established.'),
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
-        onMessage: (event) => {setImage(event.data);// Add the current timestamp to the list
+        onMessage: (event) => {
+            setImage(event.data);
+            // Add the current timestamp to the list
             messageTimestamps.current.push(now);
-        
+
             // Remove timestamps older than one second
             const oneSecondAgo = now - 1000;
             messageTimestamps.current = messageTimestamps.current.filter(timestamp => timestamp >= oneSecondAgo);
-        
+
             // Calculate FPS as the number of messages received in the last second
             setFps(messageTimestamps.current.length);
         },
@@ -125,29 +126,29 @@ const App: React.FC = () => {
     }, [cameraWebSocket.readyState, cameraWebSocket.sendMessage]);
 
     return (<>
-        <img className="relative h-screen p-4" src= {`data:image/jpeg;base64,${image}`}></img>
-            <div className="absolute top-0 left-0 p-4">
-                <HamburgerMenu />
-                <p>Fps: {fps}</p>
-            </div>
-            <div className="absolute bottom-0 left-0 flex items-start justify-start w-1/2 h-1/2 p-4">
-                <div className="relative w-full h-full flex items-center justify-center">
-                    <div className="absolute transform translate-x-[-9rem]">
-                        <KillButton sendMessage={teleopWebSocket.sendMessage} />
-                    </div>
+        <img className="relative h-screen p-4" src={`data:image/jpeg;base64,${image}`}></img>
+        <div className="absolute top-0 left-0 p-4">
+            <HamburgerMenu />
+            <p>Fps: {fps}</p>
+        </div>
+        <div className="absolute bottom-0 left-0 flex items-start justify-start w-1/2 h-1/2 p-4">
+            <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute transform translate-x-[-9rem]">
+                    <KillButton sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
-            <div className="absolute bottom-0 right-0 flex items-end justify-end w-1/2 h-1/2 p-4">
-                <div className="relative w-full h-full flex items-center justify-center">
-                    <div className="absolute transform translate-x-full">
-                        <Joystick sendMessage={teleopWebSocket.sendMessage} />
-                    </div>
+        </div>
+        <div className="absolute bottom-0 right-0 flex items-end justify-end w-1/2 h-1/2 p-4">
+            <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute transform translate-x-full">
+                    <Joystick sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
-            <div>
-                    <DetectionInterface directions={directions} />
-            </div>
-        </>
+        </div>
+        <div>
+            <DetectionInterface directions={directions} />
+        </div>
+    </>
     );
 };
 
