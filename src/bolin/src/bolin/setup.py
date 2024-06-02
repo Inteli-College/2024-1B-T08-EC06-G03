@@ -18,8 +18,6 @@ setup(
     license="MIT",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": [
-            "bolin = bolin.bolin:main",
-           ],
+        "console_scripts": [],
     },
 )
