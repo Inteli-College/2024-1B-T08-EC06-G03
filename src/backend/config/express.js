@@ -6,15 +6,15 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 // Api Routes
-const robotRoutes = require('./api/routes/robot');
+const robotRoutes = require('../api/routes/robot');
 
 /*
-const unityRoutes = require('./api/routes/unityRoutes');
-const reboilerRoutes = require('./api/routes/reboilerRoutes');
-const imageRoutes = require('./api/routes/imageRoutes');
-const tubeRoutes = require('./api/routes/tubeRoutes');
-const examinationRoutes = require('./api/routes/examinationRoutes');
-const tubeStateRoutes = require('./api/routes/tubeStateRoutes');
+const unityRoutes = require('../api/routes/unity');
+const reboilerRoutes = require('../api/routes/reboiler');
+const imageRoutes = require('../api/routes/image');
+const tubeRoutes = require('../api/routes/tube');
+const examinationRoutes = require('../api/routes/examination');
+const tubeStateRoutes = require('../api/routes/tubeState');
 */
 
 // Websockets Routes
