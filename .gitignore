@@ -203,4 +203,7 @@ qtcreator-*
 COLCON_IGNORE
 AMENT_IGNORE
 
+# Dataset
+precision-ag-subterranean--6/
+
 # End of https://www.toptal.com/developers/gitignore/api/python,ros2
