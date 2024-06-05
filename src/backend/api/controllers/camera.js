@@ -25,7 +25,7 @@ class CameraController {
         this.camera_node = new rclnodejs.Node('camera_node');
         this.cameraSubscriber = this.camera_node.createSubscription(
             'sensor_msgs/msg/CompressedImage',
-            '/camera_feed',
+            '/inferenced_camera_feed',
             (msg) => this.video_frames_callback(msg)
         );
         console.log('Camera controller started');
