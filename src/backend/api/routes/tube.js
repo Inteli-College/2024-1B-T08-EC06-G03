@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const robotController = require('../controllers/tube');
+const tubeController = require('../controllers/tube');
 
-router.get('/tubes', robotController.getAllTubes);
-router.get('/tubes/:id', robotController.getTubeById);
-router.post('/tubes', robotController.createTube);
-router.put('/tubes/:id', robotController.updateTube);
-router.delete('/tubes/:id', robotController.deleteTube);
+router.get('/tubes', tubeController.getAllTubes);
+router.get('/tubes/:id', tubeController.getTubeById);
+router.post('/tubes', tubeController.createTube);
+router.put('/tubes/:id', tubeController.updateTube);
+router.delete('/tubes/:id', tubeController.deleteTube);
  
 module.exports = router;
