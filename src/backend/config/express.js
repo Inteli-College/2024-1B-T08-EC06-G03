@@ -12,7 +12,7 @@ const reboilerRoutes = require('../api/routes/reboiler');
 const imageRoutes = require('../api/routes/image');
 const tubeRoutes = require('../api/routes/tube');
 const examinationRoutes = require('../api/routes/examination');
-//const tubeStateRoutes = require('../api/routes/tubeState'); 
+const tubeStateRoutes = require('../api/routes/tubeState'); 
 
 
 // Websockets Routes
@@ -36,7 +36,7 @@ module.exports = () => {
     app.use('/api/images', imageRoutes);
     app.use('/api/tubes', tubeRoutes);
     app.use('/api/examinations', examinationRoutes);
-    //app.use('/api/tube-states', tubeStateRoutes);
+    app.use('/api/tube-states', tubeStateRoutes);
     // Websockets
     app.use('/teleop', teleopRouter);
     app.use('/camera', cameraRouter);
