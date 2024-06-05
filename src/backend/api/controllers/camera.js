@@ -84,9 +84,7 @@ class CameraController {
         }
 
         console.log('Received video frame');
-        const imageData = Buffer.from(msg.data);
-        const base64Image = imageData.toString('base64');
-        this.socket.clients.forEach((ws) => ws.send(base64Image));
+        this.socket.clients.forEach((ws) => ws.send(msg.data));
     }
 
     async startCameraWS(req, res) {
