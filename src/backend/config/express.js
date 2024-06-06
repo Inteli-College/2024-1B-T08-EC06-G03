@@ -7,7 +7,7 @@ const morgan = require('morgan');
 
 // Api Routes
 const robotRoutes = require('../api/routes/robot');
-const unityRoutes = require('../api/routes/unity');
+const unitRoutes = require('../api/routes/unit');
 const reboilerRoutes = require('../api/routes/reboiler');
 const imageRoutes = require('../api/routes/image');
 const tubeRoutes = require('../api/routes/tube');
@@ -31,7 +31,7 @@ module.exports = () => {
 
     // Api
     app.use('/api/robots', robotRoutes);
-    app.use('/api/unities', unityRoutes);
+    app.use('/api/unities', unitRoutes);
     app.use('/api/reboilers', reboilerRoutes);
     app.use('/api/images', imageRoutes);
     app.use('/api/tubes', tubeRoutes);

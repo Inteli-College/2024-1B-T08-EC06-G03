@@ -1,6 +1,6 @@
 const prisma = require('../models/prismaClient');
 
-const getAllUnity = async (req, res) => {
+const getAllUnits = async (req, res) => {
     try {
         const unity = await prisma.unity.findMany();
         res.json(unity);
@@ -9,7 +9,7 @@ const getAllUnity = async (req, res) => {
     }
 };
 
-const getUnityById = async (req, res) => {
+const getUnitById = async (req, res) => {
     const { id } = req.params;
     try {
         const unity = await prisma.unity.findUnique({
@@ -25,7 +25,7 @@ const getUnityById = async (req, res) => {
     }
 };
 
-const createUnity = async (req, res) => {
+const createUnit = async (req, res) => {
     const { city, state } = req.body;
     try {
         const newUnity = await prisma.unity.create({
@@ -40,7 +40,7 @@ const createUnity = async (req, res) => {
     }
 };
 
-const updateUnity = async (req, res) => {
+const updateUnit = async (req, res) => {
     const { id } = req.params;
     const { city, state } = req.body;
     try {
@@ -54,7 +54,7 @@ const updateUnity = async (req, res) => {
     }
 };
 
-const deleteUnity = async (req, res) => {
+const deleteUnit = async (req, res) => {
     const { id } = req.params;
     try {
         await prisma.unity.delete({
@@ -67,9 +67,9 @@ const deleteUnity = async (req, res) => {
 };
 
 module.exports = {
-    getAllUnity,
-    getUnityById,
-    createUnity,
-    updateUnity,
-    deleteUnity
+    getAllUnits,
+    getUnitById,
+    createUnit,
+    updateUnit,
+    deleteUnit
 };
