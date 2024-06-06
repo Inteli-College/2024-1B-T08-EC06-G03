@@ -14,7 +14,7 @@ model Robot {
   Examination       Examination[]
 }
 
-model Unity {
+model Unit {
   id        Int       @id @default(autoincrement())
   city      String?
   state     String?
@@ -24,8 +24,8 @@ model Unity {
 model Reboiler {
   id        Int         @id @default(autoincrement())
   number    Int
-  unity_id  Int
-  Unity     Unity       @relation(fields: [unity_id], references: [id])
+  unit_id  Int
+  Unit     Unit       @relation(fields: [unit_id], references: [id])
   Tube      Tube[]
   Examination Examination[]
 }
