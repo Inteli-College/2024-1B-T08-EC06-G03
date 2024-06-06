@@ -1,6 +1,6 @@
 ---
 title: Visualização de dados
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 Como mencionado anterioremente, o objetivo central desse projeto é a coleta de dados em relação à eficiência da limpeza dos Reboilers. Porém, para além da coleta de dados, é muito importante pensar em maneiras visualizá-los de uma forma que auxilie nas tomadas de decisões da empresa. Dessa forma, a  utilização de gráficos se faz muito necessária.
