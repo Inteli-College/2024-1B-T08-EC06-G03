@@ -25,6 +25,38 @@ const getExaminationById = async (req, res) => {
     }
 };
 
+const getAllImagesByExaminationId = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const images = await prisma.tubeState.findMany({
+            where: { session_id: parseInt(id) },
+            include: {
+            Image: true
+            }
+        });
+        res.json(images);
+    }catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error });
+    }
+}
+
+const getAllTubeStatesByExaminationId = async (req, res) => {
+    const { id } = req.params;
+    try{
+        const tubeStates = await prisma.tubeState.findMany({
+            where: { session_id: parseInt(id) },
+            include: {
+                Image: false
+            }
+        });
+        res.json(tubeStates)
+    }
+    catch (error) {
+        res.status(500).json({ error: error });
+    }
+}
+
 const createExamination = async (req, res) => {
     const { etapa, robot_id, reboiler_id, started_at, finished_at } = req.body;
     try {
@@ -77,6 +109,8 @@ const deleteExamination = async (req, res) => {
 
 module.exports = {
     getAllExaminations,
+    getAllTubeStatesByExaminationId,
+    getAllImagesByExaminationId,
     getExaminationById,
     createExamination,
     updateExamination,
