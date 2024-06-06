@@ -13,7 +13,7 @@ Na seção [Visualização de Dados](../Sprint%203/Visualização%20de%20Dados.m
 
 **Banco de dados Relacional**
 
-![Mapa de calor](../../static/img/Banco%20de%20dados.png)
+![Banco de dados](../../static/img/Banco%20de%20dados.png)
 
 
 **Fonte:** Elaborado pela equipe Rebólins
