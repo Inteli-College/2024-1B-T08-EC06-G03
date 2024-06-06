@@ -1,6 +1,6 @@
 ---
-title: Modelagem do Banco de dados
-sidebar_position: 3
+title: Visão Computacional
+sidebar_position: 1
 ---
 
 # Banco de Dados
@@ -66,9 +66,9 @@ Abaixo está uma breve descrição de cada tabela e quais informações estão c
 
 - **id**: Identificador único do reboiler. (Chave primária)
 - **number**: Número do reboiler.
-- **unity_id**: Referência para a unidade à qual o reboiler pertence.
+- **unit_id**: Referência para a unidade à qual o reboiler pertence.
 
-### Unity
+### Unit
 
 - **id**: Identificador único da unidade. (Chave primária)
 - **city**: Cidade onde a unidade está localizada.
@@ -100,9 +100,9 @@ TubeState.image_id refere-se a Image.id. Isso cria uma relação muitos-para-um 
 
 TubeState.session_id refere-se a Examination.id. Isso cria uma relação muitos-para-um *(muitos estados podem estar associados a uma verificação)*.
 
-**Reboiler e Unity**
+**Reboiler e Unit**
 
-Reboiler.unity_id refere-se a Unity.id. Isso cria uma relação muitos-para-um *(muitos reboilers podem estar associados a uma unidade)*.
+Reboiler.unit_id refere-se a Unit.id. Isso cria uma relação muitos-para-um *(muitos reboilers podem estar associados a uma unidade)*.
 
 ## Implementação
 
