@@ -1,6 +1,6 @@
 ---
-title: Visão Computacional
-sidebar_position: 1
+title: Banco de dados
+sidebar_position: 3
 ---
 
 # Banco de Dados
