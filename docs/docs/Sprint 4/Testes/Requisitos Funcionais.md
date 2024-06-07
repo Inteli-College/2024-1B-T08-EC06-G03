@@ -28,13 +28,11 @@ Com base nos requisitos funcionais, é possível mapear os testes que comprovam 
 
 ### Preparação para os testes
 
-- **Hardware:** Realizar a inicialização do robô, utilizando o método de conexão por ssh para rodar o bringup, que inicializa vários protocolos para o funcionamento do Turtlebot. Para isso, é só abrir um terminal no computador e rodar o comando `ssh bobolins@10.128.0.24`, e digitar a senha para finalizar a conexão. Após isso, é só rodar o comando de bringup, que é `ros2 launch turtlebot3_bringup robot.launch.py`. 
+- **Hardware:** Realizar a inicialização do robô, utilizando o método de conexão por ssh para rodar o bringup, que inicializa vários protocolos para o funcionamento do Turtlebot. Para isso, é só abrir um terminal no computador e rodar o comando `ssh bobolins@10.128.0.24`, e digitar a senha para finalizar a conexão. Após isso, é só rodar o comando de bringup, que é `ros2 launch turtlebot3_bringup robot.launch.py`. Após isso, posicionar o robô em um ambiente seguro para a testagem, como uma pista.
 
-- **Software:** Inicializar o Backend, que é composto por serviços ROS, a API da aplicação web e o modelo de visão computacional que irá avaliar os 
+- **Software:** Inicializar o Backend, que é composto por serviços ROS, a API da aplicação web e o modelo de visão computacional que irá avaliar as fotos dos tubos.
 
-- **Base de Dados:** Configure uma base de dados de testes que possa receber os dados enviados pelo robô. Esta base de dados deve ser isolada da produção para evitar qualquer interferência ou perda de dados reais.
-
-- **Interface de Controle:** Configure e verifique a interface de usuário que será utilizada para controlar o robô e monitorar as inspeções.
+- **Interface de Controle:** Deixar a interface de controle aberta num dispositivo móvel que será entregue posteriormente ao testador.
 
 ### Público alvo dos testadores
 
@@ -45,23 +43,20 @@ Por não ser possível testar com os funcionários que utilizarão o sistema na 
 
 Aqui serão explicados os cenários de teste e como será a realização deles. Cada um dos tópicos abaixo indica uma tarefa que o testador irá ter que cumprir.
 
-### Execução dos Cenários de Teste
+### Tarefas do usuário durante o teste
 
 #### Teste de Teleoperação (RF01):
 
 Acesse a interface de controle e verifique a transmissão de imagens em tempo real.
-Envie comandos ao robô e observe a resposta imediata.
-Registre qualquer atraso ou falha na transmissão de imagem ou nos comandos.
+Envie comandos ao robô e observe se a mudança das imagens acompanha a movimentação do robô.
 
 #### Teste de Visualização de Dados (RF02):
 
-Realize uma inspeção e visualize os dados coletados, incluindo a quantidade de canos sujos.
-Verifique a precisão das informações exibidas na tabela.
+Visualize a tela de dados e tente achar a informação de quantos canos sujos foram detectados na última inspeção realizada.
 
 #### Teste de Cancelamento de Inspeção (RF03):
 
-Inicie uma inspeção e, após alguns segundos, pressione o botão de cancelar.
-Meça o tempo que o robô leva para parar suas ações e verifique se está dentro do limite de 10 segundos.
+Inicie uma inspeção e, após alguns segundos, pressione o botão "kill". Veja se o robô parou imediatamente o seu funcionamento.
 
 #### Teste de Proximidade (RF04):
 
@@ -75,29 +70,21 @@ Verifique se o sistema identifica corretamente a sujeira ou os resíduos e como 
 
 #### Teste de Envio de Dados (RF06):
 
-Realize uma operação de limpeza e monitore o envio dos dados para a base de dados.
-Verifique a integridade e a consistência dos dados armazenados.
-Registro dos Resultados
+Verificar se os dados que constam na página de dados condizem com a realidade: data, número de canos sujos, entre outros.
 
-Documentação: Registre todos os resultados dos testes, incluindo falhas encontradas, desempenho do sistema e feedback dos testadores.
+### Função do avaliador
 
-Captura de Evidências: Capture capturas de tela e vídeos durante os testes para documentar o comportamento do sistema e das interfaces.
+**Documentação:** Registre todos os resultados dos testes, incluindo falhas encontradas, desempenho do sistema e feedback dos testadores.
 
-#### Análise dos Resultados
+**Captura de Evidências:** Caso o testador autorize, grave os testes para documentar o comportamento do sistema e das interfaces.
 
-Avaliação de Conformidade: Compare os resultados obtidos com os critérios de aceitação definidos para cada requisito funcional.
-Identificação de Problemas: Anote quaisquer discrepâncias ou problemas encontrados durante os testes e categorize-os por prioridade.
 
-#### Relatório Final
+**Avaliação de Conformidade:** Compare os resultados obtidos com os critérios de aceitação definidos para cada requisito funcional.
 
-Sumário dos Testes: Compile um relatório detalhado que inclua os resultados dos testes, as falhas identificadas e as sugestões de melhorias.
+**Identificação de Problemas:** Anote quaisquer discrepâncias ou problemas encontrados durante os testes e categorize-os por prioridade.
 
-Recomendações: Forneça recomendações para correções e ajustes necessários antes de o sistema ser implantado em ambiente de produção.
-
-#### Feedback e Melhorias
-
-Sessão de Feedback: Realize uma sessão de feedback com os testadores para entender melhor suas experiências e sugestões.
-
-Planejamento de Correções: Baseado no feedback e nos resultados dos testes, planeje as correções e melhorias necessárias para os próximos ciclos de desenvolvimento.
+**Coleta de feedbacks:** Após a finalização do teste, pergunte ao testador como foi a experiência, e se ele tem pontos de melhoria que gostaria de compartilhar.
 
 ## Conclusões
+
+(serão adicionadas assim que os testes forem realizados)
