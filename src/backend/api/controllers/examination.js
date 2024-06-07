@@ -65,13 +65,13 @@ const createExamination = async (req, res) => {
                 etapa,
                 robot_id,
                 reboiler_id,
-                started_at: started_at ? new Date(started_at) : null,
-                finished_at: finished_at ? new Date(finished_at) : null
+                started_at: started_at ?  started_at : null,
+                finished_at: finished_at ? finished_at : null
             }
         });
         res.status(201).json(newExamination);
     } catch (error) {
-        res.status(500).json({ error: 'Error creating examination' });
+        res.status(500).json({ error: error });
     }
 };
 
@@ -91,7 +91,7 @@ const updateExamination = async (req, res) => {
         });
         res.json(updatedExamination);
     } catch (error) {
-        res.status(500).json({ error: 'Error updating examination' });
+        res.status(500).json({ error: 'Error updating examination' + error });
     }
 };
 
