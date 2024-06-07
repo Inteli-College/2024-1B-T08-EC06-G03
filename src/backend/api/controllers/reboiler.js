@@ -26,12 +26,12 @@ const getReboilerById = async (req, res) => {
 };
 
 const createReboiler = async (req, res) => {
-    const { number, unity_id } = req.body;
+    const { number, unit_id } = req.body;
     try {
         const newReboiler = await prisma.reboiler.create({
             data: {
                 number,
-                unity_id
+                unit_id
             }
         });
         res.status(201).json(newReboiler);
