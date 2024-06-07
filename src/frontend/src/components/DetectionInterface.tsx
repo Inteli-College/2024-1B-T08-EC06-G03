@@ -1,18 +1,18 @@
 import React from 'react';
 
-type Direction = 
-  | 'front'
-  | 'front-right'
-  | 'right'
-  | 'back-right'
-  | 'back'
-  | 'back-left'
-  | 'left'
-  | 'front-left';
+type Direction =
+    | 'front'
+    | 'front-right'
+    | 'right'
+    | 'back-right'
+    | 'back'
+    | 'back-left'
+    | 'left'
+    | 'front-left';
 
-  interface DetectionInterfaceProps {
+interface DetectionInterfaceProps {
     directions: Direction[];
-  }
+}
 
   const DetectionInterface: React.FC<DetectionInterfaceProps> = ({ directions }) => {
     const getIndicatorPosition = (direction: Direction) => {

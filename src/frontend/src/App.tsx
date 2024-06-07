@@ -82,6 +82,7 @@ const App: React.FC = () => {
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
         onMessage: (event) => {
+            console.log('WebSocket message:', event.data);
             try {
                 const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
                 setDirections(receivedDirections);
@@ -99,8 +100,7 @@ const App: React.FC = () => {
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
         onMessage: (event) => {
-            setImage(event.data);
-            // Add the current timestamp to the list
+            setImage(event.data);// Add the current timestamp to the list
             messageTimestamps.current.push(now);
 
             // Remove timestamps older than one second
