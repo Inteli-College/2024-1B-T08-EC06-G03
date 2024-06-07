@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const config = require('config');
 const rclnodejs = require('rclnodejs');
-
+const { spawn } = require('child_process');
 class CameraController {
     constructor() {
         this.startCameraWS = this.startCameraWS.bind(this);
@@ -11,7 +11,6 @@ class CameraController {
         this.socket = null;
         this.camera_node = null;
     }
-
     async startCameraController() {
         try {
             if (!rclnodejs.init?.called) {  // Check for existence and called flag
@@ -31,58 +30,66 @@ class CameraController {
         console.log('Camera controller started');
         this.camera_node.spin();
     }
-
     async onConnection(ws) {
         ws.on('message', data => this.onMessage(ws, data));
         ws.on('error', error => this.onError(ws, error));
         ws.on('close', () => this.onClose(ws));
         console.log('Websocket connection established');
-
         if (this.camera_node != null) {
             console.log('Camera connection already established');
             return;
         }
-
         this.startCameraController();
     }
-
     async onMessage(ws, data) {
-        console.log(`WebSocket message => ${data}`);
+        let message;
+        try {
+            message = JSON.parse(data);
+        } catch (error) {
+            ws.send('Message was not in JSON');
+            console.log('Invalid message format:', error);
+            return;
+        }
+        if (message.image_detection !== undefined) {
+            // Execute the Python script with the image_detection as a parameter
+            const pythonScript = spawn('python', ['/inferencer.py', message.image_detection]);
+            pythonScript.stdout.on('data', (data) => {
+                console.log(`Python script output: ${data}`);
+            });
+            pythonScript.stderr.on('data', (data) => {
+                console.error(`Python script error: ${data}`);
+            });
+            pythonScript.on('close', (code) => {
+                console.log(`Python script exited with code ${code}`);
+            });
+        }
     }
-
     async onError(ws, error) {
         console.log(`WebSocket error => ${error}`);
     }
-
     async onClose(ws) {
         this.socket.close();
         this.socket = null;
         this.camera_node.destroy();
         rclnodejs.shutdown();
         this.camera_node = null;
-
         console.log('WebSocket connection closed');
     }
-
-
     async video_frames_callback(msg) {
         if (!this.socket) {
             return console.log('WebSocket server not started');
-        } 
+        }
         console.log('Received video frame');
         const imageData = Buffer.from(msg.data); // Convert data to Buffer
         const base64Image = imageData.toString('base64'); // Encode to Base64
         this.socket.clients.forEach((ws) => ws.send(base64Image));
       }
-      
-
     async startCameraWS(req, res) {
         try {
             const wsCameraPath = process.env.WS_CAMERA_PATH || config.get('server.camera.path');
             const wsPort = process.env.WS_PORT || config.get('server.camera.port');
             const host = req.get('host').split(':')[0];
             const wsURL = `ws://${host}:${wsPort}${wsCameraPath}`;
-
             if (this.socket) {
                 res.status(200).json({
                     error: 'WebSocket server already started',
@@ -90,19 +97,15 @@ class CameraController {
                 });
                 return;
             }
-
             this.socket = new WebSocket.Server({
                 path: wsCameraPath,
                 port: wsPort
             });
-
             this.socket.on('connection', this.onConnection);
-
             res.status(200).json({
                 message: 'WebSocket server started',
                 url: wsURL
             });
-
             this.socket.on('listening', () => {});
         } catch (error) {
             console.error('Error starting WebSocket server:', error);
@@ -110,5 +113,4 @@ class CameraController {
         }
     }
 }
-
 module.exports = new CameraController();
