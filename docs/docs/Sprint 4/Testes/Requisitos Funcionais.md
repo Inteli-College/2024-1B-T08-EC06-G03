@@ -2,6 +2,8 @@
 title: Requisitos Funcionais
 ---
 
+## Revisão e atualização dos requisitos
+
 Durante a primeira sprint, foram mapeados [requisitos funcionais](../../Sprint%201/Arquitetura%20de%20Solucao/Requisitos%20Funcionais.md), que são basicamente as funcionalidades essenciais do projeto. Porém, no decorrer do tempo, o entendimento sobre o projeto em questão mudou, alterando também o rumo do desenvolvimento.
 Dessa forma, aqui nessa seção, serão detalhados os requisitos funcionais com todas as alterações realizadas.
 
@@ -26,9 +28,9 @@ Com base nos requisitos funcionais, é possível mapear os testes que comprovam 
 
 ### Preparação para os testes
 
-- **Hardware:** Certifique-se de que o robô esteja completamente funcional e que todos os componentes necessários, como sensores, câmeras e sistemas de controle, estejam instalados e operacionais.
+- **Hardware:** Realizar a inicialização do robô, utilizando o método de conexão por ssh para rodar o bringup, que inicializa vários protocolos para o funcionamento do Turtlebot. Para isso, é só abrir um terminal no computador e rodar o comando `ssh bobolins@10.128.0.24`, e digitar a senha para finalizar a conexão. Após isso, é só rodar o comando de bringup, que é `ros2 launch turtlebot3_bringup robot.launch.py`. 
 
-- **Software:** Instale a versão mais recente do software de controle e processamento de imagem no sistema que será utilizado para os testes. Garanta que todos os drivers e dependências estejam atualizados.
+- **Software:** Inicializar o Backend, que é composto por serviços ROS, a API da aplicação web e o modelo de visão computacional que irá avaliar os 
 
 - **Base de Dados:** Configure uma base de dados de testes que possa receber os dados enviados pelo robô. Esta base de dados deve ser isolada da produção para evitar qualquer interferência ou perda de dados reais.
 
