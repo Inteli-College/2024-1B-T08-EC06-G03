@@ -1,0 +1,68 @@
+datasource db {
+  provider = "sqlite"
+  url = env("TURSO_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+model Robot {
+  id                Int       @id @default(autoincrement())
+  last_manufactured DateTime?
+  Examination       Examination[]
+}
+
+model Unit {
+  id        Int       @id @default(autoincrement())
+  city      String?
+  state     String?
+  Reboiler  Reboiler[]
+}
+
+model Reboiler {
+  id        Int         @id @default(autoincrement())
+  number    Int
+  unit_id  Int
+  Unit     Unit       @relation(fields: [unit_id], references: [id])
+  Tube      Tube[]
+  Examination Examination[]
+}
+
+model Image {
+  id        Int         @id @default(autoincrement())
+  taken_at  DateTime?
+  TubeState TubeState[]
+}
+
+model Tube {
+  id        Int         @id @default(autoincrement())
+  reboiler_id Int
+  position  String      // Position as a tuple is not directly supported, consider using a JSON string or separate fields for x, y, z coordinates
+  Reboiler  Reboiler    @relation(fields: [reboiler_id], references: [id])
+  TubeState TubeState[]
+}
+
+model Examination {
+  id          Int         @id @default(autoincrement())
+  etapa       String      // Prisma does not have an enum type for SQL, consider using a string and implementing enum-like behavior in your application
+  robot_id    Int
+  reboiler_id Int
+  started_at  DateTime?
+  finished_at DateTime?
+  Robot       Robot       @relation(fields: [robot_id], references: [id])
+  Reboiler    Reboiler    @relation(fields: [reboiler_id], references: [id])
+  TubeState   TubeState[]
+}
+
+model TubeState {
+  id         Int        @id @default(autoincrement())
+  dirtness   Boolean
+  image_id   Int
+  session_id Int
+  tube_id    Int
+  Image      Image      @relation(fields: [image_id], references: [id])
+  Examination Examination @relation(fields: [session_id], references: [id])
+  Tube       Tube       @relation(fields: [tube_id], references: [id])
+}
