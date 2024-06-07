@@ -26,7 +26,7 @@ Como visto acima, o Jairo é o Engenheiro de Manutenção da Atvos. Dentre as at
 
 A partir dessa persona, é possível mapear as seguintes **user stories**:
 
-- User Story 1: “Como **engenheiro de manutenção**, quero que o robô realize **inspeções de forma automática** para **melhor distribuição do tempo** do processo”
+- User Story 1: “Como **engenheiro de manutenção**, quero que o robô realize **inspeções** para **melhor distribuição do tempo** do processo”
 
 - User Story 2: “Como **engenheiro de manutenção**, quero ter acesso a **dados em relação ao nível de limpeza dos canos** para conseguir **medir a eficiência** do processo de limpeza e manutenção dos reboilers”
 
@@ -46,10 +46,10 @@ O Danillo é um operador de máquinas da Atvos. Ele é responsável por operar o
 
 A partir dessa persona, é possível mapear as seguintes **user stories**:
 
-- User Story 1: “Como **operador de máquinas**, quero que **a partir da planta do reboiler, o robô consiga mapear o espaço**, para que a **inspeção automática ocorra com precisão e eficiência após esse processo**”
+- User Story 1: “Como **operador de máquinas**, quero que **seja possível controlar o robô de maneira teleoperada**, para que a **inspeção ocorra com precisão e eficiência após esse processo**”
 
 - User Story 2: “Como **operador de máquinas**, quero uma **plataforma intuitiva e clara** de operação do robô, para poder **acionar a inspeção no momento desejado e com facilidade**”
 
-- User Story 3: “Como **operador de máquinas**, quero que **eu possa acompanhar o status do funcionamento do robô**, para que eu possa **ter noção do andamento da inspeção e agir em casos de emergência**”
+- User Story 3: “Como **operador de máquinas**, quero que **eu possa acompanhar se o robô está muito próximo de um obstáculo**, para que eu possa **ter noção do andamento da inspeção e agir em casos de emergência**”
 
-- User Story 4: “Como **operador de máquinas**, quero que **haja uma forma de parar o robô ou movimentá-lo de maneira teleoperada**, para que eu possa **agir em casos de emergência**”
+- User Story 4: “Como **operador de máquinas**, quero que **haja uma forma de parar o robô**, para que eu possa **agir em casos de emergência**”

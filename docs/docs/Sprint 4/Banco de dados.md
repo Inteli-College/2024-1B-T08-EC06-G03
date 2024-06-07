@@ -1,6 +1,6 @@
 ---
-title: Visão Computacional
-sidebar_position: 1
+title: Banco de dados
+sidebar_position: 3
 ---
 
 # Banco de Dados
@@ -13,7 +13,7 @@ Na seção [Visualização de Dados](../Sprint%203/Visualização%20de%20Dados.m
 
 **Banco de dados Relacional**
 
-![Mapa de calor](../../static/img/Banco%20de%20dados.png)
+![Banco de dados](../../static/img/Banco%20de%20dados.jpeg)
 
 
 **Fonte:** Elaborado pela equipe Rebólins
@@ -30,49 +30,51 @@ Abaixo está uma breve descrição de cada tabela e quais informações estão c
 ### Tube
 
 - **id**: Identificador único do tubo. (Chave primária)
-- **reboiler_id**: Referência para o reboiler ao qual o tubo está associado.
-- **position**: Coordenadas ou posição do tubo.
+- **reboiler_id**: Referência para o reboiler ao qual o tubo está associado. (chave estrangeira da tabela Reboiler)
+- **column_position**: Posição do tubo horizontalmente. (integer)
+- **row_position**: Posição do tud verticalmente. (integer)
 
 
 ### Image
 
-- **id**: Identificador único da imagem.
-- **taken_at**: Timestamp indicando quando a imagem foi tirada.
+- **id**: Identificador único da imagem. (Chave primária)
+- **image**: String das imagens comprimidas dos tubos. (longtext)
+- **taken_at**: Número inteiro indicando quando a imagem foi tirada. (tinytext)
 
 
 ### Robot
 
 - **id**: Identificador único do robô. (Chave primária)
-- **last_manufactured**: Timestamp indicando a última data de fabricação do robô.
+- **last_manufactured**: Número inteiro indicando a última data de fabricação do robô. (tinytext)
 
 ### TubeState
 
 - **id**: Identificador único do estado do tubo. (Chave primária)
-- **dirtness**: Booleano indicando se o tubo está sujo.
-- **image_id**: Referência para a imagem associada ao estado do tubo.
-- **session_id**: Referência para a verificação associada ao estado do tubo.
-- **tube_id**: Referência para o tubo associado.
+- **dirtness**: Booleano indicando se o tubo está sujo. (bool)
+- **image_id**: Referência para a imagem associada ao estado do tubo. (chave estrangeira da tabela Image)
+- **session_id**: Referência para a verificação associada ao estado do tubo. (chave estrangeirada tabela Examination)
+- **tube_id**: Referência para o tubo associado. (chave estrangeira da tabela Tube)
 
 ### Examination
 
 - **id**: Identificador único da verificação. (Chave primária)
-- **etapa**: Etapa da verificação (enum).
-- **robot_id**: Referência para o robô que realizou a verificação.
-- **reboiler_id**: Referência para o reboiler que está sendo verificado.
-- **started_at**: Timestamp indicando quando a verificação começou.
-- **finished_at**: Timestamp indicando quando a verificação terminou.
+- **etapa**: Etapa da verificação (tinytext).
+- **robot_id**: Referência para o robô que realizou a verificação. (chave estrangeira da tabela Robot)
+- **reboiler_id**: Referência para o reboiler que está sendo verificado. (chave estrangeira da tabela Reboiler)
+- **started_at**: Número inteiro indicando quando a verificação começou. (tinytext)
+- **finished_at**: Número inteiro indicando quando a verificação terminou. (tinytext)
 
 ### Reboiler
 
 - **id**: Identificador único do reboiler. (Chave primária)
-- **number**: Número do reboiler.
-- **unit_id**: Referência para a unidade à qual o reboiler pertence.
+- **number**: Número do reboiler. (integer)
+- **unit_id**: Referência para a unidade à qual o reboiler pertence. (chave estrangeira da tabela Unit)
 
 ### Unit
 
 - **id**: Identificador único da unidade. (Chave primária)
-- **city**: Cidade onde a unidade está localizada.
-- **state**: Estado onde a unidade está localizada.
+- **city**: Cidade onde a unidade está localizada. (tinytext)
+- **state**: Estado onde a unidade está localizada. (tinytext)
 
 ## Relacionamentos
 
