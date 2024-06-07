@@ -81,6 +81,7 @@ const App: React.FC = () => {
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
         onMessage: (event) => {
+            console.log('WebSocket message:', event.data);
             try {
                 const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
                 setDirections(receivedDirections);
@@ -98,8 +99,7 @@ const App: React.FC = () => {
         onClose: () => console.log('WebSocket connection closed.'),
         onError: (event) => console.error('WebSocket error:', event),
         onMessage: (event) => {
-            setImage(event.data);
-            // Add the current timestamp to the list
+            setImage(event.data);// Add the current timestamp to the list
             messageTimestamps.current.push(now);
 
             // Remove timestamps older than one second
@@ -125,30 +125,29 @@ const App: React.FC = () => {
         }
     }, [cameraWebSocket.readyState, cameraWebSocket.sendMessage]);
 
-    return (<>
-        <img className="relative h-screen p-4" src={`data:image/jpeg;base64,${image}`}></img>
-        <div className="absolute top-0 left-0 p-4">
-            <HamburgerMenu />
-            <p>Fps: {fps}</p>
-        </div>
-        <div className="absolute bottom-0 left-0 flex items-start justify-start w-1/2 h-1/2 p-4">
-            <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute transform translate-x-[-9rem]">
+    return (
+        <div className='relative overflow-hidden h-screen flex flex-col items-center justify-center bg-gray-600'>
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                <div className="relative h-full aspect-[4/3] object-cover bg-black">
+                    <DetectionInterface directions={directions} />
+                    <img className="relative w-full h-full object-cover" src={`data:image/jpeg;base64,${image}`} />
+                </div>
+            </div>
+            <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
+                <HamburgerMenu />
+                <p className='text-red-600'>Fps: {fps}</p>
+            </div>
+            <div className="absolute bottom-20 left-20 p-4">
+                <div className="relative">
                     <KillButton sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
-        </div>
-        <div className="absolute bottom-0 right-0 flex items-end justify-end w-1/2 h-1/2 p-4">
-            <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute transform translate-x-full">
+            <div className="absolute bottom-20 right-20 p-4">
+                <div className="relative">
                     <Joystick sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
         </div>
-        <div>
-            <DetectionInterface directions={directions} />
-        </div>
-    </>
     );
 };
 
