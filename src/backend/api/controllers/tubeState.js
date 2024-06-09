@@ -44,14 +44,14 @@ const createTubeState = async (req, res) => {
 
 const updateTubeState = async (req, res) => {
     const { id } = req.params;
-    const { dirtness, image_id, session_id, tube_id } = req.body;
+    const { dirtness, image_id, examination_id, tube_id } = req.body;
     try {
         const updatedTubeState = await prisma.tubeState.update({
             where: { id: parseInt(id) },
             data: {
                 dirtness,
                 image_id,
-                session_id,
+                examination_id,
                 tube_id
             }
         });
