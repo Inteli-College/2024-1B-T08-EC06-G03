@@ -26,7 +26,7 @@ const getImageById = async (req, res) => {
 };
 
 const createImage = async (req, res) => {
-    const { taken_at,image } = req.body;
+    const { taken_at, image } = req.body;
     try {
         const newImage = await prisma.image.create({
             data: {
@@ -42,11 +42,13 @@ const createImage = async (req, res) => {
 
 const updateImage = async (req, res) => {
     const { id } = req.params;
-    const { taken_at } = req.body;
+    const { image, taken_at } = req.body;
     try {
         const updatedImage = await prisma.image.update({
             where: { id: parseInt(id) },
-            data: { taken_at: taken_at ? new Date(taken_at) : null }
+            data: { taken_at: taken_at,
+                image: image
+             }
         });
         res.json(updatedImage);
     } catch (error) {
