@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const imageController = require('../controllers/image');
 
-router.get('/image', imageController.getAllImages);
-router.get('/image/:id', imageController.getImageById);
-router.post('/image', imageController.createImage);
-router.put('/image/:id', imageController.updateImage);
-router.delete('/image/:id', imageController.deleteImage);
+router.get('/', imageController.getAllImages);
+router.get('/:id', imageController.getImageById);
+router.post('/', imageController.createImage);
+router.put('/:id', imageController.updateImage);
+router.delete('/:id', imageController.deleteImage);
  
 module.exports = router;
