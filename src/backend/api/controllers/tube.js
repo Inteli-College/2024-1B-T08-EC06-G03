@@ -43,11 +43,11 @@ const createTube = async (req, res) => {
 
 const updateTube = async (req, res) => {
     const { id } = req.params;
-    const { reboiler_id, position } = req.body;
+    const { reboiler_id, position_column,  position_row } = req.body;
     try {
         const updatedTube = await prisma.tube.update({
             where: { id: parseInt(id) },
-            data: { reboiler_id, position }
+            data: { reboiler_id, position_column, position_row}
         });
         res.json(updatedTube);
     } catch (error) {
