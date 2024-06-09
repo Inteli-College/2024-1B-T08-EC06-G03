@@ -26,11 +26,12 @@ const getImageById = async (req, res) => {
 };
 
 const createImage = async (req, res) => {
-    const { taken_at } = req.body;
+    const { taken_at,image } = req.body;
     try {
         const newImage = await prisma.image.create({
             data: {
-                taken_at: taken_at ? new Date(taken_at) : null
+                image: image,
+                taken_at: taken_at
             }
         });
         res.status(201).json(newImage);
