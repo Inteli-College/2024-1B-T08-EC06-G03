@@ -29,7 +29,7 @@ Abaixo está uma breve descrição de cada tabela e quais informações estão c
 
 ### Tube
 
-A entidade Tube representa um tubo dentro do reboiler, ou seja, um dos vários "canos" que existem dentro de um único reboiler. Sua principal utilidade no banco de dados é para compreender de maneira mais eficiente quais locais de um determinado reboiler está ficando sujo de maneira mais frequente. Sendo assim, caso soubéssemos a localização dos tubos, seria possível montar um _heatmap_ da sujeira dentro do reboiler.
+A entidade **Tube** representa um tubo dentro do reboiler, ou seja, um dos vários "canos" que existem dentro de um único reboiler. Sua principal utilidade no banco de dados é para compreender de maneira mais eficiente quais locais de um determinado reboiler está ficando sujo de maneira mais frequente. Sendo assim, caso soubéssemos a localização dos tubos, seria possível montar um _heatmap_ da sujeira dentro do reboiler.
 
 - **id**: Identificador único do tubo. (Chave primária)
 - **reboiler_id**: Referência para o reboiler ao qual o tubo está associado. (chave estrangeira da tabela Reboiler)
@@ -39,7 +39,7 @@ A entidade Tube representa um tubo dentro do reboiler, ou seja, um dos vários "
 
 ### Image
 
-A entidade Image tem como papel principal representar uma imagem de um determinado tubo, capturado durante uma das examinações. A criação da entidade permite com que tenha-se uma base de diversas imagens, o que serviria para alimentar o modelo de treinamento, ao identificar o que há e não há sujeira. 
+A entidade **Image** tem como papel principal representar uma imagem de um determinado tubo, capturado durante uma das examinações. A criação da entidade permite com que se tenha uma base de diversas imagens, o que serviria para alimentar o modelo de treinamento, ao identificar o que há e não há sujeira. 
 
 - **id**: Identificador único da imagem. (Chave primária)
 - **image**: String das imagens comprimidas dos tubos. (text)
@@ -48,14 +48,14 @@ A entidade Image tem como papel principal representar uma imagem de um determina
 
 ### Robot
 
-A entidade Robot armazena as informações de um determinado robô, contendo informações sobre a última vez que foi realizada uma manutenção nele. Sua necessidade surge para que a aplicação possa se torna escalável, tendo controle de vários operações de maneira simultânea através da plataforma web.
+A entidade **Robot** armazena as informações de um determinado robô, contendo informações sobre a última vez que foi realizada uma manutenção nele. Sua necessidade surge para que a aplicação possa se torna escalável, tendo controle de vários operações de maneira simultânea através da plataforma web.
 
 - **id**: Identificador único do robô. (Chave primária)
 - **last_manufactured**: Número inteiro indicando a última data de fabricação do robô. (text)
 
 ### TubeState
 
-A entidade TubeState serve como uma tabela intermediária entre um tubo e uma examinação, uma vez que armazena o estado de um tubo em um sessão. Com ela é possível gerar medidas como a percentagem de sujeira de um reboiler antes de uma limpeza e compará-la com após a limpeza. Além disso, a tabela também é associada com a imagem, permitindo rever se a identificação do grau de sujeira foi correta ou não.
+A entidade **TubeState** serve como uma tabela intermediária entre um tubo e uma examinação, uma vez que armazena o estado de um tubo em uma sessão. Com ela é possível gerar medidas como a percentagem de sujeira de um reboiler antes de uma limpeza e compará-la com após a limpeza. Além disso, a tabela também é associada com a imagem, permitindo rever se a identificação do grau de sujeira foi correta ou não.
 
 - **id**: Identificador único do estado do tubo. (Chave primária)
 - **dirtness**: Booleano indicando se o tubo está sujo. (bool)
@@ -65,7 +65,7 @@ A entidade TubeState serve como uma tabela intermediária entre um tubo e uma ex
 
 ### Examination
 
-A entidade Examination funciona como uma sessão de verificação do reboiler. Sendo assim, ela registra um examinação realizada no reboiler, armazenando caracterísitcas como a etapa em que foi realizada (pré ou pós limpeza), assim como o tempo que a sessão durou.
+A entidade **Examination** funciona como uma sessão de verificação do reboiler. Sendo assim, ela registra uma examinação realizada no reboiler, armazenando caracterísitcas como a etapa em que foi realizada (pré ou pós-limpeza), assim como o tempo que a sessão durou.
 
 - **id**: Identificador único da verificação. (Chave primária)
 - **etapa**: Etapa da verificação (text).
@@ -76,7 +76,7 @@ A entidade Examination funciona como uma sessão de verificação do reboiler. S
 
 ### Reboiler
 
-A entidade Reboiler tem como utilidade tornar único cada reboiler de uma determinada unidade. Com isso, seria possível identificar se existe algum maquinário que está havendo problemas mais frequentes ou que não está sendo limpo com tanta eficiência. 
+A entidade **Reboiler** tem como utilidade tornar único cada reboiler de uma determinada unidade. Com isso, seria possível identificar se existe algum maquinário que está havendo problemas mais frequentes ou que não está sendo limpo com tanta eficiência. 
 
 - **id**: Identificador único do reboiler. (Chave primária)
 - **number**: Número do reboiler. (integer)
@@ -84,7 +84,7 @@ A entidade Reboiler tem como utilidade tornar único cada reboiler de uma determ
 
 ### Unit
 
-A entidade Unit armazena informações sobre a unidade em que o robô operará, como estado e cidade. Com isso, é possível filtrar as limpezas por cidade, avaliando e comparando por exemplo: o estado dos reboilers, a eficiência da limpeza e a frequência de limpezas realizadas em cada unidade.
+A entidade **Unit** armazena informações sobre a unidade em que o robô operará, como estado e cidade. Com isso, é possível filtrar as limpezas por cidade, avaliando e comparando, por exemplo: o estado dos reboilers, a eficiência da limpeza e a frequência de limpezas realizadas em cada unidade.
 
 - **id**: Identificador único da unidade. (Chave primária)
 - **city**: Cidade onde a unidade está localizada. (text)
