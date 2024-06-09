@@ -19,7 +19,49 @@ O objetivo principal dessa página é documentar a criação e implementação d
 
 Para que fosse possível desenvolver o back-end da aplicação, primeiro foi idealizado o banco de dados, o qual é explicado em [outra página](/Sprint%204/banco_de_dados.md). Sua implementação em **Turso**, o qual tem interatividade com o **Prisma.Io**, permite com que a aplicação seja desenvolvida de forma mais acelerada devido a funções já existentes para realizar as operações de leitura, inserção, atualização dos dados.
 
+O back-end foi construído através de arquivos de controllers e de routes, importando os routers para a aplicação principal que funciona em express. Sendo assim, cada entidade possui dois arquivos, o controller, o qual possui o crud da entidade e outras operações que são executadas nela, e o route, o qual utiliza das funções implementadas no controller.
 
+Aqui podemos ver o arquivo `express.js`, o qual é responsável por fazer a api funcionar como um todo.
+
+```javascript
+const express = require('express');
+const json = require('body-parser').json;
+const config = require('config');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+
+// Api Routes
+const robotRoutes = require('../api/routes/robot');
+const unitRoutes = require('../api/routes/unit');
+const reboilerRoutes = require('../api/routes/reboiler');
+const imageRoutes = require('../api/routes/image');
+const tubeRoutes = require('../api/routes/tube');
+const examinationRoutes = require('../api/routes/examination');
+const tubeStateRoutes = require('../api/routes/tubeState'); 
+
+module.exports = () => {
+    const app = express();
+    app.use(helmet());
+    app.use(cors(process.env.CORS_ORIGIN || config.get('server.cors')));
+    app.use(morgan('dev'));
+    
+    app.set('port', process.env.PORT || config.get('server.port'));
+    app.set('host', process.env.HOST || config.get('server.host'));
+    app.use(json());
+
+    // Definição do nome de cada rota da api.
+    app.use('/api/robots', robotRoutes);
+    app.use('/api/unities', unitRoutes);
+    app.use('/api/reboilers', reboilerRoutes);
+    app.use('/api/images', imageRoutes);
+    app.use('/api/tubes', tubeRoutes);
+    app.use('/api/examinations', examinationRoutes);
+    app.use('/api/tube-states', tubeStateRoutes);
+
+    return app;
+};
+```
 
 # Metodologia e Implementação
 
@@ -37,6 +79,42 @@ Depois de criado a base de dados, é necessário seguir um [segundo tutorial](ht
 ```
 Ele deve conter a modelagem do banco, porém transformada em arquivo do tipo .schema. 
 
-::: warning [Aviso]
+:::warning Aviso
 Como o arquivo não está na pasta raiz do backend, o comando `npx generate schema` deve ser substituído por `npx generate schmea --schema=api/models/prisma.schema`.
 :::
+
+Por fim, na mesma pasta models, deve criar um arquivo chamado de `prismaclient.js`. Ele será responsável por inicializar a conexão entre o prisma e o banco de dados, além disso, ele deve ser importado em todo controller criado para que possa realizar as chamadas necessárias. O código dele será dessa forma: 
+```javascript
+const { PrismaClient } = require('@prisma/client')
+const { createClient } = require('@libsql/client');
+const { PrismaLibSQL } = require('@prisma/adapter-libsql');
+
+const libsql = createClient({
+  url: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
+
+const adapter = new PrismaLibSQL(libsql);
+const prisma = new PrismaClient({ adapter });
+
+module.exports = prisma;
+``` 
+
+### Criando um controller
+
+Para criar um controller, basta importar o `prisma` que criamos no último trecho de código para seu controller e utilizá-lo para fazer requisições. Um exemplo seria:
+```javascript
+const prisma = require('../models/prismaClient');
+
+const getAllRobots = async (req, res) => {
+  try {
+    const robots = await prisma.robot.findMany();
+    res.json(robots);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching robots' });
+  }
+};
+```
+## Rotas 
+
+Para a documentação das rotas, foi utilizado o postman, o qual contém recursos que facilitam a demonstração das mesmas. [Link de acesso](https://www.postman.com/planetary-astronaut-106586/workspace/reboilns-g03/documentation/26958099-16b60531-2533-4099-a7a3-ba5241ad8537)
