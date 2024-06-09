@@ -34,8 +34,8 @@ model Tube {
   id          Int     @id @default(autoincrement())
   reboiler    Reboiler @relation(fields: [reboiler_id], references: [id])
   reboiler_id  Int
-  column      Int
-  row         Int
+  position_column      Int
+  position_row         Int
   TubeStates  TubeState[]
 }
 
