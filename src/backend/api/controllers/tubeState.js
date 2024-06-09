@@ -26,13 +26,13 @@ const getTubeStateById = async (req, res) => {
 };
 
 const createTubeState = async (req, res) => {
-    const { dirtness, image_id, session_id, tube_id } = req.body;
+    const { dirtness, image_id, examination_id, tube_id } = req.body;
     try {
         const newTubeState = await prisma.tubeState.create({
             data: {
                 dirtness,
                 image_id,
-                session_id,
+                examination_id,
                 tube_id
             }
         });
