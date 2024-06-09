@@ -85,8 +85,8 @@ const updateExamination = async (req, res) => {
                 etapa,
                 robot_id,
                 reboiler_id,
-                started_at: started_at ? new Date(started_at) : null,
-                finished_at: finished_at ? new Date(finished_at) : null
+                started_at: started_at,
+                finished_at: finished_at
             }
         });
         res.json(updatedExamination);
