@@ -82,9 +82,9 @@ const updateExamination = async (req, res) => {
         const updatedExamination = await prisma.examination.update({
             where: { id: parseInt(id) },
             data: {
-                etapa,
-                robot_id,
-                reboiler_id,
+                etapa: etapa,
+                robot_id: robot_id,
+                reboiler_id: reboiler_id,
                 started_at: started_at,
                 finished_at: finished_at
             }
