@@ -29,15 +29,19 @@ const getAllImagesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try {
         const images = await prisma.tubeState.findMany({
-            where: { session_id: parseInt(id) },
+            where: { examination_id: parseInt(id) },
             include: {
-            Image: true
+                image: true
             }
         });
-        res.json(images);
+        if(images.length > 0){
+            res.json(images)
+        }
+        else{
+            res.status(404).json({ error: 'No tube states were found at that examination' });
+        }
     }catch (error) {
-        console.log(error)
-        res.status(500).json({ error: error });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
@@ -45,15 +49,20 @@ const getAllTubeStatesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try{
         const tubeStates = await prisma.tubeState.findMany({
-            where: { session_id: parseInt(id) },
+            where: { examination_id: parseInt(id) },
             include: {
-                Image: false
+                image: false
             }
         });
-        res.json(tubeStates)
+        if(tubeStates.length > 0){
+            res.json(tubeStates)
+        }
+        else{
+            res.status(404).json({ error: 'No tube states were found at that examination' });
+        }
     }
     catch (error) {
-        res.status(500).json({ error: error });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
@@ -71,7 +80,7 @@ const createExamination = async (req, res) => {
         });
         res.status(201).json(newExamination);
     } catch (error) {
-        res.status(500).json({ error: error });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -101,7 +110,7 @@ const deleteExamination = async (req, res) => {
         await prisma.examination.delete({
             where: { id: parseInt(id) }
         });
-        res.status(204).send();
+        res.status(204).json("Examination deleted successfully");
     } catch (error) {
         res.status(500).json({ error: 'Error deleting examination' });
     }
