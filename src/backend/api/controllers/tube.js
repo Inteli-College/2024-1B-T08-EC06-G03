@@ -26,15 +26,16 @@ const getTubeById = async (req, res) => {
 };
 
 const createTube = async (req, res) => {
-    const { reboiler_id, position } = req.body;
+    const {reboiler_id, position_column, position_row  } = req.body;
     try {
         const newTube = await prisma.tube.create({
             data: {
-                reboiler_id,
-                position
+                reboiler_id: reboiler_id,
+                position_column: position_column, 
+                position_row: position_row   
             }
         });
-        res.status(201).json(newTube);
+        res.status(201).json({message: "Tubo criado com sucesso"});
     } catch (error) {
         res.status(500).json({ error: 'Error creating tube' });
     }
