@@ -66,6 +66,34 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
             ┗ 📜server.js
         └── 📂bolin
             └── 📂src
+                └── 📂bolin
+                    └── 📂bolin
+                    └── 📂resource
+                    └── 📂test
+                    ┗ 📜package.xml
+                    ┗ 📜setup.cfg
+                    ┗ 📜setup.py
+                └── 📂bolin_camera
+                    └── 📂bolin_camera
+                    └── 📂resource
+                    └── 📂test
+                    ┗ 📜package.xml
+                    ┗ 📜setup.cfg
+                    ┗ 📜setup.py
+                └── 📂bolin_camera_cpp
+                    └── 📂include
+                    └── 📂src
+                    ┗ 📜CMakeLists.txt
+                    ┗ 📜package.xml
+                    ┗ 📜README.md
+                └── 📂bolin_lidar
+                    └── 📂bolin_lidar
+                    └── 📂resource
+                    └── 📂test
+                    ┗ 📜package.xml
+                    ┗ 📜setup.cfg
+                    ┗ 📜setup.py
+                ┗ 📜listener.py
             ┗ 📜build.sh
         └── 📂frontend
            └── 📂public
