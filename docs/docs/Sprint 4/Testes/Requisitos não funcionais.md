@@ -80,7 +80,7 @@ Para testar a usabilidade da interface, foi aplicado o teste SUS (System Usabili
 
 4. Durante o teste de precisão na identificação de reboilers, o robô alcançou uma precisão de 80% na identificação correta de tubos que necessitavam de limpeza, o que indica que o teste foi bem-sucedido.
 
-5. Para o quinto teste, de duração da bateria, a bateria permitiu o robô de se movimentar por um período de 1 hora sem descarregar a bateria, o que surpreendeu a equipe e, continuando até a bateria se esgotar, o robô permaneceu ativo por 1 hora e 37 minutos.
+5. Para o quinto teste, de duração da bateria,o robô permaneceu ligado continuamente com os pacotes ROS de movimentação, lidar e câmera rodando por 2horas e 25 minutos, o que surpreendeu a equipe. Porém, vale considerar testes futuros com o robô em movimento e com o modelo de visão computacional acionado, para avaliar o consumo de bateria em situações mais próximas do cenário real.
 
 6. Para o teste de usabilidade, 3 usuários alcançaram nota B e 2 alcançaram nota C. As principais queixas dos usuários foram em relação ao processamento da visão computacional, à disposição dos botões de funcionalidade e ao posicionamento da latência, que estava em conflito com a barra lateral. Uma feature muito elogiada, no entanto, foi o botão de joystick e a organização da página de dados.
 
