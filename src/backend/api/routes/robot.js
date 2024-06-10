@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const robotController = require('../controllers/robot');
 
-router.get('/robots', robotController.getAllRobots);
-router.get('/robots/:id', robotController.getRobotById);
-router.post('/robots', robotController.createRobot);
-router.put('/robots/:id', robotController.updateRobot);
-router.delete('/robots/:id', robotController.deleteRobot);
+router.get('/', robotController.getAllRobots);
+router.get('/:id', robotController.getRobotById);
+router.post('/', robotController.createRobot);
+router.put('/:id', robotController.updateRobot);
+router.delete('/:id', robotController.deleteRobot);
  
 module.exports = router;

@@ -29,15 +29,19 @@ const getAllImagesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try {
         const images = await prisma.tubeState.findMany({
-            where: { session_id: parseInt(id) },
+            where: { examination_id: parseInt(id) },
             include: {
-            Image: true
+                image: true
             }
         });
-        res.json(images);
+        if(images.length > 0){
+            res.json(images)
+        }
+        else{
+            res.status(404).json({ error: 'No tube states were found at that examination' });
+        }
     }catch (error) {
-        console.log(error)
-        res.status(500).json({ error: error });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
@@ -45,15 +49,20 @@ const getAllTubeStatesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try{
         const tubeStates = await prisma.tubeState.findMany({
-            where: { session_id: parseInt(id) },
+            where: { examination_id: parseInt(id) },
             include: {
-                Image: false
+                image: false
             }
         });
-        res.json(tubeStates)
+        if(tubeStates.length > 0){
+            res.json(tubeStates)
+        }
+        else{
+            res.status(404).json({ error: 'No tube states were found at that examination' });
+        }
     }
     catch (error) {
-        res.status(500).json({ error: error });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
@@ -65,13 +74,13 @@ const createExamination = async (req, res) => {
                 etapa,
                 robot_id,
                 reboiler_id,
-                started_at: started_at ? new Date(started_at) : null,
-                finished_at: finished_at ? new Date(finished_at) : null
+                started_at: started_at ?  started_at : null,
+                finished_at: finished_at ? finished_at : null
             }
         });
         res.status(201).json(newExamination);
     } catch (error) {
-        res.status(500).json({ error: 'Error creating examination' });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -82,16 +91,16 @@ const updateExamination = async (req, res) => {
         const updatedExamination = await prisma.examination.update({
             where: { id: parseInt(id) },
             data: {
-                etapa,
-                robot_id,
-                reboiler_id,
-                started_at: started_at ? new Date(started_at) : null,
-                finished_at: finished_at ? new Date(finished_at) : null
+                etapa: etapa,
+                robot_id: robot_id,
+                reboiler_id: reboiler_id,
+                started_at: started_at,
+                finished_at: finished_at
             }
         });
         res.json(updatedExamination);
     } catch (error) {
-        res.status(500).json({ error: 'Error updating examination' });
+        res.status(500).json({ error: 'Error updating examination' + error });
     }
 };
 
@@ -101,7 +110,7 @@ const deleteExamination = async (req, res) => {
         await prisma.examination.delete({
             where: { id: parseInt(id) }
         });
-        res.status(204).send();
+        res.status(204).json("Examination deleted successfully");
     } catch (error) {
         res.status(500).json({ error: 'Error deleting examination' });
     }
