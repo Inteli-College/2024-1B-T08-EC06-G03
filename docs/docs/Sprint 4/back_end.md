@@ -3,16 +3,16 @@ title: Back-End - API
 sidebar_position: 2
 ---
 
-O objetivo principal dessa página é documentar a criação e implementação de uma API realizada pelo grupo, visando interagir com o Banco de Dados existente. Para uma implementação eficaz da API, foram utilizadas tecnologias que estão em alta no mercado e que coiencidiam com os objetivos do grupo, de manter a aplicação com uma manutenibilidade fácil para os desenvolvedores, porém ainda tendo eficiência em realizar consultas ao banco. Com isso, foi desenvolvida uma aplicação **express**, juntamente aos **websockets** já existentes.
+O objetivo principal dessa página é documentar a criação e implementação de uma API realizada pelo grupo, visando interagir com o Banco de Dados existente. Para uma implementação eficaz da API, foram utilizadas tecnologias que estão em alta no mercado e que coincidiam com os objetivos do grupo: manter a de manter a aplicação com uma manutenibilidade fácil para os desenvolvedores, pporém garantindo a eficiência em realizar consultas ao banco. Com isso, foi desenvolvida uma aplicação **express**, juntamente aos **websockets** já existentes.
 
 ## Tecnologias Utilizadas
 
 - **JavaScript**
   - **[Express.js](https://expressjs.com/)**: Framework para construção de aplicações web, utilizado para criar o servidor HTTP.
 - **Turso**
-  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite.
+  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite. Para compreender mais sobre a decisão de utilizar turso, veja [aqui]((/Sprint%204/banco_de_dados.md)).
 - **Prisma ORM**
-  - [**prisma.io**](https://www.prisma.io/docs/orm/prisma-schema/overview): Biblioteca utilziada para servir como intermédio entre a api e o banco de dados, realizando as consultas por ORM.
+  - [**prisma.io**](https://www.prisma.io/docs/orm/prisma-schema/overview): Biblioteca utilziada para servir como intermédio entre a api e o banco de dados, realizando as consultas por ORM. As consultas por ORM garantem mais segurança para a aplicação, visto que evitam problemas de cybersegurança como **sqlinjection**. Além disso, a rapidez para realizar seu desenvolvimento auxilia muito no projeto, visto o escopo de dez semanas.
 
 
 ## Arquitetura
@@ -80,7 +80,7 @@ Após criado a base de dados, é necessário seguir um [segundo tutorial](https:
 Ele deve conter a modelagem do banco, porém transformada em arquivo do tipo .schema. 
 
 :::warning Aviso
-Como o arquivo não está na pasta raiz do backend, o comando `npx generate schema` deve ser substituído por `npx generate schmea --schema=api/models/prisma.schema`.
+Como o arquivo não está na pasta raiz do backend, o comando `npx generate schema` deve ser substituído por `npx prisma generate --schema=api/models/prisma.schema`.
 :::
 
 Por fim, na mesma pasta models, deve criar um arquivo chamado de `prismaclient.js`. Ele será responsável por inicializar a conexão entre o prisma e o banco de dados, além disso, ele deve ser importado em todo controller criado para poder realizar as chamadas necessárias. O código dele será dessa forma: 
