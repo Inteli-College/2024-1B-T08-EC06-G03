@@ -36,7 +36,7 @@ Com base nos requisitos funcionais, é possível mapear os testes que comprovam 
 
 ### Público alvo dos testadores
 
-Por não ser possível testar com os funcionários que utilizarão o sistema na Atvos, foi selecionado um grupo de 4 pessoas com um letramento básico em tecnologia, com uma média de idades de 27 anos.
+Por não ser possível testar com os funcionários que utilizarão o sistema na Atvos, foi selecionado um grupo de 4 pessoas com um **letramento digital básico**, com uma **média de idades de 27 anos** e uma **familiarização média/baixa com robótica.**
 
 
 ## Realização dos testes
