@@ -22,7 +22,23 @@ Durante a primeira sprint, foram mapeados os [requisitos não funcionais](../../
 A partir da revisão dos requisitos não funcionais, os testes e critérios de aceitação foram atualizados conforme a tabela acima. A seguir, serão detalhados os testes realizados para cada requisito não funcional:
 
 1. RNF02: Teste de integração do sistema
-3. RNF03: Teste de precisão de movimentação do robô
+
+Para testar a integração do sistema, foi necessário realizar solicitações de integração por meio da API do sistema do robô teleoperado, simulando diferentes cenários de uso e tipos de dados. Foi monitorada a resposta da API, registrando o tempo de resposta e a taxa de sucesso de cada solicitação. Para isso, foi utilizado o Postman para realizar as solicitações e monitorar o tempo de resposta e a taxa de sucesso. Foram realizadas 10 solicitações de integração, simulando diferentes cenários de uso e tipos de dados, e foi verificado se o tempo médio de resposta da API foi inferior a 100 milissegundos e a taxa de sucesso das integrações foi superior a 90%. Além disso, foi verificado se a documentação da interface de integração estava completa e precisa, facilitando a integração por parte dos desenvolvedores externos. O teste foi considerado bem-sucedido se o tempo médio de resposta da API foi inferior a 100 milissegundos e a taxa de sucesso das integrações foi superior a 90%.
+
+3. RNF03: Teste de precisão de movimentação do robô.
+
+Para testar a precisão de movimentação do robô, foi necessário enviar comandos de movimentação para o robô e verificar se a diferença entre o comando enviado pelo operador e o movimento real do robô não ultrapassou de ±10°. Para isso, foi utilizado um joystick para enviar comandos de movimentação para o robô e foi verificado se a diferença entre o comando enviado pelo operador e o movimento real do robô não ultrapassou de ±10°. Foram enviados os seguintes comandos de movimentação para o robô:
+    - Comando de andar para frente;
+    - Comando de virar à esquerda;
+    - Comando de virar à direita;
+    - Comando de andar para trás;
+    - Comando de andar pra frente e em seguida de virar à esquerda sem soltar o joystick;
+    - Comando de andar pra frente e em seguida de virar à direita sem soltar o joystick;
+    - Comando de giro 360° para a esquerda;
+    - Comando de giro 360° para a direita.
+
+Durante cada comando, foi verificado a diferença entre o comando enviado e a movimentação real. O teste foi considerado bem-sucedido se a diferença entre o comando enviado pelo operador e o movimento real do robô não ultrapassou de ±10°.
+
 3. RNF04: Teste de taxa de transferência de imagens
 
 Para testar a transmissão de imagens em tempo real, foi necessário transmitir imagens da câmera do robô para o frontend, passando pelo backend, e verificar se a média do intervalo entre cada transmissão de dados estava entre 50ms e 150ms. Para isso, foi necessário monitorar os intervalos entre cada transmissão de dados e anotar o tempo. Para isso, foi utilizada a exibição do FPS(frames per second) no frontend em um período de 5 minutos e o robô foi exposto a diferentes cenários:
@@ -32,12 +48,42 @@ Para testar a transmissão de imagens em tempo real, foi necessário transmitir 
     - Com obstáculos se movimentando;
     - Com o acionamento do processamento do modelo de visão computacional.
 
-Após a observação dos diferentes cenparios, foi analisado se alguns dos fatores destacados aumentou a latência da transmissçao
+Após a observação dos diferentes cenários, foi analisado se alguns dos fatores destacados aumentou a latência da transmissão ou se algum outro fator interfiriu na transmissão das imagens. O teste foi considerado bem-sucedido se a média do intervalo entre cada transmissão de dados estava entre 50ms e 150ms.
 
-4. RNF05: Teste de precisão na identificação de reboilers
+4. RNF05: Teste de precisão na identificação de reboilers.
+
+Para esse teste, foi necessário simular um ambiente controlado que simula as condições dos reboilers após a limpeza, incluindo variados níveis de acumulação de resíduos. Para isso foram utilizados os cestos de lixo da sala, que foram preenchidos com diferentes tipos de resíduos, como papel. O teste visava avaliar a precisão do modelo de visão computacional em diferentes contextos e, dado que a simulação mais fidedigna no campus do inteli foram os cestos de lixo, foi decidido que o teste seria realizado com eles. O teste foi considerado bem-sucedido se o robô alcançou uma precisão superior ou igual a 80% na identificação correta de tubos que necessitavam de limpeza, ou seja, tinham algum resíduo. Esse calculo deve ser feito a partir da divisão do número de identificações corretas pelo número total de tubos que foram indicados como sujos, ou seja, a precisão do modelo de visão computacional.
+
 5. RNF06: Teste de duração da bateria
+
+Nesse teste, a bateria do robô foi carregada completamente e foi monitorado o tempo de duração da bateria. O teste foi considerado bem-sucedido se a bateria permitiu o robô de se movimentar por um período mínimo de 1 hora sem descarregar a bateria.
+
 6. RNF07: Teste de usabilidade
 
-## Realização dos testes
+Para testar a usabilidade da interface, foi aplicado o teste SUS (System Usability Scale) com no mínimo 5 usuários. O teste foi considerado bem-sucedido se no mínimo 60% dos usuários atingiram o score nível B (notas entre 70-80), e todos atingiram no mínimo no score nível C (notas entre 60-70). Apesar do público alvo serem engenheiros de manutenção e trabalhadores da equipe de manutenção da Atvos, não foi possível realizar o teste com esse público, devido a restrições de contato com esse pùblico. Dessa forma, o teste foi realizado com alunos e colaboradores do Inteli que, apesar de não serem o público alvo, possuem letramento digital semelhante e podem fornecer feedbacks relevantes sobre a usabilidade da interface. O teste foi realizado com o teste da interface de controle sem informação prévia sobre cada funcionalidade, apenas com um visão geral do escopo do projeto apresentado aos usuários e uma explicação breve sobre as funcionalidades existentes do robô. Com isso, dfoi possível testar a intuitividade da interface e a facilidade de uso da aplicação no geral.
+
+## Resultados
+
+1. Para o teste de integração do sistema, o tempo médio de resposta da API foi de 50ms e a taxa de sucesso das integrações foi de 100%, o que indica que o teste foi bem-sucedido.Vale ressaltar que a documentação foi simples e intuitiva para outros membros da equipe que não ficaram responsáveis pelo desenvolvimento da API, o que reduziu os vieses e comprovou a clareza da documentação. 
+
+2. Para o teste de precisão de movimentação do robô, a diferença entre o comando enviado pelo operador e o movimento real do robô não ultrapassou de ±10° em nenhum dos casos, o que indica que o teste foi bem-sucedido.
+
+3. No teste de taxa de transferência de imagens, a média do intervalo entre cada transmissão de dados foi de 103ms, o que indica que o teste foi bem-sucedido. Nos diferentes cenários vale destacar observações importantes:
+
+- Com iluminação adequada, a média do intervalo entre cada transmissão de dados foi de 100ms em um período de 2 minutos;
+- Com pouca iluminação, a média do intervalo entre cada transmissão de dados foi de 125ms em um período de 2 minutos;
+- Com obstáculos parados, a média do intervalo entre cada transmissão de dados foi de 110ms em um período de 2 minutos;
+- Com obstáculos se movimentando, a média do intervalo entre cada transmissão de dados foi de 105ms em um período de 2 minutos;
+- Com o acionamento do processamento do modelo de visão computacional, apesar de ser acionado somente no momento de acionamento do botão, esse processo impactou na latência de transmissão da imagem, que baixou de 20fps para 12fps, uma mudança considerável. Desse modo, cabe avaliar possívies melhorias no desempenho do modelo ou na arquitetura de comunicação entre o backend e o script de visão computacional, como a separação dessas etapas em diferentes controllers.
+
+Outro ponto se considerar que não foi previsto no roteiro de testes foi a conexão da rede, que impacta diretamente na transmissão, ou seja, é um ponto essencial de ser avaliado quando o protótipo for testado em campo ou atualizado para a versão de mercado.
+
+4. Durante o teste de precisão na identificação de reboilers, o robô alcançou uma precisão de 80% na identificação correta de tubos que necessitavam de limpeza, o que indica que o teste foi bem-sucedido.
+
+5. Para o quinto teste, de duração da bateria, a bateria permitiu o robô de se movimentar por um período de 1 hora sem descarregar a bateria, o que surpreendeu a equipe e, continuando até a bateria se esgotar, o robô permaneceu atio por 1 hora e 37 minutos.
+
+6. Para o teste de usabilidade, 3 usuários alcançaram nota B e 2 alcançara nota C. As principais queixas dos usuários foram em relação ao processamento da visão computacional, a disposição dos botões de funcionalidade e ao posicionamento da latência, que estava em conflito com a barra lateral. Uma feature muito elogiada, no entanto, foi o botão de joystick e a organização da página de dados.
 
 ## Conclusões
+
+A partir dos testes realizados, a equipe refletiu sobre os feedbacks e a principal ação a ser tomada na próxima sprint será em relação à melhoria do modelo de visão computacional, adicionar o feedback do processamento na tela e adicionar de alguma forma a informação sobre o botão de kill e quando acioná-lo. Portanto, os testes de requisitos não funcionais foram fundamentais para verificar pontos de melhoria no sistema e atuualizar as necessidades e requisitos do projeto.
