@@ -47,7 +47,7 @@ Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes
      ```
    - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
 
-### 3. Execução do Software de Controle
+### 4. Execução do Software de Controle
 Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô.
 
 1. **Inicialização do Back-End**:
@@ -97,7 +97,7 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
 
     - Acesse [http://localhost:5173](http://localhost:5173) no seu navegador.
 
-### 4. Controle do Robô
+### 5. Controle do Robô
 - Utilize o joystick para controlar o robô.
 
 
