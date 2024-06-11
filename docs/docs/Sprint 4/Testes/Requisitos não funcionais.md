@@ -66,24 +66,20 @@ Para testar a usabilidade da interface, foi aplicado o teste SUS (System Usabili
 
 1. Para o teste de integração do sistema, o tempo médio de resposta da API foi de 50ms e a taxa de sucesso das integrações foi de 100%, o que indica que o teste foi bem-sucedido.Vale ressaltar que a documentação foi simples e intuitiva para outros membros da equipe que não ficaram responsáveis pelo desenvolvimento da API, o que reduziu os vieses e comprovou a clareza da documentação. 
 
-2. Para o teste de precisão de movimentação do robô, a diferença entre o comando enviado pelo operador e o movimento real do robô não ultrapassou de ±10° em nenhum dos casos, o que indica que o teste foi bem-sucedido.
+2. Para o teste de precisão de movimentação do robô, a diferença entre o comando enviado pelo operador e o movimento real do robô não ultrapassou de ±10° em nenhum dos casos, a partir da observação da equipe, o que foi considerado um resultado sasisfatório.
 
 3. No teste de taxa de transferência de imagens, a média do intervalo entre cada transmissão de dados foi de 103ms, o que indica que o teste foi bem-sucedido. Nos diferentes cenários, vale destacar observações importantes:
 
-    - Com iluminação adequada, a média do intervalo entre cada transmissão de dados foi de 100ms em um período de 2 minutos;
-    - Com pouca iluminação, a média do intervalo entre cada transmissão de dados foi de 125ms em um período de 2 minutos;
-    - Com obstáculos parados, a média do intervalo entre cada transmissão de dados foi de 110ms em um período de 2 minutos;
-    - Com obstáculos se movimentando, a média do intervalo entre cada transmissão de dados foi de 105ms em um período de 2 minutos;
-    - Com o acionamento do processamento do modelo de visão computacional, apesar de ser acionado somente no momento de acionamento do botão, esse processo impactou na latência de transmissão da imagem, que baixou de 20fps para 12fps, uma mudança considerável. Desse modo, cabe avaliar possíveis melhorias no desempenho do modelo ou na arquitetura de comunicação entre o backend e o script de visão computacional, como a separação dessas etapas em diferentes controllers.
+    - Não houve diferença entre a transmissão de imagens com iluminação adequada e com pouca iluminação, o que indica que a iluminação não impactou na latência da transmissão;
+    - Não houve diferenças significativas entre obstáculos parados ou em movimento;
+    - Não foi possível avaliar o impacto do acionamento do processamento do modelo de visão computacional dado que durante os testes a integração entre o modelo e a aplicação não estava completa.
 
     Outro ponto a se considerar que não foi previsto no roteiro de testes foi a conexão da rede, que impacta diretamente na transmissão, ou seja, é um ponto essencial a ser avaliado quando o protótipo for testado em campo ou atualizado para a versão de mercado.
 
-4. Durante o teste de precisão na identificação de reboilers, o robô alcançou uma precisão de 80% na identificação correta de tubos que necessitavam de limpeza, o que indica que o teste foi bem-sucedido.
+4. Para o quinto teste, de duração da bateria,o robô permaneceu ligado continuamente com os pacotes ROS de movimentação, lidar e câmera rodando por 2horas e 25 minutos, o que surpreendeu a equipe. Porém, vale considerar testes futuros com o robô em movimento e com o modelo de visão computacional acionado, para avaliar o consumo de bateria em situações mais próximas do cenário real.
 
-5. Para o quinto teste, de duração da bateria,o robô permaneceu ligado continuamente com os pacotes ROS de movimentação, lidar e câmera rodando por 2horas e 25 minutos, o que surpreendeu a equipe. Porém, vale considerar testes futuros com o robô em movimento e com o modelo de visão computacional acionado, para avaliar o consumo de bateria em situações mais próximas do cenário real.
-
-6. Para o teste de usabilidade, 3 usuários alcançaram nota B e 2 alcançaram nota C. As principais queixas dos usuários foram em relação ao processamento da visão computacional, à disposição dos botões de funcionalidade e ao posicionamento da latência, que estava em conflito com a barra lateral. Uma feature muito elogiada, no entanto, foi o botão de joystick e a organização da página de dados.
+6. Para o teste de usabilidade, 4 usuários testaram a solução com o teste SUS e a média de notas foi de 84,4, indicando um score médio A, uma nota muito boa. Todos os usuários alcançaram a nota B, superando as metas estabelecidas para esse teste. As principais queixas dos usuários foram em relação à qualidade da câmera, à instabilidade de conexão e falta de movimentação pelas setas , pois o teste foi realizado pelo computador, enquanto a aplicação foi desenvolvida para ser utilizada em um dispositivo móvel. Porém, algo muito positivo foi a clareza dos botões e simplicidade da interface. Para ver mais sobre cada teste, acesse a [Tabela de Testes](https://docs.google.com/spreadsheets/d/1hyU2EtLaos3EX-l6XtDDiVFYKS4Vnd7YyudwoYwAVCQ/edit?usp=sharing).
 
 ## Conclusões
 
-A partir dos testes realizados, a equipe refletiu sobre os feedbacks e a principal ação a ser tomada na próxima sprint será em relação à melhoria do modelo de visão computacional, adicionar o feedback do processamento na tela e adicionar de alguma forma a informação sobre o botão de kill e quando acioná-lo. Portanto, os testes de requisitos não funcionais foram fundamentais para verificar pontos de melhoria no sistema e atualizar as necessidades e requisitos do projeto.
+A partir dos testes realizados, a equipe refletiu sobre os feedbacks e a principal ação a ser tomada na próxima sprint será em relação à melhoria do modelo de visão computacional, adicionar de alguma forma a informação sobre o botão de kill e quando acioná-lo, além de um feedback depois que ele for acionado. Além disso, também será considerado melhorar a sensibilidade do joystick e o feedback de obstáculos pŕoximos. Portanto, os testes de requisitos não funcionais foram fundamentais para verificar pontos de melhoria no sistema e atualizar as necessidades e requisitos do projeto.
