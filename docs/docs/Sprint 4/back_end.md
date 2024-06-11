@@ -66,11 +66,10 @@ module.exports = () => {
 # Metodologia e Implementação
 
 ### Criando o database
-É necessário criar uma conta na aplicação do [**Turso**](https://turso.tech/) e seguir o [tutorial](https://docs.turso.tech/quickstart), até o passo 4, para configurar o terminal. Após criar a conta e conectar o banco de dados ao terminal, basta executar os comandos sql presente no diretório:
+É necessário criar uma conta na aplicação do [**Turso**](https://turso.tech/) e seguir o [tutorial](https://docs.turso.tech/quickstart), até o passo 4, para configurar o terminal. Após criar a conta e conectar o banco de dados ao terminal, basta executar na plataforma os comandos sql presente no diretório:
 ```bash
 /src/backend/scripts/createDatabase.sql
 ```
- na plataforma para criar sua base de dados.
 
 ### Conectando o database na aplicação
 Após criado a base de dados, é necessário seguir um [segundo tutorial](https://docs.turso.tech/sdk/ts/orm/prisma), o qual permitirá realizar a conexão entre o **Turso** e o **Prisma** em sua máquina. Os comandos devem ser rodados no diretório do `backend`. Nesse tutorial, será necessário criar um arquivo chamado `prisma.schema`, o qual ficará localizado em: 
@@ -82,6 +81,15 @@ Ele deve conter a modelagem do banco, porém transformada em arquivo do tipo .sc
 :::warning Aviso
 Como o arquivo não está na pasta raiz do backend, o comando `npx generate schema` deve ser substituído por `npx prisma generate --schema=api/models/prisma.schema`.
 :::
+
+Em sequência, é necessário criar um arquivo .env dentro da pasta `backend`. Esse arquivo armazanerá os tokens para conectar ao turso.
+
+```env
+TURSO_DATABASE_URL={url}
+TURSO_AUTH_TOKEN={token}
+```
+
+É necessário substituir as variáveis pelas informações geradas no tutorial.
 
 Por fim, na mesma pasta models, deve criar um arquivo chamado de `prismaclient.js`. Ele será responsável por inicializar a conexão entre o prisma e o banco de dados, além disso, ele deve ser importado em todo controller criado para poder realizar as chamadas necessárias. O código dele será dessa forma: 
 ```javascript
