@@ -167,7 +167,7 @@ Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes
    - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
 
 ### 4. Execução do Software de Controle
-Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô. Para isso, é necessário utilizar um computador.
+Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô. 
 
 1. **Clonar o projeto no computador** 
     - É necessário clonar o projeto no computador que vá rodar a aplicação.
