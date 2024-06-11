@@ -2,13 +2,16 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage
 from std_msgs.msg import Header
+from rclpy.qos import qos_profile_sensor_data
 import cv2
 
 
 class CameraPublisher(Node):
     def __init__(self):
         super().__init__("camera_publisher")
-        self.publisher_ = self.create_publisher(CompressedImage, "/camera_feed", 40)
+        self.publisher_ = self.create_publisher(
+            CompressedImage, "/camera_feed", qos_profile=qos_profile_sensor_data
+        )
         self.cap = cv2.VideoCapture(0)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
