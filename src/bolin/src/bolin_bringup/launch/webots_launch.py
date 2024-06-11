@@ -7,11 +7,11 @@ import os
 
 
 def generate_launch_description():
-    turtlebot_launch_file_dir = FindPackageShare(package="turtlebot3_bringup").find(
-        "turtlebot3_bringup"
+    webots_launch_file_dir = FindPackageShare(package="webots_ros2_turtlebot").find(
+        "webots_ros2_turtlebot"
     )
-    turtlebot_launch_file_path = os.path.join(
-        turtlebot_launch_file_dir, "launch", "robot.launch.py"
+    webots_launch_file_path = os.path.join(
+        webots_launch_file_dir, "launch", "robot_launch.py"
     )
 
     return LaunchDescription(
@@ -23,18 +23,18 @@ def generate_launch_description():
                 output="screen",
             ),
             Node(
+                package="bolin_lidar",
+                executable="lidar",
+                name="lidar",
+            ),
+            Node(
                 package="bolin_teleop",
                 executable="teleop",
                 name="teleop",
                 output="screen",
             ),
-            Node(
-                package="bolin_lidar",
-                executable="lidar",
-                name="lidar",
-            ),
             IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(turtlebot_launch_file_path)
+                PythonLaunchDescriptionSource(webots_launch_file_path)
             ),
         ]
     )
