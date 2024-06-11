@@ -1,6 +1,8 @@
+import os
+from glob import glob
 from setuptools import find_packages, setup
 
-package_name = "bolin_camera"
+package_name = "bolin_bringup"
 
 setup(
     name=package_name,
@@ -9,15 +11,19 @@ setup(
     data_files=[
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
         ("share/" + package_name, ["package.xml"]),
+        (
+            os.path.join("share", package_name, "launch"),
+            glob(os.path.join("launch", "*launch.[pxy][yma]*")),
+        ),
     ],
     install_requires=["setuptools"],
     zip_safe=True,
-    maintainer="luiza",
-    maintainer_email="luiza.rubim@sou.inteli.edu.br",
+    maintainer="eduardo-barreto",
+    maintainer_email="eduardopontobarreto@gmail.com",
     description="TODO: Package description",
     license="TODO: License declaration",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": ["camera=bolin_camera.sender:main"],
+        "console_scripts": [],
     },
 )
