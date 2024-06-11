@@ -51,7 +51,7 @@ Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes
 Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô. Para isso, é necessário utilizar um computador.
 
 1. **Clonar o projeto no computador** 
-    - É necessário clonar o projeto no computador que vá rodar a aplicação, repetindo o passo executado no robô
+    - É necessário clonar o projeto no computador que vá rodar a aplicação.
     ```bash
     git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
     ```

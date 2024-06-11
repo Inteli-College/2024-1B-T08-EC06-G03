@@ -167,9 +167,15 @@ Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes
    - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
 
 ### 4. Execução do Software de Controle
-Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô.
+Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô. Para isso, é necessário utilizar um computador.
 
-1. **Inicialização do Back-End**:
+1. **Clonar o projeto no computador** 
+    - É necessário clonar o projeto no computador que vá rodar a aplicação.
+    ```bash
+    git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
+    ```
+
+2. **Inicialização do Back-End**:
     - Instale o [Node.js](https://nodejs.org/en/download/)
     - No seu computador (não no terminal SSH), abra um novo terminal.
     - Acesse a pasta do Back-End
@@ -193,7 +199,7 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
     npm start
     ```
     
-2. **Inicialização do Front-End**:
+3. **Inicialização do Front-End**:
     - Instale o [Node.js](https://nodejs.org/en/download/)
     - No seu computador (não no terminal SSH), abra um novo terminal.
     - Acesse a pasta do Front-End
@@ -221,7 +227,6 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
 
 
 **Nota:** É importante confirmar todos os comandos e caminhos exatos com a documentação técnica disponível para garantir que as instruções estejam corretas e atualizadas.
-
 
 ## Documentação
 
