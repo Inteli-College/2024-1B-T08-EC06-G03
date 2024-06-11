@@ -65,6 +65,8 @@ module.exports = () => {
 
 # Metodologia e Implementação
 
+## Implementação 
+
 ### Criando o database
 É necessário criar uma conta na aplicação do [**Turso**](https://turso.tech/) e seguir o [tutorial](https://docs.turso.tech/quickstart), até o passo 4, para configurar o terminal. Após criar a conta e conectar o banco de dados ao terminal, basta executar na plataforma os comandos sql presente no diretório:
 ```bash
@@ -91,7 +93,9 @@ TURSO_AUTH_TOKEN={token}
 
 É necessário substituir as variáveis pelas informações geradas no tutorial.
 
-Por fim, na mesma pasta models, deve criar um arquivo chamado de `prismaclient.js`. Ele será responsável por inicializar a conexão entre o prisma e o banco de dados, além disso, ele deve ser importado em todo controller criado para poder realizar as chamadas necessárias. O código dele será dessa forma: 
+## Metodologia
+
+Na pasta models, deve-se criar um arquivo chamado de `prismaclient.js`. Ele será responsável por inicializar a conexão entre o prisma e o banco de dados, além disso, ele deve ser importado em todo controller criado para poder realizar as chamadas necessárias. O código dele será dessa forma: 
 ```javascript
 const { PrismaClient } = require('@prisma/client')
 const { createClient } = require('@libsql/client');
