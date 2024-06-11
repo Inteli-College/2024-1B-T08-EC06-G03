@@ -10,7 +10,7 @@ O objetivo principal dessa página é documentar a criação e implementação d
 - **JavaScript**
   - **[Express.js](https://expressjs.com/)**: Framework para construção de aplicações web, utilizado para criar o servidor HTTP.
 - **Turso**
-  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite. Para compreender mais sobre a decisão de utilizar turso, veja [aqui]((/Sprint%204/banco_de_dados.md)).
+  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite. Para compreender mais sobre a decisão de utilizar turso, veja [aqui](/Sprint%204/banco_de_dados.md).
 - **Prisma ORM**
   - [**prisma.io**](https://www.prisma.io/docs/orm/prisma-schema/overview): Biblioteca utilziada para servir como intermédio entre a api e o banco de dados, realizando as consultas por ORM. As consultas por ORM garantem mais segurança para a aplicação, visto que evitam problemas de cybersegurança como **sqlinjection**. Além disso, a rapidez para realizar seu desenvolvimento auxilia muito no projeto, visto o escopo de dez semanas.
 
