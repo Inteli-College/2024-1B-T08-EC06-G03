@@ -3,7 +3,7 @@ title: Back-End - API
 sidebar_position: 2
 ---
 
-O objetivo principal dessa página é documentar a criação e implementação de uma API realizada pelo grupo, visando interagir com o Banco de Dados existente. Para uma implementação eficaz da API, foram utilizadas tecnologias que estão em alta no mercado e que coincidiam com os objetivos do grupo: manter a de manter a aplicação com uma manutenibilidade fácil para os desenvolvedores, pporém garantindo a eficiência em realizar consultas ao banco. Com isso, foi desenvolvida uma aplicação **express**, juntamente aos **websockets** já existentes.
+O objetivo principal dessa página é documentar a criação e implementação de uma API realizada pelo grupo, visando interagir com o Banco de Dados existente. Para uma implementação eficaz da API, foram utilizadas tecnologias que estão em alta no mercado e que coincidiam com os objetivos do grupo: manter a de manter a aplicação com uma manutenibilidade fácil para os desenvolvedores, porém garantindo a eficiência em realizar consultas ao banco. Com isso, foi desenvolvida uma aplicação **express**, juntamente aos **websockets** já existentes.
 
 ## Tecnologias Utilizadas
 
@@ -72,14 +72,14 @@ module.exports = () => {
 ```
 
 ### Conectando o database na aplicação
-Após criado a base de dados, é necessário seguir um [segundo tutorial](https://docs.turso.tech/sdk/ts/orm/prisma), o qual permitirá realizar a conexão entre o **Turso** e o **Prisma** em sua máquina. Os comandos devem ser rodados no diretório do `backend`. Nesse tutorial, será necessário criar um arquivo chamado `prisma.schema`, o qual ficará localizado em: 
+Após criado a base de dados, é necessário seguir um [segundo tutorial](https://docs.turso.tech/sdk/ts/orm/prisma), o qual permitirá realizar a conexão entre o **Turso** e o **Prisma** em sua máquina. Os comandos devem ser rodados no diretório do `backend`. Nesse tutorial, será necessário criar um arquivo chamado `schema.prisma`, o qual ficará localizado em: 
 ```bash
 /src/backend/models/
 ```
 Ele deve conter a modelagem do banco, porém transformada em arquivo do tipo .schema. 
 
 :::warning Aviso
-Como o arquivo não está na pasta raiz do backend, o comando `npx generate schema` deve ser substituído por `npx prisma generate --schema=api/models/prisma.schema`.
+Como o arquivo não está na pasta raiz do backend, o comando `npx prisma generate` deve ser substituído por `npx prisma generate --schema=api/models/schema.prisma`.
 :::
 
 Em sequência, é necessário criar um arquivo .env dentro da pasta `backend`. Esse arquivo armazanerá os tokens para conectar ao turso.
