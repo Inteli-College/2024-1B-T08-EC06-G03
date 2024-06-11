@@ -9,17 +9,25 @@ Um dos requisitos para o funcionamento desse projeto é a detecção de resíduo
 
 ## Escolha do Modelo
 
-O YOLO (You Only Look Once) é um modelo de visão computacional voltado para a detecção de objetos em imagens em tempo real. Proposto por Joseph Redmon e Ali Farhadi em 2015, o YOLO foi escolhido por sua velocidade e precisão na detecção de objetos, sendo capaz de processar imagens a uma taxa de 45 frames por segundo. Além disso, sua capacidade de operar em tempo real é crucial para o contexto do projeto. Comparado a outros modelos de detecção de objetos, o YOLO é menos propenso a predições falsas e pode localizar erros com maior eficiência. No projeto, foi decidida a utilização da versão [YOLOv8](https://docs.ultralytics.com/models/yolov8/), apesar de existirem atualizações mais recentes, porque a instalação é facilitada (não há a necessidade de clonar um repositório, por exemplo, como a [YOLOv9](https://docs.ultralytics.com/models/yolov9/)), e também há mais exemplos encontrados online, facilitando o aprendizado dos desenvolvedores e implementação, já que a documentação é mais rica, o que não é o caso da versão [YOLOv10](https://docs.ultralytics.com/models/yolov10/), que foi lançada durante o desenvolvimento desse projeto, e ainda não tem muitos casos de uso.
+O YOLO (You Only Look Once) é um modelo de visão computacional voltado para a detecção de objetos em imagens em tempo real. Proposto por Joseph Redmon e Ali Farhadi em 2015, o YOLO foi escolhido por sua velocidade e precisão na detecção de objetos, sendo capaz de processar imagens a uma taxa de 45 frames por segundo. Além disso, sua capacidade de operar em tempo real é crucial para o contexto do projeto. Comparado a outros modelos de detecção de objetos, o YOLO é menos propenso a predições falsas e pode localizar erros com maior eficiência. 
 
-## Funcionamento
+Para isso, o YOLO utiliza uma única **rede neural convolucional (CNN)** para prever múltiplas caixas delimitadoras e as probabilidades associadas a essas caixas. O modelo divide a imagem em uma grade e, para cada célula da grade, prevê as caixas e suas probabilidades em apenas uma avaliação, tornando-o extremamente eficiente. 
 
-O YOLO utiliza uma única rede neural convolucional para prever múltiplas caixas delimitadoras e as probabilidades associadas a essas caixas. O modelo divide a imagem em uma grade e, para cada célula da grade, prevê as caixas e suas probabilidades em apenas uma avaliação, tornando-o extremamente eficiente.
+Explicando de maneira mais simplificada o funcionamento desse modelo, pode-se dizer que ele pega uma imagem e a divide em vários quadradinhos (ou pixels), e analisa cada um deles para buscar objetos, desenhando **caixas** ao redor de coisas que ele acha que são objetos. No caso do nosso projeto, ele delimita onde ele acredita que há impurezas nos canos, por se basear nos dados que foram utilizados para treiná-lo (ou ensiná-lo como identificar esses objetos). Dessa forma, cada caixa possui uma coordenada, o que indica onde está o objeto na imagem e sua largura/altura.
+
+Após a delimitação das caixas, o modelo devolve a confiança, ou seja, qual é a probabilidade de ele estar certo quanto à detecção daquele objeto. Como mencionado anteriormente, um ponto muito positivo do YOLO é justamente essa capacidade de analisar tudo isso de uma vez só, não necessitando de processar a mesma imagem várias vezes com diferentes filtros (como é o caso, por exemplo, do [Haar Cascade](https://rmnicola.github.io/m6-ec-encontros/haar)).
+
+### Escolha de versão
+
+No projeto, foi decidida a utilização da versão [YOLOv8](https://docs.ultralytics.com/models/yolov8/), apesar de existirem atualizações mais recentes, porque a instalação é facilitada (não há a necessidade de clonar um repositório, por exemplo, como a [YOLOv9](https://docs.ultralytics.com/models/yolov9/)), e também há mais exemplos encontrados online, facilitando o aprendizado dos desenvolvedores e implementação, já que a documentação é mais rica, o que não é o caso da versão [YOLOv10](https://docs.ultralytics.com/models/yolov10/), que foi lançada durante o desenvolvimento desse projeto, e ainda não tem muitos casos de uso.
 
 ## Treinamento do Modelo
 
 ### Dataset
 
-O dataset utilizado para treinar o modelo foi o `Precision SG Subterranean`, que contém mais de 260 imagens de ambientes semelhantes a canos de reboilers, focando na detecção de sujeira nesses ambientes. Esse dataset foi escolhido por suas imagens de alta qualidade e por ser de acesso público, o que facilita a replicação dos resultados.
+Para definir o dataset, foi necessário uma série de pesquisas a fim de encontrar um que fosse o mais fiel possível e ao mesmo tempo *open source* para ser utilizado no projeto, uma vez que a empresa parceira não pôde disponibilizar imagens dos canos dos reboilers.
+
+O dataset utilizado para treinar o modelo foi o [`Precision SG Subterranean`](https://universe.roboflow.com/purdue-university-niruh/precision-ag-subterranean/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true), que contém mais de 600 imagens de canos com diferentes graus de sujidade, com 549 delas separadas para treino e 82 separadas para teste. Esse dataset foi escolhido por suas imagens de alta qualidade e por ser de acesso público, o que facilita a replicação dos resultados, além de ser o mais análogo à aplicação do projeto, com vários tipos diferentes de sujeira nos canos.
 
 ## Resultados
 
