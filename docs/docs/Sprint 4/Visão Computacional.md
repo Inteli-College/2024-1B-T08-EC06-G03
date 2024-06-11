@@ -27,7 +27,7 @@ O dataset utilizado para treinar o modelo foi o `Precision SG Subterranean`, que
 
 ## Resultados
 
-Os resultados obtidos podem ser observados na imagem abaixo:
+Para uma visualização mais clara dos resultados obtidos com o treinamento do modelo, foi criado um gráfico com parâmetros comumente utilizados para definir a eficácia de um modelo de visão computacional. O gráfico apresenta a precisão, que indica a proporção de predições corretas feitas pelo modelo, o recall, que indica a proporção de objetos detectados corretamente pelo modelo, e o mAP50, que é a média da precisão em diferentes valores de threshold. Estes valores foram calculdados a partir das épocas do treinamento, que indicam o número de vezes que o modelo passou por todo o dataset de treinamento.
 
 <div align="center">
 

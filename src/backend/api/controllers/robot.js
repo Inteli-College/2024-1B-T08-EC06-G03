@@ -30,7 +30,7 @@ const createRobot = async (req, res) => {
   try {
     const newRobot = await prisma.robot.create({
       data: {
-        last_manufactured: new Date(last_manufactured)
+        last_manufactured: last_manufactured
       }
     });
     res.status(201).json(newRobot);
@@ -45,7 +45,7 @@ const updateRobot = async (req, res) => {
   try {
     const updatedRobot = await prisma.robot.update({
       where: { id: parseInt(id) },
-      data: { last_manufactured: new Date(last_manufactured) }
+      data: { last_manufactured: last_manufactured }
     });
     res.json(updatedRobot);
   } catch (error) {

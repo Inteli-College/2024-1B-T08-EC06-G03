@@ -8,61 +8,63 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-model Robot {
-  id                Int       @id @default(autoincrement())
-  last_manufactured DateTime?
-  Examination       Examination[]
-}
-
 model Unit {
-  id        Int       @id @default(autoincrement())
-  city      String?
-  state     String?
-  Reboiler  Reboiler[]
+  id    Int      @id @default(autoincrement())
+  city  String
+  state String
+  Reboilers Reboiler[]
 }
 
 model Reboiler {
-  id        Int         @id @default(autoincrement())
-  number    Int
-  unit_id  Int
-  Unit     Unit       @relation(fields: [unit_id], references: [id])
-  Tube      Tube[]
-  Examination Examination[]
+  id     Int    @id @default(autoincrement())
+  number Int
+  unit   Unit   @relation(fields: [unit_id], references: [id])
+  unit_id Int
+  Tubes  Tube[]
+  Examinations Examination[]
 }
 
-model Image {
-  id        Int         @id @default(autoincrement())
-  taken_at  DateTime?
-  TubeState TubeState[]
+model Robot {
+  id               Int     @id @default(autoincrement())
+  last_manufactured Int
+  Examinations Examination[]
 }
 
 model Tube {
-  id        Int         @id @default(autoincrement())
-  reboiler_id Int
-  position  String      // Position as a tuple is not directly supported, consider using a JSON string or separate fields for x, y, z coordinates
-  Reboiler  Reboiler    @relation(fields: [reboiler_id], references: [id])
-  TubeState TubeState[]
+  id          Int     @id @default(autoincrement())
+  reboiler    Reboiler @relation(fields: [reboiler_id], references: [id])
+  reboiler_id  Int
+  position_column      Int
+  position_row         Int
+  TubeStates  TubeState[]
+}
+
+model Image {
+  id       Int       @id @default(autoincrement())
+  image    String
+  taken_at Int
+  TubeStates TubeState[]
 }
 
 model Examination {
-  id          Int         @id @default(autoincrement())
-  etapa       String      // Prisma does not have an enum type for SQL, consider using a string and implementing enum-like behavior in your application
-  robot_id    Int
-  reboiler_id Int
-  started_at  DateTime?
-  finished_at DateTime?
-  Robot       Robot       @relation(fields: [robot_id], references: [id])
-  Reboiler    Reboiler    @relation(fields: [reboiler_id], references: [id])
-  TubeState   TubeState[]
+  id           Int      @id @default(autoincrement())
+  etapa        String
+  robot        Robot    @relation(fields: [robot_id], references: [id])
+  robot_id      Int
+  reboiler     Reboiler @relation(fields: [reboiler_id], references: [id])
+  reboiler_id   Int
+  started_at   Int
+  finished_at  Int
+  TubeStates   TubeState[]
 }
 
 model TubeState {
-  id         Int        @id @default(autoincrement())
-  dirtness   Boolean
+  id        Int        @id @default(autoincrement())
+  dirtness  Int
+  image     Image      @relation(fields: [image_id], references: [id])
   image_id   Int
-  session_id Int
+  examination   Examination @relation(fields: [examination_id], references: [id])
+  examination_id Int
+  tube      Tube       @relation(fields: [tube_id], references: [id])
   tube_id    Int
-  Image      Image      @relation(fields: [image_id], references: [id])
-  Examination Examination @relation(fields: [session_id], references: [id])
-  Tube       Tube       @relation(fields: [tube_id], references: [id])
 }
