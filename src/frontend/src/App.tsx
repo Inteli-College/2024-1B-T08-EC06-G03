@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import useWebSocket from 'react-use-websocket';
 import Joystick from './components/Joystick'; // Adjust the path based on your project structure
 import KillButton from './components/Kill'; // Import the KillButton component
+import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
 
@@ -130,7 +131,7 @@ const App: React.FC = () => {
             <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                 <div className="relative h-full aspect-[4/3] object-cover bg-black">
                     <DetectionInterface directions={directions} />
-                    <img className="relative w-full h-full object-cover" src={`data:image/jpeg;base64,${image}`} />
+                    <img className="relative w-[640px] h-[480px] object-cover" src={`data:image/jpeg;base64,${image}`} />
                 </div>
             </div>
             <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
@@ -140,6 +141,11 @@ const App: React.FC = () => {
             <div className="absolute bottom-20 left-20 p-4">
                 <div className="relative">
                     <KillButton sendMessage={teleopWebSocket.sendMessage} />
+                </div>
+            </div>
+            <div className="absolute bottom-80 right-24 p-4">
+                <div className="relative">
+                    <SnapButton sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
             <div className="absolute bottom-20 right-20 p-4">
