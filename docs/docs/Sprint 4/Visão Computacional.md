@@ -29,11 +29,28 @@ Para definir o dataset, foi necessário uma série de pesquisas a fim de encontr
 
 O dataset utilizado para treinar o modelo foi o [`Precision SG Subterranean`](https://universe.roboflow.com/purdue-university-niruh/precision-ag-subterranean/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true), que contém mais de 600 imagens de canos com diferentes graus de sujidade, com 549 delas separadas para treino e 82 separadas para teste. Esse dataset foi escolhido por suas imagens de alta qualidade e por ser de acesso público, o que facilita a replicação dos resultados, além de ser o mais análogo à aplicação do projeto, com vários tipos diferentes de sujeira nos canos.
 
-## Resultados
+## Avaliação do modelo
 
-Para uma visualização mais clara dos resultados obtidos com o treinamento do modelo, foi criado um gráfico com parâmetros comumente utilizados para definir a eficácia de um modelo de visão computacional. O gráfico apresenta a precisão, que indica a proporção de predições corretas feitas pelo modelo, o recall, que indica a proporção de objetos detectados corretamente pelo modelo, e o mAP50, que é a média da precisão em diferentes valores de threshold. Estes valores foram calculdados a partir das épocas do treinamento, que indicam o número de vezes que o modelo passou por todo o dataset de treinamento.
+### Definição das métricas utilizadas
+
+As métricas são indicadores que mostram como o modelo está performando, permitindo a avaliação e melhora do mesmo. As principais métricas utilizadas são a **precisão, recall, mean average precision** (mAP - que tem tanto o **mAP50** quanto o **mAP50-95**) e **Fitness**. Agora, será apresentado o que cada uma delas representa:
+
+- **Precisão:** Apresenta a porcentagem de verdadeiros positivos (ou seja, a porcentagem predições corretas). No contexto do nosso projeto, significa em quantos canos o modelo corretamente identificou sujeiras, o que significa que ter essa métrica alta é interessante para o desempenho do projeto.
+
+- **Recall:** é uma métrica que avalia quantos objetos que deveriam ser detectados o modelo corretamente detectou. Por exemplo, se haviam 10 canos com impureza e o modelo detectou apenas 8, ele tem um recall de 80%. Isso ajuda a compreender a capacidade do modelo de encontrar a sujeira nos canos.
+
+- **mAP50:** É uma métrica que utiliza de um **threshold** de 50%, que nada mais é que um valor que determina a precisão que uma detecção precisa performar para ser considerada correta.
+Por exemplo, com um threshold de 50% significa que, para uma detecção ser considerada correta, a sobreposição entre a caixa predita pelo modelo e a caixa real do objeto deve ser de pelo menos 50%. É uma métrica mais simples para avaliar o desempenho do modelo.
+
+- **mAP50-95:** Possui a mesma lógica do anterior, mas possui um threshold variável entre 50% a 95%, com intervalos de 5%, dando uma visão mais completa do modelo, pois avalia quão bem ele se sai em diferentes níveis de sobreposição, sendo um pouco mais rigoroso que o mAP50.
+
+### Resultados
+
+Para uma visualização mais clara dos resultados obtidos com o treinamento do modelo, é possível observar no gráfico abaixo o desempenho dele nas métricas **precisão, recall e mAP50-95** durante cada uma das 200 épocas de treinamento, que indicam o número de vezes que o modelo passou por todo o dataset de treinamento.
 
 <div align="center">
+
+**Níveis de Precisão, Recall e mAP50-95 em 200 épocas**
 
 ![Resultado](../../static/img/output.png)
 
@@ -41,7 +58,7 @@ Para uma visualização mais clara dos resultados obtidos com o treinamento do m
 
 </div>
 
-O modelo alcançou uma precisão estável entre 80% e 90% em todas as imagens testadas, indicando uma alta capacidade de detecção de sujeira nos canos de reboilers. Além disso, o modelo apresentou um alto recall, demonstrando ser capaz de detectar a maioria dos objetos presentes nas imagens.
+Como é possível observar nos gráficos acima, o modelo alcançou uma precisão estável entre 80% e 90% em todas as métricas testadas, indicando uma alta capacidade de detecção de sujeira nos canos de reboilers. Além disso, o modelo apresentou um alto recall, demonstrando ser capaz de detectar a maioria dos objetos presentes nas imagens.
 
 ## Bibliografia
 
