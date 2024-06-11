@@ -36,7 +36,7 @@ Com base nos requisitos funcionais, é possível mapear os testes que comprovam 
 
 ### Público alvo dos testadores
 
-Por não ser possível testar com os funcionários que utilizarão o sistema na Atvos, foi selecionado um grupo de 4 pessoas com um letramento básico em tecnologia, com idades entre 20 e 23 anos.
+Por não ser possível testar com os funcionários que utilizarão o sistema na Atvos, foi selecionado um grupo de 4 pessoas com um **letramento digital básico**, com uma **média de idades de 27 anos** e uma **familiarização média/baixa com robótica.**
 
 
 ## Realização dos testes
@@ -87,4 +87,28 @@ Verificar se os dados que constam na página de dados condizem com a realidade: 
 
 ## Conclusões
 
-(serão adicionadas assim que os testes forem realizados)
+Os testes foram realizados no dia 10/06/24, com 4 pessoas diferentes. A interface web foi apresentada num notebook, isto porque a transmissão de imagens no celular estava muito lenta, o que prejudicava a teleoperação. Alguns insigths que foram retirados dessa experiência foram:
+
+- A sensibilidade do controle dificulta um pouco a movimentação do robô;
+- Como o teste foi realizado em computador, o controle por joystick não foi muito intuitivo para os usuários, sendo um feedback comum que o controle pelas setas do teclado seria mais fácil;
+- Troubleshooting: Foram localizados alguns erros de conexão com o frontend na parte de detecção dos obstáculos;
+- Enquanto o teste foi realizado, as partes de visualização de dados e de visão computacional ainda não estavam integradas ao sistema, então **os requisitos relacionados a essas funções (RF02, RF05 e RF06) não puderam ser validados no teste.**
+
+A seguir, serão repassados cada teste e como foi o desempenho deles, problemas encontrados e pontos positivos.
+
+#### Teste de Teleoperação (RF01):
+
+Foi um sucesso em 100% das sessões de teste. A transmissão de imagem em tempo real foi útil e suficiente para a localização do robô no espaço. Porém, em alguns raros momentos, foram registrados alguns travamentos, que foram facilmente resolvidos com uma atualização da página.
+
+#### Teste de Cancelamento de Inspeção (RF03):
+
+Foi um sucesso em 75% das sessões de teste e o robô parou após o botão ser pressionado, não sendo possível movimentá-lo. Porém, na vez em que o comando não funcionou, a interface travou fazendo com que o robô ficasse rodando incessantemente e o controle do mesmo fosse perdido. Como a interface travou, apertar o botão de *kill* não paralizou o robô, o que chamou a atenção para a eficácia desse mecanismo em condições reais de emergência. 
+
+#### Teste de Proximidade (RF04):
+
+Apesar de ser uma funcionalidade implementada desde a [terceira Sprint](https://inteli-college.github.io/2024-1B-T08-EC06-G03/category/sprint-3), houve erros de conexão com o frontend durante os testes, fazendo com que o robô detectasse a presença de obstáculos e bloquasse a movimentação do robô nas direções que o fariam colidir, mas não retornando na interface (para o usuário) os alertas informando a proximidade de um obstáculo. Dessa forma, apesar do impedimento de colisões ter funcionado 100% das vezes, o retorno de alertas no frontend não foi apresentado em nenhum dos testes.
+
+
+Em conclusão, os testes foram de suma importância para validar algumas das funcionalidades e observar problemas de usabilidade e integração do sistema criado. Os feedbacks coletados irão impactar o desenvolvimento da Sprint a seguir, visando corrigir os problemas encontrados, além de incluir a realização dos testes que se relacionam com os requisitos de funcionamento da detecção de sujidade nos tubos (visão computacional) e visualização de dados.
+
+
