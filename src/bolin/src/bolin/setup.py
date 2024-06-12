@@ -20,7 +20,7 @@ setup(
     entry_points={
         "console_scripts": [
             "bolin = bolin.bolin:main",
-            "battery = bolin.bolin:main"
+            "battery = bolin.battery_mock:main"
            ],
     },
 )
