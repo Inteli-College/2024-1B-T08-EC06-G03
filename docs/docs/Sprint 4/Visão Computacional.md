@@ -27,7 +27,7 @@ No projeto, foi decidida a utilização da versão [YOLOv8](https://docs.ultraly
 
 Para definir o dataset, foi necessário uma série de pesquisas a fim de encontrar um que fosse o mais fiel possível e ao mesmo tempo *open source* para ser utilizado no projeto, uma vez que a empresa parceira não pôde disponibilizar imagens dos canos dos reboilers.
 
-O dataset utilizado para treinar o modelo foi o [`Precision SG Subterranean`](https://universe.roboflow.com/purdue-university-niruh/precision-ag-subterranean/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true), que contém mais de 600 imagens de canos com diferentes graus de sujidade, com 549 delas separadas para treino e 82 separadas para teste. Esse dataset foi escolhido por suas imagens de alta qualidade e por ser de acesso público, o que facilita a replicação dos resultados, além de ser o mais análogo à aplicação do projeto, com vários tipos diferentes de sujeira nos canos.
+O dataset utilizado para treinar o modelo foi o [`Tacomare Computer Vision Project`](https://universe.roboflow.com/project-y7tgq/tacomare), que contém mais de 500 imagens de canos com diferentes graus de sujidade, com mais de 350 delas separadas para treino e 100 separadas para teste. Esse dataset foi escolhido por suas imagens de alta qualidade e por ser de acesso público, o que facilita a replicação dos resultados, além de facilmente aplicável para testes e utilização em razão do contexto do projeto.
 
 ## Avaliação do modelo
 
