@@ -47,7 +47,7 @@ const App: React.FC = () => {
 
     const startCamera = () => {
         const ros = new ROSLIB.Ros({
-            url: 'ws://localhost:9090'
+            url: `ws://${window.location.hostname}:9090`
         });
 
         ros.on('connection', () => {
@@ -122,8 +122,8 @@ const App: React.FC = () => {
         <div className='relative overflow-hidden h-screen flex flex-col items-center justify-center bg-gray-600'>
             <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                 <div className="relative h-full aspect-[4/3] object-cover bg-black">
-                    <DetectionInterface directions={directions} />
                     <img className="relative w-full h-full object-cover" src={`data:image/jpeg;base64,${image}`} />
+                    <DetectionInterface directions={directions} />
                 </div>
             </div>
             <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
