@@ -52,7 +52,7 @@ Para uma visualização mais clara dos resultados obtidos com o treinamento do m
 
 **Níveis de Precisão, Recall e mAP50-95 em 200 épocas**
 
-![Resultado](../../static/img/output.png)
+![Resultado](/img/output.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
