@@ -83,3 +83,10 @@ Para testar a usabilidade da interface, foi aplicado o teste SUS (System Usabili
 ## Conclusões
 
 A partir dos testes realizados, a equipe refletiu sobre os feedbacks e a principal ação a ser tomada na próxima sprint será em relação à melhoria do modelo de visão computacional, adicionar de alguma forma a informação sobre o botão de kill e quando acioná-lo, além de um feedback depois que ele for acionado. Além disso, também será considerado melhorar a sensibilidade do joystick e o feedback de obstáculos pŕoximos. Portanto, os testes de requisitos não funcionais foram fundamentais para verificar pontos de melhoria no sistema e atualizar as necessidades e requisitos do projeto.
+
+## Demonstração
+
+Segue abaixo um vídeo gravado durante um dos procedimentos de teste dos Requisitos Funcionais:
+
+[Teste de Requisitos não funcionais](https://youtu.be/OGPyP2dI_So)
+
