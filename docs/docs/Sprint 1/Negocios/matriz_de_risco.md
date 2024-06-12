@@ -2,7 +2,7 @@
 
 Uma matriz de risco é importante em projetos de tecnologia, pois oferece uma visão holística e estruturada das potenciais ameaças e oportunidades que podem impactar o planejamento e a execução de uma solução. Ao identificar e classificar os riscos e as oportunidades, desde os mais prováveis até os mais catastróficos, a equipe de projeto pode antecipar problemas, desenvolver estratégias de mitigação e estabelecer planos de contingência eficazes. Permitindo uma gestão proativa do projeto, garantindo que os recursos sejam alocados adequadamente, os prazos cumpridos e os objetivos alcançados dentro das expectativas. Além disso, a matriz de risco promove uma comunicação transparente entre os stakeholders, facilitando a tomada de decisões embasadas e a manutenção da confiança no progresso do projeto.
 
-![Matriz_de_Risco](/img/matriz_de_risco.png)
+![Matriz_de_Risco](/img/matriz-de-risco.png)
 <h6 align="center"> Fonte: Elaboração feita pelo Grupo Rebólins </h6>
 
 ## Riscos
