@@ -16,7 +16,7 @@ Abaixo, é possível observar pontos chaves da persona do Jairo, o engenheiro de
 
 **Persona 1 - Jairo**
 
-![Descrição da persona Engenheiro de Manutenção - Jairo](../../../static/img/Jairo.png)
+![Descrição da persona Engenheiro de Manutenção - Jairo](/img/Jairo.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
@@ -36,7 +36,7 @@ A partir dessa persona, é possível mapear as seguintes **user stories**:
 
 **Persona 2 - Danillo**
 
-![Descrição da persona Operador de Máquinas - Danillo Chrystian](../../../static/img/Danillo.png)
+![Descrição da persona Operador de Máquinas - Danillo Chrystian](/img/Danillo.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 

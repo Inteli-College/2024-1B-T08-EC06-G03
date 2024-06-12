@@ -40,10 +40,10 @@ O node `bolin_camera` utiliza OpenCV [OpenCV](https://opencv.org/) para capturar
 - Também consideramos utilizar escrever o nó em C++ para melhorar a performance e diminuit a latência na transmissão. No entanto, após testes, percebemos que a diferença não era significativa. Segue abaixo os testes realizados:
 
 ##### Teste com C++
-![Teste de Performance com C++](../../../static/img/teste_camera_cpp.jpeg)
+![Teste de Performance com C++](/img/teste_camera_cpp.jpeg)
 
 ##### Teste com Python
-![Teste de Performance com Python](../../../static/img/teste_camera_python.jpeg)
+![Teste de Performance com Python](/img/teste_camera_python.jpeg)
 
 Portanto, a partir dessa comparação, foi decidido que o nó continuaria sendo escrito em Python.
 
