@@ -47,7 +47,7 @@ const App: React.FC = () => {
 
     const startCamera = () => {
         const ros = new ROSLIB.Ros({
-            url: 'ws://localhost:9090'
+            url: `ws://${window.location.hostname}:9090`
         });
 
         ros.on('connection', () => {
