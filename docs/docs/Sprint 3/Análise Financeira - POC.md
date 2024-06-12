@@ -1,3 +1,8 @@
+---
+title: Análise Financeira - Prova de conceito
+sidebar_position: 3
+---
+
 # Análise Financeira - Prova de conceito (POC)
 
 ## Introdução

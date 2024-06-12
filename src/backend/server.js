@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const app = require('./config/express')();
 const config = require('config');
 const port = config.get('server.port');

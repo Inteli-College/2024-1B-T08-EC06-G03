@@ -1,0 +1,70 @@
+datasource db {
+  provider = "sqlite"
+  url = env("TURSO_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+model Unit {
+  id    Int      @id @default(autoincrement())
+  city  String
+  state String
+  Reboilers Reboiler[]
+}
+
+model Reboiler {
+  id     Int    @id @default(autoincrement())
+  number Int
+  unit   Unit   @relation(fields: [unit_id], references: [id])
+  unit_id Int
+  Tubes  Tube[]
+  Examinations Examination[]
+}
+
+model Robot {
+  id               Int     @id @default(autoincrement())
+  last_manufactured Int
+  Examinations Examination[]
+}
+
+model Tube {
+  id          Int     @id @default(autoincrement())
+  reboiler    Reboiler @relation(fields: [reboiler_id], references: [id])
+  reboiler_id  Int
+  position_column      Int
+  position_row         Int
+  TubeStates  TubeState[]
+}
+
+model Image {
+  id       Int       @id @default(autoincrement())
+  image    String
+  taken_at Int
+  TubeStates TubeState[]
+}
+
+model Examination {
+  id           Int      @id @default(autoincrement())
+  etapa        String
+  robot        Robot    @relation(fields: [robot_id], references: [id])
+  robot_id      Int
+  reboiler     Reboiler @relation(fields: [reboiler_id], references: [id])
+  reboiler_id   Int
+  started_at   Int
+  finished_at  Int
+  TubeStates   TubeState[]
+}
+
+model TubeState {
+  id        Int        @id @default(autoincrement())
+  dirtness  Int
+  image     Image      @relation(fields: [image_id], references: [id])
+  image_id   Int
+  examination   Examination @relation(fields: [examination_id], references: [id])
+  examination_id Int
+  tube      Tube       @relation(fields: [tube_id], references: [id])
+  tube_id    Int
+}

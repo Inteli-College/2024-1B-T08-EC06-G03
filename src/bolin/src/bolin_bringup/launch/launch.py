@@ -32,6 +32,11 @@ def generate_launch_description():
                 executable="teleop",
                 name="teleop",
             ),
+            Node(
+                package="bolin_lidar",
+                executable="lidar",
+                name="lidar",
+            ),
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(turtlebot_launch_file_path)
             ),

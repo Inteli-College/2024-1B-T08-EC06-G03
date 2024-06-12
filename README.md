@@ -39,9 +39,6 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
         └── 📂docs
             └── index.md
             └── 📂Sprint 1
-                └── 📂Arquitetura de Solucao
-                └── 📂Design
-                └── 📂Negocios
             └── 📂Sprint 2
             └── 📂Sprint 3
             └── 📂Sprint 4
@@ -52,49 +49,82 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
         └── 📜README.md
         └── 📂src
             └── 📂components
-                └── 📂HomepageFeatures
             └── 📂css
         └── 📂static
             └── 📂img
         └── README.md
     ├── 📂src
+        └── 📂Backend
+            └── 📂api
+                └── 📂controllers
+                └── 📂data
+                └── 📂models
+                └── 📂routes
+            └── 📂config
+                ┗ 📜express.js
+            └── 📂node_modules
+            ┗ 📜server.js
+        └── 📂bolin
+            └── 📂src
+                └── 📂bolin
+                    └── 📂bolin
+                    └── 📂resource
+                    └── 📂test
+                    ┗ 📜package.xml
+                    ┗ 📜setup.cfg
+                    ┗ 📜setup.py
+                └── 📂bolin_camera
+                    └── 📂bolin_camera
+                    └── 📂resource
+                    └── 📂test
+                    ┗ 📜package.xml
+                    ┗ 📜setup.cfg
+                    ┗ 📜setup.py
+                └── 📂bolin_camera_cpp
+                    └── 📂include
+                    └── 📂src
+                    ┗ 📜CMakeLists.txt
+                    ┗ 📜package.xml
+                    ┗ 📜README.md
+                └── 📂bolin_lidar
+                    └── 📂bolin_lidar
+                    └── 📂resource
+                    └── 📂test
+                    ┗ 📜package.xml
+                    ┗ 📜setup.cfg
+                    ┗ 📜setup.py
+                ┗ 📜listener.py
+            ┗ 📜build.sh
         └── 📂frontend
            └── 📂public
-            └── 📂css
-                └── 📜style.css
-            └── 📂img
-                └── 📜noSignal.jpg
-            └── 📂js
-                └── 📜script.js
-           ┗ 📜index.html
-        └──📂workspace
-            └── 📂src
-               └── 📂robot_navigation
-                   └── 📂resource
-                      └── 📜robot_navigation
-                   └── 📂robot_navigation
-                      └── 📜__init__.py
-                      └── 📜bot.py
-                   └── 📂test
-                      └── 📜test_copyright.py
-                      └── 📜test_flake8.py
-                      └──📜test_pep257.py
-                      └── 📜package.xml
-                    └── 📜setup.cfg
-                    └── 📜setup.py
+                ┗ 📜vite.svg
+           └── 📂src
+                └── 📂assets
+                └── 📂components
+                └── 📂pages
+                └── 📂styles
+                ┗ 📜App.js
+                ┗ 📜App.tsx
+                ┗ 📜index.css
+                ┗ 📜main.tsx
+                ┗ 📜vite-env.d.ts
+         ┗ 📜index.html
+         ┗ 📜tsconfig.json
+         ┗ 📜vite.config.js
+        └── 📂model
+            └── 📂runs
+                └── 📂train
+                └── 📂train2
+                └── 📂train10
+            ┗ 📜vite.config.js
+            ┗ 📜vite.config.js
         └── 📜run.sh
-    └── 📜README.md
-    └── 📜.gitignore
+    └── 📜oloy.ipynb
+    └── 📜yolov8n.pt
 ```
 
-## Execução do Projeto
 
-É necessário clonar o projeto para iniciar a execução do projeto.
-
-```sh
-git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
-```
-Além disso, é importante ter instalado o [ROS2](https://docs.ros.org/en/humble/Installation.html).
+## Guia de instrução 
 
 ### 1. Conexão com o Robô via SSH
 Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Há um tutorial de como deve ser feito o [setup do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint%202/Metodologia) Execute os seguintes passos no seu terminal:
@@ -104,41 +134,48 @@ Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. H�
    - Abra um terminal no seu computador.
    - Digite o comando SSH para estabelecer uma conexão segura. Confirme o comando exato e o IP na documentação de metodologia. Um exemplo de comando é:
      ```bash
-     ssh -p 1238 bobolins@10.128.0.16
+     ssh rebolins@rebolins.local
      ```
 
-### 2. Inicialização do Robô
-Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes necessários do robô.
+### 2. Clonar o projeto no robô 
 
-1. **Executar o Comando de Bring Up**:
+```sh
+git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
+```
+Além disso, é importante ter instalado o [ROS2](https://docs.ros.org/en/humble/Installation.html).
+
+### 3. Inicialização do Robô
+Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes necessários do robô. Execute isso no mesmo terminal do 
+
+1. **Entrar na pasta de código**:
+    - É necessário entrar na pasta que os pacotes estão alocados.
+    ```bash
+    cd src/bolin
+    ```
+
+2. **Executar o Build.sh**:
+    - É necessário rodar o arquivo de build para construir os pacotes ros.
+    ```bash
+    source build.sh
+    ```
+
+3. **Executar o Comando de Bring Up**:
    - No terminal SSH, execute o comando que inicializa os processos necessários no robô. Este comando pode ser encontrado na documentação técnica ou em tutoriais relevantes. Um exemplo comum para robôs baseados em ROS pode ser algo como:
      ```bash
-     ros2 launch turtlebot3_bringup robot.launch.py
+     ros2 launch bolin_bringup launch.py
      ```
    - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
 
-2. **Executar os comando de controle e sensores**:
+### 4. Execução do Software de Controle
+Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô. 
 
-    - Acesse a pasta do robô
-
+1. **Clonar o projeto no computador** 
+    - É necessário clonar o projeto no computador que vá rodar a aplicação.
     ```bash
-    cd src/bolin/
+    git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
     ```
 
-    - Execute o robô (rode cada comando abaixo em um terminal diferente)
-
-   ```bash
-    ros2 run bolin bolin
-    
-    ros2 run  bolin_lidar bolin_lidar
-    
-    ros2 run bolin_camera camera
-    ```
-
-### 3. Execução do Software de Controle
-Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô.
-
-1. **Inicialização do Back-End**:
+2. **Inicialização do Back-End**:
     - Instale o [Node.js](https://nodejs.org/en/download/)
     - No seu computador (não no terminal SSH), abra um novo terminal.
     - Acesse a pasta do Back-End
@@ -152,6 +189,9 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
     ```bash
     npm install
     ```
+    :::warning Alerta
+    Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint%204/banco_de_dados.md), pois é necessário gerar o `schema.prisma` para que o back-end execute.    
+    :::
 
     - Execute o Back-End
 
@@ -159,7 +199,7 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
     npm start
     ```
     
-2. **Inicialização do Front-End**:
+3. **Inicialização do Front-End**:
     - Instale o [Node.js](https://nodejs.org/en/download/)
     - No seu computador (não no terminal SSH), abra um novo terminal.
     - Acesse a pasta do Front-End
@@ -182,7 +222,7 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
 
     - Acesse [http://localhost:5173](http://localhost:5173) no seu navegador.
 
-### 4. Controle do Robô
+### 5. Controle do Robô
 - Utilize o joystick para controlar o robô.
 
 
