@@ -1,15 +1,23 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import Table from '../components/Table';
+import {Table, TableHead, TableHeader} from "../components/ui/table"
 
 const App: React.FC = () => {
   return (
-    <div className="h-full bg-gray-100">
-      <Navbar />
-      <main className="pt-32 flex-grow">
-        <Table />
-      </main>
+    <div>
+      <Navbar/>
+      <div className='pt-32 max-w-4xl mx-auto'>
+        <div className='border rounded'>
+          <Table>
+            <TableHeader>
+              <TableHead>ID</TableHead>
+              <TableHead>PRODUTO</TableHead>
+            </TableHeader>
+          </Table>
+        </div>
+      </div>
     </div>
+    
   );
 }
 
