@@ -44,7 +44,7 @@ Houve a possibilidade de fazer interface por linha de comando, no entanto, foi e
 
 **Interface de controle**
 
-![Central de controle Desencana!](/img/interface_principal.png)
+![Central de controle Desencana!](/img/interface-principal.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
