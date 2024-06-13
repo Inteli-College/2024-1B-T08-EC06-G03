@@ -10,7 +10,6 @@ const robotRoutes = require('../api/routes/robot');
 const unitRoutes = require('../api/routes/unit');
 const reboilerRoutes = require('../api/routes/reboiler');
 const imageRoutes = require('../api/routes/image');
-const tubeRoutes = require('../api/routes/tube');
 const examinationRoutes = require('../api/routes/examination');
 const tubeStateRoutes = require('../api/routes/tubeState'); 
 
@@ -34,7 +33,6 @@ module.exports = () => {
     app.use('/api/unities', unitRoutes);
     app.use('/api/reboilers', reboilerRoutes);
     app.use('/api/images', imageRoutes);
-    app.use('/api/tubes', tubeRoutes);
     app.use('/api/examinations', examinationRoutes);
     app.use('/api/tube-states', tubeStateRoutes);
     // Websockets
