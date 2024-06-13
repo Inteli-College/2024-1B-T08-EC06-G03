@@ -5,24 +5,6 @@ sidebar_position: 1
 
 # Migração para websockets com ROSBridge
 
-- ultimas sprints sofremos com as questões de latência e instabilidade da visualização da câmera
-- antes, o backend instanciava nodes ROS que tinham subscribers da camera e da teleoperação do robô, e então se comunicava com websockets com o frontend
-- isso alem de causar latência, também causava instabilidade na visualização da câmera.
-- uma coisa ruim também é a dependência da instalação do ROS na máquina que roda o backend
-- a solução encontrada foi a migração para websockets com ROSBridge
-- ao implementar a solução, a visualização da câmera ficou mais estável e com menos latência
-
-# Como funciona
-
-- ROSBridge é um middleware que permite a comunicação entre o ROS e aplicações web
-- a comunicação é feita através de websockets
-- a câmera do robô envia as imagens para o ROS, que por sua vez envia para o ROSBridge
-- a aplicação web recebe as imagens do ROSBridge e exibe na tela
-
----
-
-# Migração para WebSockets com ROSBridge
-
 ## Contexto
 
 Nas últimas sprints, enfrentamos problemas significativos de latência e instabilidade na visualização da câmera do nosso robô. Anteriormente, o backend do projeto instanciava nodes ROS que atuavam como subscribers da câmera e da teleoperação do robô, e então se comunicavam via WebSockets com o frontend. Essa abordagem resultava em alta latência e instabilidade na visualização da câmera, além de exigir que o ROS fosse instalado na máquina que executa o backend.
