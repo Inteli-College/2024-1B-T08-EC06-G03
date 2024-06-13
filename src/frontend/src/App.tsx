@@ -166,7 +166,7 @@ const App: React.FC = () => {
                 <Joystick sendMessage={teleopWebSocket.sendMessage} />
             </div>
         </div>
-        <BatteryBar batteryPercentage={batteryPercentage} />
+        <BatteryBar batteryPercentage={batteryPercentage} stroke-width="100"/>
 
     </div>
     );

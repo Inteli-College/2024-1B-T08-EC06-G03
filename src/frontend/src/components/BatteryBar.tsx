@@ -8,13 +8,21 @@ const BatteryBar: React.FC<BatteryBarProps> = ({ batteryPercentage }) => {
   const batteryLevel = batteryPercentage * 100;
 
   const getBatteryColor = () => {
-    if (batteryLevel > 50) return '#4caf50'; // Verde
+    if (batteryLevel > 65) return '#4caf50'; // Verde
     if (batteryLevel > 20) return '#ffeb3b'; // Amarelo
     return '#f44336'; // Vermelho
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto', textAlign: 'center' }}>
+    <div style={{ 
+      position: 'fixed', 
+      top: '10px', 
+      right: '10px', 
+      zIndex: 1000, 
+      textAlign: 'center',
+      maxWidth: '150px',
+      padding: '5px', // Espaçamento interno
+    }}>
       <div
         style={{
           width: '100%',
@@ -23,6 +31,8 @@ const BatteryBar: React.FC<BatteryBarProps> = ({ batteryPercentage }) => {
           borderRadius: '5px',
           overflow: 'hidden',
           marginBottom: '10px',
+          border: '1px solid black', // Bordas da barra
+          borderWidth: '2px', // Espessura da borda
         }}
       >
         <div
@@ -34,7 +44,7 @@ const BatteryBar: React.FC<BatteryBarProps> = ({ batteryPercentage }) => {
           }}
         />
       </div>
-      <p>{`Nível da bateria: ${batteryLevel.toFixed(0)}%`}</p>
+      <p style={{ margin: 0, color: 'red' }}>{`Nível da bateria: ${batteryLevel.toFixed(0)}%`}</p> {/* Estiliza o texto em vermelho */}
     </div>
   );
 };
