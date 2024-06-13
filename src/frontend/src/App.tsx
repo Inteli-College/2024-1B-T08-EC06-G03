@@ -5,6 +5,7 @@ import KillButton from './components/Kill'; // Import the KillButton component
 import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
+import BatteryBar from './components/BatteryBar';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
@@ -26,6 +27,19 @@ const App: React.FC = () => {
     const [cameraData, setCameraData] = useState<any>({});
     const [cameraSocketUrl, setCameraSocketUrl] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
+    const [batteryPercentage, setBatteryPercentage] = useState<number>(0.5); // Inicia com 50%
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBatteryPercentage((prev) => {
+            const newPercentage = prev + (Math.random() * 0.1 - 0.05); // Variação aleatória
+            return Math.max(0, Math.min(1, newPercentage)); // Mantém entre 0 e 1
+            });
+        }, 2000); // Atualiza a cada 2 segundos
+    
+        return () => clearInterval(interval); // Limpa o intervalo ao desmontar
+        }, []);
+    
 
     const [fps, setFps] = useState<number>(0);
     const messageTimestamps = useRef<number[]>([]);
@@ -152,8 +166,13 @@ const App: React.FC = () => {
                 <Joystick sendMessage={teleopWebSocket.sendMessage} />
             </div>
         </div>
+        <BatteryBar batteryPercentage={batteryPercentage} />
+
     </div>
     );
+
+    
 };
+
 
 export default App;
