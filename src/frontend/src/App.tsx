@@ -29,18 +29,6 @@ const App: React.FC = () => {
     const [image, setImage] = useState<string | null>(null);
     const [batteryPercentage, setBatteryPercentage] = useState<number>(0.5); // Inicia com 50%
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setBatteryPercentage((prev) => {
-            const newPercentage = prev + (Math.random() * 0.1 - 0.05); // Variação aleatória
-            return Math.max(0, Math.min(1, newPercentage)); // Mantém entre 0 e 1
-            });
-        }, 2000); // Atualiza a cada 2 segundos
-    
-        return () => clearInterval(interval); // Limpa o intervalo ao desmontar
-        }, []);
-    
-
     const [fps, setFps] = useState<number>(0);
     const messageTimestamps = useRef<number[]>([]);
     const now = Date.now(); // Capture the current timestamp
@@ -76,6 +64,20 @@ const App: React.FC = () => {
             console.error('Error fetching camera:', error);
         }
     }, []);
+
+
+    //Implementação provisória da bateria 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBatteryPercentage((prev) => {
+            const newPercentage = prev + (Math.random() * 0.1 - 0.05); // Variação aleatória
+            return Math.max(0, Math.min(1, newPercentage)); // Mantém entre 0 e 1
+            });
+        }, 2000); // Atualiza a cada 2 segundos
+    
+        return () => clearInterval(interval); // Limpa o intervalo ao desmontar
+        }, []);
+    
 
     useEffect(() => {
         fetchData();
