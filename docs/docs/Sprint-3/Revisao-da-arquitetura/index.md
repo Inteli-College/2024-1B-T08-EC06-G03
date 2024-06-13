@@ -21,7 +21,7 @@ O diagrama abaixo representa a comunicação entre os subsistemas Back-End, Rob�
 
 **Arquitetura**
 
-![Diagrama de Arquitetura](../../../static/img/Diagrama%20de%20arquitetura.png)
+![Diagrama de Arquitetura](/img/diagrama-de-arquitetura.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
