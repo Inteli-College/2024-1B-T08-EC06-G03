@@ -67,15 +67,14 @@ const getAllTubeStatesByExaminationId = async (req, res) => {
 }
 
 const createExamination = async (req, res) => {
-    const { etapa, robot_id, reboiler_id, started_at, finished_at } = req.body;
+    const { step, started_at, finished_at, order_id } = req.body;
     try {
         const newExamination = await prisma.examination.create({
             data: {
-                etapa,
-                robot_id,
-                reboiler_id,
+                step,
                 started_at: started_at ?  started_at : null,
-                finished_at: finished_at ? finished_at : null
+                finished_at: finished_at ? finished_at : null,
+                order_id: order_id
             }
         });
         res.status(201).json(newExamination);
@@ -86,16 +85,15 @@ const createExamination = async (req, res) => {
 
 const updateExamination = async (req, res) => {
     const { id } = req.params;
-    const { etapa, robot_id, reboiler_id, started_at, finished_at } = req.body;
+    const { step, started_at, finished_at, order_id } = req.body;
     try {
         const updatedExamination = await prisma.examination.update({
             where: { id: parseInt(id) },
             data: {
-                etapa: etapa,
-                robot_id: robot_id,
-                reboiler_id: reboiler_id,
+                step: step,
                 started_at: started_at,
-                finished_at: finished_at
+                finished_at: finished_at,
+                order_id: order_id
             }
         });
         res.json(updatedExamination);
