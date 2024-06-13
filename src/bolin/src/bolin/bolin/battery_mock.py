@@ -17,17 +17,17 @@ class BatteryPublisher(Node):
         battery_msg = BatteryState()
         battery_msg.header.stamp = self.get_clock().now().to_msg()
         battery_msg.header.frame_id = 'battery_frame'
-        battery_msg.voltage = 12.1  # Valor mockado de voltagem
-        battery_msg.temperature = 25.0  # Valor mockado de temperatura
-        battery_msg.current = 0.0  # Valor mockado de corrente
-        battery_msg.charge = 10.0  # Valor mockado de carga
-        battery_msg.capacity = 20.0  # Valor mockado de capacidade
-        battery_msg.design_capacity = 20.0  # Capacidade de design mockada
+        battery_msg.voltage = 12.1
+        battery_msg.temperature = 25.0 
+        battery_msg.current = 0.0 
+        battery_msg.charge = 10.0  
+        battery_msg.capacity = 20.0 
+        battery_msg.design_capacity = 20.0  
         battery_msg.percentage = 0.5  # 50% de carga
         battery_msg.power_supply_status = BatteryState.POWER_SUPPLY_STATUS_UNKNOWN
         battery_msg.power_supply_health = BatteryState.POWER_SUPPLY_HEALTH_UNKNOWN
         battery_msg.power_supply_technology = BatteryState.POWER_SUPPLY_TECHNOLOGY_UNKNOWN
-        battery_msg.present = True  # A bateria está presente
+        battery_msg.present = True  
         
         # Publica a mensagem no tópico 'battery_state'
         self.pub_battery_state.publish(battery_msg)
@@ -38,10 +38,8 @@ class BatteryPublisher(Node):
         self.get_logger().info(f'  Voltagem da Bateria: {battery_msg.voltage:.2f}V')
 
 def main(args=None):
-    # Inicializa o ROS 2
-    rclpy.init(args=args)
     
-    # Cria a instância do nó BatteryPublisher
+    rclpy.init(args=args)
     battery_publisher = BatteryPublisher()
     
     # Mantém o nó rodando
