@@ -2,15 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App'
-import Table from './pages/Table'
+// import Table from './pages/Table'
 import './index.css'
+import Teste from './pages/test'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
 	<BrowserRouter>
 	  <Routes>
 		<Route path="/" element={<App />} />
-		<Route path="table" element={<Table />} />
+		{/* <Route path="table" element={<Table />} /> */}
+		<Route path="teste" element={<Teste />} />
 		
 	  </Routes>
 	</BrowserRouter>
