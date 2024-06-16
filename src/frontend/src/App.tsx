@@ -5,31 +5,29 @@ import KillButton from './components/Kill'; // Import the KillButton component
 import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
+import ROSLIB from 'roslib'
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
-type Direction = 
-  | 'front'
-  | 'front-right'
-  | 'right'
-  | 'back-right'
-  | 'back'
-  | 'back-left'
-  | 'left'
-  | 'front-left';
+type Direction =
+    | 'front'
+    | 'front-right'
+    | 'right'
+    | 'back-right'
+    | 'back'
+    | 'back-left'
+    | 'left'
+    | 'front-left';
 
 const App: React.FC = () => {
 
     const [directions, setDirections] = useState<Direction[]>([]);
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
-    const [cameraData, setCameraData] = useState<any>({});
-    const [cameraSocketUrl, setCameraSocketUrl] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
 
     const [fps, setFps] = useState<number>(0);
     const messageTimestamps = useRef<number[]>([]);
-    const now = Date.now(); // Capture the current timestamp
 
     const fetchData = useCallback(async () => {
         try {
@@ -47,35 +45,53 @@ const App: React.FC = () => {
         }
     }, []);
 
-    const videoData = useCallback(async () => {
-        try {
-            const response = await fetch(`${API_URL}/camera/start`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({}),
+    const startCamera = () => {
+        const ros = new ROSLIB.Ros({
+            url: `ws://${window.location.hostname}:9090`
+        });
+
+        ros.on('connection', () => {
+            console.log('Connected to rosbridge server.');
+            const cameraSubscriber = new ROSLIB.Topic({
+                ros: ros,
+                name: '/camera_feed',
+                messageType: 'sensor_msgs/CompressedImage'
             });
-            const jsonData = await response.json();
-            setCameraData(jsonData)
-        } catch (error) {
-            console.error('Error fetching camera:', error);
-        }
-    }, []);
+
+            cameraSubscriber.subscribe((msg: any) => {
+                setImage(msg.data);
+
+                const now = Date.now();
+                messageTimestamps.current.push(now);
+                const oneSecondAgo = now - 1000;
+                messageTimestamps.current = messageTimestamps.current.filter(timestamp => timestamp >= oneSecondAgo);
+
+                setFps(messageTimestamps.current.length);
+            });
+
+            console.log('Camera controller started and subscribed to /camera_feed');
+        });
+
+        ros.on('error', (error: Error) => {
+            console.error('Error connecting to rosbridge server:', error);
+        });
+
+        ros.on('close', () => {
+            console.log('Connection to rosbridge server closed.');
+        });
+    };
 
     useEffect(() => {
         fetchData();
-        videoData();
-    }, [fetchData, videoData]);
+    }, [fetchData]);
 
     useEffect(() => {
+        startCamera();
         if (teleopData?.url) {
             setTeleopSocketUrl(teleopData.url);
         }
-        if (cameraData?.url) {
-            setCameraSocketUrl(cameraData.url);
-        }
-    }, [cameraData]);
+    }, [teleopData]);
+
 
     const teleopWebSocket = useWebSocket(teleopSocketUrl, {
         onOpen: () => console.log('WebSocket connection established.'),
@@ -84,33 +100,16 @@ const App: React.FC = () => {
         onMessage: (event) => {
             console.log('WebSocket message:', event.data);
             try {
-              const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
-              setDirections(receivedDirections);
+                const receivedDirections: Direction[] = JSON.parse(event.data).obstacle;
+                setDirections(receivedDirections);
             } catch (error) {
-              console.log('Error parsing WebSocket message:', error);
+                console.log('Error parsing WebSocket message:', error);
             }
 
-          },
-        shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
-    });
-
-    
-    const cameraWebSocket = useWebSocket(cameraSocketUrl, {
-        onOpen: () => console.log('WebSocket connection established.'),
-        onClose: () => console.log('WebSocket connection closed.'),
-        onError: (event) => console.error('WebSocket error:', event),
-        onMessage: (event) => {setImage(event.data);// Add the current timestamp to the list
-            messageTimestamps.current.push(now);
-        
-            // Remove timestamps older than one second
-            const oneSecondAgo = now - 1000;
-            messageTimestamps.current = messageTimestamps.current.filter(timestamp => timestamp >= oneSecondAgo);
-        
-            // Calculate FPS as the number of messages received in the last second
-            setFps(messageTimestamps.current.length);
         },
         shouldReconnect: (closeEvent) => true, // Will attempt to reconnect on all close events, such as server shutting down
     });
+
 
     useEffect(() => {
         if (teleopWebSocket.readyState === WebSocket.OPEN) {
@@ -119,40 +118,34 @@ const App: React.FC = () => {
     }, [teleopWebSocket.readyState, teleopWebSocket.sendMessage]);
 
 
-    useEffect(() => {
-        if (cameraWebSocket.readyState === WebSocket.OPEN) {
-            cameraWebSocket.sendMessage(JSON.stringify({ message: 'Hello, WebSocket!' }));
-        }
-    }, [cameraWebSocket.readyState, cameraWebSocket.sendMessage]);
-
     return (
-    <div className='relative overflow-hidden h-screen flex flex-col items-center justify-center bg-gray-600'>
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">    
-            <div className="relative h-full aspect-[4/3] object-cover bg-black">   
-                <DetectionInterface directions={directions} />
-                <img className="relative w-[640px] h-[480px] object-cover" src={`data:image/jpeg;base64,${image}`} />
+        <div className='relative overflow-hidden h-screen flex flex-col items-center justify-center bg-gray-600'>
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                <div className="relative h-full aspect-[4/3] object-cover bg-black">
+                    <img className="relative w-full h-full object-cover" src={`data:image/jpeg;base64,${image}`} />
+                    <DetectionInterface directions={directions} />
+                </div>
+            </div>
+            <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
+                <HamburgerMenu />
+                <p className='text-red-600'>Fps: {fps}</p>
+            </div>
+            <div className="absolute bottom-20 left-20 p-4">
+                <div className="relative">
+                    <KillButton sendMessage={teleopWebSocket.sendMessage} />
+                </div>
+            </div>
+            <div className="absolute bottom-80 right-24 p-4">
+                <div className="relative">
+                    <SnapButton sendMessage={teleopWebSocket.sendMessage} />
+                </div>
+            </div>
+            <div className="absolute bottom-20 right-20 p-4">
+                <div className="relative">
+                    <Joystick sendMessage={teleopWebSocket.sendMessage} />
+                </div>
             </div>
         </div>
-        <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
-            <HamburgerMenu />
-            <p className='text-red-600'>Fps: {fps}</p>
-        </div>
-        <div className="absolute bottom-20 left-20 p-4">
-            <div className="relative">
-                <KillButton sendMessage={teleopWebSocket.sendMessage} />
-            </div>
-        </div>
-        <div className="absolute bottom-80 right-24 p-4">
-            <div className="relative">
-                <SnapButton sendMessage={teleopWebSocket.sendMessage} />
-            </div>
-        </div>
-        <div className="absolute bottom-20 right-20 p-4">
-            <div className="relative">
-                <Joystick sendMessage={teleopWebSocket.sendMessage} />
-            </div>
-        </div>
-    </div>
     );
 };
 

@@ -23,10 +23,14 @@ def generate_launch_description():
                 output="screen",
             ),
             Node(
+                package="bolin_lidar",
+                executable="lidar",
+                name="lidar",
+            ),
+            Node(
                 package="bolin_teleop",
                 executable="teleop",
                 name="teleop",
-                output="screen",
             ),
             Node(
                 package="bolin_lidar",

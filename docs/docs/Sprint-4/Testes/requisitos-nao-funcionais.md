@@ -4,7 +4,7 @@ title: Requisitos  Não Funcionais
 
 ## Revisão e atualização dos requisitos
 
-Durante a primeira sprint, foram mapeados os [requisitos não funcionais](../../Sprint%201/Arquitetura%20de%20Solucao/Requisitos%20Não%20Funcionais.md) a fim de metrificar e avaliar a qualidade do sistema. Porém, ao longo das sprints, o entendimento sobre o projeto mudou juntamente com o rumo do desenvolvimento. Dessa forma, os requisitos não funcionais foram revisitados e percebeu-se a necessidade de atualizá-los. As mudanças mais substanciais foram referentes à movimentação do robô e aos casos de uso. Assim, a forma de controle é a teleoperação em vez da navegação automática, sendo o robô controlado por um operador  orientado pelas imagens da câmera. Dessa forma, os requisitos relacionados à transmissão de imagem, precisão de movimentação e análise dos tubos também foram alterados, de forma que a transmissão da câmera deve ocorrer em tempo real e não intermitentemente. Além disso, os requisitos de precisão deixaram de ser sobre a movimentação autônoma do robô e passaram a ser sobre a capacidade do teleoperador de posicionar o robô abaixo do tubo. Por fim, outras questões analisadas que não foram consideradas inicialmente foram as características de performance, como o tempo de duração da bateria, capacidade de processamento da visão computacional e a usabilidade, como facilidade do usuário em navegar pela plataforma. A seguir encontra-se a tabela de requisitos não funcionais atualizada. 
+Durante a primeira sprint, foram mapeados os [requisitos não funcionais](/Sprint%201/Arquitetura%20de%20Solucao/Requisitos%20Não%20Funcionais.md) a fim de metrificar e avaliar a qualidade do sistema. Porém, ao longo das sprints, o entendimento sobre o projeto mudou juntamente com o rumo do desenvolvimento. Dessa forma, os requisitos não funcionais foram revisitados e percebeu-se a necessidade de atualizá-los. As mudanças mais substanciais foram referentes à movimentação do robô e aos casos de uso. Assim, a forma de controle é a teleoperação em vez da navegação automática, sendo o robô controlado por um operador  orientado pelas imagens da câmera. Dessa forma, os requisitos relacionados à transmissão de imagem, precisão de movimentação e análise dos tubos também foram alterados, de forma que a transmissão da câmera deve ocorrer em tempo real e não intermitentemente. Além disso, os requisitos de precisão deixaram de ser sobre a movimentação autônoma do robô e passaram a ser sobre a capacidade do teleoperador de posicionar o robô abaixo do tubo. Por fim, outras questões analisadas que não foram consideradas inicialmente foram as características de performance, como o tempo de duração da bateria, capacidade de processamento da visão computacional e a usabilidade, como facilidade do usuário em navegar pela plataforma. A seguir encontra-se a tabela de requisitos não funcionais atualizada. 
 
 
 | Requisito Não Funcional | Descrição | Teste | Critério de aceitação |
@@ -83,3 +83,10 @@ Para testar a usabilidade da interface, foi aplicado o teste SUS (System Usabili
 ## Conclusões
 
 A partir dos testes realizados, a equipe refletiu sobre os feedbacks e a principal ação a ser tomada na próxima sprint será em relação à melhoria do modelo de visão computacional, adicionar de alguma forma a informação sobre o botão de kill e quando acioná-lo, além de um feedback depois que ele for acionado. Além disso, também será considerado melhorar a sensibilidade do joystick e o feedback de obstáculos pŕoximos. Portanto, os testes de requisitos não funcionais foram fundamentais para verificar pontos de melhoria no sistema e atualizar as necessidades e requisitos do projeto.
+
+## Demonstração
+
+Segue abaixo um vídeo gravado durante um dos procedimentos de teste dos Requisitos Funcionais:
+
+[Teste de Requisitos não funcionais](https://youtu.be/OGPyP2dI_So)
+

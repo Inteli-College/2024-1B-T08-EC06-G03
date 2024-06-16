@@ -1,11 +1,15 @@
 const WebSocket = require('ws');
 const config = require('config');
-const rclnodejs = require('rclnodejs');
+const ROSLIB = require('roslib');
 
 class TeleopController {
     constructor() {
+        this.startTeleopWS = this.startTeleopWS.bind(this);
+        this.onConnection = this.onConnection.bind(this);
+        this.onError = this.onError.bind(this);
+        this.onClose = this.onClose.bind(this);
         this.socket = null;
-        this.teleopNode = null;
+        this.ros = null;
         this.linearSpeed = 0;
         this.angularSpeed = 0;
         this.obstacleThreshold = 20;
@@ -21,45 +25,91 @@ class TeleopController {
         ];
         this.obstacleLocations = [];
 
-        this.startTeleopWS = this.startTeleopWS.bind(this);
-        this.onConnection = this.onConnection.bind(this);
-        this.onMessage = this.onMessage.bind(this);
-        this.onError = this.onError.bind(this);
-        this.onClose = this.onClose.bind(this);
         this.lidarCallback = this.lidarCallback.bind(this);
+        this.publishSpeeds = this.publishSpeeds.bind(this);
     }
 
-    async initializeTeleopNode() {
-        try {
-            if (!rclnodejs.init?.called) {
-                console.log('Initializing rclnodejs');
-                await rclnodejs.init();
-            }
-        } catch (error) {
-            console.error('Error initializing rclnodejs:', error);
+    startTeleopController() {
+        this.ros = new ROSLIB.Ros({
+            url: 'ws://localhost:9090'
+        });
+
+        this.ros.on('connection', () => {
+            console.log('Connected to ROSBridge server.');
+            this.lidarSubscriber = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/obstacle_distances',
+                messageType: 'std_msgs/Float32MultiArray'
+            });
+
+            this.angularSpeedPublisher = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/angular_speed',
+                messageType: 'std_msgs/Float32'
+            });
+
+            this.linearSpeedPublisher = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/linear_speed',
+                messageType: 'std_msgs/Float32'
+            });
+
+            this.killRobotClient = new ROSLIB.Service({
+                ros: this.ros,
+                name: '/kill_robot_service',
+                serviceType: 'std_srvs/srv/Trigger'
+            });
+
+            this.lidarSubscriber.subscribe(this.lidarCallback);
+
+            console.log('Teleop controller started and subscribed to /obstacle_distances');
+
+            setInterval(this.publishSpeeds, 100);
+        });
+
+        this.ros.on('error', (error) => {
+            console.error('Error connecting to ROSBridge server:', error);
+        });
+
+        this.ros.on('close', () => {
+            console.log('Connection to ROSBridge server closed.');
+        });
+    }
+
+    validateLinearSpeed(linearSpeed) {
+        const obstaclesInFront = ['front', 'front-right', 'front-left'].some(direction => this.obstacleLocations.includes(direction));
+        const obstaclesInBack = ['back', 'back-right', 'back-left'].some(direction => this.obstacleLocations.includes(direction));
+
+        if (obstaclesInFront && linearSpeed > 0) {
+            return 0;
+        }
+
+        if (obstaclesInBack && linearSpeed < 0) {
+            return 0;
+        }
+
+        return linearSpeed;
+    }
+
+    publishSpeeds() {
+        if (this.ros == null) {
+            console.error('ROS connection not established');
             return;
         }
 
-        this.teleopNode = new rclnodejs.Node('teleop_node');
-        this.linearSpeedPublisher = this.teleopNode.createPublisher('std_msgs/msg/Float32', 'linear_speed');
-        this.angularSpeedPublisher = this.teleopNode.createPublisher('std_msgs/msg/Float32', 'angular_speed');
-        this.killRobotClient = this.teleopNode.createClient('std_srvs/srv/Trigger', 'kill_robot_service');
+        this.linearSpeed = this.validateLinearSpeed(this.linearSpeed);
 
-        this.teleopNode.createTimer(50, () => {
-            this.linearSpeed = this.validateLinearSpeed(this.linearSpeed);
-            this.linearSpeedPublisher.publish(this.linearSpeed);
-            this.angularSpeedPublisher.publish(this.angularSpeed);
-            console.log(`Linear speed: ${this.linearSpeed}, Angular speed: ${this.angularSpeed}`);
+        const linearSpeedMessage = new ROSLIB.Message({
+            data: this.linearSpeed
+        });
+        const angularSpeedMessage = new ROSLIB.Message({
+            data: this.angularSpeed
         });
 
-        this.lidarSubscriber = this.teleopNode.createSubscription(
-            'std_msgs/msg/Float32MultiArray',
-            '/obstacle_distances',
-            this.lidarCallback
-        );
+        this.linearSpeedPublisher.publish(linearSpeedMessage);
+        this.angularSpeedPublisher.publish(angularSpeedMessage);
 
-        console.log('Teleop node initialized');
-        this.teleopNode.spin();
+        console.log(`Published speeds: linear=${this.linearSpeed}, angular=${this.angularSpeed}`);
     }
 
     async onConnection(ws) {
@@ -68,12 +118,12 @@ class TeleopController {
         ws.on('close', () => this.onClose(ws));
         console.log('WebSocket connection established');
 
-        if (this.teleopNode) {
-            console.log('Teleop node already initialized');
+        if (this.ros != null) {
+            console.log('Teleop connection already established');
             return;
         }
 
-        await this.initializeTeleopNode();
+        this.startTeleopController();
     }
 
     onMessage(ws, data) {
@@ -96,37 +146,28 @@ class TeleopController {
         }
 
         if (message.kill_robot) {
-            console.log('Calling kill robot service');
-            this.killRobotClient.sendRequest({}, response => {
+            const request = new ROSLIB.ServiceRequest({});
+            this.killRobotClient.callService(request, (response) => {
                 console.log('Kill robot service response:', response);
-                ws.send(`Kill button response: ${JSON.stringify(response)}`);
             });
         }
-
-        ws.send('Message received');
     }
 
     onError(ws, error) {
         console.log(`WebSocket error => ${error}`);
     }
 
-    async onClose(ws) {
-        this.socket.close();
-        this.socket = null;
-
-        if (this.teleopNode) {
-            this.teleopNode.destroy();
-            rclnodejs.shutdown();
-            this.teleopNode = null;
+    onClose(ws) {
+        if (this.socket) {
+            this.socket.close();
+            this.socket = null;
         }
-
         console.log('WebSocket connection closed');
     }
 
     lidarCallback(msg) {
         if (!this.socket) {
-            console.log('WebSocket server not started');
-            return;
+            return console.log('WebSocket server not started');
         }
 
         const obstacleStatus = msg.data.map(distance => distance < this.obstacleThreshold ? 1 : 0);
@@ -139,23 +180,7 @@ class TeleopController {
         });
 
         console.log('Obstacle locations:', this.obstacleLocations);
-
         this.socket.clients.forEach(ws => ws.send(JSON.stringify({ obstacle: this.obstacleLocations })));
-    }
-
-    validateLinearSpeed(linearSpeed) {
-        const obstaclesInFront = ['front', 'front-right', 'front-left'].some(direction => this.obstacleLocations.includes(direction));
-        const obstaclesInBack = ['back', 'back-right', 'back-left'].some(direction => this.obstacleLocations.includes(direction));
-
-        if (obstaclesInFront && linearSpeed > 0) {
-            return 0;
-        }
-
-        if (obstaclesInBack && linearSpeed < 0) {
-            return 0;
-        }
-
-        return linearSpeed;
     }
 
     async startTeleopWS(req, res) {
@@ -177,6 +202,7 @@ class TeleopController {
                 path: wsTeleopPath,
                 port: wsPort
             });
+
             this.socket.on('connection', this.onConnection);
 
             res.status(200).json({

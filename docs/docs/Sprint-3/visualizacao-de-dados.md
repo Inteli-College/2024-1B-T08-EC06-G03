@@ -14,7 +14,7 @@ Em primeiro lugar, a utilização de **mapas de calor** para representar a sujid
 
 **Exemplo de mapa de calor**
 
-![Mapa de calor](../../static/img/mapa%20de%20calor.png)
+![Mapa de calor](/img/mapa-de-calor.png)
 
 **Fonte:** Imagem retirada do Google
 
@@ -30,7 +30,7 @@ Adicionalmente, **gráficos de barras** que mostram a quantidade de limpezas rea
 
 **Exemplo de gráfico de barras**
 
-![Exemplo gráfico de barras - Limpezas primeiro semestre](../../static/img/Grafico%20de%20barras%20limpezas.png)
+![Exemplo gráfico de barras - Limpezas primeiro semestre](/img/grafico-de-barras-limpezas.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
@@ -46,7 +46,7 @@ Por último, **gráficos de comparação** entre os níveis de sujidade antes e 
 
 **Exemplo de Gráfico de comparação - Barras**
 
-![Exemplo de Gráfico de comparação - Barras](../../static/img/Comparação%20do%20grau%20de%20sujidade%20antes%20e%20depois%20das%20limpezas.png)
+![Exemplo de Gráfico de comparação - Barras](/img/comparacao-do-grau-de-sujidade-antes-e-depois-das-limpezas.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
@@ -56,7 +56,7 @@ Por último, **gráficos de comparação** entre os níveis de sujidade antes e 
 
 **Exemplo de Gráfico de comparação - Linhas**
 
-![Exemplo de Gráfico de comparação - Linhas](../../static/img/Comparação%20do%20grau%20de%20sujidade%20antes%20e%20depois%20das%20limpezas%20linha.png)
+![Exemplo de Gráfico de comparação - Linhas](/img/comparacao-do-grau-de-sujidade-antes-e-depois-das-limpezas-linha.png)
 
 **Fonte:** Elaborado pela equipe Rebólins
 
