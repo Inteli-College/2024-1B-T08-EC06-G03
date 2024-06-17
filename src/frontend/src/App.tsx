@@ -5,7 +5,8 @@ import KillButton from './components/Kill'; // Import the KillButton component
 import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
-import ROSLIB from 'roslib'
+import ROSLIB from 'roslib';
+import BatteryBar from './components/BatteryBar';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
+    const [batteryPercentage, setBatteryPercentage] = useState<number>(0.5); // Inicia com 50%
 
     const [fps, setFps] = useState<number>(0);
     const messageTimestamps = useRef<number[]>([]);
@@ -80,6 +82,20 @@ const App: React.FC = () => {
             console.log('Connection to rosbridge server closed.');
         });
     };
+
+
+    //Implementação provisória da bateria 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBatteryPercentage((prev) => {
+            const newPercentage = prev + (Math.random() * 0.1 - 0.05); // Variação aleatória
+            return Math.max(0, Math.min(1, newPercentage)); // Mantém entre 0 e 1
+            });
+        }, 2000); // Atualiza a cada 2 segundos
+    
+        return () => clearInterval(interval); // Limpa o intervalo ao desmontar
+        }, []);
+    
 
     useEffect(() => {
         fetchData();
@@ -146,7 +162,13 @@ const App: React.FC = () => {
                 </div>
             </div>
         </div>
+        <BatteryBar batteryPercentage={batteryPercentage} stroke-width="100"/>
+
+    </div>
     );
+
+    
 };
+
 
 export default App;
