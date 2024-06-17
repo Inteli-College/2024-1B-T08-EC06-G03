@@ -56,7 +56,7 @@ Uma visualização do sistema apresentado acima pode ser visto no diagrama abaix
 
 **Arquitetura de Informação**
 
-![Diagrama de sequência](../../../static/img/Arquitetura%20de%20Informação.jpg)
+![Diagrama de sequência](/img/arquitetura-de-informacao.jpg)
 
 **Fonte:** Elaborado pela equipe Rebólins
 

@@ -4,10 +4,10 @@ title: Requisitos Funcionais
 
 ## Revisão e atualização dos requisitos
 
-Durante a primeira sprint, foram mapeados [requisitos funcionais](../../Sprint%201/Arquitetura%20de%20Solucao/Requisitos%20Funcionais.md), que são basicamente as funcionalidades essenciais do projeto. Porém, no decorrer do tempo, o entendimento sobre o projeto em questão mudou, alterando também o rumo do desenvolvimento.
+Durante a primeira sprint, foram mapeados [requisitos funcionais](Sprint-1/Arquitetura-de-Solucao/requisitos-funcionais.md), que são basicamente as funcionalidades essenciais do projeto. Porém, no decorrer do tempo, o entendimento sobre o projeto em questão mudou, alterando também o rumo do desenvolvimento.
 Dessa forma, aqui nessa seção, serão detalhados os requisitos funcionais com todas as alterações realizadas.
 
-| Requisito | Descrição | [User story relacionada](../../Sprint%201/Design/personas.md) | Critérios de aceitação | Caso de teste |
+| Requisito | Descrição | [User story relacionada](Sprint-1/Design/personas.md) | Critérios de aceitação | Caso de teste |
 |-----------|-----------|-----------------------|------------------------|---------------|
 | RF01      | A interface de usuário permite que o robô seja controlado de maneira teleoperada | User story 1 do Danillo | O sistema apresenta acompanhamento das imagens enviadas pela câmera em tempo real, além de contar com uma interface de controle do robô | Verificação da transmissão de imagem em tempo real e do funcionamento do controle|
 | RF02      | É possível acessar dados sobre uma inspeção | User story 2 do Jairo | É possível visualizar numa tabela qual a quantidade de canos sujos em uma inspeção | Visualizar a tela de visualização de dados|

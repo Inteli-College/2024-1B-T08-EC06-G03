@@ -63,8 +63,7 @@ class CameraSubscriber(Node):
             self.finish_measurement_time = time.time()
             self.measurement_count += 1
             if self.measurement_count == 10:
-                pass
-                # self.shutdown()
+                self.shutdown()
 
             print(f"Measurement {self.measurement_count}:")
             print(f"Average FPS in last 5 seconds: {self.avg_fps:.2f}")
