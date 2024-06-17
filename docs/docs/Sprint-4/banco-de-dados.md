@@ -7,7 +7,7 @@ sidebar_position: 1
 
 ## Introdução
 
-Na seção [Visualização de Dados](/Sprint%203/Visualização%20de%20Dados.md), foram apresentados possíveis casos de uso dos dados que serão coletados pelo projeto. Nesta seção, haverá o detalhamento como esses dados estão armazenados dentro do **banco de dados relacional**, conforme ilustrado abaixo:
+Na seção [Visualização de Dados](/Sprint-3/visualizacao-de-dados.md), foram apresentados possíveis casos de uso dos dados que serão coletados pelo projeto. Nesta seção, haverá o detalhamento como esses dados estão armazenados dentro do **banco de dados relacional**, conforme ilustrado abaixo:
 
 <div align="center">
 
