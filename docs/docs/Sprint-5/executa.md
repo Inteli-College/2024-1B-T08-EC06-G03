@@ -94,7 +94,7 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
    ```
 
    :::warning Alerta
-   Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint%204/banco_de_dados.md), pois é necessário gerar o `schema.prisma` para que o back-end execute.  
+   Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint%204/banco-de-dados.md), pois é necessário gerar o `schema.prisma` para que o back-end execute.  
    :::
 
    - Execute o Back-End
