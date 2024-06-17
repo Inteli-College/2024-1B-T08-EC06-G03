@@ -10,19 +10,13 @@ class BatteryPublisher(Node):
         self.pub_battery_state = self.create_publisher(BatteryState, 'battery_state', 10)
         
         # Configura um timer para publicar a cada 20 milissegundos
-        self.timer = self.create_timer(0.02, self.publish_battery_state)
+        self.timer = self.create_timer(30000, self.publish_battery_state)
         
     def publish_battery_state(self):
         # Cria uma mensagem do tipo BatteryState com valores mockados
         battery_msg = BatteryState()
         battery_msg.header.stamp = self.get_clock().now().to_msg()
         battery_msg.header.frame_id = 'battery_frame'
-        battery_msg.voltage = 12.1
-        battery_msg.temperature = 25.0 
-        battery_msg.current = 0.0 
-        battery_msg.charge = 10.0  
-        battery_msg.capacity = 20.0 
-        battery_msg.design_capacity = 20.0  
         battery_msg.percentage = 0.5  # 50% de carga
         battery_msg.power_supply_status = BatteryState.POWER_SUPPLY_STATUS_UNKNOWN
         battery_msg.power_supply_health = BatteryState.POWER_SUPPLY_HEALTH_UNKNOWN
@@ -33,9 +27,9 @@ class BatteryPublisher(Node):
         self.pub_battery_state.publish(battery_msg)
         
         # Adiciona logs para acompanhar os valores que estão sendo publicados
-        self.get_logger().info(f'Publicado no tópico battery_state:')
-        self.get_logger().info(f'  Porcentagem da Bateria: {battery_msg.percentage * 100:.2f}%')
-        self.get_logger().info(f'  Voltagem da Bateria: {battery_msg.voltage:.2f}V')
+        self.get_logger().debug(f'Publicado no tópico battery_state:')
+        self.get_logger().debug(f'  Porcentagem da Bateria: {battery_msg.percentage * 100:.2f}%')
+        self.get_logger().debug(f'  Voltagem da Bateria: {battery_msg.voltage:.2f}V')
 
 def main(args=None):
     
