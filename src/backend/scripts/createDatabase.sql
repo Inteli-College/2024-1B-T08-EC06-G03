@@ -1,7 +1,7 @@
 -- Create the Robot table
 CREATE TABLE IF NOT EXISTS `Robot` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `last_manufactured` TEXT NOT NULL
+  `nickname` TEXT 
 );
 
 -- Create the Unit table
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `Reboiler` (
 -- Create the Order table
 CREATE TABLE IF NOT EXISTS `Order` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `status` TEXT,
+  `step` TEXT,
   `robot_id` INTEGER,
   `reboiler_id` INTEGER,
   `started_at` TEXT,
