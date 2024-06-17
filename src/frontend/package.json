@@ -17,6 +17,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
+    "react-toastify": "^10.0.5",
     "react-use-websocket": "^3.0.0",
     "roslib": "^1.4.1"
   },
