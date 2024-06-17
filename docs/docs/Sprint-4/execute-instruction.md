@@ -8,7 +8,7 @@ sidebar_position: 4
 ## Conexão com o robô
 
 ### 1. Conexão com o Robô via SSH
-Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Há um tutorial de como deve ser feito o [setup do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint%202/Metodologia) Execute os seguintes passos no seu terminal:
+Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Há um tutorial de como deve ser feito o [setup do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint-2/Metodologia) Execute os seguintes passos no seu terminal:
 
 1. **Inicie o Robô**: Certifique-se de que o robô esteja ligado e pronto para conexão.
 2. **Conectar via SSH**:
@@ -71,7 +71,7 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
     npm install
     ```
     :::warning Alerta
-    Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint%204/banco_de_dados.md), pois é necessário gerar o `schema.prisma` para que o back-end execute.    
+    Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint-4/banco_de_dados.md), pois é necessário gerar o `schema.prisma` para que o back-end execute.    
     :::
 
     - Execute o Back-End

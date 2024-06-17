@@ -4,7 +4,7 @@ title: Requisitos Funcionais
 
 ## Revisão e atualização dos requisitos
 
-Durante a primeira sprint, foram mapeados [requisitos funcionais](Sprint%201/Arquitetura%20de%20Solucao/Requisitos%20Funcionais.md), que são basicamente as funcionalidades essenciais do projeto. Porém, no decorrer do tempo, o entendimento sobre o projeto em questão mudou, alterando também o rumo do desenvolvimento.
+Durante a primeira sprint, foram mapeados [requisitos funcionais](Sprint-1/Arquitetura-de-Solucao/requisitos-funcionais.md), que são basicamente as funcionalidades essenciais do projeto. Porém, no decorrer do tempo, o entendimento sobre o projeto em questão mudou, alterando também o rumo do desenvolvimento.
 Dessa forma, aqui nessa seção, serão detalhados os requisitos funcionais com todas as alterações realizadas.
 
 | Requisito | Descrição | [User story relacionada](Sprint%201/Design/personas.md) | Critérios de aceitação | Caso de teste |

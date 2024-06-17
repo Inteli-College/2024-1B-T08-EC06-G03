@@ -10,14 +10,14 @@ O objetivo principal dessa página é documentar a criação e implementação d
 - **JavaScript**
   - **[Express.js](https://expressjs.com/)**: Framework para construção de aplicações web, utilizado para criar o servidor HTTP.
 - **Turso**
-  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite. Para compreender mais sobre a decisão de utilizar turso, veja [aqui](/Sprint%204/banco_de_dados.md).
+  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite. Para compreender mais sobre a decisão de utilizar turso, veja [aqui](/Sprint-4/banco_de_dados.md).
 - **Prisma ORM**
   - [**prisma.io**](https://www.prisma.io/docs/orm/prisma-schema/overview): Biblioteca utilziada para servir como intermédio entre a api e o banco de dados, realizando as consultas por ORM. As consultas por ORM garantem mais segurança para a aplicação, visto que evitam problemas de cybersegurança como **sqlinjection**. Além disso, a rapidez para realizar seu desenvolvimento auxilia muito no projeto, visto o escopo de dez semanas.
 
 
 ## Arquitetura
 
-Antes de iniciar o desenvolvimento do back-end da aplicação,  foi idealizado e implementado o banco de dados, o qual é explicado em [outra página](/Sprint%204/banco_de_dados.md). Sua implementação em **Turso**, o qual tem interatividade com o **Prisma.Io**, permite com que a aplicação seja desenvolvida de forma mais acelerada devido a funções já existentes para realizar as operações de leitura, inserção, atualização dos dados.
+Antes de iniciar o desenvolvimento do back-end da aplicação,  foi idealizado e implementado o banco de dados, o qual é explicado em [outra página](/Sprint-4/banco_de_dados.md). Sua implementação em **Turso**, o qual tem interatividade com o **Prisma.Io**, permite com que a aplicação seja desenvolvida de forma mais acelerada devido a funções já existentes para realizar as operações de leitura, inserção, atualização dos dados.
 
 O back-end foi construído por meio de arquivos de controllers e de routes, importando os routers para a aplicação principal que funciona em express. Sendo assim, cada entidade possui dois arquivos, o controller, o qual possui o crud da entidade e outras operações que são executadas nela, e o route, o qual utiliza das funções implementadas no controller.
 
