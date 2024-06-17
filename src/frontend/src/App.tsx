@@ -5,6 +5,7 @@ import KillButton from './components/Kill'; // Import the KillButton component
 import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
+import ROSLIB from 'roslib';
 import BatteryBar from './components/BatteryBar';
 
 const API_URL = `http://${window.location.hostname}:8000`;
