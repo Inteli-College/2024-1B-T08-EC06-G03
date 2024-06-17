@@ -16,8 +16,6 @@ CREATE TABLE IF NOT EXISTS `Reboiler` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `number` INTEGER NOT NULL,
   `unit_id` INTEGER,
-  `started_at` TEXT,
-  `finished_at` TEXT,
   FOREIGN KEY (`unit_id`) REFERENCES `Unit`(`id`)
 );
 
