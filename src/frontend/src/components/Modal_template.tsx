@@ -2,7 +2,7 @@ import React from "react";
 import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogTrigger,DialogFooter} from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 
-export type SubmitFunction = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+export type SubmitFunction = (event: React.FormEvent<HTMLFormElement>) => void;
 
 interface ModalProps {
     button_label: string;
@@ -12,7 +12,7 @@ interface ModalProps {
     submit_action: SubmitFunction;
     };
 
-export const Modal_template: React.FC<ModalProps> = ({ button_label, title, children, submit_action}) => {
+const Modal_template: React.FC<ModalProps> = ({ button_label, title, children, submit_action}) => {
     return (
         <Dialog>
       <DialogTrigger asChild>
@@ -22,12 +22,16 @@ export const Modal_template: React.FC<ModalProps> = ({ button_label, title, chil
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        {children}
-        <DialogFooter>
-          <Button type="submit" onSubmit={submit_action}>Enviar</Button>
+        <form onSubmit={submit_action}>
+            {children}
+            <DialogFooter>
+            <Button type="submit">Enviar</Button>
         </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
     );
 }
+
+export default Modal_template;
 

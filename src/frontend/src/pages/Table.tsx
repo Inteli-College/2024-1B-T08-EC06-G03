@@ -9,9 +9,12 @@ import {
 import { Process, columns } from "../components/Columns";
 import { DataTable } from "../components/DataTable";
 import { NewProcessDialog } from "@/components/NewProcessDialog"
-import { UnitDropdown } from "@/components/UnitDropdown"
+import SelectOptions from '@/components/Select-options';
 import Navbar from '../components/Navbar';
 import App from "@/App.tsx"
+import Modal_template, { SubmitFunction } from "../components/Modal_template"
+import { create } from 'domain';
+import { Input } from '@/components/ui/input';
 
 async function getData(): Promise<Process[]> {
   // Fetch data from your API here.
@@ -139,9 +142,34 @@ async function getData(): Promise<Process[]> {
   ];
 }
 
+
+async function createRobot(data: any ) {
+  // Fetch data from your API here.
+  console.log(data)
+}
+
+async function createProcedure(data: any ) {
+  // Fetch data from your API here.
+  console.log(data)
+}
+
+async function createReboiler(data: any ) {
+  // Fetch data from your API here.
+  console.log(data)
+}
+
+function formDataToObject(formData: FormData): { [key: string]: any } {
+  const data: { [key: string]: any } = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+  return data;
+}
+
 const Table: React.FC = () => {
   const [data, setData] = useState<Process[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [step, setStep] = useState<string>("");
 
   useEffect(() => {
     async function fetchData() {
@@ -156,6 +184,17 @@ const Table: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  const newProcedure: SubmitFunction = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("step", step);
+    console.log("Formas" + formData)
+    const data = formDataToObject(formData);
+    console.log(data)
+    createProcedure(data);
+  }
+
   return (
     <div>
       <Navbar />
@@ -168,19 +207,53 @@ const Table: React.FC = () => {
           </TabsList>
           <TabsContent value="procedimentos">
             <div className="flex justify-end mb-2 mt-6">
-              <NewProcessDialog />
+              <Modal_template 
+                title={"Cadastrar procedimento"}
+                button_label="cadastrar procedimento" 
+                children={
+                  <div>
+                    <div>
+                      <label>Etapa</label>
+                      <br/>
+                      <SelectOptions options={["pré-limpeza", "pós-limpeza"]} selected={step} setSelected={setStep}/>
+                    </div>
+                    <div>
+                      <label>Reboiler</label>
+                      <br/>
+                      <Input type="text" name='reboiler' placeholder="Insira o reboiler a ser inspecionado" id="reboiler"/>
+                      <br/>
+                      <label>Robô</label>
+                      <Input type="text" name="robot" placeholder="Insira o robô a ser inspecionado" id="robot"/>
+                      <br/>
+                    </div>
+                  </div>} 
+                submit_action={newProcedure}
+                isOpen={true}>
+              </Modal_template>
             </div>
             <DataTable columns={columns} data={data} />
           </TabsContent>
           <TabsContent value="robos">
             <div className="flex justify-end mb-2 mt-6">
-              <NewProcessDialog />
+              <Modal_template 
+                title={"lala"}
+                button_label="cadastrar robô" 
+                children={<div>lalala</div>} 
+                submit_action={createRobot}
+                isOpen={true}>
+              </Modal_template>
             </div>
             <DataTable columns={columns} data={data} />
           </TabsContent>
           <TabsContent value="reboilers">
             <div className="flex justify-end mb-2 mt-6">
-              <NewProcessDialog />
+              <Modal_template 
+                title={"lala"}
+                button_label="cadastrar reboiler" 
+                children={<div>lalala</div>} 
+                submit_action={createReboiler}
+                isOpen={true}>
+              </Modal_template>
             </div>
             <DataTable columns={columns} data={data} />
           </TabsContent>
