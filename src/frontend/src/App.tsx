@@ -96,10 +96,11 @@ const App: React.FC = () => {
                 messageType: 'sensor_msgs/BatteryState'
             });
 
-            batterySubscriber.subscribe((msg:any) => {
+            batterySubscriber.subscribe((msg) => {
+                console.log(msg);
                 // Extrai a porcentagem da mensagem e atualiza o estado
-                setBatteryPercentage(msg.percentage * 100); // Converte para porcentagem (0 a 100)
-                console.log('Battery percentage:', msg.percentage * 100);
+                setBatteryPercentage(msg.percentage); // Converte para porcentagem (0 a 100)
+                console.log('Battery percentage:', msg.percentage);
             });
 
             console.log('Subscribed to /battery_state for battery updates.');
