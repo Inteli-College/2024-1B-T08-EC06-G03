@@ -200,6 +200,14 @@ const Table: React.FC = () => {
     createRobot(data);
   }
 
+  const newReboiler: SubmitFunction = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = formDataToObject(formData);
+    createReboiler(data);
+  }
+
+
   return (
     <div>
       <Navbar />
@@ -225,10 +233,10 @@ const Table: React.FC = () => {
                     <div>
                       <label>Reboiler</label>
                       <br/>
-                      <Input type="text" name='reboiler' placeholder="Insira o reboiler a ser inspecionado" id="reboiler"/>
+                      <Input type="text" name='reboiler' placeholder="Insira o reboiler a ser inspecionado" />
                       <br/>
                       <label>Robô</label>
-                      <Input type="text" name="robot" placeholder="Insira o robô a ser inspecionado" id="robot"/>
+                      <Input type="text" name="robot" placeholder="Insira o robô a ser inspecionado"/>
                       <br/>
                     </div>
                   </div>} 
@@ -248,7 +256,7 @@ const Table: React.FC = () => {
                   <div>
                     <label>Apelido</label>
                     <br/>
-                    <Input type="text" name='nickname' placeholder="Insira o apelido do robô a ser cadastrado" id="nickname"/>
+                    <Input type="text" name='nickname' placeholder="Insira o apelido do robô a ser cadastrado"/>
                     <br/>
                   </div>
                 </div>
@@ -262,10 +270,19 @@ const Table: React.FC = () => {
           <TabsContent value="reboilers">
             <div className="flex justify-end mb-2 mt-6">
               <Modal_template 
-                title={"lala"}
-                button_label="cadastrar reboiler" 
-                children={<div>lalala</div>} 
-                submit_action={createReboiler}
+                title={"Cadastrar reboiler"}
+                button_label="Cadastrar reboiler" 
+                children={
+                <div>
+                  <div>
+                    <label>Número</label>
+                    <br/>
+                    <Input type="text" name='number' placeholder="Insira o número do reboiler ser cadastrado"/>
+                    <br/>
+                  </div>
+                </div>
+                } 
+                submit_action={newReboiler}
                 isOpen={true}>
               </Modal_template>
             </div>
