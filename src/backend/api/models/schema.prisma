@@ -20,7 +20,6 @@ model Reboiler {
   number Int
   unit   Unit   @relation(fields: [unit_id], references: [id])
   unit_id Int
-  TubeStates  TubeState[]
   Orders Order[]
 }
 
