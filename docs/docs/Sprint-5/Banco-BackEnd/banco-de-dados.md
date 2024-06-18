@@ -91,21 +91,20 @@ A entidade **Unit** armazena informações sobre a unidade em que o robô operar
 
 ## Relacionamentos
 
-**Tube e Reboiler**
+**Examination e Order**
+Examination.order_Id refere-se a Order.id. Isso cria uma relação dois-para-um *(dois examinations podem ser realizadas por um robô)*. Isso se deve a uma regra de negócio em que um order tem uma examinação de pré-limpeza e pós-limpeza.
 
-Tube.reboiler_id refere-se a Reboiler.id. Isso cria uma relação muitos-para-um *(muitos tubos podem estar associados a um reboiler).*
+**Examination e TubeState**
 
-**Examination e Robot**
+TubeState.examination_id refere-se a Examination.id. Isso cria uma relação muitos-para-um *(muitos tubeState pertencem a uma examinação)*.
 
-Examination.robot_id refere-se a Robot.id. Isso cria uma relação muitos-para-um *(muitas verificações podem ser realizadas por um robô)*.
+**Order e Robot**
 
-**Examination e Reboiler**
+Order.robot_id refere-se a Robot.id. Isso cria uma relação muitos-para-um *(muitos processos podem ser realizadas por um robô)*.
 
-Examination.reboiler_id refere-se a Reboiler.id. Isso cria uma relação muitos-para-um *(muitas verificações podem ser associadas a um reboiler)*.
+**Order e Reboiler**
 
-**TubeState e Tube**
-
-TubeState.tube_id refere-se a Tube.id. Isso cria uma relação muitos-para-um *(muitos estados podem ser associados a um tubo)*.
+Order.reboiler_id refere-se a Reboiler.id. Isso cria uma relação muitos-para-um *(muitas processos podem ser associadas a um reboiler)*.
 
 **TubeState e Image**
 
