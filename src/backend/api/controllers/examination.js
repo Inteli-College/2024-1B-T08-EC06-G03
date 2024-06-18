@@ -76,11 +76,27 @@ const getAllTubeStatesByExaminationId = async (req, res) => {
 }
 
 const createExamination = async (req, res) => {
-    const { step, started_at, finished_at, order_id } = req.body;
+    const { started_at, finished_at, order_id } = req.body;
+    let step = ""
     try {
+        const examinationExist = await prisma.examination.findMany({
+            where: {
+                order_id: order_id
+            }
+        });
+        console.log(examinationExist)
+        if (examinationExist) {
+            if (examinationExist.length > 1) {
+                res.status(400).json({ error: 'Examinations already exists' });
+                return;
+            }
+            step = "Pós"
+        }else{
+            step = "Pré"
+        }
         const newExamination = await prisma.examination.create({
             data: {
-                step,
+                step: step,
                 started_at: started_at ?  started_at : null,
                 finished_at: finished_at ? finished_at : null,
                 order_id: order_id
@@ -88,6 +104,7 @@ const createExamination = async (req, res) => {
         });
         res.status(201).json(newExamination);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
@@ -119,6 +136,7 @@ const deleteExamination = async (req, res) => {
         });
         res.status(204).json("Examination deleted successfully");
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Error deleting examination' });
     }
 };
