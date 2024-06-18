@@ -48,11 +48,11 @@ model Examination {
 
 model Order{
   id           Int      @id @default(autoincrement())
-  status       String 
+  status       String
   robot        Robot    @relation(fields: [robot_id], references: [id])
-  robot_id      Int
+  robot_id     Int
   reboiler     Reboiler @relation(fields: [reboiler_id], references: [id])
-  reboiler_id   Int
+  reboiler_id  Int
   started_at   Int
   finished_at  Int
 }
@@ -64,6 +64,4 @@ model TubeState {
   image_id   Int
   examination   Examination @relation(fields: [examination_id], references: [id])
   examination_id Int
-  reboiler     Reboiler @relation(fields: [reboiler_id], references: [id])
-  reboiler_id   Int
 }
