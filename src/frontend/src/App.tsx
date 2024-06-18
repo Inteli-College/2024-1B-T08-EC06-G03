@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import ROSLIB from 'roslib';
 import useWebSocket from 'react-use-websocket';
 import Joystick from './components/Joystick'; // Adjust the path based on your project structure
 import KillButton from './components/Kill'; // Import the KillButton component
 import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
-import ROSLIB from 'roslib';
 import BatteryBar from './components/BatteryBar';
 
 const API_URL = `http://${window.location.hostname}:8000`;
@@ -81,7 +81,8 @@ const App: React.FC = () => {
         });
     };
 
-    const updateBatteryState = (setBatteryPercentage: React.Dispatch<React.SetStateAction<number>>) => {
+    // Função para atualizar o estado da bateria
+    const updateBatteryState = () => {
         const ros = new ROSLIB.Ros({
             url: `ws://${window.location.hostname}:9090`
         });
@@ -95,15 +96,16 @@ const App: React.FC = () => {
                 messageType: 'sensor_msgs/BatteryState'
             });
 
-            batterySubscriber.subscribe((msg: any) => {
-                setBatteryPercentage(msg.percentage);
-                console.log('Battery percentage:', msg.percentage);
+            batterySubscriber.subscribe((msg:any) => {
+                // Extrai a porcentagem da mensagem e atualiza o estado
+                setBatteryPercentage(msg.percentage * 100); // Converte para porcentagem (0 a 100)
+                console.log('Battery percentage:', msg.percentage * 100);
             });
 
             console.log('Subscribed to /battery_state for battery updates.');
         });
 
-        ros.on('error', (error: Error) => {
+        ros.on('error', (error:any) => {
             console.error('Error connecting to rosbridge server for battery state:', error);
         });
 
@@ -111,6 +113,7 @@ const App: React.FC = () => {
             console.log('Connection to rosbridge server for battery state closed.');
         });
     };
+
 
     useEffect(() => {
         fetchData();
@@ -124,7 +127,7 @@ const App: React.FC = () => {
     }, [teleopData]);
 
     useEffect(() => {
-        updateBatteryState(setBatteryPercentage);
+        updateBatteryState();
     }, []);
 
     const teleopWebSocket = useWebSocket(teleopSocketUrl, {
