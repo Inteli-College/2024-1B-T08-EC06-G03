@@ -119,33 +119,33 @@ const App: React.FC = () => {
 
 
     return (
-    <div className='relative overflow-hidden h-screen flex flex-col items-center justify-center bg-gray-600'>
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">    
-            <div className="relative h-full aspect-[4/3] object-cover bg-black">   
-                <DetectionInterface directions={directions} />
-                <img className="relative w-[640px] h-[480px] object-cover" src={`data:image/jpeg;base64,${image}`} />
+        <div className='relative overflow-hidden h-screen flex flex-col items-center justify-center bg-gray-600'>
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                <div className="relative h-full aspect-[4/3] object-cover bg-black">
+                    <img className="relative w-full h-full object-cover" src={`data:image/jpeg;base64,${image}`} />
+                    <DetectionInterface directions={directions} />
+                </div>
+            </div>
+            <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
+                <HamburgerMenu />
+                <p className='text-red-600'>Fps: {fps}</p>
+            </div>
+            <div className="absolute bottom-20 left-20 p-4">
+                <div className="relative">
+                    <KillButton sendMessage={teleopWebSocket.sendMessage} />
+                </div>
+            </div>
+            <div className="absolute bottom-80 right-24 p-4">
+                <div className="relative">
+                    <SnapButton sendMessage={teleopWebSocket.sendMessage} />
+                </div>
+            </div>
+            <div className="absolute bottom-20 right-20 p-4">
+                <div className="relative">
+                    <Joystick sendMessage={teleopWebSocket.sendMessage} />
+                </div>
             </div>
         </div>
-        <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
-            <HamburgerMenu />
-            <p className='text-red-600'>Fps: {fps}</p>
-        </div>
-        <div className="absolute bottom-20 left-20 p-4">
-            <div className="relative">
-                <KillButton sendMessage={teleopWebSocket.sendMessage} />
-            </div>
-        </div>
-        <div className="absolute bottom-80 right-24 p-4">
-            <div className="relative">
-                <SnapButton sendMessage={teleopWebSocket.sendMessage} />
-            </div>
-        </div>
-        <div className="absolute bottom-20 right-20 p-4">
-            <div className="relative">
-                <Joystick sendMessage={teleopWebSocket.sendMessage} />
-            </div>
-        </div>
-    </div>
     );
 };
 
