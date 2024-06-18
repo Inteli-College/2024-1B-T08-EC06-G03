@@ -1,0 +1,47 @@
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import BatteryState
+
+class BatteryPublisher(Node):
+    def __init__(self):
+        super().__init__('battery_publisher')
+        
+        # Cria um publisher para o tópico 'battery_state'
+        self.pub_battery_state = self.create_publisher(BatteryState, 'battery_state', 10)
+        
+        # Configura um timer para publicar a cada 20 milissegundos
+        self.timer = self.create_timer(30000, self.publish_battery_state)
+        
+    def publish_battery_state(self):
+        # Cria uma mensagem do tipo BatteryState com valores mockados
+        battery_msg = BatteryState()
+        battery_msg.header.stamp = self.get_clock().now().to_msg()
+        battery_msg.header.frame_id = 'battery_frame'
+        battery_msg.percentage = 0.5  # 50% de carga
+        battery_msg.power_supply_status = BatteryState.POWER_SUPPLY_STATUS_UNKNOWN
+        battery_msg.power_supply_health = BatteryState.POWER_SUPPLY_HEALTH_UNKNOWN
+        battery_msg.power_supply_technology = BatteryState.POWER_SUPPLY_TECHNOLOGY_UNKNOWN
+        battery_msg.present = True  
+        
+        # Publica a mensagem no tópico 'battery_state'
+        self.pub_battery_state.publish(battery_msg)
+        
+        # Adiciona logs para acompanhar os valores que estão sendo publicados
+        self.get_logger().debug(f'Publicado no tópico battery_state:')
+        self.get_logger().debug(f'  Porcentagem da Bateria: {battery_msg.percentage * 100:.2f}%')
+        self.get_logger().debug(f'  Voltagem da Bateria: {battery_msg.voltage:.2f}V')
+
+def main(args=None):
+    
+    rclpy.init(args=args)
+    battery_publisher = BatteryPublisher()
+    
+    # Mantém o nó rodando
+    rclpy.spin(battery_publisher)
+    
+    # Destrói o nó e desliga o ROS 2 ao final
+    battery_publisher.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
