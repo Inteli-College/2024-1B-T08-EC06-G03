@@ -1,4 +1,5 @@
 const prisma = require('../models/prismaClient');
+const detector = require('../service/detector');
 
 const getAllTubeStates = async (req, res) => {
     try {
@@ -26,7 +27,19 @@ const getTubeStateById = async (req, res) => {
 };
 
 const createTubeState = async (req, res) => {
-    const { dirtness, image_id, examination_id, tube_id } = req.body;
+    const { dirtness, image, examination_id } = req.body;
+    const image_analysed = await detector.analyse(image);
+    try{
+        const image_id = await prisma.image.create({
+            data: {
+                image: image_analysed,
+                taken_at: Math.floor(new Date()/ 1000)
+            }
+        });
+    }
+    catch (error) {
+        res.status(500).json({ error: 'Error creating image' });
+    }
     try {
         const newTubeState = await prisma.tubeState.create({
             data: {
