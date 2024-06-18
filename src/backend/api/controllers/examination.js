@@ -84,8 +84,7 @@ const createExamination = async (req, res) => {
                 order_id: order_id
             }
         });
-        console.log(examinationExist)
-        if (examinationExist) {
+        if (examinationExist.length !== 0) {
             if (examinationExist.length > 1) {
                 res.status(400).json({ error: 'Examinations already exists' });
                 return;
