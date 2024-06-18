@@ -26,8 +26,7 @@ const App: React.FC = () => {
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
-    const [batteryPercentage, setBatteryPercentage] = useState<number>(0.5); // Inicia com 50%
-
+    const [batteryPercentage, setBatteryPercentage] = useState<number>(0); 
     const [fps, setFps] = useState<number>(0);
     const messageTimestamps = useRef<number[]>([]);
 
@@ -70,7 +69,6 @@ const App: React.FC = () => {
 
                 setFps(messageTimestamps.current.length);
             });
-
             console.log('Camera controller started and subscribed to /camera_feed');
         });
 
@@ -83,19 +81,36 @@ const App: React.FC = () => {
         });
     };
 
+    const updateBatteryState = (setBatteryPercentage: React.Dispatch<React.SetStateAction<number>>) => {
+        const ros = new ROSLIB.Ros({
+            url: `ws://${window.location.hostname}:9090`
+        });
 
-    //Implementação provisória da bateria 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setBatteryPercentage((prev) => {
-            const newPercentage = prev + (Math.random() * 0.1 - 0.05); // Variação aleatória
-            return Math.max(0, Math.min(1, newPercentage)); // Mantém entre 0 e 1
+        ros.on('connection', () => {
+            console.log('Connected to rosbridge server for battery state.');
+
+            const batterySubscriber = new ROSLIB.Topic({
+                ros: ros,
+                name: '/battery_state',
+                messageType: 'sensor_msgs/BatteryState'
             });
-        }, 2000); // Atualiza a cada 2 segundos
-    
-        return () => clearInterval(interval); // Limpa o intervalo ao desmontar
-        }, []);
-    
+
+            batterySubscriber.subscribe((msg: any) => {
+                setBatteryPercentage(msg.percentage);
+                console.log('Battery percentage:', msg.percentage);
+            });
+
+            console.log('Subscribed to /battery_state for battery updates.');
+        });
+
+        ros.on('error', (error: Error) => {
+            console.error('Error connecting to rosbridge server for battery state:', error);
+        });
+
+        ros.on('close', () => {
+            console.log('Connection to rosbridge server for battery state closed.');
+        });
+    };
 
     useEffect(() => {
         fetchData();
@@ -108,6 +123,9 @@ const App: React.FC = () => {
         }
     }, [teleopData]);
 
+    useEffect(() => {
+        updateBatteryState(setBatteryPercentage);
+    }, []);
 
     const teleopWebSocket = useWebSocket(teleopSocketUrl, {
         onOpen: () => console.log('WebSocket connection established.'),
@@ -161,11 +179,9 @@ const App: React.FC = () => {
                     <Joystick sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
+            <BatteryBar batteryPercentage={batteryPercentage} stroke-width="100"/>
         </div>
-        <BatteryBar batteryPercentage={batteryPercentage} stroke-width="100"/>
-
-    </div>
-    );
+        );
 
     
 };
