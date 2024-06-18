@@ -28,14 +28,18 @@ const getExaminationById = async (req, res) => {
 const getAllImagesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try {
-        const images = await prisma.tubeState.findMany({
-            where: { examination_id: parseInt(id) },
+        const examinations = await prisma.tubeState.findMany({
+            where: { id: parseInt(id) },
             include: {
-                image: true
+                TubeStates:{ 
+                    include:{
+                        image: false
+                    }
+                }
             }
         });
-        if(images.length > 0){
-            res.json(images)
+        if(examinations.TubeStates.length > 0){
+            res.json(examinations)
         }
         else{
             res.status(404).json({ error: 'No tube states were found at that examination' });
@@ -48,20 +52,25 @@ const getAllImagesByExaminationId = async (req, res) => {
 const getAllTubeStatesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try{
-        const tubeStates = await prisma.tubeState.findMany({
-            where: { examination_id: parseInt(id) },
+        const examination = await prisma.examination.findUnique({
+            where: { id: parseInt(id) },
             include: {
-                image: false
+                TubeStates:{ 
+                    include:{
+                        image: false
+                    }
+                }
             }
         });
-        if(tubeStates.length > 0){
-            res.json(tubeStates)
+        if(examination.TubeStates.length > 0){
+            res.json(examination)
         }
         else{
             res.status(404).json({ error: 'No tube states were found at that examination' });
         }
     }
     catch (error) {
+        console.log(error)  
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
