@@ -5,7 +5,7 @@ const getAllRobots = async (req, res) => {
     const robots = await prisma.robot.findMany();
     res.json(robots);
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching robots' });
+    res.status(500).json({ error: 'Error fetching robot' });
   }
 };
 
@@ -26,11 +26,11 @@ const getRobotById = async (req, res) => {
 };
 
 const createRobot = async (req, res) => {
-  const { last_manufactured } = req.body;
+  const { nickname } = req.body;
   try {
     const newRobot = await prisma.robot.create({
       data: {
-        last_manufactured: last_manufactured
+        nickname
       }
     });
     res.status(201).json(newRobot);
@@ -41,11 +41,11 @@ const createRobot = async (req, res) => {
 
 const updateRobot = async (req, res) => {
   const { id } = req.params;
-  const { last_manufactured } = req.body;
+  const { nickname } = req.body;
   try {
     const updatedRobot = await prisma.robot.update({
       where: { id: parseInt(id) },
-      data: { last_manufactured: last_manufactured }
+      data: { nickname }
     });
     res.json(updatedRobot);
   } catch (error) {

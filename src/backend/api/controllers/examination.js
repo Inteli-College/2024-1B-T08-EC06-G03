@@ -28,14 +28,18 @@ const getExaminationById = async (req, res) => {
 const getAllImagesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try {
-        const images = await prisma.tubeState.findMany({
-            where: { examination_id: parseInt(id) },
+        const examinations = await prisma.tubeState.findMany({
+            where: { id: parseInt(id) },
             include: {
-                image: true
+                TubeStates:{ 
+                    include:{
+                        image: false
+                    }
+                }
             }
         });
-        if(images.length > 0){
-            res.json(images)
+        if(examinations.TubeStates.length > 0){
+            res.json(examinations)
         }
         else{
             res.status(404).json({ error: 'No tube states were found at that examination' });
@@ -48,54 +52,74 @@ const getAllImagesByExaminationId = async (req, res) => {
 const getAllTubeStatesByExaminationId = async (req, res) => {
     const { id } = req.params;
     try{
-        const tubeStates = await prisma.tubeState.findMany({
-            where: { examination_id: parseInt(id) },
+        const examination = await prisma.examination.findUnique({
+            where: { id: parseInt(id) },
             include: {
-                image: false
+                TubeStates:{ 
+                    include:{
+                        image: false
+                    }
+                }
             }
         });
-        if(tubeStates.length > 0){
-            res.json(tubeStates)
+        if(examination.TubeStates.length > 0){
+            res.json(examination)
         }
         else{
             res.status(404).json({ error: 'No tube states were found at that examination' });
         }
     }
     catch (error) {
+        console.log(error)  
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
 const createExamination = async (req, res) => {
-    const { etapa, robot_id, reboiler_id, started_at, finished_at } = req.body;
+    const { started_at, finished_at, order_id } = req.body;
+    let step = ""
     try {
+        const examinationExist = await prisma.examination.findMany({
+            where: {
+                order_id: order_id
+            }
+        });
+        console.log(examinationExist)
+        if (examinationExist) {
+            if (examinationExist.length > 1) {
+                res.status(400).json({ error: 'Examinations already exists' });
+                return;
+            }
+            step = "Pós"
+        }else{
+            step = "Pré"
+        }
         const newExamination = await prisma.examination.create({
             data: {
-                etapa,
-                robot_id,
-                reboiler_id,
+                step: step,
                 started_at: started_at ?  started_at : null,
-                finished_at: finished_at ? finished_at : null
+                finished_at: finished_at ? finished_at : null,
+                order_id: order_id
             }
         });
         res.status(201).json(newExamination);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
 const updateExamination = async (req, res) => {
     const { id } = req.params;
-    const { etapa, robot_id, reboiler_id, started_at, finished_at } = req.body;
+    const { step, started_at, finished_at, order_id } = req.body;
     try {
         const updatedExamination = await prisma.examination.update({
             where: { id: parseInt(id) },
             data: {
-                etapa: etapa,
-                robot_id: robot_id,
-                reboiler_id: reboiler_id,
+                step: step,
                 started_at: started_at,
-                finished_at: finished_at
+                finished_at: finished_at,
+                order_id: order_id
             }
         });
         res.json(updatedExamination);
@@ -112,6 +136,7 @@ const deleteExamination = async (req, res) => {
         });
         res.status(204).json("Examination deleted successfully");
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Error deleting examination' });
     }
 };
