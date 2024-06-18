@@ -189,10 +189,15 @@ const Table: React.FC = () => {
 
     const formData = new FormData(event.currentTarget);
     formData.append("step", step);
-    console.log("Formas" + formData)
     const data = formDataToObject(formData);
-    console.log(data)
     createProcedure(data);
+  }
+
+  const newRobot: SubmitFunction = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = formDataToObject(formData);
+    createRobot(data);
   }
 
   return (
@@ -236,10 +241,19 @@ const Table: React.FC = () => {
           <TabsContent value="robos">
             <div className="flex justify-end mb-2 mt-6">
               <Modal_template 
-                title={"lala"}
+                title={"Cadastrar robô"}
                 button_label="cadastrar robô" 
-                children={<div>lalala</div>} 
-                submit_action={createRobot}
+                children={
+                <div>
+                  <div>
+                    <label>Apelido</label>
+                    <br/>
+                    <Input type="text" name='nickname' placeholder="Insira o apelido do robô a ser cadastrado" id="nickname"/>
+                    <br/>
+                  </div>
+                </div>
+                } 
+                submit_action={newRobot}
                 isOpen={true}>
               </Modal_template>
             </div>
