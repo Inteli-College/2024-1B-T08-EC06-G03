@@ -66,14 +66,12 @@ A entidade **Robot** armazena as informações de um determinado robô, contendo
 
 ### TubeState
 
-A entidade **TubeState** serve para ar 
-uma vez que armazena o estado de um tubo em uma sessão. Com ela é possível gerar medidas como a percentagem de sujeira de um reboiler antes de uma limpeza e compará-la com após a limpeza. Além disso, a tabela também é associada com a imagem, permitindo rever se a identificação do grau de sujeira foi correta ou não.
+A entidade **TubeState** serve para armazenar o estado de cada tubo de uma determinada examinação, ou seja, armazenar o estado de sujeira de um determinado tubo de um reboiler. A tabela possui uma relação de 1:1 com a tabela imagem, possibilitando rever a imagem que foi tirada do tubo e analisando a sua sujeira.
 
 - **id**: Identificador único do estado do tubo. (Chave primária, Integer)
 - **dirtness**: Booleano indicando se o tubo está sujo. (bool)
 - **image_id**: Referência para a imagem associada ao estado do tubo. (chave estrangeira da tabela Image)
-- **session_id**: Referência para a verificação associada ao estado do tubo. (chave estrangeirada tabela Examination)
-
+- **examination_id**: Referência para a verificação associada ao estado do tubo. (chave estrangeirada tabela Examination)
 
 ### Reboiler
 
