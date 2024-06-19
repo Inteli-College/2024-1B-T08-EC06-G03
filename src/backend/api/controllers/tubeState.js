@@ -45,7 +45,7 @@ const createTubeState = async (req, res) => {
                 examination_id,
             }
         });
-        res.status(201).json(newTubeState);
+        res.status(201).json({image_analysed, dirtness});
     }
     catch (error) {
         console.log(error);
