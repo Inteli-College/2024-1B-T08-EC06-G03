@@ -109,26 +109,6 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`${API_URL}/teleop/start`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({}),
-                });
-                const jsonData = await response.json();
-                setTeleopData(jsonData);
-            } catch (error) {
-                console.error('Error fetching teleop data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
         if (teleopData?.url) {
             setTeleopSocketUrl(teleopData.url);
         }
