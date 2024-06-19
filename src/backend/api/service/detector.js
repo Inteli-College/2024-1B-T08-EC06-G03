@@ -1,15 +1,19 @@
-class Detector {
-    constructor() {
-    }
+require('dotenv').config();
 
-    async analyse(image) {
+const config = require('config');
+const host = config.get('services.analyse.host');
+const port = config.get('services.analyse.port');
+const route = host + ':' + port; 
+
+class Detector {
+    static async analyse(image) {
         try {
-            const response = await fetch('localhost:3000/infer', {
+            const response = await fetch(`${route}/infer`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ image })
+                body: JSON.stringify({ base64_img: image })
             });
             const data = await response.json();
             return data;
@@ -19,3 +23,5 @@ class Detector {
         }
     }
 }
+
+module.exports = Detector;
