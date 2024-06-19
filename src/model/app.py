@@ -5,17 +5,23 @@ import numpy as np
 import cv2
 import base64
 
-model = YOLO("oloy_verdadeiro.pt")
+model = YOLO("best.pt")
 app = Flask(__name__)
 
+# Route to infer the image sent by the client
+# Returns a json with the base64 inferenced image and a flag indicating if dirt was detected
 @app.route("/infer", methods=["POST"])
 def infer():
     data = request.json
     base64_img = data.get("base64_img")
-    resultado = inferencer(base64_img)
-    return resultado
+    base64_inferenced_image, dirt_detected = inferencer(base64_img)
+    return {"base64_infered_img": base64_inferenced_image,
+            "dirt_detected": dirt_detected}
 
+# Function to infer the image sent 
+# Returns the inferenced image plus a flag indicating if dirt was detected
 def inferencer(base64_img):
+    dirt_detected = 0
     try:
         img = base64.b64decode(str(base64_img))
         new_img = cv2.imdecode(np.frombuffer(img, np.uint8), cv2.IMREAD_COLOR)
@@ -32,12 +38,13 @@ def inferencer(base64_img):
             b = box.xyxy[0]
             c = box.cls
             annotator.box_label(b, model.names[int(c)])
+            if model.names[int(c)] == "dirt":
+                dirt_detected = 1
 
     annotated_image = annotator.result()
     _, buffer = cv2.imencode(".jpg", annotated_image)
-    inferenced_image = annotated_image.copy()
     base64_inferenced_image = base64.b64encode(buffer).decode("utf-8")
-    return base64_inferenced_image
+    return base64_inferenced_image, dirt_detected
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000)
