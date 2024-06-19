@@ -61,22 +61,6 @@ export const columns: ColumnDef<Order>[] = [
     header: "Reboiler",
   },
   {
-    accessorKey: "examinations",
-    header: "Examinations",
-    cell: ({ row }) => {
-      const examinations = row.original.examinations;
-      return (
-        <div>
-          {examinations.map((exam) => (
-            <div key={exam.id}>
-              <strong>{exam.step}</strong> - {new Date(exam.started_at * 1000).toLocaleString()}
-            </div>
-          ))}
-        </div>
-      );
-    },
-  },
-  {
     id: "actions",
     cell: ({ row }) => {
       const order = row.original;
@@ -103,3 +87,4 @@ export const columns: ColumnDef<Order>[] = [
     },
   },
 ];
+  

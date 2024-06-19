@@ -51,6 +51,11 @@ const Table: React.FC = () => {
         setData(combinedData);
         setLoading(false);
       } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError(String(error));
+        }
         setLoading(false);
       }
     }
