@@ -18,6 +18,6 @@ setup(
     license="TODO: License declaration",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": ["lidar = bolin_lidar.bolin_lidar:main"],
+        "console_scripts": ["lidar = bolin_lidar.lidar:main"],
     },
 )

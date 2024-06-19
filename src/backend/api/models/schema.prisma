@@ -20,23 +20,13 @@ model Reboiler {
   number Int
   unit   Unit   @relation(fields: [unit_id], references: [id])
   unit_id Int
-  Tubes  Tube[]
-  Examinations Examination[]
+  Orders Order[]
 }
 
 model Robot {
   id               Int     @id @default(autoincrement())
-  last_manufactured Int
-  Examinations Examination[]
-}
-
-model Tube {
-  id          Int     @id @default(autoincrement())
-  reboiler    Reboiler @relation(fields: [reboiler_id], references: [id])
-  reboiler_id  Int
-  position_column      Int
-  position_row         Int
-  TubeStates  TubeState[]
+  nickname String
+  Orders Order[]
 }
 
 model Image {
@@ -48,14 +38,22 @@ model Image {
 
 model Examination {
   id           Int      @id @default(autoincrement())
-  etapa        String
-  robot        Robot    @relation(fields: [robot_id], references: [id])
-  robot_id      Int
-  reboiler     Reboiler @relation(fields: [reboiler_id], references: [id])
-  reboiler_id   Int
+  step        String
   started_at   Int
   finished_at  Int
+  order_id     Int
   TubeStates   TubeState[]
+}
+
+model Order{
+  id           Int      @id @default(autoincrement())
+  status       String
+  robot        Robot    @relation(fields: [robot_id], references: [id])
+  robot_id     Int
+  reboiler     Reboiler @relation(fields: [reboiler_id], references: [id])
+  reboiler_id  Int
+  started_at   Int
+  finished_at  Int
 }
 
 model TubeState {
@@ -65,6 +63,4 @@ model TubeState {
   image_id   Int
   examination   Examination @relation(fields: [examination_id], references: [id])
   examination_id Int
-  tube      Tube       @relation(fields: [tube_id], references: [id])
-  tube_id    Int
 }
