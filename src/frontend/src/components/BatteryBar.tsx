@@ -44,7 +44,7 @@ const BatteryBar: React.FC<BatteryBarProps> = ({ batteryPercentage }) => {
           }}
         />
       </div>
-      <p style={{ margin: 0, color: 'red' }}>{`${batteryLevel.toFixed(0)}%`}</p> {/* Estiliza o texto em vermelho */}
+      <p style={{ margin: 0, color: 'white' }}>{`${batteryLevel.toFixed(0)}%`}</p> {/* Estiliza o texto em branco */}
     </div>
   );
 };
