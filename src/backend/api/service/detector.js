@@ -16,7 +16,10 @@ class Detector {
                 body: JSON.stringify({ base64_img: image })
             });
             const data = await response.json();
-            return data;
+            return {
+                dirtDetected: data.dirt_detected,
+                base64InferedImg: data.base64_infered_img
+            };
         } catch (error) {
             console.error('Error:', error);
             throw error;
