@@ -1,146 +1,22 @@
-/// Table.tsx (or Table.js)
 import React, { useEffect, useState } from 'react';
+import { Plus } from 'lucide-react'; 
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs";
-import { Process, columns } from "../components/Columns";
-import { DataTable } from "../components/DataTable";
-import { NewProcessDialog } from "@/components/NewProcessDialog"
-import SelectOptions from '@/components/Select-options';
+} from '@/components/ui/tabs';
+import { Examination, Order, columns } from '../components/Columns';
+import { DataTable } from '../components/DataTable';
+import { NewProcessDialog } from '@/components/NewProcessDialog';
+import { UnitDropdown } from '@/components/UnitDropdown';
+import { Button } from '@/components/ui/button';
 import Navbar from '../components/Navbar';
-import App from "@/App.tsx"
+import SelectOptions from '@/components/Select-options';
 import Modal_template, { SubmitFunction } from "../components/Modal_template"
 import { create } from 'domain';
 import { Input } from '@/components/ui/input';
 
-async function getData(): Promise<Process[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    {
-      etapa: "pré",
-      robo: "RoboBolin",
-      reboiler: "pending",
-      data: "2021-10-01T00:00:00Z",
-      sujidade: 20,
-    },
-    // ...
-  ];
-}
 
 
 async function createRobot(data: any ) {
@@ -167,21 +43,62 @@ function formDataToObject(formData: FormData): { [key: string]: any } {
 }
 
 const Table: React.FC = () => {
-  const [data, setData] = useState<Process[]>([]);
+  const [data, setData] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<string>("");
 
   useEffect(() => {
     async function fetchData() {
-      const result = await getData();
-      setData(result);
-      setLoading(false);
+      try {
+        const [ordersResponse, examinationsResponse] = await Promise.all([
+          fetch('http://localhost:8000/api/orders', {
+            method: 'GET',
+            headers: {
+              'Cache-Control': 'no-cache',
+            },
+          }),
+          fetch('http://localhost:8000/api/examinations', {
+            method: 'GET',
+            headers: {
+              'Cache-Control': 'no-cache',
+            },
+          }),
+        ]);
+
+        if (!ordersResponse.ok || !examinationsResponse.ok) {
+          throw new Error('Failed to fetch data from one or both endpoints');
+        }
+
+        const orders = await ordersResponse.json();
+        const examinations = await examinationsResponse.json();
+
+        const combinedData = orders.map((order: Order) => ({
+          ...order,
+          examinations: examinations.filter((examination: Examination) => examination.order_id === order.id),
+        }));
+
+        setData(combinedData);
+        setLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError(String(error));
+        }
+        setLoading(false);
+      }
     }
+
     fetchData();
   }, []);
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching data: {error}</div>;
   }
 
   const newProcedure: SubmitFunction = (event) => {
@@ -211,7 +128,13 @@ const Table: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className="container mx-auto py-10 pt-32">
+      <div className="container mx-auto py-10 pt-44">
+        <div className="mb-4 flex justify-between items-center">
+          <UnitDropdown />
+          <Button variant="outline" className="w-10 h-10 flex justify-center items-center p-0">
+            <Plus className="h-5 w-5" />
+          </Button>
+        </div>
         <Tabs defaultValue="procedimentos">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="procedimentos">Procedimentos</TabsTrigger>
@@ -289,8 +212,6 @@ const Table: React.FC = () => {
             <DataTable columns={columns} data={data} />
           </TabsContent>
         </Tabs>
-        
-        
       </div>
     </div>
   );

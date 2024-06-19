@@ -1,7 +1,9 @@
-import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
- 
-import { Button } from "@/components/ui/button"
+// Columns.ts
+
+import { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,45 +11,60 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
-import { NewProcessDialog } from "./NewProcessDialog"
+export type Examination = {
+  id: number;
+  step: "Pré" | "Pós";
+  started_at: number;
+  finished_at: number;
+  order_id: number;
+};
 
+export type Order = {
+  id: number;
+  status: string;
+  robot_id: number;
+  reboiler_id: number;
+  started_at: number;
+  finished_at: number;
+  examinations: Examination[];
+};
 
-export type Process = {
-  etapa: "pré" | "pós"
-  robo: string
-  reboiler: string
-  data: string
-  sujidade: number
-}
-
-export const columns: ColumnDef<Process>[] = [
+export const columns: ColumnDef<Order>[] = [
   {
-    accessorKey: "etapa",
-    header: "Etapa",
+    accessorKey: "status",
+    header: "Status",
   },
   {
-    accessorKey: "robo",
+    accessorKey: "started_at",
+    header: "Data de Início",
+    cell: ({ getValue }) => {
+      const value = getValue() as number;
+      return new Date(value * 1000).toLocaleString();
+    },
+  },
+  {
+    accessorKey: "finished_at",
+    header: "Data de Fim",
+    cell: ({ getValue }) => {
+      const value = getValue() as number;
+      return new Date(value * 1000).toLocaleString();
+    },
+  },
+  {
+    accessorKey: "robot_id",
     header: "Robô",
   },
   {
-    accessorKey: "reboiler",
+    accessorKey: "reboiler_id",
     header: "Reboiler",
-  },
-  {
-    accessorKey: "data",
-    header: "Data",
-  },
-  {
-    accessorKey: "sujidade",
-    header: "Sujidade (%)",
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const process = row.original
- 
+      const order = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -58,17 +75,16 @@ export const columns: ColumnDef<Process>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(process.robo)}
-            >
-              Copy payment ID
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order.id.toString())}>
+              Copy Order ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>View order details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
+  
