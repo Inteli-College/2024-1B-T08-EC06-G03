@@ -27,7 +27,7 @@ const getTubeStateById = async (req, res) => {
 };
 
 const createTubeState = async (req, res) => {
-    const { image, examination_id } = req.body;
+    const { image, examination_id, taken_at } = req.body;
     const response =  await detector.analyse(image);
     const  image_analysed = response.base64InferedImg;
     const dirtness =  response.dirtDetected;
@@ -35,7 +35,7 @@ const createTubeState = async (req, res) => {
         const imageCreated = await prisma.image.create({
             data: {
                 image: image_analysed,
-                taken_at: 1718815524
+                taken_at
             }
         });
         const newTubeState = await prisma.tubeState.create({
