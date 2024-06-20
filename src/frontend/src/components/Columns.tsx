@@ -31,7 +31,7 @@ export type Order = {
   Examinations: Examination[];
 };
 
-export type Robot {
+export type Robot = {
   id: number;
   nickname: string;
   unit_id: number;
