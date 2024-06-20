@@ -88,7 +88,7 @@ export function DataTable({
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {row.original.examinations
+                    {row.original.Examinations
                       .filter((exam) => exam.step === "Pré")
                       .map((exam) => (
                         <TableRow key={exam.id}>
@@ -100,7 +100,7 @@ export function DataTable({
                           </TableCell>
                         </TableRow>
                       ))}
-                    {row.original.examinations
+                    {row.original.Examinations
                       .filter((exam) => exam.step === "Pós")
                       .map((exam) => (
                         <TableRow key={exam.id}>

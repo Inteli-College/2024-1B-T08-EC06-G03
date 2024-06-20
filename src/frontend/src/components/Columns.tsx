@@ -28,7 +28,7 @@ export type Order = {
   reboiler_id: number;
   started_at: number;
   finished_at: number;
-  examinations: Examination[];
+  Examinations: Examination[];
 };
 
 export type Robot = {
