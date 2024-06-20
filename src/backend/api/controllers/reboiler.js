@@ -25,6 +25,24 @@ const getReboilerById = async (req, res) => {
     }
 };
 
+const getReboilerByUnitId = async (req, res) => {
+    const {id } = req.params;
+    try{
+        const reboiler = await prisma.reboiler.findMany({
+            where: {unit_id: parseInt(id)}
+        });
+        if(reboiler){
+            res.json(reboiler);
+        }else{
+            res.status(404).json({error: 'No reboilers were found at that unit'});
+        }
+    }
+    catch(error){
+        res.status(500).json({error: 'Error fetching reboiler'});
+    }
+}
+
+
 const createReboiler = async (req, res) => {
     const { number, unit_id } = req.body;
     try {
@@ -69,6 +87,7 @@ const deleteReboiler = async (req, res) => {
 module.exports = {
     getAllReboilers,
     getReboilerById,
+    getReboilerByUnitId,
     createReboiler,
     updateReboiler,
     deleteReboiler
