@@ -34,7 +34,10 @@ const getOrderByUnitId = async (req, res) => {
 			reboiler: {
 			unit: { id: parseInt(unitId) }, // Join with Reboiler and Unit tables
 			},
-		}
+		},
+		include: {
+			Examinations: true, // Include examination details
+		},
 		});
 		if (orders.length > 0) {
 		res.json(orders);
@@ -42,6 +45,7 @@ const getOrderByUnitId = async (req, res) => {
 		res.json({ message: 'No orders found for this unit' }); // Informative message
 		}
 	} catch (error) {
+		console.log(error);
 		res.status(500).json({ error: 'Error fetching orders' });
 	}
 };	  
