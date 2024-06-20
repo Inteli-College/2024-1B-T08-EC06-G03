@@ -48,6 +48,7 @@ const Table: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<string>("");
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
+  const [unit, setUnit] = useState<number>(1);
 
   useEffect(() => {
     if (tabSelected === "procedimentos") {
@@ -66,7 +67,7 @@ const Table: React.FC = () => {
 
   const fetchOrders = async () => {
     try {
-      const orders: Order[] | string = await getOrders();
+      const orders: Order[] | string = await getOrders(unit);
       if (typeof orders === "string") {
         setError(orders);
       } else {
@@ -82,7 +83,7 @@ const Table: React.FC = () => {
 
   const fetchRobots = async () => {
     try {
-      const robots: Robot[] | string = await getRobots();
+      const robots: Robot[] | string = await getRobots(unit);
       // if (typeof robots === "string") {
       //   setError(robots);
       // } else {
