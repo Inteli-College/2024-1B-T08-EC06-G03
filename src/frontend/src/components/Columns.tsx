@@ -31,6 +31,16 @@ export type Order = {
   examinations: Examination[];
 };
 
+export type Robot = {
+  id: number;
+  nickname: string;
+}
+
+export type Reboiler = {
+  id: number;
+  number: number;
+}
+
 export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "status",
