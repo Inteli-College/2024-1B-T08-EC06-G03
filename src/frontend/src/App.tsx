@@ -156,7 +156,7 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div className="absolute top-0 left-0 p-4 flex flex-col items-start justify-start">
-                <HamburgerMenu />
+                <HamburgerMenu examinationId={examinationId}/>
                 <p className='text-red-600'>Fps: {fps}</p>
             </div>
             <div className="absolute bottom-20 left-20 p-4">
