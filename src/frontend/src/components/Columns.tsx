@@ -31,7 +31,7 @@ export type Order = {
   Examinations: Examination[];
 };
 
-export type Robot = {
+export type Robot {
   id: number;
   nickname: string;
   unit_id: number;
@@ -125,30 +125,16 @@ export const columnsRobot: ColumnDef<Robot>[] = [
   {
     accessorKey: "unit_id",
     header: "Unit ID",
-  },{
-    id: "actions",
-    cell: ({ row }) => {
-      const order = row.original;
+  }
+];
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order.id.toString())}>
-              Copy Order ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View order details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+export const columnsReboiler: ColumnDef<Reboiler>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "number",
+    header: "Number",
   }
 ];

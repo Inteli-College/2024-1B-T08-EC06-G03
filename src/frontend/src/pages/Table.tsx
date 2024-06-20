@@ -6,9 +6,10 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { Robot, Order, Reboiler, columnsExamination, columnsRobot } from '../components/Columns';
-import {getOrders} from '@/api/orders';
+import { Robot, Order, Reboiler, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
+import { getOrders } from '@/api/orders';
 import { getRobots } from '@/api/robot';
+import { getReboilers } from '@/api/reboiler';
 import { DataTable } from '../components/DataTable';
 import { NewProcessDialog } from '@/components/NewProcessDialog';
 import  UnitDropdown from '../components/UnitDropdown';
@@ -44,28 +45,30 @@ function formDataToObject(formData: FormData): { [key: string]: any } {
 }
 
 const Table: React.FC = () => {
-  const [data, setData] = useState<Order[] | Robot[] >([]);
+  const [data, setData] = useState<Order[] | Robot[] | Reboiler[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<string>("");
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
-  const [typeTable, setTypeTable] = useState<ColumnDef<Order | Robot>[]>(columnsExamination as ColumnDef<Order | Robot>[]);
+  const [typeTable, setTypeTable] = useState<ColumnDef<Order | Robot | Reboiler>[] | null>();
   const [unit, setUnit] = useState<number>(1);
 
   useEffect(() => {
+    console.log(tabSelected)
     if (tabSelected === "procedimentos") {
       setLoading(true);
-      setTypeTable(columnsExamination as ColumnDef<Order | Robot>[]);
+      setTypeTable(columnsExamination as ColumnDef<Order | Robot | Reboiler>[]);
       fetchOrders();
     }
     else if (tabSelected === "robos") {
       setLoading(true);
-      setTypeTable(columnsRobot as ColumnDef<Order | Robot>[]);
+      setTypeTable(columnsRobot as ColumnDef<Order | Robot | Reboiler>[]);
       fetchRobots();
     }
     else if (tabSelected === "reboilers") {
       setLoading(true);
-      fetchOrders();
+      setTypeTable(columnsReboiler as ColumnDef<Order | Robot | Reboiler>[]);
+      fetchReboilers();
     }
   }, [tabSelected, unit]);
 
@@ -94,6 +97,23 @@ const Table: React.FC = () => {
         setData(robots);
       }
       console.log(robots)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);
+    }
+  }; 
+
+  const fetchReboilers = async () => {
+    try {
+      const reboilers: Reboiler[] | string = await getReboilers(unit);
+      if (typeof reboilers === "string") {
+        setError(reboilers);
+      } else {
+        setData(reboilers);
+      }
+      console.log(reboilers)
     } catch (error) {
       console.error('Error fetching data:', error);
       setError('An error occurred while fetching data.'); 
@@ -149,9 +169,9 @@ const Table: React.FC = () => {
         </div>
         <Tabs defaultValue="procedimentos">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="procedimentos">Procedimentos</TabsTrigger>
-            <TabsTrigger value="robos" onFocus={()=>console.log(fetchRobots())}>Robôs</TabsTrigger>
-            <TabsTrigger value="reboilers">Reboilers</TabsTrigger>
+            <TabsTrigger value="procedimentos" onFocus={()=>setTabSelected("procedimentos")}>Procedimentos</TabsTrigger>
+            <TabsTrigger value="robos" onFocus={()=>setTabSelected("robos")} >Robôs</TabsTrigger>
+            <TabsTrigger value="reboilers" onFocus={()=>setTabSelected("reboilers")}>Reboilers</TabsTrigger>
           </TabsList>
           {loading && ( 
              <div><br/>Loading...</div>
