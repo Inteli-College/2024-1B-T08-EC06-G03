@@ -6,8 +6,9 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { Examination, Order, columns } from '../components/Columns';
-import { getOrders} from '../api/orders';
+import { Robot, Order, columns } from '../components/Columns';
+import {getOrders} from '@/api/orders';
+import { getRobots } from '@/api/robot';
 import { DataTable } from '../components/DataTable';
 import { NewProcessDialog } from '@/components/NewProcessDialog';
 import { UnitDropdown } from '@/components/UnitDropdown';
@@ -17,8 +18,6 @@ import SelectOptions from '@/components/Select-options';
 import Modal_template, { SubmitFunction } from "../components/Modal_template"
 import { create } from 'domain';
 import { Input } from '@/components/ui/input';
-
-
 
 async function createRobot(data: any ) {
   // Fetch data from your API here.
@@ -44,34 +43,66 @@ function formDataToObject(formData: FormData): { [key: string]: any } {
 }
 
 const Table: React.FC = () => {
-  const [data, setData] = useState<Order[] >([]);
+  const [data, setData] = useState<Order[] | Robot[] >([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<string>("");
+  const [tabSelected, setTabSelected] = useState<string>("procedimentos");
+
+  useEffect(() => {
+    if (tabSelected === "procedimentos") {
+      setLoading(true);
+      fetchOrders();
+    }
+    else if (tabSelected === "robos") {
+      setLoading(true);
+      fetchOrders();
+    }
+    else if (tabSelected === "reboilers") {
+      setLoading(true);
+      fetchOrders();
+    }
+  }, [tabSelected]);
+
+  const fetchOrders = async () => {
+    try {
+      const orders: Order[] | string = await getOrders();
+      if (typeof orders === "string") {
+        setError(orders);
+      } else {
+        setData(orders);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);
+    }
+  }; 
+
+  const fetchRobots = async () => {
+    try {
+      const robots: Robot[] | string = await getRobots();
+      // if (typeof robots === "string") {
+      //   setError(robots);
+      // } else {
+      //   setData(robots);
+      // }
+      console.log(robots)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);
+    }
+  }; 
 
   useEffect(() => {
     setLoading(true);
-    const fetchData = async () => {
-      try {
-        const orders: Order[] | string = await getOrders();
-        if (typeof orders === "string") {
-          setError(orders);
-        } else {
-          setData(orders);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('An error occurred while fetching data.'); // Provide a user-friendly error message
-      } finally {
-        setLoading(false);
-      }
-    }; 
-    fetchData(); 
+    fetchOrders();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+
 
   if (error) {
     return <div>Error fetching data: {error}</div>;
@@ -114,9 +145,13 @@ const Table: React.FC = () => {
         <Tabs defaultValue="procedimentos">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="procedimentos">Procedimentos</TabsTrigger>
-            <TabsTrigger value="robos">Robôs</TabsTrigger>
+            <TabsTrigger value="robos" onFocus={()=>console.log(fetchRobots())}>Robôs</TabsTrigger>
             <TabsTrigger value="reboilers">Reboilers</TabsTrigger>
           </TabsList>
+          (loading) {
+             <div>Loading...</div>
+          }
+          else{<>
           <TabsContent value="procedimentos">
             <div className="flex justify-end mb-2 mt-6">
               <Modal_template 
@@ -187,6 +222,8 @@ const Table: React.FC = () => {
             </div>
             <DataTable columns={columns} data={data} />
           </TabsContent>
+          </>
+          }
         </Tabs>
       </div>
     </div>
