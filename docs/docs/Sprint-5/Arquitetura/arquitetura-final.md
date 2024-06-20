@@ -35,7 +35,7 @@ O metapackage `bolin` agrupa todos esses nodes e inclui um mock da bateria, usad
 
 ##### Backend (Express.js)
 
-O backend do sistema é implementado em Express.js e possui várias funções críticas. O `Teleop Controller` é responsável por se subscrever no tópico `obstacle_distances` e publicar nos tópicos `angular_speed` e `linear_speed`. Ele integra um sistema de segurança que utiliza os dados do LIDAR para evitar que o robô se mova em direção a obstáculos. Este componente usa a biblioteca `roslib` para comunicação com os tópicos ROS usando Websockets disponibilizados pelo RosBridge.
+O backend do sistema é implementado em Express.js e possui várias funções essenciais. O `Teleop Controller` é responsável por se subscrever no tópico `obstacle_distances` e publicar nos tópicos `angular_speed` e `linear_speed`. Ele integra um sistema de segurança que utiliza os dados do LIDAR para evitar que o robô se mova em direção a obstáculos. Este componente usa a biblioteca `roslib` para comunicação com os tópicos ROS usando Websockets disponibilizados pelo RosBridge.
 
 O sistema de segurança integrado ao Teleop Controller utiliza os dados do LIDAR para tomar decisões em tempo real, garantindo que o robô não colida com obstáculos. Além disso, o backend implementa WebSockets para comunicação com o frontend, permitindo o envio de dados do LIDAR e a recepção de comandos de teleoperação de maneira eficiente e em tempo real.
 
