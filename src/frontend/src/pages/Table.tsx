@@ -7,6 +7,7 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs';
 import { Examination, Order, columns } from '../components/Columns';
+import { getOrders} from '../api/orders';
 import { DataTable } from '../components/DataTable';
 import { NewProcessDialog } from '@/components/NewProcessDialog';
 import { UnitDropdown } from '@/components/UnitDropdown';
@@ -43,54 +44,29 @@ function formDataToObject(formData: FormData): { [key: string]: any } {
 }
 
 const Table: React.FC = () => {
-  const [data, setData] = useState<Order[]>([]);
+  const [data, setData] = useState<Order[] >([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<string>("");
 
   useEffect(() => {
-    async function fetchData() {
+    setLoading(true);
+    const fetchData = async () => {
       try {
-        const [ordersResponse, examinationsResponse] = await Promise.all([
-          fetch('http://localhost:8000/api/orders', {
-            method: 'GET',
-            headers: {
-              'Cache-Control': 'no-cache',
-            },
-          }),
-          fetch('http://localhost:8000/api/examinations', {
-            method: 'GET',
-            headers: {
-              'Cache-Control': 'no-cache',
-            },
-          }),
-        ]);
-
-        if (!ordersResponse.ok || !examinationsResponse.ok) {
-          throw new Error('Failed to fetch data from one or both endpoints');
-        }
-
-        const orders = await ordersResponse.json();
-        const examinations = await examinationsResponse.json();
-
-        const combinedData = orders.map((order: Order) => ({
-          ...order,
-          examinations: examinations.filter((examination: Examination) => examination.order_id === order.id),
-        }));
-
-        setData(combinedData);
-        setLoading(false);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
+        const orders: Order[] | string = await getOrders();
+        if (typeof orders === "string") {
+          setError(orders);
         } else {
-          setError(String(error));
+          setData(orders);
         }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('An error occurred while fetching data.'); // Provide a user-friendly error message
+      } finally {
         setLoading(false);
       }
-    }
-
-    fetchData();
+    }; 
+    fetchData(); 
   }, []);
 
   if (loading) {
