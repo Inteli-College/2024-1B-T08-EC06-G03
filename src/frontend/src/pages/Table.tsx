@@ -149,10 +149,10 @@ const Table: React.FC = () => {
             <TabsTrigger value="robos" onFocus={()=>console.log(fetchRobots())}>Robôs</TabsTrigger>
             <TabsTrigger value="reboilers">Reboilers</TabsTrigger>
           </TabsList>
-          (loading) {
-             <div>Loading...</div>
-          }
-          else{<>
+          {loading && ( 
+             <div><br/>Loading...</div>
+          )}
+          {!loading && (<>
           <TabsContent value="procedimentos">
             <div className="flex justify-end mb-2 mt-6">
               <Modal_template 
@@ -224,7 +224,7 @@ const Table: React.FC = () => {
             <DataTable columns={columns} data={data} />
           </TabsContent>
           </>
-          }
+          )}
         </Tabs>
       </div>
     </div>
