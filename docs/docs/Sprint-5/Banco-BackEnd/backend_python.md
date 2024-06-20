@@ -89,6 +89,9 @@ def inferencer(base64_img):
     return base64_inferenced_image, dirt_detected
 ```
 
+## Rotas
+Para ver testes da rota implementada acima, acesse o [postman](https://www.postman.com/planetary-resonance-766487/workspace/backend-python/request/27247540-477f79a6-5265-430d-9a24-94858efd368a).
+
 
 
 
