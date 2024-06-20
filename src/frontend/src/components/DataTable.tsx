@@ -17,11 +17,11 @@ import {
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Order } from '../components/Columns'; // Certifique-se de importar o tipo Order
+import { Order, Reboiler, Robot } from '../components/Columns'; // Certifique-se de importar o tipo Order
 
 interface DataTableProps {
-  columns: ColumnDef<Order, any>[];
-  data: Order[];
+  columns: ColumnDef<Order | Robot>[];
+  data: Order[] | Robot[] | Reboiler[]; 
 }
 
 export function DataTable({

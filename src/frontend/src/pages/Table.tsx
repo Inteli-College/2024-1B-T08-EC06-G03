@@ -6,7 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { Robot, Order, columns } from '../components/Columns';
+import { Robot, Order, Reboiler, columnsExamination, columnsRobot } from '../components/Columns';
 import {getOrders} from '@/api/orders';
 import { getRobots } from '@/api/robot';
 import { DataTable } from '../components/DataTable';
@@ -18,6 +18,7 @@ import SelectOptions from '@/components/Select-options';
 import Modal_template, { SubmitFunction } from "../components/Modal_template"
 import { create } from 'domain';
 import { Input } from '@/components/ui/input';
+import { ColumnDef } from '@tanstack/react-table';
 
 async function createRobot(data: any ) {
   // Fetch data from your API here.
@@ -48,17 +49,19 @@ const Table: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<string>("");
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
+  const [typeTable, setTypeTable] = useState<ColumnDef<Order | Robot>[]>(columnsExamination as ColumnDef<Order | Robot>[]);
   const [unit, setUnit] = useState<number>(1);
-
 
   useEffect(() => {
     if (tabSelected === "procedimentos") {
       setLoading(true);
+      setTypeTable(columnsExamination as ColumnDef<Order | Robot>[]);
       fetchOrders();
     }
     else if (tabSelected === "robos") {
       setLoading(true);
-      fetchOrders();
+      setTypeTable(columnsRobot as ColumnDef<Order | Robot>[]);
+      fetchRobots();
     }
     else if (tabSelected === "reboilers") {
       setLoading(true);
@@ -85,11 +88,11 @@ const Table: React.FC = () => {
   const fetchRobots = async () => {
     try {
       const robots: Robot[] | string = await getRobots(unit);
-      // if (typeof robots === "string") {
-      //   setError(robots);
-      // } else {
-      //   setData(robots);
-      // }
+      if (typeof robots === "string") {
+        setError(robots);
+      } else {
+        setData(robots);
+      }
       console.log(robots)
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -180,7 +183,7 @@ const Table: React.FC = () => {
                 isOpen={true}>
               </Modal_template>
             </div>
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={typeTable} data={data} />
           </TabsContent>
           <TabsContent value="robos">
             <div className="flex justify-end mb-2 mt-6">
@@ -201,7 +204,7 @@ const Table: React.FC = () => {
                 isOpen={true}>
               </Modal_template>
             </div>
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={typeTable} data={data} />
           </TabsContent>
           <TabsContent value="reboilers">
             <div className="flex justify-end mb-2 mt-6">
@@ -222,7 +225,7 @@ const Table: React.FC = () => {
                 isOpen={true}>
               </Modal_template>
             </div>
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={typeTable} data={data} />
           </TabsContent>
           </>
           )}
