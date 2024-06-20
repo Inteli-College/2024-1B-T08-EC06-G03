@@ -27,7 +27,8 @@ model Reboiler {
 model Robot {
   id          Int     @id @default(autoincrement())
   nickname    String
-  unit_id     Int
+  unit        Unit    @relation(fields: [unit_id], references: [id])
+  unit_id     Int     
   Orders      Order[]
 }
 
