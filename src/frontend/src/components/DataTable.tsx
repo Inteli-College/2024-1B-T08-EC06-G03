@@ -41,8 +41,8 @@ export function DataTable({
 
   const navigate = useNavigate();
 
-  const handleControlClick = (orderId: number) => {
-    navigate(`/control/${orderId}`);
+  const handleControlClick = (examinationId: number) => {
+    navigate(`/control/${examinationId}`);
   };
 
   return (
