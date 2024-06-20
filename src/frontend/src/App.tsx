@@ -7,6 +7,7 @@ import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
 import BatteryBar from './components/BatteryBar';
+import {useParams} from 'react-router-dom';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
@@ -20,8 +21,14 @@ type Direction =
     | 'left'
     | 'front-left';
 
+interface SnapButton{
+    examinationId: string;
+}
+
 const App: React.FC = () => {
 
+    const params = useParams();
+    const examinationId = params.id;
     const [directions, setDirections] = useState<Direction[]>([]);
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
@@ -158,7 +165,7 @@ const App: React.FC = () => {
             </div>
             <div className="absolute bottom-80 right-24 p-4">
                 <div className="relative">
-                    <SnapButton sendMessage={teleopWebSocket.sendMessage} />
+                    <SnapButton examinationId={examinationId} />
                 </div>
             </div>
             <div className="absolute bottom-20 right-20 p-4">
