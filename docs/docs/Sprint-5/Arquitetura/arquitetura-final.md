@@ -11,7 +11,7 @@ O sistema integra vários componentes para operar um robô de teleoperação equ
 
 #### Diagrama de Arquitetura
 
-luiza ta deixando bonito
+![diagrama-arquitetura](/img/diagrama-arquitetura.jpg)
 
 #### Descrição dos Componentes
 
