@@ -1,14 +1,16 @@
--- Create the Robot table
-CREATE TABLE IF NOT EXISTS `Robot` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `nickname` TEXT 
-);
-
 -- Create the Unit table
 CREATE TABLE IF NOT EXISTS `Unit` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `city` TEXT,
   `state` TEXT
+);
+
+-- Create the Robot table
+CREATE TABLE IF NOT EXISTS `Robot` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `nickname` TEXT 
+  `unit_id` INTEGER,
+  FOREIGN KEY (`unit_id`) REFERENCES `Unit`(`id`)
 );
 
 -- Create the Reboiler table
@@ -55,5 +57,5 @@ CREATE TABLE IF NOT EXISTS `TubeState` (
   `image_id` INTEGER,
   `examination_id` INTEGER,
   FOREIGN KEY (`image_id`) REFERENCES `Image`(`id`),
-  FOREIGN KEY (`examination_id`) REFERENCES `Examination`(`id`),
+  FOREIGN KEY (`examination_id`) REFERENCES `Examination`(`id`)
 );

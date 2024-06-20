@@ -12,6 +12,7 @@ model Unit {
   id    Int      @id @default(autoincrement())
   city  String
   state String
+  Robots Robot[]
   Reboilers Reboiler[]
 }
 
@@ -24,9 +25,10 @@ model Reboiler {
 }
 
 model Robot {
-  id               Int     @id @default(autoincrement())
-  nickname String
-  Orders Order[]
+  id          Int     @id @default(autoincrement())
+  nickname    String
+  unit_id     Int
+  Orders      Order[]
 }
 
 model Image {
