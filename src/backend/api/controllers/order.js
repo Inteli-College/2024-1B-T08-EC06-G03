@@ -25,6 +25,27 @@ const getOrdersById = async (req, res) => {
 	}
 };	
 
+const getOrderByUnitId = async (req, res) => {
+	const { unitId } = req.params; // Assuming unitId is passed in the request params
+	
+	try {
+		const orders = await prisma.order.findMany({
+		where: {
+			reboiler: {
+			unit: { id: parseInt(unitId) }, // Join with Reboiler and Unit tables
+			},
+		}
+		});
+		if (orders.length > 0) {
+		res.json(orders);
+		} else {
+		res.json({ message: 'No orders found for this unit' }); // Informative message
+		}
+	} catch (error) {
+		res.status(500).json({ error: 'Error fetching orders' });
+	}
+};	  
+
 const createOrder = async (req, res) => {
 	const { status, robot_id, reboiler_id, started_at, finished_at } = req.body;
 	try {
@@ -78,6 +99,7 @@ const deleteOrder = async (req, res) => {
 module.exports = {
 	getAllOrders,
 	getOrdersById,
+	getOrderByUnitId,
 	createOrder,
 	updateOrder,
 	deleteOrder
