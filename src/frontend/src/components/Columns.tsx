@@ -47,6 +47,12 @@ export type Unit = {
   state: string;
 }
 
+export type dropdown = {
+  id: number;
+  label: string;
+  value: number;
+}
+
 export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "status",

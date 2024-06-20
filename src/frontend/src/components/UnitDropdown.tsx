@@ -9,10 +9,10 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { getUnities } from '@/api/unit';
-import { Unit } from '@/components/Columns';
+import { Unit, dropdown } from '@/components/Columns';
 
 export function UnitDropdown() {
-  const [options, setOptions] = React.useState<Unit[] | [] >([]);
+  const [options, setOptions] = React.useState<dropdown[] | [] >([]);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -22,7 +22,12 @@ export function UnitDropdown() {
       if (typeof data === "string") {
         setError(data);
       } else {
-        setOptions(data);
+        const transformedOptions = data.map((unit) => ({
+          id: unit.id,
+          label: unit.city + " - " + unit.state,
+          value: unit.id,
+        }));
+        setOptions(transformedOptions);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -32,7 +37,7 @@ export function UnitDropdown() {
   }, []);
 
   return (
-    <Select>
+    <Select >
       <SelectTrigger className="w-[300px]">
         <SelectValue placeholder="Select a unit" />
       </SelectTrigger>
