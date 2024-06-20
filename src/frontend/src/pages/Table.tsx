@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/tabs';
 import { Robot, Order, columns } from '../components/Columns';
 import {getOrders} from '@/api/orders';
-import { getRobots } from '@/api/robot';
+import { getRobots, createRobot} from '@/api/robot';
 import { DataTable } from '../components/DataTable';
 import { NewProcessDialog } from '@/components/NewProcessDialog';
 import { UnitDropdown } from '@/components/UnitDropdown';
@@ -18,11 +18,9 @@ import SelectOptions from '@/components/Select-options';
 import Modal_template, { SubmitFunction } from "../components/Modal_template"
 import { create } from 'domain';
 import { Input } from '@/components/ui/input';
+import { toast } from 'react-toastify';
 
-async function createRobot(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
+
 
 async function createProcedure(data: any ) {
   // Fetch data from your API here.
@@ -39,7 +37,7 @@ function formDataToObject(formData: FormData): { [key: string]: any } {
   formData.forEach((value, key) => {
     data[key] = value;
   });
-  return data;
+  return {...data};
 }
 
 const Table: React.FC = () => {
@@ -49,6 +47,7 @@ const Table: React.FC = () => {
   const [step, setStep] = useState<string>("");
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
   const [unit, setUnit] = useState<number>(1);
+
 
   useEffect(() => {
     if (tabSelected === "procedimentos") {
@@ -98,6 +97,20 @@ const Table: React.FC = () => {
     }
   }; 
 
+  const registerRobot = async (robot : Robot)=> {
+    try{
+      const newrobot: Robot | string = await createRobot(robot);
+      console.log(newrobot)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);
+      return robot
+    }
+  }; 
+
+
   useEffect(() => {
     setLoading(true);
     fetchOrders();
@@ -121,8 +134,16 @@ const Table: React.FC = () => {
   const newRobot: SubmitFunction = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const data = formDataToObject(formData);
-    createRobot(data);
+    let newrobotdata = {
+      nickname: formData.get("nickname") as string,
+      unit_id: unit,
+      id: null
+    }
+    console.log(newrobotdata)
+    const robotRegistered = registerRobot(newrobotdata);
+    if (robotRegistered !== null){
+      toast.success("Robô cadastrado com sucesso")
+    }
   }
 
   const newReboiler: SubmitFunction = (event) => {
@@ -155,7 +176,8 @@ const Table: React.FC = () => {
           {!loading && (<>
           <TabsContent value="procedimentos">
             <div className="flex justify-end mb-2 mt-6">
-              <Modal_template 
+              <Modal_template
+                className= "new_procedure_modal" 
                 title={"Cadastrar procedimento"}
                 button_label="cadastrar procedimento" 
                 children={
@@ -183,7 +205,8 @@ const Table: React.FC = () => {
           </TabsContent>
           <TabsContent value="robos">
             <div className="flex justify-end mb-2 mt-6">
-              <Modal_template 
+              <Modal_template
+                className= "new_robot_modal"  
                 title={"Cadastrar robô"}
                 button_label="cadastrar robô" 
                 children={
@@ -204,7 +227,8 @@ const Table: React.FC = () => {
           </TabsContent>
           <TabsContent value="reboilers">
             <div className="flex justify-end mb-2 mt-6">
-              <Modal_template 
+              <Modal_template
+                className= "new_reboiler_modal" 
                 title={"Cadastrar reboiler"}
                 button_label="Cadastrar reboiler" 
                 children={
