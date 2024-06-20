@@ -3,13 +3,15 @@ import '../styles/kill.css';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 interface SnapButtonProps {
-    sendMessage: (message: string) => void;
+    examinationId: string;
 }
 
-const SnapButton: React.FC<SnapButtonProps> = ({ sendMessage }) => {
+const SnapButton: React.FC<SnapButtonProps> = ({ examinationId }) => {
     const handleClick = () => {
-        sendMessage(JSON.stringify({ kill_robot: 'snap' }));
+        console.log(`Sending snap with id ${examinationId}`)
     };
+
+    console.log(`snap: ${ examinationId }`)
 
     return (
         <button
