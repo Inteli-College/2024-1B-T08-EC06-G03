@@ -1,19 +1,18 @@
+import { Unit } from '../components/Columns';
 
-import { Robot } from '../components/Columns';
-
-export const getRobots = async (unit_id: number): Promise<Robot[] | string> => {
+export const getUnities = async (): Promise<Unit[] | string> => {
     try {
-    const robotResponse = await fetch(`http://localhost:8000/api/orders:${unit_id}`, {
+    const unitResponse = await fetch(`http://localhost:8000/api/unities`, {
       method: 'GET',
       headers: {
         'Cache-Control': 'no-cache',
       },
     });
 
-      if (!robotResponse.ok) {
+      if (!unitResponse .ok) {
         throw new Error('Failed to fetch data from one or both endpoints');
       }
-      return await robotResponse.json();
+      return await unitResponse.json();
     } 
     catch (error) {
       return error instanceof Error ? error.message : String(error);

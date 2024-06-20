@@ -1,5 +1,5 @@
 
-import { Examination, Order } from '../components/Columns';
+import { Order } from '../components/Columns';
 
 export const getOrders = async (unit_id: number): Promise<Order[] | string> => {
     try {
