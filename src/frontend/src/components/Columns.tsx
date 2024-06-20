@@ -34,6 +34,7 @@ export type Order = {
 export type Robot = {
   id: number;
   nickname: string;
+  unit_id: number;
 }
 
 export type Reboiler = {
@@ -53,7 +54,7 @@ export type dropdown = {
   value: number;
 }
 
-export const columns: ColumnDef<Order>[] = [
+export const columnsExamination: ColumnDef<Order>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -107,6 +108,33 @@ export const columns: ColumnDef<Order>[] = [
         </DropdownMenu>
       );
     },
-  },
+  }
 ];
   
+
+
+export const columnsRobot: ColumnDef<Robot>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "nickname",
+    header: "Nickname",
+  },
+  {
+    accessorKey: "unit_id",
+    header: "Unit ID",
+  }
+];
+
+export const columnsReboiler: ColumnDef<Reboiler>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "number",
+    header: "Number",
+  }
+];

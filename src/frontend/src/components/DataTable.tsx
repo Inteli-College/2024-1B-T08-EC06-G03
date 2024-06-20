@@ -18,13 +18,14 @@ import {
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Reboiler, Robot } from '../components/Columns';
 import { Order } from '../components/Columns'; // Certifique-se de importar o tipo Order
 import { Gamepad2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface DataTableProps {
-  columns: ColumnDef<Order, any>[];
-  data: Order[];
+  columns: ColumnDef<Order | Robot>[];
+  data: Order[] | Robot[] | Reboiler[]; 
 }
 
 export function DataTable({
@@ -98,7 +99,7 @@ export function DataTable({
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {row.original.Examinations
+                    {('Examinations' in row.original) && row.original.Examinations
                       .filter((exam) => exam.step === "Pré")
                       .map((exam) => (
                         <TableRow key={exam.id}>
@@ -119,7 +120,7 @@ export function DataTable({
                           </TableCell>
                         </TableRow>
                       ))}
-                    {row.original.Examinations
+                    {('Examinations' in row.original) && row.original.Examinations
                       .filter((exam) => exam.step === "Pós")
                       .map((exam) => (
                         <TableRow key={exam.id}>
