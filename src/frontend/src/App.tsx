@@ -23,6 +23,7 @@ type Direction =
 
 interface SnapButton{
     examinationId: string;
+    image: string;
 }
 
 const App: React.FC = () => {
@@ -165,7 +166,7 @@ const App: React.FC = () => {
             </div>
             <div className="absolute bottom-80 right-24 p-4">
                 <div className="relative">
-                    <SnapButton examinationId={examinationId} />
+                    <SnapButton examinationId={examinationId} image={image}/>
                 </div>
             </div>
             <div className="absolute bottom-20 right-20 p-4">
