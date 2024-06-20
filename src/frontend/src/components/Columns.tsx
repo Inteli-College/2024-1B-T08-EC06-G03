@@ -41,6 +41,12 @@ export type Reboiler = {
   number: number;
 }
 
+export type Unit = {
+  id: number;
+  city: string;
+  state: string;
+}
+
 export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "status",
