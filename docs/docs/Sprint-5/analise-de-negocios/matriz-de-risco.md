@@ -7,7 +7,10 @@ sidebar_position: 2
 
 Uma matriz de risco é importante em projetos de tecnologia, pois oferece uma visão holística e estruturada das potenciais ameaças e oportunidades que podem impactar o planejamento e a execução de uma solução. Ao identificar e classificar os riscos e as oportunidades, desde os mais prováveis até os mais catastróficos, a equipe de projeto pode antecipar problemas, desenvolver estratégias de mitigação e estabelecer planos de contingência eficazes. Permitindo uma gestão proativa do projeto, garantindo que os recursos sejam alocados adequadamente, os prazos cumpridos e os objetivos alcançados dentro das expectativas. Além disso, a matriz de risco promove uma comunicação transparente entre os stakeholders, facilitando a tomada de decisões embasadas e a manutenção da confiança no progresso do projeto.
 
+<h6 align="center"> Matriz de Risco </h6>
+
 ![Matriz_de_Risco](/img/matriz-de-risco.png)
+
 <h6 align="center"> Fonte: Elaboração feita pelo Grupo Rebólins </h6>
 
 ## Riscos
@@ -44,16 +47,8 @@ Uma matriz de risco é importante em projetos de tecnologia, pois oferece uma vi
    - *Justificativa:* A probabilidade média é devido ao fato de que o modelo inicial de nosso protótipo possui dificuldades para andar em diferentes plataformas.
     - **Mitigação:** A equipe deve focar em otimizar a movimentação do robô ou adicionar elementos especiais às rodas, motores e estabilidade da câmera, para que ele consiga andar em diferentes superfícies.
 
-5. Implementação da movimentação autônoma do robô não ser concluída
-   - **Explicativa:** A solução prevê a implementação da movimentação do robô de forma autônoma. Porém a implementação de um caminho para circular de forma autônoma é complexo e custoso.
-   - **Impacto:**  Alto
-   - *Justificativa:* Caso o robô não seja capaz de se movimentar de forma autônoma, isso exige que ele seja operado de forma remota, assim ainda trazendo dificuldades para o desenvolvimento da solução. Além disso, traz riscos de falta de comunicação entre o operador e o robô.
-   - **Probabilidade:** 70%
-   - *Justificativa:* A probabilidade é julgada alta, por não saber exatamente o caminho que o robô deve percorrer, assim como pela complexidade de implementação.
-    - **Mitigação:** A equipe deve analisar a possibilidade de implementar um controle remoto, caso a movimentação autônoma não seja possível.
 
-
-6. O robô não ser capaz de realizar a leitura correta dos valores visualizados pela câmera.
+5. O robô não ser capaz de realizar a leitura correta dos valores visualizados pela câmera.
    - **Explicativa:** É crucial para o funcionamento da solução, que o robô seja capaz de realizar a leitura dos valores obtido pela câmera. Sendo assim, existe a dificuldade de realizar a leitura devido a pouca ou nenhuma luz existente no tubo. Além disso, existe a dificuldade devido a não existência de uma base de dados para a realização da visão computacional.
    - **Impacto:** Muito Alto
    - *Justificativa:* Esse risco tiraria o sentido do projeto, visto que o principal valor do robô é a identificação de pontos que devem ser limpos pelo robô.
@@ -61,7 +56,7 @@ Uma matriz de risco é importante em projetos de tecnologia, pois oferece uma vi
    - *Justificativa:* A probabilidade de 30% é devido a não existência da base de dados, o que trará mais dificuldade durante o projeto para a implementação de visão computacional.
     - **Mitigação:** A equipe deve buscar por soluções que permitam a leitura mesmo em ambientes com pouca luz, como uma lanterna periférica, ou buscar por alternativas de análise que não incluam um ambiente com pouca ou nenhuma iluminação.
 
-7. A solução não permite clareza na identificação do tubo que deve ser limpo.
+6. A solução não permite clareza na identificação do tubo que deve ser limpo.
    - **Explicativa:** Uma vez que o robô circulará por baixo, é necessário que envie uma forma de sinal para a persona que está limpando o tubo para identificá-lo. 
    - **Impacto:** Muito Alto
    - *Justificativa:* Caso não seja permitir identificar o tubo, a solução perde seu valor agregado.

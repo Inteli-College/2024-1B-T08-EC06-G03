@@ -44,7 +44,7 @@ Segmentos de clientes são os grupos específicos de consumidores que a empresa 
 ## Recursos-chave (Key Resources)
 Recursos-chave são os ativos mais importantes necessários para fazer o modelo de negócio funcionar. Eles permitem que a empresa crie e ofereça uma proposta de valor, alcance mercados, mantenha relacionamentos com segmentos de clientes e gere receitas.
 
-- Membros da equipe de desenvolvimento (os robôs).
+- Membros da equipe de desenvolvimento.
 - Robô móvel (Turtlebot); componentes periféricos (ex.: sensor de temperatura).
 - Modelos de detecção de objetos por visão computacional (ex.: YOLO); dataset de canos sujos.
 

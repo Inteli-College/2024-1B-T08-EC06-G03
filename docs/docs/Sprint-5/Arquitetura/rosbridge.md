@@ -1,6 +1,5 @@
 ---
 title: Migração para WebSockets com ROSBridge
-sidebar_position: 1
 ---
 
 # Migração para websockets com ROSBridge
