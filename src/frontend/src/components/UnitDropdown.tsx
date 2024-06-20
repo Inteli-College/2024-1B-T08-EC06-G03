@@ -9,10 +9,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { getUnities } from '@/api/unit';
-import { Unit } from '@/components/Columns';
+import { Unit, dropdown } from '@/components/Columns';
 
-export function UnitDropdown() {
-  const [options, setOptions] = React.useState<Unit[] | [] >([]);
+interface SelectOptionsProps {
+  setSelected: (value: string) => void;
+}
+
+const UnitDropdown: React.FC<SelectOptionsProps> = ({  setSelected }) => {
+  const [options, setOptions] = React.useState<dropdown[] | [] >([]);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -22,7 +26,12 @@ export function UnitDropdown() {
       if (typeof data === "string") {
         setError(data);
       } else {
-        setOptions(data);
+        const transformedOptions = data.map((unit) => ({
+          id: unit.id,
+          label: unit.city + " - " + unit.state,
+          value: unit.id,
+        }));
+        setOptions(transformedOptions);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -32,7 +41,7 @@ export function UnitDropdown() {
   }, []);
 
   return (
-    <Select>
+    <Select onValueChange={setSelected}>
       <SelectTrigger className="w-[300px]">
         <SelectValue placeholder="Select a unit" />
       </SelectTrigger>
@@ -40,7 +49,7 @@ export function UnitDropdown() {
         <SelectGroup>
           <SelectLabel>Units</SelectLabel>
           {options.map((option) => (
-            <SelectItem key={option.id} value={option.value}>
+            <SelectItem key={option.id} value={option.value.toString()}>
               {option.label}
             </SelectItem>
           ))}
@@ -49,3 +58,5 @@ export function UnitDropdown() {
     </Select>
   );
 }
+
+export default UnitDropdown;
