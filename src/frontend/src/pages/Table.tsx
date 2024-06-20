@@ -11,7 +11,7 @@ import {getOrders} from '@/api/orders';
 import { getRobots } from '@/api/robot';
 import { DataTable } from '../components/DataTable';
 import { NewProcessDialog } from '@/components/NewProcessDialog';
-import { UnitDropdown } from '@/components/UnitDropdown';
+import  UnitDropdown from '../components/UnitDropdown';
 import { Button } from '@/components/ui/button';
 import Navbar from '../components/Navbar';
 import SelectOptions from '@/components/Select-options';
@@ -50,6 +50,7 @@ const Table: React.FC = () => {
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
   const [unit, setUnit] = useState<number>(1);
 
+
   useEffect(() => {
     if (tabSelected === "procedimentos") {
       setLoading(true);
@@ -63,7 +64,7 @@ const Table: React.FC = () => {
       setLoading(true);
       fetchOrders();
     }
-  }, [tabSelected]);
+  }, [tabSelected, unit]);
 
   const fetchOrders = async () => {
     try {
@@ -138,7 +139,7 @@ const Table: React.FC = () => {
       <Navbar />
       <div className="container mx-auto py-10 pt-44">
         <div className="mb-4 flex justify-between items-center">
-          <UnitDropdown />
+          <UnitDropdown selected={unit} setSelected={setUnit} />
           <Button variant="outline" className="w-10 h-10 flex justify-center items-center p-0">
             <Plus className="h-5 w-5" />
           </Button>

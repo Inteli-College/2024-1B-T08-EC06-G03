@@ -11,7 +11,11 @@ import {
 import { getUnities } from '@/api/unit';
 import { Unit, dropdown } from '@/components/Columns';
 
-export function UnitDropdown() {
+interface SelectOptionsProps {
+  setSelected: (value: string) => void;
+}
+
+const UnitDropdown: React.FC<SelectOptionsProps> = ({  setSelected }) => {
   const [options, setOptions] = React.useState<dropdown[] | [] >([]);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -37,7 +41,7 @@ export function UnitDropdown() {
   }, []);
 
   return (
-    <Select >
+    <Select onValueChange={setSelected}>
       <SelectTrigger className="w-[300px]">
         <SelectValue placeholder="Select a unit" />
       </SelectTrigger>
@@ -45,7 +49,7 @@ export function UnitDropdown() {
         <SelectGroup>
           <SelectLabel>Units</SelectLabel>
           {options.map((option) => (
-            <SelectItem key={option.id} value={option.value}>
+            <SelectItem key={option.id} value={option.value.toString()}>
               {option.label}
             </SelectItem>
           ))}
@@ -54,3 +58,5 @@ export function UnitDropdown() {
     </Select>
   );
 }
+
+export default UnitDropdown;
