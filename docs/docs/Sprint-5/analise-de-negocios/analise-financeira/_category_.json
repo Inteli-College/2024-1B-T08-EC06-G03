@@ -1,0 +1,9 @@
+{
+    "label": "Análise financeira",
+    "position": 1,
+    "link": {
+      "type": "generated-index",
+      "description": "A análise financeria consiste no levantamento de custos e receita de um projeto, sendo importante para tomar decisões sobre sua aplicação, dados para os investidores e estimativa de duração do projeto. Dado que o projeto atual possui um nível de maturidade (TRL) 3, isto é, uma prova de conceito (PoC) que busca testar as funcionalidades elementares por meio de experimentos, a análise financeira da POC se distancia de forma considerável dos custos da solução final. Desse modo, foram feitas as análises financeiras tanto da PoC quanto da solução final. Seguem as análises detalhadas:"
+    }
+  }
+  

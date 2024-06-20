@@ -1,3 +1,8 @@
+---
+Title: "Business Model Canvas"
+sidebar_position: 1
+---
+
 # Business Model Canvas
 
 O Business Model Canvas é uma ferramenta de gestão estratégica que permite às organizações desenvolver e esboçar modelos de negócios novos ou existentes. É um mapa visual que descreve as bases sobre as quais uma empresa cria, entrega e captura valor. Composto por nove segmentos fundamentais que abrangem as áreas mais críticas de uma empresa, desde a oferta de valor até a infraestrutura, clientes e finanças, o canvas ajuda a construir uma clara compreensão do funcionamento de um negócio. Dessa forma, permite aos empreendedores e gerentes visualizar e reinventar suas operações, promovendo inovação, alinhamento estratégico e eficiência operacional.
@@ -22,7 +27,7 @@ Atividades-chave representam as operações essenciais que uma organização dev
 ## Propostas de valor (Value Propositions)
 A proposta de valor é a oferta central da empresa, detalhando os produtos e serviços que a tornam atraente para os clientes e definindo como a empresa soluciona problemas ou atende às necessidades de seus clientes de forma única e diferenciada. A partir do mapeamento das dores do cliente, é possível criar soluções para que essas dores sejam minimizadas, garantindo que as tarefas chave podem ser realizadas com mais eficiência. Ademais, a proposta de valor apresenta de forma simples os principais ganhos obtidos ao adotar a solução e explica como que esses ganhos são gerados. Por fim, a proposta lista quais são os principais produtos e serviços ofertados pela empresa. Portanto, a proposta de valor do Grupo Rebólins é:
 
-**Garantir a limpeza de reboilers com inspeções teleoperadas antes e após a limpeza manual e analisadas via modelo de visão computacional. A solução também fornece dados para futuros projetos de anaĺise de dados e provisiona o registro de limpezas e as condições de cada tubo via imagens.**
+**Garantir a limpeza de reboilers com inspeções teleoperadas antes e após a limpeza manual e analisadas via modelo de visão computacional. A solução também fornece dados para futuros projetos de anáĺise de dados e provisiona o registro de limpezas e as condições de cada tubo via imagens.**
 ## Relacionamento com Clientes (Customer Relationships)
 O relacionamento com clientes é a abordagem adotada pela empresa para interagir com o seu público-alvo. Estabelece como a empresa se comunica, mantém e reforça as relações com os clientes durante todo o processo de venda e pós-venda.
 
