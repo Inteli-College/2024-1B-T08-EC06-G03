@@ -48,7 +48,13 @@ export type Unit = {
   state: string;
 }
 
-export const columns: ColumnDef<Order>[] = [
+export type dropdown = {
+  id: number;
+  label: string;
+  value: number;
+}
+
+export const columnsExamination: ColumnDef<Order>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -102,6 +108,33 @@ export const columns: ColumnDef<Order>[] = [
         </DropdownMenu>
       );
     },
-  },
+  }
 ];
   
+
+
+export const columnsRobot: ColumnDef<Robot>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "nickname",
+    header: "Nickname",
+  },
+  {
+    accessorKey: "unit_id",
+    header: "Unit ID",
+  }
+];
+
+export const columnsReboiler: ColumnDef<Reboiler>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "number",
+    header: "Number",
+  }
+];

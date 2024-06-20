@@ -27,7 +27,7 @@ module.exports = () => {
     
     app.set('port', process.env.PORT || config.get('server.port'));
     app.set('host', process.env.HOST || config.get('server.host'));
-    app.use(json());
+    app.use(json({limit: '50mb'}));
 
     // Api
     app.use('/api/robots', robotRoutes);

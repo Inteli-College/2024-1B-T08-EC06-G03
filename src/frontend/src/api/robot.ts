@@ -3,7 +3,7 @@ import { Robot } from '../components/Columns';
 
 export const getRobots = async (unit_id: number): Promise<Robot[] | string> => {
     try {
-    const robotResponse = await fetch(`http://localhost:8000/api/robots/${unit_id}`, {
+    const robotResponse = await fetch(`http://localhost:8000/api/robots/unit/${unit_id}`, {
       method: 'GET',
       headers: {
         'Cache-Control': 'no-cache',
