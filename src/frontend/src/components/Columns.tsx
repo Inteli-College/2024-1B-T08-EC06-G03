@@ -34,6 +34,7 @@ export type Order = {
 export type Robot = {
   id: number;
   nickname: string;
+  unit_id: number;
 }
 
 export type Reboiler = {
