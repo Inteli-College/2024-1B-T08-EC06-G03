@@ -17,6 +17,6 @@ export const getRobots = async (unit_id: number): Promise<Robot[] | string> => {
       return await robotResponse.json();
     } 
     catch (error) {
-      console.error('Error fetching data:', error);
+      return error instanceof Error ? error.message : String(error);
     }
   }
