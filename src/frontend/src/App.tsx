@@ -113,6 +113,7 @@ const App: React.FC = () => {
     };
 
     useEffect(() => {
+        fetchData();
         startRosConnection();
     }, []);
 
@@ -174,7 +175,7 @@ const App: React.FC = () => {
                     <Joystick sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
-            <BatteryBar batteryPercentage={batteryPercentage} stroke-width="100"/>
+            <BatteryBar batteryPercentage={batteryPercentage/100} stroke-width="100"/>
         </div>
         );
 
