@@ -1,9 +1,9 @@
 
-import { Order } from '../components/Columns';
+import { Order, OrderWithDirtness } from '../components/Columns';
 
-export const getOrders = async (unit_id: number): Promise<Order[] | string> => {
+export const getOrders = async (unit_id: number): Promise<OrderWithDirtness[] | string> => {
     try {
-      const ordersResponse= await fetch(`http://localhost:8000/api/orders/unit/${unit_id}`, {
+      const ordersResponse= await fetch(`http://localhost:8000/api/orders/dirtness/${unit_id}`, {
           method: 'GET',
           headers: {
             'Cache-Control': 'no-cache',
