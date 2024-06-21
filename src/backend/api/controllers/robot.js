@@ -25,27 +25,46 @@ const getRobotById = async (req, res) => {
   }
 };
 
+const getRobotByUnitId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const robot = await prisma.robot.findMany({
+      where: { unit_id: parseInt(id) }
+    });
+    if (robot) {
+      res.json(robot);
+    } else {
+      res.status(404).json({ error: 'No robots were found at that unity' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching robot' });
+  }
+};
+
+
 const createRobot = async (req, res) => {
-  const { nickname } = req.body;
+  const { nickname, unit_id } = req.body;
   try {
     const newRobot = await prisma.robot.create({
       data: {
-        nickname
+        nickname,
+        unit_id
       }
     });
     res.status(201).json(newRobot);
   } catch (error) {
+    console.log(error); 
     res.status(500).json({ error: 'Error creating robot' });
   }
 };
 
 const updateRobot = async (req, res) => {
   const { id } = req.params;
-  const { nickname } = req.body;
+  const { nickname, unit_id } = req.body;
   try {
     const updatedRobot = await prisma.robot.update({
       where: { id: parseInt(id) },
-      data: { nickname }
+      data: { nickname, unit_id }
     });
     res.json(updatedRobot);
   } catch (error) {
@@ -68,6 +87,7 @@ const deleteRobot = async (req, res) => {
 module.exports = {
   getAllRobots,
   getRobotById,
+  getRobotByUnitId,
   createRobot,
   updateRobot,
   deleteRobot

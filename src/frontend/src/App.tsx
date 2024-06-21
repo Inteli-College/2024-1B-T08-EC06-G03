@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import ROSLIB from 'roslib';
 import useWebSocket from 'react-use-websocket';
 import Joystick from './components/Joystick'; // Adjust the path based on your project structure
 import KillButton from './components/Kill'; // Import the KillButton component
 import SnapButton from './components/Snap';
 import HamburgerMenu from './components/HamburgerMenu';
 import DetectionInterface from './components/DetectionInterface';
-import ROSLIB from 'roslib'
+import BatteryBar from './components/BatteryBar';
 
 const API_URL = `http://${window.location.hostname}:8000`;
 
@@ -25,7 +26,7 @@ const App: React.FC = () => {
     const [teleopData, setTeleopData] = useState<any>({});
     const [teleopSocketUrl, setTeleopSocketUrl] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
-
+    const [batteryPercentage, setBatteryPercentage] = useState<number>(0); 
     const [fps, setFps] = useState<number>(0);
     const messageTimestamps = useRef<number[]>([]);
 
@@ -45,13 +46,16 @@ const App: React.FC = () => {
         }
     }, []);
 
-    const startCamera = () => {
+    // Função para iniciar a conexão ROS e se inscrever nos tópicos
+    const startRosConnection = () => {
         const ros = new ROSLIB.Ros({
             url: `ws://${window.location.hostname}:9090`
         });
 
         ros.on('connection', () => {
             console.log('Connected to rosbridge server.');
+
+            // Inscrever-se no tópico da câmera
             const cameraSubscriber = new ROSLIB.Topic({
                 ros: ros,
                 name: '/camera_feed',
@@ -70,6 +74,25 @@ const App: React.FC = () => {
             });
 
             console.log('Camera controller started and subscribed to /camera_feed');
+
+            // Inscrever-se no tópico da bateria
+            const batterySubscriber = new ROSLIB.Topic({
+                ros: ros,
+                name: '/battery_state',
+                messageType: 'sensor_msgs/BatteryState'
+            });
+
+            batterySubscriber.subscribe((msg: any) => {
+                if (msg.hasOwnProperty('percentage')) {
+                    const percentage = msg.percentage;
+                    setBatteryPercentage(percentage);
+                    console.log('Battery percentage:', percentage);
+                } else {
+                    console.error('Percentage property not found in message:', msg);
+                }
+            });
+
+            console.log('Subscribed to /battery_state for battery updates.');
         });
 
         ros.on('error', (error: Error) => {
@@ -82,16 +105,14 @@ const App: React.FC = () => {
     };
 
     useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+        startRosConnection();
+    }, []);
 
     useEffect(() => {
-        startCamera();
         if (teleopData?.url) {
             setTeleopSocketUrl(teleopData.url);
         }
     }, [teleopData]);
-
 
     const teleopWebSocket = useWebSocket(teleopSocketUrl, {
         onOpen: () => console.log('WebSocket connection established.'),
@@ -145,8 +166,12 @@ const App: React.FC = () => {
                     <Joystick sendMessage={teleopWebSocket.sendMessage} />
                 </div>
             </div>
+            <BatteryBar batteryPercentage={batteryPercentage} stroke-width="100"/>
         </div>
-    );
+        );
+
+    
 };
+
 
 export default App;

@@ -16,5 +16,11 @@
       "port": 8002,
       "path": "/camera"
     }
+  },
+  "services": {
+    "analyse":{
+      "host": "http://localhost",
+      "port": 3000
+    }
   }
 }
