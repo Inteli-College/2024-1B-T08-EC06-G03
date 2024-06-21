@@ -1,6 +1,5 @@
 ---
 title: Testes
-sidebar_position: 7
 ---
 
 ## Validação dos requisitos funcionais
