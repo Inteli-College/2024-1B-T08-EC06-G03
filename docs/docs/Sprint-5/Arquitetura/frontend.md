@@ -70,7 +70,6 @@ Voltando aos detalhes das tabelas, na tabela de procedimentos, é possível ver 
 Para iniciar um novo procedimento, que engloba o funcionamento do robô pré e pós limpeza, é possível clicar no botão presente acima das tabelas no lado direito, escrito "cadastrar procedimento". Ao apertar esse botão, deve-se selecionar o robô e o reboiler já previamente cadastrados.
 
 ### Procedimento e informações sobre as inspeções
-![detalhes do procedimento da tabela de procedimentos](/img/front-teleop.png)
 
 Outra funcionalidade é o botão de retomada de sessão em inspeções que ainda estão ativas, de modo que, caos o operador do robô tenha interrompido a inspeção ou saia da página de controle, ele possa retomar. Assim, ele deve entrar na página de controle, ir no procedimento ativo, clicar no botão retomar sessão e ele será redirecionado para a página de controle novamente.
 
