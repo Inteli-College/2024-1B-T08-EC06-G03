@@ -19,13 +19,13 @@ import {
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Reboiler, Robot } from '../components/Columns';
-import { Order } from '../components/Columns'; // Certifique-se de importar o tipo Order
+import { Order, OrderWithDirtness } from '../components/Columns'; // Certifique-se de importar o tipo Order
 import { Gamepad2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface DataTableProps {
   columns: ColumnDef<Order | Robot>[];
-  data: Order[] | Robot[] | Reboiler[]; 
+  data: OrderWithDirtness[] | Robot[] | Reboiler[]; 
 }
 
 export function DataTable({
@@ -95,6 +95,7 @@ export function DataTable({
                     <TableRow>
                       <TableHead className="p-2">Etapa</TableHead>
                       <TableHead className="p-2">Data</TableHead>
+                      <TableHead className="p-2">Sujeira %</TableHead>
                       <TableHead className="p-2">Ações</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -108,6 +109,9 @@ export function DataTable({
                           </TableCell>
                           <TableCell className="p-2">
                             {new Date(exam.started_at * 1000).toLocaleString()}
+                          </TableCell>
+                          <TableCell className="p-2">
+                            {exam.dirtness*100}
                           </TableCell>
                           <TableCell className="p-2">
                             <Button
@@ -129,6 +133,9 @@ export function DataTable({
                           </TableCell>
                           <TableCell className="p-2">
                             {new Date(exam.started_at * 1000).toLocaleString()}
+                          </TableCell>
+                          <TableCell className="p-2">
+                            {exam.dirtness*100}
                           </TableCell>
                           <TableCell className="p-2">
                             <Button

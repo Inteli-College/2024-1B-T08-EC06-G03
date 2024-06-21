@@ -6,7 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { Robot, Order, Reboiler, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
+import { Robot, Order, Reboiler, OrderWithDirtness, ExaminationWithDirtness, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
 import { getOrders, createOrder } from '@/api/orders';
 import { getRobots, createRobot } from '@/api/robot';
 import { getReboilers, createReboiler } from '@/api/reboiler';
@@ -28,34 +28,34 @@ const Table: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
-  const [typeTable, setTypeTable] = useState<ColumnDef<Order | Robot | Reboiler>[] | null>();
+  const [typeTable, setTypeTable] = useState<ColumnDef<OrderWithDirtness | Robot | Reboiler>[] | null>();
   const [unit, setUnit] = useState<number>(1);
   const [reboiler_selected, setReboilerSelected] = useState<number>(0);
   const [robot_selected, setRobotSelected] = useState<number>(1);
 
-
+  console.log(data)
   useEffect(() => {
     console.log(tabSelected)
     if (tabSelected === "procedimentos") {
       setLoading(true);
-      setTypeTable(columnsExamination as ColumnDef<Order | Robot | Reboiler>[]);
+      setTypeTable(columnsExamination as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
       fetchOrders();
     }
     else if (tabSelected === "robos") {
       setLoading(true);
-      setTypeTable(columnsRobot as ColumnDef<Order | Robot | Reboiler>[]);
+      setTypeTable(columnsRobot as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
       fetchRobots();
     }
     else if (tabSelected === "reboilers") {
       setLoading(true);
-      setTypeTable(columnsReboiler as ColumnDef<Order | Robot | Reboiler>[]);
+      setTypeTable(columnsReboiler as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
       fetchReboilers();
     }
   }, [tabSelected, unit]);
 
   const fetchOrders = async () => {
     try {
-      const orders: Order[] | string = await getOrders(unit);
+      const orders: OrderWithDirtness[] | string = await getOrders(unit);
       if (typeof orders === "string") {
         setError(orders);
       } else {

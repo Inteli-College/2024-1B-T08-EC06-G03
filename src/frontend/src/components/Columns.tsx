@@ -21,6 +21,15 @@ export type Examination = {
   order_id: number;
 };
 
+export type ExaminationWithDirtness = {
+  id: number;
+  dirtness: number;
+  step: "Pré" | "Pós";
+  started_at: number;
+  finished_at: number;
+  order_id: number;
+};
+
 export type Order = {
   id: number | null;
   status: string;
@@ -29,6 +38,16 @@ export type Order = {
   started_at: number;
   finished_at: number | null;
   Examinations: Examination[];
+};
+
+export type OrderWithDirtness = {
+  id: number | null;
+  status: string;
+  robot_id: number;
+  reboiler_id: number;
+  started_at: number;
+  finished_at: number | null;
+  Examinations: ExaminationWithDirtness[];
 };
 
 export type Robot = {
