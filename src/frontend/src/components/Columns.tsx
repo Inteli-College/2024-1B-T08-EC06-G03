@@ -38,8 +38,9 @@ export type Robot = {
 }
 
 export type Reboiler = {
-  id: number;
+  id: number | null;
   number: number;
+  unit_id: number;
 }
 
 export type Unit = {

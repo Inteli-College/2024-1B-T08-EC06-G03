@@ -12,6 +12,7 @@ import { getUnities } from '@/api/unit';
 import { Unit, dropdown } from '@/components/Columns';
 
 interface SelectOptionsProps {
+  selected: number;
   setSelected: (value: string) => void;
 }
 

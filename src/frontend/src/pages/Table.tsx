@@ -9,7 +9,7 @@ import {
 import { Robot, Order, Reboiler, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
 import { getOrders } from '@/api/orders';
 import { getRobots, createRobot } from '@/api/robot';
-import { getReboilers } from '@/api/reboiler';
+import { getReboilers, createReboiler } from '@/api/reboiler';
 import { DataTable } from '../components/DataTable';
 import { NewProcessDialog } from '@/components/NewProcessDialog';
 import  UnitDropdown from '../components/UnitDropdown';
@@ -111,7 +111,8 @@ const Table: React.FC = () => {
       console.error('Error fetching data:', error);
       setError('An error occurred while fetching data.'); 
     } finally {
-      setLoading(false);      return robot
+      setLoading(false);      
+      return robot
     }
   }; 
 
@@ -123,12 +124,26 @@ const Table: React.FC = () => {
         setError(reboilers);
       } else {
         setData(reboilers);
+        setReboilers(reboilers.map((reboiler) => reboiler.number.toString()));
       }
       console.log(reboilers)    } catch (error) {
       console.error('Error fetching data:', error);
       setError('An error occurred while fetching data.'); 
     } finally {
       setLoading(false);
+    }
+  }; 
+
+  const registerReboiler = async (reboiler : Reboiler)=> {
+    try{
+      const newreboiler: Reboiler | string = await createReboiler(reboiler);
+      console.log(newreboiler)    
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);      
+      return reboiler
     }
   }; 
 
@@ -170,8 +185,16 @@ const Table: React.FC = () => {
   const newReboiler: SubmitFunction = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const data = formDataToObject(formData);
-    createReboiler(data);
+    let newreboilerdata = {
+      number: formData.get("number_reboiler") as unknown as number,
+      unit_id: unit,
+      id: null
+    }
+    console.log(newreboilerdata)
+    const reboilerRegistered = registerReboiler(newreboilerdata);
+    if (reboilerRegistered !== null){
+      toast.success("Reboiler cadastrado com sucesso")
+    }
   }
 
 
@@ -180,7 +203,7 @@ const Table: React.FC = () => {
       <Navbar />
       <div className="container mx-auto py-10 pt-44">
         <div className="mb-4 flex justify-between items-center">
-          <UnitDropdown selected={unit} setSelected={setUnit} />
+          <UnitDropdown selected={unit} setSelected={() => setUnit} />
           <Button variant="outline" className="w-10 h-10 flex justify-center items-center p-0">
             <Plus className="h-5 w-5" />
           </Button>
@@ -235,7 +258,13 @@ const Table: React.FC = () => {
                   <div>
                     <label>Apelido</label>
                     <br/>
-                    <Input type="text" name='nickname' placeholder="Insira o apelido do robô a ser cadastrado"/>
+                    <Input 
+                      type="text" 
+                      name='nickname' 
+                      placeholder="Insira o apelido do robô a ser cadastrado"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();}}}/>
                     <br/>
                   </div>
                 </div>
@@ -257,7 +286,7 @@ const Table: React.FC = () => {
                   <div>
                     <label>Número</label>
                     <br/>
-                    <Input type="text" name='number' placeholder="Insira o número do reboiler ser cadastrado"/>
+                    <Input type="number" name='number_reboiler' placeholder="Insira o número do reboiler ser cadastrado"/>
                     <br/>
                   </div>
                 </div>
