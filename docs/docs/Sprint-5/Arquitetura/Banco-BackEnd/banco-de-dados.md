@@ -14,7 +14,7 @@ Na seção [Visualização de Dados](/Sprint-3/visualizacao-de-dados.md), foram 
 
 **Banco de dados Relacional**
 
-![Banco de dados](/img/banco-de-dados-v2.png)
+![Banco de dados](/img/banco-de-dados.png)
 
 
 **Fonte:** Elaborado pela equipe Rebólins
@@ -63,6 +63,7 @@ A entidade **Robot** armazena as informações de um determinado robô, contendo
 
 - **id**: Identificador único do robô. (Chave primária, Integer)
 - **nickname**: Nome dado ao robô como forma de identificá-lo. (text)
+- **unit_id**: Identificador da unidade à qual o robô pertence. (Chave estrangeira, integer).
 
 ### TubeState
 

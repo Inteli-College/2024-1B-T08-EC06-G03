@@ -1,6 +1,6 @@
 ---
 title: Visão geral da Arquitetura do sistema 
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 ### Visão geral da Arquitetura do Sistema

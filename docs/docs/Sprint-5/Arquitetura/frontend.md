@@ -1,6 +1,6 @@
 ---
 title: Frontend - Interface do Usuário
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Frontend - Interface do Usuário
@@ -35,32 +35,39 @@ Por fim, cada botão foi posicionado com o intuito de facilitar o controle do op
 
 A tela de controle de processos é a interface que a gerência da manutenção poderá controlar os diferentes processos que irá utilizar para visualizar e analisar os dados coletados pelo robô. Ela foi pensada para ser mais complexa e detalhada,trazendo informações sobre cadas reboiler, quais os robôs cadastrados naquela unidade, quais procedimentos estão ativos e o histórico de limpezas, por exemplo. Para exibir essas diversas informações, a tela de controle de processos possui:
 
-- Tabela de reboilers: exibe os reboilers cadastrados na unidade;
-- Tabela de robôs: exibe os robôs cadastrados na unidade;
 - Tabela de procedimentos: exibe o histórico de procedimentos na unidade;
+- Tabela de robôs: exibe os robôs cadastrados na unidade;
+- Tabela de reboilers: exibe os reboilers cadastrados na unidade;
 
-### Tabela de reboilers cadastrados
-![Tabela de reboilers](/img/front-teleop.png)
-
-### Tabela de robôs cadsatrados
-![Tabela de robôs](/img/front-teleop.png)
 
 ### Tabela de procedimentos cadastrados
-![Tabela de procedimentos](/img/front-teleop.png)
+![Tabela de procedimentos](/img/procedimentos-cadastrados.png)
+
+### Tabela de robôs cadastrados
+![Tabela de robôs](/img/robos-cadastrados.png)
+
+### Tabela de reboilers cadastrados
+![Tabela de reboilers](/img/reboilers-cadastrados.png)
+
 
 Essas tabelas são exibidas por meio de um tab system, onde o usuário pode selecionar qual tabela deseja visualizar e tem acesso a um clique em diferentes tabelas, facilitando a visualização.
 
 Outro ponto é a seleção de unidade, exibida no centro superior da tela, que é o primeiro passo do usuário para verificar determinada informação, ele escolhe a unidade da qual ele quer ver as informações e a tela é atualizada com as informações da unidade selecionada.
 
-### Seção da unidade
+### Seção da unidade - dropdown
 ![Seção da unidade](/img/front-teleop.png)
 
 Existe também o botão de criar unidade, posicionado ao lado da seleção de unidade, assim como os botões de criar procedimentos, robôs e reboilers, permitindo o cadastro de novas informações. Ao clicar, um modal irá surgir para inserir as informações e cadastrar no banco de dados.
 
 ### Cadastrar robô
-![Modal de criar](/img/front-teleop.png)
+![Modal de criar](/img/apelido-robo.png)
 
 Voltando aos detalhes das tabelas, na tabela de procedimentos, é possível ver mais detalhes sobre um procedimento específico, como a data de início, data de fim, reboiler associado, robô associado e o andamento de cada etapa do procedimento (pré-limpeza ou pós-limpeza). Além disso, ao clicar sobre cada inspeção, é possível ver o detalhamento da mesma, ou seja, imagens tiradas do reboiler e quantos canos foram identificados sujos, fornecendo informações substanciais para análise da eficiência da limpeza, trazer reflexões sobre a frequência de limpeza e identificar possíveis problemas. Por exemplo, caso um reboiler necessite constantes limpezas, mas a inspeção após limpeza identifica que muitos canos continuam sujos, a equipe de manutenção pode provisionar uma limpeza mais detalhada ou verificação de funcionamento da máquina, mitigando possíveis falhas.
+
+### Cadastrar procedimento
+![Iniciar novo procedimento](/img/cadastrar-procedimento.png)
+
+Para iniciar um novo procedimento, que engloba o funcionamento do robô pré e pós limpeza, é possível clicar no botão presente acima das tabelas no lado direito, escrito "cadastrar procedimento". Ao apertar esse botão, deve-se selecionar o robô e o reboiler já previamente cadastrados.
 
 ### Procedimento e informações sobre as inspeções
 ![detalhes do procedimento da tabela de procedimentos](/img/front-teleop.png)
