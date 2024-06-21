@@ -5,6 +5,7 @@ const host = config.get('services.analyse.host');
 const port = config.get('services.analyse.port');
 const route = host + ':' + port; 
 
+//class to send image to computer vision model to analyse dirtness
 class Detector {
     static async analyse(image) {
         try {
