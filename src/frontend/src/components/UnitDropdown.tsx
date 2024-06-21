@@ -17,28 +17,29 @@ interface SelectOptionsProps {
   setSelected: (value: string) => void;
 }
 
-const UnitDropdown: React.FC<SelectOptionsProps> = ({  setSelected }) => {
-  const [options, setOptions] = React.useState<dropdown[] | [] >([]);
+const UnitDropdown: React.FC<SelectOptionsProps> = ({ setSelected }) => {
+  const [options, setOptions] = React.useState<dropdown[] | []>([]);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     async function getOptions() {
-    try{
-      const data: Unit[] | string   = await getUnities();
-      if (typeof data === "string") {
-        setError(data);
-      } else {
-        const transformedOptions = data.map((unit) => ({
-          id: unit.id,
-          label: unit.city + " - " + unit.state,
-          value: unit.id,
-        }));
-        setOptions(transformedOptions);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setError('An error occurred while fetching data.'); 
-    }  finally{}}
+      try {
+        const data: Unit[] | string = await getUnities();
+        if (typeof data === "string") {
+          setError(data);
+        } else {
+          const transformedOptions = data.map((unit) => ({
+            id: unit.id,
+            label: unit.city + " - " + unit.state,
+            value: unit.id,
+          }));
+          setOptions(transformedOptions);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('An error occurred while fetching data.');
+      } finally { }
+    }
     getOptions();
   }, []);
 

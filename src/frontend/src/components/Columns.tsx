@@ -1,5 +1,3 @@
-// Columns.ts
-
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
@@ -130,7 +128,7 @@ export const columnsExamination: ColumnDef<Order>[] = [
     },
   }
 ];
-  
+
 
 
 export const columnsRobot: ColumnDef<Robot>[] = [

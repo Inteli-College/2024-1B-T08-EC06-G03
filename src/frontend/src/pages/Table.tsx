@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react'; 
+import { Plus } from 'lucide-react';
 import {
   Tabs,
   TabsContent,
@@ -11,7 +11,7 @@ import { getOrders, createOrder } from '@/api/orders';
 import { getRobots, createRobot } from '@/api/robot';
 import { getReboilers, createReboiler } from '@/api/reboiler';
 import { DataTable } from '../components/DataTable';
-import  UnitDropdown from '../components/UnitDropdown';
+import UnitDropdown from '../components/UnitDropdown';
 import RobotDropdown from '@/components/robotDropdown';
 import ReboilerDropdown from '@/components/reboilerDropdown';
 import { Button } from '@/components/ui/button';
@@ -61,24 +61,24 @@ const Table: React.FC = () => {
       }
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError('An error occurred while fetching data.'); 
+      setError('An error occurred while fetching data.');
     } finally {
       setLoading(false);
     }
-  }; 
+  };
 
-  const registerOrder = async (order : Order)=> {
-    try{
+  const registerOrder = async (order: Order) => {
+    try {
       const neworder: Order | string = await createOrder(order);
-      console.log(neworder)    
+      console.log(neworder)
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError('An error occurred while fetching data.'); 
+      setError('An error occurred while fetching data.');
     } finally {
-      setLoading(false);      
+      setLoading(false);
       return order
     }
-  }; 
+  };
 
   const fetchRobots = async () => {
     try {
@@ -91,24 +91,24 @@ const Table: React.FC = () => {
       console.log(robots)
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError('An error occurred while fetching data.'); 
+      setError('An error occurred while fetching data.');
     } finally {
       setLoading(false);
     }
-  }; 
+  };
 
-  const registerRobot = async (robot : Robot)=> {
-    try{
+  const registerRobot = async (robot: Robot) => {
+    try {
       const newrobot: Robot | string = await createRobot(robot);
-      console.log(newrobot)    
+      console.log(newrobot)
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError('An error occurred while fetching data.'); 
+      setError('An error occurred while fetching data.');
     } finally {
-      setLoading(false);      
+      setLoading(false);
       return robot
     }
-  }; 
+  };
 
 
   const fetchReboilers = async () => {
@@ -119,26 +119,27 @@ const Table: React.FC = () => {
       } else {
         setData(reboilers);
       }
-      console.log(reboilers)    } catch (error) {
+      console.log(reboilers)
+    } catch (error) {
       console.error('Error fetching data:', error);
-      setError('An error occurred while fetching data.'); 
+      setError('An error occurred while fetching data.');
     } finally {
       setLoading(false);
     }
-  }; 
+  };
 
-  const registerReboiler = async (reboiler : Reboiler)=> {
-    try{
+  const registerReboiler = async (reboiler: Reboiler) => {
+    try {
       const newreboiler: Reboiler | string = await createReboiler(reboiler);
-      console.log(newreboiler)    
+      console.log(newreboiler)
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError('An error occurred while fetching data.'); 
+      setError('An error occurred while fetching data.');
     } finally {
-      setLoading(false);      
+      setLoading(false);
       return reboiler
     }
-  }; 
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -158,15 +159,15 @@ const Table: React.FC = () => {
     let neworderdata = {
       id: null,
       status: "active",
-      robot_id : robot_selected,
+      robot_id: robot_selected,
       reboiler_id: reboiler_selected,
       Examinations: [],
-      started_at: Math.floor(Date.now()/1000),
+      started_at: Math.floor(Date.now() / 1000),
       finished_at: null,
     };
     console.log(neworderdata)
     const robotRegistered = registerOrder(neworderdata);
-    if (robotRegistered !== null){
+    if (robotRegistered !== null) {
       toast.success("Procedimento cadastrado com sucesso")
     }
   }
@@ -181,7 +182,7 @@ const Table: React.FC = () => {
     }
     console.log(newrobotdata)
     const robotRegistered = registerRobot(newrobotdata);
-    if (robotRegistered !== null){
+    if (robotRegistered !== null) {
       toast.success("Robô cadastrado com sucesso")
     }
   }
@@ -196,7 +197,7 @@ const Table: React.FC = () => {
     }
     console.log(newreboilerdata)
     const reboilerRegistered = registerReboiler(newreboilerdata);
-    if (reboilerRegistered !== null){
+    if (reboilerRegistered !== null) {
       toast.success("Reboiler cadastrado com sucesso")
     }
   }
@@ -211,88 +212,90 @@ const Table: React.FC = () => {
         </div>
         <Tabs defaultValue="procedimentos">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="procedimentos" onFocus={()=>setTabSelected("procedimentos")}>Procedimentos</TabsTrigger>
-            <TabsTrigger value="robos" onFocus={()=>setTabSelected("robos")} >Robôs</TabsTrigger>
-            <TabsTrigger value="reboilers" onFocus={()=>setTabSelected("reboilers")}>Reboilers</TabsTrigger>
+            <TabsTrigger value="procedimentos" onFocus={() => setTabSelected("procedimentos")}>Procedimentos</TabsTrigger>
+            <TabsTrigger value="robos" onFocus={() => setTabSelected("robos")} >Robôs</TabsTrigger>
+            <TabsTrigger value="reboilers" onFocus={() => setTabSelected("reboilers")}>Reboilers</TabsTrigger>
           </TabsList>
-          {loading && ( 
-             <div><br/>Loading...</div>
+          {loading && (
+            <div><br />Loading...</div>
           )}
           {!loading && (<>
-          <TabsContent value="procedimentos">
-            <div className="flex justify-end mb-2 mt-6">
-              <Modal_template
-                className= "new_procedure_modal" 
-                title={"Cadastrar procedimento"}
-                button_label="cadastrar procedimento" 
-                children={
-                  <div>
+            <TabsContent value="procedimentos">
+              <div className="flex justify-end mb-2 mt-6">
+                <Modal_template
+                  className="new_procedure_modal"
+                  title={"Cadastrar procedimento"}
+                  button_label="cadastrar procedimento"
+                  children={
                     <div>
-                      <label>Reboiler</label>
-                      <br/>
-                      <ReboilerDropdown name="reboiler_number" unit={unit} selected={reboiler_selected} setSelected={(reboiler)=> setReboilerSelected(reboiler as unknown as number)} />
-                      <br/>
-                      <label>Robô</label>
-                      <RobotDropdown name="robot_number" unit={unit} selected={robot_selected} setSelected={(robot)=> setRobotSelected(robot as unknown as number)} />
-                      <br/>
+                      <div>
+                        <label>Reboiler</label>
+                        <br />
+                        <ReboilerDropdown name="reboiler_number" unit={unit} selected={reboiler_selected} setSelected={(reboiler) => setReboilerSelected(reboiler as unknown as number)} />
+                        <br />
+                        <label>Robô</label>
+                        <RobotDropdown name="robot_number" unit={unit} selected={robot_selected} setSelected={(robot) => setRobotSelected(robot as unknown as number)} />
+                        <br />
+                      </div>
+                    </div>}
+                  submit_action={newOrder}
+                  isOpen={true}>
+                </Modal_template>
+              </div>
+              <DataTable columns={typeTable} data={data} />
+            </TabsContent>
+            <TabsContent value="robos">
+              <div className="flex justify-end mb-2 mt-6">
+                <Modal_template
+                  className="new_robot_modal"
+                  title={"Cadastrar robô"}
+                  button_label="cadastrar robô"
+                  children={
+                    <div>
+                      <div>
+                        <label>Apelido</label>
+                        <br />
+                        <Input
+                          type="text"
+                          name='nickname'
+                          placeholder="Insira o apelido do robô a ser cadastrado"
+                          onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                            }
+                          }} />
+                        <br />
+                      </div>
                     </div>
-                  </div>} 
-                submit_action={newOrder}
-                isOpen={true}>
-              </Modal_template>
-            </div>
-            <DataTable columns={typeTable} data={data} />
-          </TabsContent>
-          <TabsContent value="robos">
-            <div className="flex justify-end mb-2 mt-6">
-              <Modal_template
-                className= "new_robot_modal"  
-                title={"Cadastrar robô"}
-                button_label="cadastrar robô" 
-                children={
-                <div>
-                  <div>
-                    <label>Apelido</label>
-                    <br/>
-                    <Input 
-                      type="text" 
-                      name='nickname' 
-                      placeholder="Insira o apelido do robô a ser cadastrado"
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          e.preventDefault();}}}/>
-                    <br/>
-                  </div>
-                </div>
-                } 
-                submit_action={newRobot}
-                isOpen={true}>
-              </Modal_template>
-            </div>
-            <DataTable columns={typeTable} data={data} />
-          </TabsContent>
-          <TabsContent value="reboilers">
-            <div className="flex justify-end mb-2 mt-6">
-              <Modal_template
-                className= "new_reboiler_modal" 
-                title={"Cadastrar reboiler"}
-                button_label="Cadastrar reboiler" 
-                children={
-                <div>
-                  <div>
-                    <label>Número</label>
-                    <br/>
-                    <Input type="number" name='number_reboiler' placeholder="Insira o número do reboiler ser cadastrado"/>
-                    <br/>
-                  </div>
-                </div>
-                } 
-                submit_action={newReboiler}
-                isOpen={true}>
-              </Modal_template>
-            </div>
-            <DataTable columns={typeTable} data={data} />
-          </TabsContent>
+                  }
+                  submit_action={newRobot}
+                  isOpen={true}>
+                </Modal_template>
+              </div>
+              <DataTable columns={typeTable} data={data} />
+            </TabsContent>
+            <TabsContent value="reboilers">
+              <div className="flex justify-end mb-2 mt-6">
+                <Modal_template
+                  className="new_reboiler_modal"
+                  title={"Cadastrar reboiler"}
+                  button_label="Cadastrar reboiler"
+                  children={
+                    <div>
+                      <div>
+                        <label>Número</label>
+                        <br />
+                        <Input type="number" name='number_reboiler' placeholder="Insira o número do reboiler ser cadastrado" />
+                        <br />
+                      </div>
+                    </div>
+                  }
+                  submit_action={newReboiler}
+                  isOpen={true}>
+                </Modal_template>
+              </div>
+              <DataTable columns={typeTable} data={data} />
+            </TabsContent>
           </>
           )}
         </Tabs>
