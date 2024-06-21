@@ -16,11 +16,11 @@ sidebar_position: 4
 </div>
 
 A princípio, a interface de usuário era apenas uma página de teleoperação, feita com html e css simples. Havia um botão para interromper o funcionamento do robô, um para ligá-lo e a movimentação não era feita por meio da interface, e sim pelas teclas do teclado, não sendo acessível para aparelhos como celular ou tablet.
-Com o decorrer das sprints, o projeto foi tomando forma e ganhando complexidade, conforme novas _features_ foram implementada. Dessa forma, a interface do usuaário acabou sendo iterada várias vezes antes da versão final que será apresentada abaixo.
+Com o decorrer das sprints, o projeto foi tomando forma e ganhando complexidade, conforme novas _features_ foram implementadas. Dessa forma, a interface do usuaário acabou sendo iterada várias vezes antes da versão final que será apresentada abaixo.
 
 ## Wireframe da versão final
 
-A versão inicial da interface não contemplava as [user stories 2 e 3 do Jairo](../../Sprint-1/Design/personas.md), pois não havia a parte de visualização e validação de dados. Por essa razão, primeiramente foi esboçado um wireframe, que é uma visualização de baixa fidelidade do que era planejado ser implementado.
+A versão inicial da interface não contemplava as [user stories 2 e 3 do Jairo](../../Sprint-1/Design/personas.md), pois não havia a parte de visualização e validação de dados. Por essa razão, foi primeiramente esboçado um wireframe, o qual é uma visualização de baixa fidelidade do que era planejado ser implementado.
 
 <div align="center">
 
@@ -69,11 +69,11 @@ A tela de operação é a interface que o operador irá utilizar enquanto contro
 
 </div>
 
-Por fim, cada botão foi posicionado com o intuito de facilitar o controle do operador. Já que essa tela foi projetada para ser utilizada em uma versão mobile, com o tablet ou o celular, por exemplo, os botões ficaram nas áreas mais extremas, com maior facilidade de controle das mãos e pilotagem, além da câmera estar no centro, facilitando o controle do robô pela interface.
+Por fim, cada botão foi posicionado com o intuito de facilitar o controle do operador. Já que essa tela foi projetada para ser utilizada em uma versão mobile, com o tablet ou o celular, por exemplo, os botões ficaram nas áreas mais extremas, com maior facilidade de controle das mãos e pilotagem, além da câmera, estar no centro, facilitando o controle do robô pela interface.
 
 ## Tela de controle de processos
 
-A tela de controle de processos é a interface que a gerência da manutenção poderá controlar os diferentes processos que irá utilizar para visualizar e analisar os dados coletados pelo robô. Ela foi pensada para ser mais complexa e detalhada,trazendo informações sobre cadas reboiler, quais os robôs cadastrados naquela unidade, quais procedimentos estão ativos e o histórico de limpezas, por exemplo. Para exibir essas diversas informações, a tela de controle de processos possui:
+A tela de controle de processos é a interface que a gerência da manutenção poderá controlar os diferentes processos que irá utilizar para visualizar e analisar os dados coletados pelo robô. Ela foi pensada para ser mais complexa e detalhada, trazendo informações sobre cadas reboiler, quais os robôs cadastrados naquela unidade, quais procedimentos estão ativos e o histórico de limpezas, por exemplo. Para exibir essas diversas informações, a tela de controle de processos possui:
 
 - Tabela de procedimentos: exibe o histórico de procedimentos na unidade;
 - Tabela de robôs: exibe os robôs cadastrados na unidade;
@@ -107,16 +107,15 @@ Voltando aos detalhes das tabelas, na tabela de procedimentos, é possível ver 
 ### Cadastrar procedimento
 ![Iniciar novo procedimento](/img/cadastrar-procedimento.png)
 
-Para iniciar um novo procedimento, que engloba o funcionamento do robô pré e pós limpeza, é possível clicar no botão presente acima das tabelas no lado direito, escrito "cadastrar procedimento". Ao apertar esse botão, deve-se selecionar o robô e o reboiler já previamente cadastrados.
+Para iniciar um novo procedimento, que engloba o funcionamento do robô pré e pós-limpeza, é possível clicar no botão presente acima das tabelas no lado direito, escrito "cadastrar procedimento". Ao apertar esse botão, deve-se selecionar o robô e o reboiler já previamente cadastrados.
 
 ### Procedimento e informações sobre as inspeções
 
-Outra funcionalidade é o botão de retomada de sessão em inspeções que ainda estão ativas, de modo que, caos o operador do robô tenha interrompido a inspeção ou saia da página de controle, ele possa retomar. Assim, ele deve entrar na página de controle, ir no procedimento ativo, clicar no botão retomar sessão e ele será redirecionado para a página de controle novamente.
+Outra funcionalidade é o botão de retomada de sessão em inspeções que continuam ativas, de modo que, caos o operador do robô tenha interrompido a inspeção ou saia da página de controle, ele possa retomar. Assim, ele deve entrar na página de controle, ir ao procedimento ativo, clicar no botão retomar sessão e ele será redirecionado para a página de controle novamente.
 
 Portanto, a página de controles tem o objetivo de reunir todas as funcionalidades de gerência e controle de processo em uma tela só, facilitando a visualização e análise de dados, além de permitir o cadastro de novas informações.
 
 ## Conclusão
 
-Portanto, as telas foram pensadas a partir da necessidade de cada persona e o principal foco foi trazer as funcionalidades de forma intuitiva, por meio de ícones, palavras chaves e botões acessíveis, além de possibilitar a melhor experiência do usuário com a interface. A tela de operação foi pensada para ser simples e direta, enquanto a tela de controle de processos foi pensada para ser mais detalhada e complexa, trazendo informações relevantes para a gerência da manutenção.
-
+Portanto, as telas foram pensadas a partir da necessidade de cada persona e o principal foco foi trazer as funcionalidades de forma intuitiva, por meio de ícones, palavras-chave e botões acessíveis, além de possibilitar a melhor experiência do usuário com a interface. A tela de operação foi pensada para ser simples e direta, enquanto a tela de controle de processos foi pensada para ser mais detalhada e complexa, trazendo informações relevantes para a gerência da manutenção.
 

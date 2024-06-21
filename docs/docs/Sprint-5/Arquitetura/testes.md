@@ -14,7 +14,7 @@ title: Testes
 
 - **Hardware:** Realizar a inicialização do robô, utilizando o método de conexão por ssh para rodar o bringup, que inicializa vários protocolos para o funcionamento do Turtlebot. Para isso, é só abrir um terminal no computador e rodar o comando `ssh bobolins@10.128.0.24`, e digitar a senha para finalizar a conexão. Após isso, é só rodar o comando de bringup, que é `ros2 launch turtlebot3_bringup robot.launch.py`. Após isso, posicionar o robô em um ambiente seguro para a testagem, como uma pista.
 
-- **Software:** Inicializar o Backend, que é composto por serviços ROS, a API da aplicação web e o modelo de visão computacional que irá avaliar as fotos dos tubos.
+- **Software:** Inicializar o Backend, composto por serviços ROS, a API da aplicação web e o modelo de visão computacional que irá avaliar as fotos dos tubos.
 
 - **Interface de Controle:** Deixar a interface de controle aberta num dispositivo móvel que será entregue posteriormente ao testador.
 
@@ -101,11 +101,11 @@ Durante cada comando, foi verificada a diferença entre o comando enviado e a mo
 
 #### RNF05: Teste de precisão na identificação de reboilers.
 
-Para esse teste, foi necessário simular um ambiente controlado que simula as condições dos reboilers após a limpeza, incluindo variados níveis de acumulação de resíduos. Para isso, foram utilizados os cestos de lixo da sala, que foram preenchidos com diferentes tipos de resíduos, como papel. O teste visava avaliar a precisão do modelo de visão computacional em diferentes contextos e, dado que a simulação mais fidedigna no campus do inteli foram os cestos de lixo, foi decidido que o teste seria realizado com eles. O teste foi considerado bem-sucedido se o robô alcançou uma precisão superior ou igual a 80% na identificação correta de tubos que necessitavam de limpeza, ou seja, tinham algum resíduo. Esse cálculo deve ser feito a partir da divisão do número de identificações corretas pelo número total de tubos que foram indicados como sujos, ou seja, a precisão do modelo de visão computacional.
+Para esse teste, foi necessário simular um ambiente controlado que simula as condições dos reboilers após a limpeza, incluindo variados níveis de acumulação de resíduos. Para isso, foram utilizados os cestos de lixo da sala, que foram preenchidos com diferentes tipos de resíduos, como papel. O teste visava avaliar a precisão do modelo de visão computacional em diferentes contextos e, dado que a simulação mais fidedigna no campus do inteli foram os cestos de lixo, foi decidido que o teste seria realizado com eles. O teste foi considerado bem-sucedido se o robô alcançou uma precisão superior ou igual a 80% na identificação correta de tubos que necessitavam de limpeza, ou seja, tinham algum resíduo. Esse cálculo deve ser feito a partir da divisão do número de identificações corretas pelo número total de tubos indicados como sujos, ou seja, a precisão do modelo de visão computacional.
 
 #### RNF06: Teste de duração da bateria
 
-Nesse teste, a bateria do robô foi carregada completamente e foi monitorado o tempo de duração da bateria. O teste foi considerado bem-sucedido se a bateria permitiu o robô de se movimentar por um período mínimo de 1 hora sem descarregar a bateria.
+Nesse teste, a bateria do robô foi carregada completamente e teve seu tempo de duração monitorado. O teste foi considerado bem-sucedido se a bateria permitiu o robô de se movimentar por um período mínimo de 1 hora sem descarregar a bateria.
 
 #### RNF07: Teste de usabilidade
 
@@ -115,7 +115,7 @@ Para testar a usabilidade da interface, foi aplicado o teste SUS (System Usabili
 
 ### Validação dos requisitos funcionais
 
-Os testes foram realizados no dia 10/06/24, com 4 pessoas diferentes. A interface web foi apresentada num notebook, isto porque a transmissão de imagens no celular estava muito lenta, o que prejudicava a teleoperação. Alguns insigths que foram retirados dessa experiência foram:
+Os testes foram realizados no dia 10/06/24, com 4 pessoas diferentes. A interface web foi apresentada num notebook, isto porque a transmissão de imagens no celular estava muito lenta, o que prejudicava a teleoperação. Alguns insights que foram retirados dessa experiência foram:
 
 - A sensibilidade do controle dificulta um pouco a movimentação do robô;
 - Como o teste foi realizado em computador, o controle por joystick não foi muito intuitivo para os usuários, sendo um feedback comum que o controle pelas setas do teclado seria mais fácil;
@@ -140,11 +140,11 @@ Foi um sucesso em 100% das sessões de teste. A transmissão de imagem em tempo 
 
 #### Teste de Cancelamento de Inspeção (RF03):
 
-Foi um sucesso em 75% das sessões de teste e o robô parou após o botão ser pressionado, não sendo possível movimentá-lo. Porém, na vez em que o comando não funcionou, a interface travou fazendo com que o robô ficasse rodando incessantemente e o controle do mesmo fosse perdido. Como a interface travou, apertar o botão de *kill* não paralizou o robô, o que chamou a atenção para a eficácia desse mecanismo em condições reais de emergência. 
+Foi um sucesso em 75% das sessões de teste e o robô parou após o botão ser pressionado, não sendo possível movimentá-lo. Porém, na vez em que o comando não funcionou, a interface travou, fazendo com que o robô ficasse rodando incessantemente e o controle do mesmo fosse perdido. Como a interface travou, apertar o botão de *kill* não paralizou o robô, o que chamou a atenção para a eficácia desse mecanismo em condições reais de emergência. 
 
 #### Teste de Proximidade (RF04):
 
-Apesar de ser uma funcionalidade implementada desde a [terceira Sprint](https://inteli-college.github.io/2024-1B-T08-EC06-G03/category/sprint-3), houve erros de conexão com o frontend durante os testes, fazendo com que o robô detectasse a presença de obstáculos e bloquasse a movimentação do robô nas direções que o fariam colidir, mas não retornando na interface (para o usuário) os alertas informando a proximidade de um obstáculo. Dessa forma, apesar do impedimento de colisões ter funcionado 100% das vezes, o retorno de alertas no frontend não foi apresentado em nenhum dos testes.
+Apesar de ser uma funcionalidade implementada desde a [terceira Sprint](https://inteli-college.github.io/2024-1B-T08-EC06-G03/category/sprint-3), houve erros de conexão com o frontend durante os testes, fazendo com que o robô detectasse a presença de obstáculos e bloqueasse a movimentação do robô nas direções que o fariam colidir, mas não retornando na interface (para o usuário) os alertas informando a proximidade de um obstáculo. Dessa forma, apesar do impedimento de colisões ter funcionado 100% das vezes, o retorno de alertas no frontend não foi apresentado em nenhum dos testes.
 
 
 ### Validação dos requisitos não funcionais
@@ -158,11 +158,11 @@ Para o teste de integração do sistema, o tempo médio de resposta da API foi d
 
 No teste de taxa de transferência de imagens, a média do intervalo entre cada transmissão de dados foi de 103ms, o que indica que o teste foi bem-sucedido. Nos diferentes cenários, vale destacar observações importantes:
 
-    - Não houve diferença entre a transmissão de imagens com iluminação adequada e com pouca iluminação, o que indica que a iluminação não impactou na latência da transmissão;
-    - Não houve diferenças significativas entre obstáculos parados ou em movimento;
-    - Não foi possível avaliar o impacto do acionamento do processamento do modelo de visão computacional dado que durante os testes a integração entre o modelo e a aplicação não estava completa.
+    - Não houve diferença entre a transmissão de imagens com iluminação adequada e com pouca iluminação, o que indica que a iluminação não impactou na latência da transmissão;
+    - Não houve diferenças significativas entre obstáculos parados ou em movimento;
+    - Não foi possível avaliar o impacto do acionamento do processamento do modelo de visão computacional dado que durante os testes a integração entre o modelo e a aplicação não estava completa.
 
-    Outro ponto a se considerar que não foi previsto no roteiro de testes foi a conexão da rede, que impacta diretamente na transmissão, ou seja, é um ponto essencial a ser avaliado quando o protótipo for testado em campo ou atualizado para a versão de mercado.
+    Outro ponto a se considerar que não foi previsto no roteiro de testes foi a conexão da rede, que impacta diretamente na transmissão, ou seja, é um ponto essencial a ser avaliado quando o protótipo for testado em campo ou atualizado para a versão de mercado.
 
 #### Teste de precisão da movimentação do robô (impacta no RNF03 e RNF04):
 
@@ -171,7 +171,7 @@ Para o teste de precisão de movimentação do robô, a diferença entre o coman
 
 #### Teste de duração da bateria (RNF04):
 
-Para o quinto teste, de duração da bateria,o robô permaneceu ligado continuamente com os pacotes ROS de movimentação, lidar e câmera rodando por 2horas e 25 minutos, o que surpreendeu a equipe. Porém, vale considerar testes futuros com o robô em movimento e com o modelo de visão computacional acionado, para avaliar o consumo de bateria em situações mais próximas do cenário real.
+Para o quinto teste, de duração da bateria, o robô permaneceu ligado continuamente com os pacotes ROS de movimentação, lidar e câmera rodando por 2horas e 25 minutos, o que surpreendeu a equipe. Porém, vale considerar testes futuros com o robô em movimento e com o modelo de visão computacional acionado, para avaliar o consumo de bateria em situações mais próximas do cenário real.
 
 #### Teste de Usabilidade (RNF05):
 
@@ -185,7 +185,7 @@ Fonte: Elaborado pela equipe Rebólins
 
 </div>
 
-Para o teste de usabilidade, 4 usuários testaram a solução com o teste SUS e a média de notas foi de 84,4, indicando um score médio A, uma nota muito boa. Todos os usuários alcançaram a nota B, superando as metas estabelecidas para esse teste. As principais queixas dos usuários foram em relação à qualidade da câmera, à instabilidade de conexão e falta de movimentação pelas setas , pois o teste foi realizado pelo computador, enquanto a aplicação foi desenvolvida para ser utilizada em um dispositivo móvel. Porém, algo muito positivo foi a clareza dos botões e simplicidade da interface. Para ver mais sobre cada teste, acesse a [Tabela de Testes](https://docs.google.com/spreadsheets/d/1hyU2EtLaos3EX-l6XtDDiVFYKS4Vnd7YyudwoYwAVCQ/edit?usp=sharing).
+Para o teste de usabilidade, 4 usuários testaram a solução com o teste SUS e a média de notas foi de 84,4, indicando um score médio A, uma nota muito boa. Todos os usuários alcançaram a nota B, superando as metas estabelecidas para esse teste. As principais queixas dos usuários foram em relação à qualidade da câmera, à instabilidade de conexão e falta de movimentação pelas setas, pois o teste foi realizado pelo computador, enquanto a aplicação foi desenvolvida para ser utilizada em um dispositivo móvel. Porém, algo muito positivo foi a clareza dos botões e simplicidade da interface. Para ver mais sobre cada teste, acesse a [Tabela de Testes](https://docs.google.com/spreadsheets/d/1hyU2EtLaos3EX-l6XtDDiVFYKS4Vnd7YyudwoYwAVCQ/edit?usp=sharing).
 
 
 Segue abaixo um vídeo gravado durante um dos procedimentos de teste dos Requisitos Funcionais:
