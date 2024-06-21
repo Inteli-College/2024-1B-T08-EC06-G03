@@ -3,7 +3,7 @@ title: Guia de execução atualizado
 sidebar_position: 5
 ---
 
-Com a recente [Migração para WebSockets com ROSBridge](Sprint-5/rosbridge.md), a arquitetura foi modificada, portanto, o guia de execução foi atualizado
+Com a recente [Migração para WebSockets com ROSBridge](Sprint-4/rosbridge.md), a arquitetura foi modificada, portanto, o guia de execução foi atualizado
 
 ---
 
