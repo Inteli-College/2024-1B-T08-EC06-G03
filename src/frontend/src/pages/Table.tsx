@@ -207,10 +207,7 @@ const Table: React.FC = () => {
       <Navbar />
       <div className="container mx-auto py-10 pt-44">
         <div className="mb-4 flex justify-between items-center">
-          <UnitDropdown selected={unit} setSelected={() => setUnit } />
-          <Button variant="outline" className="w-10 h-10 flex justify-center items-center p-0">
-            <Plus className="h-5 w-5" />
-          </Button>
+          <UnitDropdown selected={unit} setSelected={() => setUnit} />
         </div>
         <Tabs defaultValue="procedimentos">
           <TabsList className="grid w-full grid-cols-3">
