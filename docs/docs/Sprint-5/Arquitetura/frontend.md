@@ -1,6 +1,6 @@
 ---
 title: Frontend - Interface do Usuário
-sidebar_position: 2
+sidebar_position: 4
 ---
 
 # Frontend - Interface do Usuário
@@ -55,7 +55,7 @@ Essas tabelas são exibidas por meio de um tab system, onde o usuário pode sele
 Outro ponto é a seleção de unidade, exibida no centro superior da tela, que é o primeiro passo do usuário para verificar determinada informação, ele escolhe a unidade da qual ele quer ver as informações e a tela é atualizada com as informações da unidade selecionada.
 
 ### Seção da unidade - dropdown
-![Seção da unidade](/img/front-teleop.png)
+![Seção da unidade](/img/dropdown-unit.png)
 
 Existe também o botão de criar unidade, posicionado ao lado da seleção de unidade, assim como os botões de criar procedimentos, robôs e reboilers, permitindo o cadastro de novas informações. Ao clicar, um modal irá surgir para inserir as informações e cadastrar no banco de dados.
 
