@@ -14,7 +14,7 @@ Na seção [Visualização de Dados](/Sprint-3/visualizacao-de-dados.md), foram 
 
 **Banco de dados Relacional**
 
-![Banco de dados](/img/banco-de-dados.png)
+![Banco de dados](/img/banco-de-dados-v2.png)
 
 
 **Fonte:** Elaborado pela equipe Rebólins
