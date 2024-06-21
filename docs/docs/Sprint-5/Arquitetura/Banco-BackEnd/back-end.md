@@ -8,16 +8,16 @@ O objetivo principal dessa página é documentar a criação e implementação d
 ## Tecnologias Utilizadas
 
 - **JavaScript**
-  - **[Express.js](https://expressjs.com/)**: Framework para construção de aplicações web, utilizado para criar o servidor HTTP.
+  - **[Express.js](https://expressjs.com/)**: Framework para construção de aplicações web, utilizado para criar o servidor HTTP.
 - **Turso**
-  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite. Para compreender mais sobre a decisão de utilizar turso, veja [aqui]((/Sprint-5/Arquitetura/Banco-BackEnd/banco-de-dados.md).
+  - [**turso**:](https://turso.tech/) Banco de dados em nuvem, o qual funciona rodando um database do tipo sqlite. Para compreender mais sobre a decisão de utilizar turso, veja [aqui]((/Sprint-5/Arquitetura/Banco-BackEnd/banco-de-dados.md).
 - **Prisma ORM**
-  - [**prisma.io**](https://www.prisma.io/docs/orm/prisma-schema/overview): Biblioteca utilziada para servir como intermédio entre a api e o banco de dados, realizando as consultas por ORM. As consultas por ORM garantem mais segurança para a aplicação, visto que evitam problemas de cybersegurança como **sqlinjection**. Além disso, a rapidez para realizar seu desenvolvimento auxilia muito no projeto, visto o escopo de dez semanas.
+  - [**prisma.io**](https://www.prisma.io/docs/orm/prisma-schema/overview): Biblioteca utilizada para servir como intermédio entre a api e o banco de dados, realizando as consultas por ORM. As consultas por ORM garantem mais segurança para a aplicação, visto que evitam problemas de cybersegurança como **sqlinjection**. Além disso, a rapidez para realizar seu desenvolvimento auxilia muito no projeto, visto o escopo de dez semanas.
 
 
 ## Arquitetura
 
-Antes de iniciar o desenvolvimento do back-end da aplicação,  foi idealizado e implementado o banco de dados, o qual é explicado em [outra página](/Sprint-5/Arquitetura/Banco-BackEnd/banco-de-dados.md). Sua implementação em **Turso**, o qual tem interatividade com o **Prisma.Io**, permite com que a aplicação seja desenvolvida de forma mais acelerada devido a funções já existentes para realizar as operações de leitura, inserção, atualização dos dados.
+Antes de iniciar o desenvolvimento do back-end da aplicação,  foi idealizado e implementado o banco de dados, o qual é explicado em [outra página](/Sprint-5/Arquitetura/Banco-BackEnd/banco-de-dados.md). Sua implementação em **Turso**, o qual tem interatividade com o **Prisma.Io**, permite com que a aplicação seja desenvolvida de forma mais acelerada devido a funções já existentes para realizar as operações de leitura, inserção, atualização dos dados.
 
 O back-end foi construído por meio de arquivos de controllers e de routes, importando os routers para a aplicação principal que funciona em express. Sendo assim, cada entidade possui dois arquivos, o controller, o qual possui o crud da entidade e outras operações que são executadas nela, e o route, o qual utiliza das funções implementadas no controller.
 
@@ -41,25 +41,25 @@ const examinationRoutes = require('../api/routes/examination');
 const tubeStateRoutes = require('../api/routes/tubeState'); 
 
 module.exports = () => {
-    const app = express();
-    app.use(helmet());
-    app.use(cors(process.env.CORS_ORIGIN || config.get('server.cors')));
-    app.use(morgan('dev'));
-    
-    app.set('port', process.env.PORT || config.get('server.port'));
-    app.set('host', process.env.HOST || config.get('server.host'));
-    app.use(json());
+    const app = express();
+    app.use(helmet());
+    app.use(cors(process.env.CORS_ORIGIN || config.get('server.cors')));
+    app.use(morgan('dev'));
+    
+    app.set('port', process.env.PORT || config.get('server.port'));
+    app.set('host', process.env.HOST || config.get('server.host'));
+    app.use(json());
 
-    // Definição do nome de cada rota da api.
-    app.use('/api/robots', robotRoutes);
-    app.use('/api/unities', unitRoutes);
-    app.use('/api/reboilers', reboilerRoutes);
-    app.use('/api/images', imageRoutes);
-    app.use('/api/orders', tubeRoutes);
-    app.use('/api/examinations', examinationRoutes);
-    app.use('/api/tube-states', tubeStateRoutes);
+    // Definição do nome de cada rota da api.
+    app.use('/api/robots', robotRoutes);
+    app.use('/api/unities', unitRoutes);
+    app.use('/api/reboilers', reboilerRoutes);
+    app.use('/api/images', imageRoutes);
+    app.use('/api/orders', tubeRoutes);
+    app.use('/api/examinations', examinationRoutes);
+    app.use('/api/tube-states', tubeStateRoutes);
 
-    return app;
+    return app;
 };
 ```
 
@@ -84,7 +84,7 @@ Ele deve conter a modelagem do banco, porém transformada em arquivo do tipo .sc
 Como o arquivo não está na pasta raiz do backend, o comando `npx prisma generate` deve ser substituído por `npx prisma generate --schema=api/models/schema.prisma`.
 :::
 
-Em sequência, é necessário criar um arquivo .env dentro da pasta `backend`. Esse arquivo armazanerá os tokens para conectar ao turso.
+Em sequência, é necessário criar um arquivo .env na pasta `backend`. Esse arquivo armazenará os tokens para conectar ao turso.
 
 ```env
 TURSO_DATABASE_URL={url}
@@ -102,8 +102,8 @@ const { createClient } = require('@libsql/client');
 const { PrismaLibSQL } = require('@prisma/adapter-libsql');
 
 const libsql = createClient({
-  url: process.env.TURSO_DATABASE_URL,
-  authToken: process.env.TURSO_AUTH_TOKEN,
+  url: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
 const adapter = new PrismaLibSQL(libsql);
@@ -119,14 +119,14 @@ Para criar um controller, basta importar o `prisma` que criamos no último trech
 const prisma = require('../models/prismaClient');
 
 const getAllRobots = async (req, res) => {
-  try {
-    const robots = await prisma.robot.findMany();
-    res.json(robots);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching robots' });
-  }
+  try {
+    const robots = await prisma.robot.findMany();
+    res.json(robots);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching robots' });
+  }
 };
 ```
 ## Rotas 
 
-Para a documentação das rotas, foi utilizado o postman, o qual contém recursos que facilitam a demonstração das mesmas. [Link de acesso](https://www.postman.com/planetary-astronaut-106586/workspace/reboilns-g03/documentation/26958099-16b60531-2533-4099-a7a3-ba5241ad8537)
+Para a documentação das rotas, foi utilizado o Postman, o qual contém recursos que facilitam a demonstração das mesmas. [Link de acesso](https://www.postman.com/planetary-astronaut-106586/workspace/reboilns-g03/documentation/26958099-16b60531-2533-4099-a7a3-ba5241ad8537)
