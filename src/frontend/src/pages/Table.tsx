@@ -7,48 +7,31 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs';
 import { Robot, Order, Reboiler, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
-import { getOrders } from '@/api/orders';
+import { getOrders, createOrder } from '@/api/orders';
 import { getRobots, createRobot } from '@/api/robot';
 import { getReboilers, createReboiler } from '@/api/reboiler';
 import { DataTable } from '../components/DataTable';
-import { NewProcessDialog } from '@/components/NewProcessDialog';
 import  UnitDropdown from '../components/UnitDropdown';
 import { Button } from '@/components/ui/button';
 import Navbar from '../components/Navbar';
 import SelectOptions from '@/components/Select-options';
 import Modal_template, { SubmitFunction } from "../components/Modal_template"
-import { create } from 'domain';
 import { Input } from '@/components/ui/input';
 import { toast } from 'react-toastify';
 import { ColumnDef } from '@tanstack/react-table';
 
 
-async function createProcedure(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
-
-async function createReboiler(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
-
-function formDataToObject(formData: FormData): { [key: string]: any } {
-  const data: { [key: string]: any } = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-  return {...data};
-}
-
 const Table: React.FC = () => {
   const [data, setData] = useState<Order[] | Robot[] | Reboiler[]>([]);
+  const [reboilers, setReboilers] = useState<string[] | [] >([]);
+  const [robots, setRobots] = useState<string[] | [] >([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [step, setStep] = useState<string>("");
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
   const [typeTable, setTypeTable] = useState<ColumnDef<Order | Robot | Reboiler>[] | null>();
   const [unit, setUnit] = useState<number>(1);
+  const [reboiler_selected, setReboilerSelected] = useState<number>(0);
+  const [robot_selected, setRobotSelected] = useState<string>("");
 
 
   useEffect(() => {
@@ -86,6 +69,19 @@ const Table: React.FC = () => {
     }
   }; 
 
+  const registerOrder = async (order : Order)=> {
+    try{
+      const neworder: Order | string = await createOrder(order);
+      console.log(neworder)    
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);      
+      return order
+    }
+  }; 
+
   const fetchRobots = async () => {
     try {
       const robots: Robot[] | string = await getRobots(unit);
@@ -93,6 +89,7 @@ const Table: React.FC = () => {
         setError(robots);
       } else {
         setData(robots);
+        setRobots(robots.map((robot) => robot.nickname.toString()));
       }
       console.log(robots)
     } catch (error) {
@@ -158,13 +155,22 @@ const Table: React.FC = () => {
     return <div>Error fetching data: {error}</div>;
   }
 
-  const newProcedure: SubmitFunction = (event) => {
+  const newOrder: SubmitFunction = (event) => {
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
-    formData.append("step", step);
-    const data = formDataToObject(formData);
-    createProcedure(data);
+    let neworderdata = {
+      id: null,
+      status: "active",
+      robot_id : formData.get("robot_number") as unknown as number,
+      reboiler_id: formData.get("reboiler_number") as unknown as number,
+      Examinations: [],
+      started_at: Math.floor(Date.now()/1000),
+      finished_at: null,
+    };
+    const robotRegistered = registerOrder(neworderdata);
+    if (robotRegistered !== null){
+      toast.success("Procedimento cadastrado com sucesso")
+    }
   }
 
   const newRobot: SubmitFunction = (event) => {
@@ -227,21 +233,16 @@ const Table: React.FC = () => {
                 children={
                   <div>
                     <div>
-                      <label>Etapa</label>
-                      <br/>
-                      <SelectOptions options={["pré-limpeza", "pós-limpeza"]} selected={step} setSelected={setStep}/>
-                    </div>
-                    <div>
                       <label>Reboiler</label>
                       <br/>
-                      <Input type="text" name='reboiler' placeholder="Insira o reboiler a ser inspecionado" />
+                      <SelectOptions options={reboilers} selected={reboiler_selected} setSelected={()=> setReboilerSelected} />
                       <br/>
                       <label>Robô</label>
-                      <Input type="text" name="robot" placeholder="Insira o robô a ser inspecionado"/>
+                      <SelectOptions options={robots} selected={robot_selected} setSelected={()=> setRobotSelected} />
                       <br/>
                     </div>
                   </div>} 
-                submit_action={newProcedure}
+                submit_action={newOrder}
                 isOpen={true}>
               </Modal_template>
             </div>

@@ -22,12 +22,12 @@ export type Examination = {
 };
 
 export type Order = {
-  id: number;
+  id: number | null;
   status: string;
   robot_id: number;
   reboiler_id: number;
   started_at: number;
-  finished_at: number;
+  finished_at: number | null;
   Examinations: Examination[];
 };
 
@@ -99,7 +99,7 @@ export const columnsExamination: ColumnDef<Order>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order.id.toString())}>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order?.id.toString())}>
               Copy Order ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />

@@ -3,7 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 interface SelectOptionsProps {
     options: string[];
-    selected: string;
+    selected: string | number;
     
     setSelected: (value: string) => void;
 }
