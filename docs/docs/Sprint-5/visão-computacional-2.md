@@ -9,7 +9,7 @@ Um dos requisitos para o funcionamento desse projeto é a detecção de resíduo
 
 ## Escolha de versão do modelo
 
-No projeto, foi decidida a utilização da versão [YOLOv8](https://docs.ultralytics.com/models/yolov8/), apesar de existirem atualizações mais recentes, porque a instalação é facilitada (não há a necessidade de clonar um repbositório, por exemplo, como a [YOLOv9](https://docs.ultralytics.com/models/yolov9/)), e também há mais exemplos encontrados online, facilitando o aprendizado dos desenvolvedores e implementação, já que a documentação é mais rica, o que não é o caso da versão [YOLOv10](https://docs.ultralytics.com/models/yolov10/), que foi lançada durante o desenvolvimento desse projeto, e ainda não tem muitos casos de uso.
+No projeto, foi decidida a utilização da versão [YOLOv8](https://docs.ultralytics.com/models/yolov8/), apesar de existirem atualizações mais recentes, porque a instalação é facilitada (não há a necessidade de clonar um repositório, por exemplo, como a [YOLOv9](https://docs.ultralytics.com/models/yolov9/)). Além disso, a YOLOv8 possui mais exemplos encontrados online, facilitando o aprendizado dos desenvolvedores e implementação, já que a documentação é mais rica, o que não é o caso da versão [YOLOv10](https://docs.ultralytics.com/models/yolov10/), que foi lançada durante o desenvolvimento desse projeto, e ainda não tem muitos casos de uso.
 
 ## Treinamento do Modelo
 
@@ -53,24 +53,109 @@ Por fim, foram utilizadas 100 épocas para o treinamento do modelo. Isto indica 
 
 ## Avaliação do modelo
 
-### Definição das principais métricas utilizadas
+### Métricas de Avaliação
 
-As métricas são indicadores que mostram como o modelo está performando, permitindo sua avaliação e como melhorá-lo. As principais métricas utilizadas são a **precisão, recall, precisão e recall, f1 confiança e mean average precision** (mAP - que tem tanto o **mAP50** quanto o **mAP50-95**). Agora, será apresentado o que cada uma delas representa:
+1. **Precisão (Precision)**
 
-- **Precisão:** Apresenta a porcentagem de verdadeiros positivos (ou seja, a porcentagem predições corretas). No contexto do nosso projeto, significa em quantos canos o modelo corretamente identificou sujeiras, o que significa que ter essa métrica alta é interessante para o desempenho do projeto.
+    A precisão mede a proporção de verdadeiros positivos (detecções corretas de sujeira) sobre o total de detecções positivas (verdadeiros positivos + falsos positivos).
 
-- **Recall:** é uma métrica que avalia quantos objetos que deveriam ser detectados o modelo corretamente detectou. Por exemplo, se haviam 10 canos com impureza e o modelo detectou apenas 8, ele tem um recall de 80%. Isso ajuda a compreender a capacidade do modelo de encontrar a sujeira nos canos.
+    - **Importância no Projeto:** Uma alta precisão significa que a maioria das detecções de sujeira são corretas. Isso é crucial porque:
+        - **Cenário Realista:** Garante que o sistema não está identificando sujeira onde não existe, evitando alarmes falsos.
+        - **Mitigação de Problemas de Vazão:** Detecções precisas permitem intervenções adequadas e pontuais, prevenindo problemas de vazão devido à sujeira nos tubos.
+   
+2. **Recall**
 
-- **mAP50:** É uma métrica que utiliza de um **threshold** de 50%, que nada mais é que um valor que determina a precisão que uma detecção precisa performar para ser considerada correta.
-Por exemplo, com um threshold de 50% significa que, para uma detecção ser considerada correta, a sobreposição entre a caixa predita pelo modelo e a caixa real do objeto deve ser de pelo menos 50%. É uma métrica mais simples para avaliar o desempenho do modelo.
+    O recall mede a proporção de verdadeiros positivos sobre o total de instâncias reais positivas (verdadeiros positivos + falsos negativos).
 
-- **mAP50-95:** Possui a mesma lógica do anterior, mas possui um threshold variável entre 50% a 95%, com intervalos de 5%, dando uma visão mais completa do modelo, pois avalia quão bem ele se sai em diferentes níveis de sobreposição, sendo um pouco mais rigoroso que o mAP50.
+    - **Importância no Projeto:** Um alto recall indica que o modelo está capturando a maioria dos casos reais de sujeira. Isso é importante porque:
+        - **Completa Detecção:** Assegura que a maior parte da sujeira é detectada, reduzindo a probabilidade de deixar resíduos não identificados que podem causar problemas de performance no futuro.
+        - **Intervenção Adequada:** Garante que a manutenção pode ser realizada com base em uma detecção abrangente, melhorando a eficácia das limpezas e manutenções.
 
-### Outras métricas utilizadas
+3. **mAP50**
 
-- **Box Loss:** Mede a precisão da localização das bounding boxes previstas em comparação com as bounding boxes reais dos objetos. Quanto menor o valor, melhor o modelo está performando.
-- **Classification Loss:** Avalia a precisão da previsão das classes dos objetos dentro das bounding boxes. A perda de classificação mede o erro entre as classes previstas pelo modelo e as classes reais dos objetos.
-- **Ditribution Focal Loss:** Perda usada em tarefas de detecção de objetos, especialmente em arquiteturas modernas como o próprio YOLO. A DFL é uma combinação de aspectos da Focal Loss e técnicas de distribuição para melhorar a precisão da previsão de bounding boxes e classes. Ela se concentra em penalizar previsões incorretas de forma mais severa e, ao mesmo tempo, ajuda a lidar com a distribuição de dados desbalanceada.
+    Mean Average Precision (mAP) ao usar um limiar de Intersection over Union (IoU) de 0.50. Isso significa que uma predição é considerada correta se a sobreposição (interseção) entre a caixa predita e a caixa real for de pelo menos 50%.
+    
+    - **Importâncias no Projeto:**
+        - **Indicador de Desempenho Inicial:** Fornece uma medida clara de quão bem o modelo está detectando resíduos quando a exigência de sobreposição não é muito rigorosa (50% de sobreposição).
+        - **Benchmarking:** É uma métrica padrão para comparar a performance inicial do modelo com outros modelos ou versões anteriores.
+        - **Acurácia Prática:** Num cenário de inspeção de tubos, um mAP50 alto indica que o modelo é capaz de detectar resíduos de maneira robusta, mesmo com variações leves na precisão da localização.
+
+4. **mAP50-95**
+
+    Mean Average Precision calculada em múltiplos limiares de IoU, de 0.50 a 0.95 em incrementos de 0.05 (ou seja, IoU=0.50, 0.55, 0.60, ..., 0.95). Isso proporciona uma visão mais completa da performance do modelo em diferentes níveis de exigência de sobreposição.
+
+    - **Importância no Projeto:**
+        - **Indicador de Desempenho Inicial:** Fornece uma medida clara de quão bem o modelo está detectando resíduos quando a exigência de sobreposição não é muito rigorosa (50% de sobreposição).
+        - **Benchmarking:** É uma métrica padrão para comparar a performance inicial do modelo com outros modelos ou versões anteriores.
+        - **Acurácia Prática:** Num cenário de inspeção de tubos, um mAP50 alto indica que o modelo é capaz de detectar resíduos de maneira robusta, mesmo com variações leves na precisão da localização.
+
+### Impacto das Métricas no Contexto de Negócio
+
+1. **Confiabilidade e Eficiência Operacional**
+    - **Precisão Alta:** Garante que os recursos não sejam desperdiçados em falsas detecções, permitindo uma manutenção mais eficiente e econômica.
+    - **Recall Alto:** Assegura que a maioria das sujeiras sejam identificadas e tratadas, evitando problemas de performance e manutenção corretiva não planejada.
+
+2. **Segurança e Qualidade**
+    - **Detecções Confiáveis:** Reduz o risco de falhas catastróficas nos reboilers devido a acúmulo de sujeira não detectada.
+    - **Qualidade dos Dados:** Proporciona dados precisos e completos para análises posteriores, suportando decisões informadas sobre a manutenção e operação dos reboilers.
+
+3. **Decisões Estratégicas**
+    - **Dados Verídicos:** Com métricas equilibradas, a empresa pode confiar nos dados para planejamento estratégico, como agendamento de manutenções preventivas e investimentos em melhorias.
+
+Ao analisar essas métricas, a equipe técnica pode garantir que o modelo de detecção de sujeira nos reboilers está funcionando de maneira eficiente e eficaz, oferecendo suporte robusto para a tomada de decisões operacionais e estratégicas. A exemplo de umas das nossas personas, o **Operador de máquinas** Danillo Chrystian, que precisa de uma interface clara e intuitiva para operar o robô de inspeção, a precisão e o recall altos garantem que ele possa confiar nas detecções do modelo para agir de forma rápida e precisa em situações de emergência.
+
+### Métricas de perda
+
+As métricas de perda (ou loss) são fundamentais no treinamento de modelos de aprendizado de máquina, incluindo aqueles usados para detecção de objetos como o YOLOv8. Elas indicam o quanto o modelo está errando e ajudam a ajustar os pesos do modelo para melhorar sua performance. No contexto do seu projeto de detecção de resíduos em tubos de reboilers, as métricas de perda se relacionam da seguinte forma:
+
+1. **Box Loss (Perda de Caixa)**
+
+    A classification loss mede o erro na classificação dos objetos dentro das caixas delimitadoras. No projeto, refere-se à capacidade do modelo de distinguir corretamente entre tubo (tube) e sujeira (dirt).
+
+    - **Localização:** O quão precisa é a posição da caixa predita.
+    - **Dimensão:** O quão precisas são as dimensões (largura e altura) da caixa predita.
+
+    **Importância no Projeto:**
+    - **Precisão na Detecção de Resíduos:** Uma baixa box loss significa que o modelo está delimitando os resíduos dentro dos tubos de forma precisa. Isso é essencial para:
+        - **Análises Detalhadas:** Permitir uma análise precisa da quantidade e localização da sujeira.
+        - **Intervenção Eficiente:** Assegurar que as intervenções de limpeza ou manutenção sejam direcionadas para as áreas corretas.
+
+2. **Classification Loss (Perda de Classificação)**
+
+    A classification loss mede o erro na classificação dos objetos dentro das caixas delimitadoras. No projeto, refere-se à capacidade do modelo de distinguir corretamente entre tubo (tube) e sujeira (dirt).
+
+    **Importância no Projeto:**
+    - **Identificação Correta de Resíduos:** Uma baixa classification loss significa que o modelo está corretamente identificando sujeira versus tubo. Isso é crucial para:
+        - **Decisões de Manutenção:** Garantir que as áreas identificadas para limpeza contenham realmente resíduos.
+        - **Confiabilidade dos Dados:** Proporcionar dados confiáveis para análise posterior e para informar a equipe de manutenção.
+
+3. **Distribution Focal Loss**
+
+    A distribution focal loss é uma métrica que foca em melhorar a performance do modelo em classes difíceis de distinguir. Ela dá mais peso a erros em classes menos frequentes ou mais difíceis de classificar, ajudando a modelar melhor esses casos.
+
+    **Importância no Projeto:**
+    - **Melhoria em Casos Difíceis:** Uma baixa distribution focal loss indica que o modelo está melhorando na detecção de resíduos difíceis de identificar, que podem ser críticos para:
+        - **Detecção de Pequenos Resíduos:** Assegurar que até mesmo pequenas quantidades de sujeira sejam detectadas, evitando problemas de performance.
+        - **Consistência e Confiabilidade:** Aumentar a confiança no modelo ao garantir que ele é robusto o suficiente para lidar com todos os tipos de resíduos, independentemente da sua frequência ou dificuldade de detecção.
+
+### Impacto das Métricas de Perda 
+
+1. **Aprimoramento Contínuo:**
+    - **Ajuste de Pesos:** Durante o treinamento, essas métricas de perda são usadas para ajustar os pesos do modelo, melhorando gradualmente sua precisão e recall.
+    - **Otimização do Modelo:** Minimizar essas perdas resulta em um modelo mais eficiente e eficaz na detecção de resíduos nos tubos.
+
+2. **Precisão e Confiabilidade:**
+    - **Box Loss:** Reduzir a box loss melhora a precisão da localização dos resíduos, garantindo que a análise e a manutenção sejam direcionadas corretamente.
+    - **Classification Loss:** Reduzir a classification loss assegura que a identificação de sujeira é confiável, evitando falsas classificações que poderiam levar a intervenções desnecessárias.
+    - **Distribution Focal Loss:** Focar na redução dessa perda melhora a detecção em cenários difíceis, garantindo que mesmo as áreas mais desafiadoras são corretamente analisadas.
+
+3. **Impacto na Manutenção e Operações:**
+    - **Planejamento de Manutenção:** Com perdas reduzidas, o modelo fornece dados mais precisos, suportando um planejamento de manutenção mais eficiente e econômico.
+    - **Qualidade dos Dados:** Métricas de perda reduzidas aumentam a qualidade e a confiabilidade dos dados coletados, permitindo uma análise mais precisa e decisões operacionais melhor informadas.
+
+4. **Segurança e Performance:**
+    - **Redução de Falhas:** Detecções precisas e confiáveis de resíduos ajudam a evitar falhas catastróficas nos reboilers, garantindo a segurança e a continuidade das operações.
+    - **Otimização da Vazão:** Ao identificar corretamente a sujeira, o modelo ajuda a manter a vazão ideal dos tubos, prevenindo bloqueios e otimizações ineficazes.
 
 ### Resultados
 
@@ -109,7 +194,7 @@ Analisando o gráfico apresentado é possível notar as seguintes informações 
 
 10. **metrics/mAP50-95(B)**: Reflete a mAP (mean Average Precision) com múltiplos limiares (50-95%) durante a validação. A mAP50-95 aumenta gradualmente, alcançando cerca de 0,85, sugerindo que o modelo está se tornando progressivamente melhor em detectar objetos com uma variedade de limiares.
 
-Por fim, é possível observar que o modelo YOLOv8 obteve um desempenho muito bom em todas as métricas avaliadas, indicando que ele é capaz de detectar objetos com alta precisão e recall, além de ter uma alta mAP50 e mAP50-95, o que sugere que ele é capaz de detectar objetos com diferentes níveis de confiança. Em relação às perdas de bounding box, classificação e focalização de distribuição, todas diminuíram significativamente ao longo do treinamento, o que indica que o modelo está aprendendo a localizar as bounding boxes, classificar os objetos e prever sua distribuição de maneira mais precisa.
+Enfim, os resultados obtidos com o treinamento do modelo YOLOv8 são altamente satisfatórios, com altas pontuações em todas as métricas avaliadas. A precisão, recall, mAP50 e mAP50-95 atingiram valores próximos de 1, indicando que o modelo é altamente preciso e eficaz na detecção de objetos nas imagens. Além disso, as métricas de perda (box loss, classification loss e distribution focal loss) diminuíram significativamente ao longo do treinamento, sugerindo que o modelo está aprendendo a localizar e classificar os objetos com precisão.
 
 ### Comparação entre os modelos treinados
 
@@ -127,7 +212,7 @@ Antes de finalizar o treinamento do modelo, foi feito um treinamento com 5 époc
 
 Analisando o gráfico acima, é notável que, apesar de apresentar bons resultados, o modelo mostrava tendência a melhorar em todas as métricas, mas ainda não havia atingido o seu potencial máximo. Por exemplo, a precisão mostra um aumento repentino na última época, enquanto o recall apresenta uma leve queda, o que pode sugerir um equilíbrio entre precisão e recall que ainda precisava ser ajustado. Além disso, a melhoria nas métricas mAP50 e mAP50-95 sugere que o modelo poderia se tornar mais eficaz em detectar objetos com diferentes níveis de confiança.
 
-## Testes e conclusão
+## Validação e conclusão
 
 O modelo YOLOv8 foi treinado com sucesso para detectar sujeira em canos de reboilers, atingindo altas pontuações em métricas seja em precisão, recall, mAP50 e mAP50-95 ao ser treinado com 100 épocas, sendo capaz de detectar todos os objetos presentes nas imagens com alta precisão.
 
@@ -144,7 +229,7 @@ Abaixo é possível observar um exemplo de uma imagem de teste com a detecção 
 
 </div>
 
-Observando esta imagem, pode-se observar que o modelo corroborou com as métricas apresentadas, detectando tubos e sujeiras com uma eficácia muito alta e sem erros aparentes.
+Observando esta imagem, pode-se perceber uma alta confiança na detecção de tubos (1.0) e uma boa confiança na detecção de sujeira (0.8-0.9) que indicam que o modelo está funcionando bem. Ainda considerando estes resultados, é possível afirmar que um operador poderia usar essas detecções para identificar rapidamente quais tubos precisam de limpeza ou manutenção, com base nas detecções de sujeira. Além disso, é importante afirmar que o modelo pode ser facilmente melhorado com mais dados e um aumento das épocas de treinamento.
 
 <div align="center">
 
@@ -158,7 +243,7 @@ Observando esta imagem, pode-se observar que o modelo corroborou com as métrica
 
 Nesta segunda imagem, é possível notar que o modelo foi capaz de detectar tanto os tubos (representados por 0) quanto a sujeira (representado por 1) presente neles em diferentes posições e ângulos, isto mostra a versatilidade do modelo em realizar detecções em cenários distintos e específicos.
 
-Por fim, é importante ressaltar que o modelo foi treinado com um dataset específico e, portanto, é importante avaliar o desempenho do modelo em um ambiente de produção para garantir que ele seja capaz de generalizar bem para novos dados. Além disso, é importante monitorar o desempenho do modelo ao longo do tempo.
+Concluindo, é possível dizer que estas montagem de imagens validando o modelo YOLO no contexto do projeto mostram um bom desempenho não apenas na detecção de tubos e resíduos como na localização dos memsmos, fornecendo uma base sólida para intervenções de manutenção baseadas em detecções automatizadas. A confiança nas detecções e a categorização clara das imagens ajudam a garantir que o sistema seja prático e eficiente para uso em cenários reais.
 
 ## Estrutura de pastas
 
