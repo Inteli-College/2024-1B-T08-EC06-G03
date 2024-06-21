@@ -5,7 +5,47 @@ sidebar_position: 4
 
 # Frontend - Interface do Usuário
 
-## Contexto
+# Versão inicial da interface
+
+<div align="center">
+
+**Interface de controle - V0**
+
+![Central de controle Desencana!](/img/interface-principal.png)
+
+</div>
+
+A princípio, a interface de usuário era apenas uma página de teleoperação, feita com html e css simples. Havia um botão para interromper o funcionamento do robô, um para ligá-lo e a movimentação não era feita por meio da interface, e sim pelas teclas do teclado, não sendo acessível para aparelhos como celular ou tablet.
+Com o decorrer das sprints, o projeto foi tomando forma e ganhando complexidade, conforme novas _features_ foram implementada. Dessa forma, a interface do usuaário acabou sendo iterada várias vezes antes da versão final que será apresentada abaixo.
+
+## Wireframe da versão final
+
+A versão inicial da interface não contemplava as [user stories 2 e 3 do Jairo](../../Sprint-1/Design/personas.md), pois não havia a parte de visualização e validação de dados. Por essa razão, primeiramente foi esboçado um wireframe, que é uma visualização de baixa fidelidade do que era planejado ser implementado.
+
+<div align="center">
+
+**Wireframe da tela de acompanhamento de sessões**
+
+![Wireframe 1](/img/wireframe-1.jpg)
+
+</div>
+
+<div align="center">
+
+**Wireframe da tela de acompanhamento de sessões**
+
+![Wireframe 2](/img/wireframe-2.jpg)
+
+</div>
+
+Como é possível observar, foi esboçado como funcionaria o fluxo de busca das sessões de inspeção realizadas pelo robô, considerando a unidade, os reboilers e os robôs atuantes, além de pensar na lógica de como a tela de teleoperação seria acessada (e foi estabelecido que ela só seria acessada após a identificação da sessão, mas isso será explicado melhor mais à frente). 
+
+# Tecnologias utilizadas
+
+Para a escolha das tecnologias utilizadas, as variáveis consideradas foram: facilidade de implementação e conhecimento prévio do time, facilidade de integração com o backend e a possibilidade de usar componentes pré-prontos. Pensando nesses aspectos, a decisão final foi utilizar o _build tool_ [Vite](https://vitejs.dev/) que os desenvolvedores já possuem uma maior familiaridade, o que facilitou a implementação e acelerou o tempo de desenvolvimento. Outro ponto importante é que há muitas bibliotecas disponíveis, como o [Tailwind](https://tailwindcss.com/docs/installation)  e o [ShadCN UI](https://ui.shadcn.com/), que possuem várias ferramentas que tornaram a estilização e criação dos componentes da interface muito mais efetivos.
+
+
+# Interface Final
 
 Para controlar os procedimentos de inspeção do robô, isto é, a verificação do nível de sujidade antes e após a limpeza manual, é necessária uma interface que permita visualizar as diferentes inspeções que ocorrem, os reboilers e a frequência de limpeza, entre outras informações essenciais tanto à pessoa que irá controlar o robô quanto à equipe que irá visualizar e analisar os dados coletados. Dessa forma, foram idealizadas duas telas principais na interface gráfica: a tela de operação e a interface de controle dos dados.
 
