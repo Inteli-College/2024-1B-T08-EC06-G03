@@ -100,6 +100,7 @@ export function DataTable({
                             <TableRow>
                               <TableHead className="p-2">Etapa</TableHead>
                               <TableHead className="p-2">Data</TableHead>
+                              <TableHead className="p-2">Sujidade(%)</TableHead>
                               <TableHead className="p-2">Ações</TableHead>
                             </TableRow>
                           </TableHeader>
