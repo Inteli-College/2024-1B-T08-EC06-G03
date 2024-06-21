@@ -33,9 +33,7 @@ const Table: React.FC = () => {
   const [reboiler_selected, setReboilerSelected] = useState<number>(0);
   const [robot_selected, setRobotSelected] = useState<number>(1);
 
-  console.log(data)
   useEffect(() => {
-    console.log(tabSelected)
     if (tabSelected === "procedimentos") {
       setLoading(true);
       setTypeTable(columnsExamination as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
@@ -209,7 +207,7 @@ const Table: React.FC = () => {
       <Navbar />
       <div className="container mx-auto py-10 pt-44">
         <div className="mb-4 flex justify-between items-center">
-          <UnitDropdown selected={unit} setSelected={() => setUnit} />
+          <UnitDropdown selected={unit} setSelected={() => setUnit } />
           <Button variant="outline" className="w-10 h-10 flex justify-center items-center p-0">
             <Plus className="h-5 w-5" />
           </Button>

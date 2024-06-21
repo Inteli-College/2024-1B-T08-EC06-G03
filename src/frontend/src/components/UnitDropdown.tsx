@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/select';
 import { getUnities } from '@/api/unit';
 import { Unit, dropdown } from '@/components/Columns';
+import { Value } from '@radix-ui/react-select';
 
 interface SelectOptionsProps {
   selected: number;
@@ -42,7 +43,7 @@ const UnitDropdown: React.FC<SelectOptionsProps> = ({  setSelected }) => {
   }, []);
 
   return (
-    <Select onValueChange={setSelected}>
+    <Select onValueChange={setSelected(Number(Value))}>
       <SelectTrigger className="w-[300px]">
         <SelectValue placeholder="Select a unit" />
       </SelectTrigger>
