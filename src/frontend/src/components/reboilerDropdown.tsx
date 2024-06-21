@@ -4,33 +4,34 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { getUnities } from '@/api/unit';
-import { Unit, dropdown } from '@/components/Columns';
+import { getReboilers } from '@/api/reboiler';
+import { Reboiler, dropdown } from '@/components/Columns';
 
 interface SelectOptionsProps {
+  name: string;
   selected: number;
   setSelected: (value: string) => void;
+  unit: number;
 }
 
-const UnitDropdown: React.FC<SelectOptionsProps> = ({  setSelected }) => {
+const ReboilerDropdown: React.FC<SelectOptionsProps> = ({ setSelected, unit}) => {
   const [options, setOptions] = React.useState<dropdown[] | [] >([]);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     async function getOptions() {
     try{
-      const data: Unit[] | string   = await getUnities();
+      const data: Reboiler[] | string   = await getReboilers(unit);
       if (typeof data === "string") {
         setError(data);
       } else {
-        const transformedOptions = data.map((unit) => ({
-          id: unit.id,
-          label: unit.city + " - " + unit.state,
-          value: unit.id,
+        const transformedOptions = data.map((reboiler) => ({
+          id: reboiler.id as number,
+          label: reboiler.number as unknown as string,
+          value: reboiler.id as number,
         }));
         setOptions(transformedOptions);
       }
@@ -44,11 +45,10 @@ const UnitDropdown: React.FC<SelectOptionsProps> = ({  setSelected }) => {
   return (
     <Select onValueChange={setSelected}>
       <SelectTrigger className="w-[300px]">
-        <SelectValue placeholder="Select a unit" />
+        <SelectValue placeholder="Selecione um reboiler" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Units</SelectLabel>
           {options.map((option) => (
             <SelectItem key={option.id} value={option.value.toString()}>
               {option.label}
@@ -60,4 +60,4 @@ const UnitDropdown: React.FC<SelectOptionsProps> = ({  setSelected }) => {
   );
 }
 
-export default UnitDropdown;
+export default ReboilerDropdown;
