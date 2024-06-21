@@ -21,7 +21,7 @@ export const getOrders = async (unit_id: number): Promise<Order[] | string> => {
 
   export const createOrder = async (order: Order): Promise<Order | string> => {
     try {
-      const createOrderResponse = await fetch(`http://localhost:8000/api/robots/`, {
+      const createOrderResponse = await fetch(`http://localhost:8000/api/orders/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -48,12 +48,13 @@ const createReboiler = async (req, res) => {
     try {
         const newReboiler = await prisma.reboiler.create({
             data: {
-                number,
-                unit_id
+            number: parseInt(number),
+            unit_id: parseInt(unit_id)
             }
         });
         res.status(201).json(newReboiler);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: 'Error creating reboiler' });
     }
 };

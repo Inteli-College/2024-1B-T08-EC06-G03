@@ -12,6 +12,8 @@ import { getRobots, createRobot } from '@/api/robot';
 import { getReboilers, createReboiler } from '@/api/reboiler';
 import { DataTable } from '../components/DataTable';
 import  UnitDropdown from '../components/UnitDropdown';
+import RobotDropdown from '@/components/robotDropdown';
+import ReboilerDropdown from '@/components/reboilerDropdown';
 import { Button } from '@/components/ui/button';
 import Navbar from '../components/Navbar';
 import SelectOptions from '@/components/Select-options';
@@ -23,15 +25,13 @@ import { ColumnDef } from '@tanstack/react-table';
 
 const Table: React.FC = () => {
   const [data, setData] = useState<Order[] | Robot[] | Reboiler[]>([]);
-  const [reboilers, setReboilers] = useState<string[] | [] >([]);
-  const [robots, setRobots] = useState<string[] | [] >([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
   const [typeTable, setTypeTable] = useState<ColumnDef<Order | Robot | Reboiler>[] | null>();
   const [unit, setUnit] = useState<number>(1);
   const [reboiler_selected, setReboilerSelected] = useState<number>(0);
-  const [robot_selected, setRobotSelected] = useState<string>("");
+  const [robot_selected, setRobotSelected] = useState<number>(1);
 
 
   useEffect(() => {
@@ -89,7 +89,6 @@ const Table: React.FC = () => {
         setError(robots);
       } else {
         setData(robots);
-        setRobots(robots.map((robot) => robot.nickname.toString()));
       }
       console.log(robots)
     } catch (error) {
@@ -121,7 +120,6 @@ const Table: React.FC = () => {
         setError(reboilers);
       } else {
         setData(reboilers);
-        setReboilers(reboilers.map((reboiler) => reboiler.number.toString()));
       }
       console.log(reboilers)    } catch (error) {
       console.error('Error fetching data:', error);
@@ -158,15 +156,17 @@ const Table: React.FC = () => {
   const newOrder: SubmitFunction = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    console.log(formData)
     let neworderdata = {
       id: null,
       status: "active",
-      robot_id : formData.get("robot_number") as unknown as number,
-      reboiler_id: formData.get("reboiler_number") as unknown as number,
+      robot_id : robot_selected,
+      reboiler_id: reboiler_selected,
       Examinations: [],
       started_at: Math.floor(Date.now()/1000),
       finished_at: null,
     };
+    console.log(neworderdata)
     const robotRegistered = registerOrder(neworderdata);
     if (robotRegistered !== null){
       toast.success("Procedimento cadastrado com sucesso")
@@ -235,10 +235,10 @@ const Table: React.FC = () => {
                     <div>
                       <label>Reboiler</label>
                       <br/>
-                      <SelectOptions options={reboilers} selected={reboiler_selected} setSelected={()=> setReboilerSelected} />
+                      <ReboilerDropdown name="reboiler_number" unit={unit} selected={reboiler_selected} setSelected={(reboiler)=> setReboilerSelected(reboiler as unknown as number)} />
                       <br/>
                       <label>Robô</label>
-                      <SelectOptions options={robots} selected={robot_selected} setSelected={()=> setRobotSelected} />
+                      <RobotDropdown name="robot_number" unit={unit} selected={robot_selected} setSelected={(robot)=> setRobotSelected(robot as unknown as number)} />
                       <br/>
                     </div>
                   </div>} 

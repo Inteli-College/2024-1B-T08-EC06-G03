@@ -55,15 +55,17 @@ const createOrder = async (req, res) => {
 	try {
 		const newOrder = await prisma.order.create({
 			data: {
-				status,
-				robot_id,
-				reboiler_id,
-				started_at,
-				finished_at
+				status: status,
+				started_at: started_at,
+				finished_at: 0,
+				robot: { connect: { id: parseInt(robot_id) } },
+				reboiler: { connect: { id: parseInt(reboiler_id) } },
+				Examinations: { create: { step: "pré", started_at: started_at, finished_at: 0} },
 			}
 		});
 		res.status(201).json(newOrder);
 	} catch (error) {
+		console.log(error);
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };

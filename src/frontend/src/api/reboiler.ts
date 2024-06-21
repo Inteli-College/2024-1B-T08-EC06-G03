@@ -40,6 +40,7 @@ export const getReboilers = async (unit_id: number): Promise<Reboiler[] | string
       return await createReboilerResponse.json();
     } 
     catch (error) {
+      console.error('Error fetching data:', error);
       return error instanceof Error ? error.message : String(error);
     }
   }
