@@ -6,73 +6,56 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { Robot, Order, Reboiler, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
-import { getOrders } from '@/api/orders';
+import { Robot, Order, Reboiler, OrderWithDirtness, ExaminationWithDirtness, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
+import { getOrders, createOrder } from '@/api/orders';
 import { getRobots, createRobot } from '@/api/robot';
-import { getReboilers } from '@/api/reboiler';
+import { getReboilers, createReboiler } from '@/api/reboiler';
 import { DataTable } from '../components/DataTable';
-import { NewProcessDialog } from '@/components/NewProcessDialog';
 import  UnitDropdown from '../components/UnitDropdown';
+import RobotDropdown from '@/components/robotDropdown';
+import ReboilerDropdown from '@/components/reboilerDropdown';
 import { Button } from '@/components/ui/button';
 import Navbar from '../components/Navbar';
 import SelectOptions from '@/components/Select-options';
 import Modal_template, { SubmitFunction } from "../components/Modal_template"
-import { create } from 'domain';
 import { Input } from '@/components/ui/input';
 import { toast } from 'react-toastify';
 import { ColumnDef } from '@tanstack/react-table';
 
 
-async function createProcedure(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
-
-async function createReboiler(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
-
-function formDataToObject(formData: FormData): { [key: string]: any } {
-  const data: { [key: string]: any } = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-  return {...data};
-}
-
 const Table: React.FC = () => {
   const [data, setData] = useState<Order[] | Robot[] | Reboiler[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [step, setStep] = useState<string>("");
   const [tabSelected, setTabSelected] = useState<string>("procedimentos");
-  const [typeTable, setTypeTable] = useState<ColumnDef<Order | Robot | Reboiler>[] | null>();
+  const [typeTable, setTypeTable] = useState<ColumnDef<OrderWithDirtness | Robot | Reboiler>[] | null>();
   const [unit, setUnit] = useState<number>(1);
+  const [reboiler_selected, setReboilerSelected] = useState<number>(0);
+  const [robot_selected, setRobotSelected] = useState<number>(1);
 
-
+  console.log(data)
   useEffect(() => {
     console.log(tabSelected)
     if (tabSelected === "procedimentos") {
       setLoading(true);
-      setTypeTable(columnsExamination as ColumnDef<Order | Robot | Reboiler>[]);
+      setTypeTable(columnsExamination as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
       fetchOrders();
     }
     else if (tabSelected === "robos") {
       setLoading(true);
-      setTypeTable(columnsRobot as ColumnDef<Order | Robot | Reboiler>[]);
+      setTypeTable(columnsRobot as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
       fetchRobots();
     }
     else if (tabSelected === "reboilers") {
       setLoading(true);
-      setTypeTable(columnsReboiler as ColumnDef<Order | Robot | Reboiler>[]);
+      setTypeTable(columnsReboiler as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
       fetchReboilers();
     }
   }, [tabSelected, unit]);
 
   const fetchOrders = async () => {
     try {
-      const orders: Order[] | string = await getOrders(unit);
+      const orders: OrderWithDirtness[] | string = await getOrders(unit);
       if (typeof orders === "string") {
         setError(orders);
       } else {
@@ -83,6 +66,19 @@ const Table: React.FC = () => {
       setError('An error occurred while fetching data.'); 
     } finally {
       setLoading(false);
+    }
+  }; 
+
+  const registerOrder = async (order : Order)=> {
+    try{
+      const neworder: Order | string = await createOrder(order);
+      console.log(neworder)    
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);      
+      return order
     }
   }; 
 
@@ -111,7 +107,8 @@ const Table: React.FC = () => {
       console.error('Error fetching data:', error);
       setError('An error occurred while fetching data.'); 
     } finally {
-      setLoading(false);      return robot
+      setLoading(false);      
+      return robot
     }
   }; 
 
@@ -132,6 +129,19 @@ const Table: React.FC = () => {
     }
   }; 
 
+  const registerReboiler = async (reboiler : Reboiler)=> {
+    try{
+      const newreboiler: Reboiler | string = await createReboiler(reboiler);
+      console.log(newreboiler)    
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.'); 
+    } finally {
+      setLoading(false);      
+      return reboiler
+    }
+  }; 
+
   useEffect(() => {
     setLoading(true);
     fetchOrders();
@@ -143,13 +153,24 @@ const Table: React.FC = () => {
     return <div>Error fetching data: {error}</div>;
   }
 
-  const newProcedure: SubmitFunction = (event) => {
+  const newOrder: SubmitFunction = (event) => {
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
-    formData.append("step", step);
-    const data = formDataToObject(formData);
-    createProcedure(data);
+    console.log(formData)
+    let neworderdata = {
+      id: null,
+      status: "active",
+      robot_id : robot_selected,
+      reboiler_id: reboiler_selected,
+      Examinations: [],
+      started_at: Math.floor(Date.now()/1000),
+      finished_at: null,
+    };
+    console.log(neworderdata)
+    const robotRegistered = registerOrder(neworderdata);
+    if (robotRegistered !== null){
+      toast.success("Procedimento cadastrado com sucesso")
+    }
   }
 
   const newRobot: SubmitFunction = (event) => {
@@ -170,8 +191,16 @@ const Table: React.FC = () => {
   const newReboiler: SubmitFunction = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const data = formDataToObject(formData);
-    createReboiler(data);
+    let newreboilerdata = {
+      number: formData.get("number_reboiler") as unknown as number,
+      unit_id: unit,
+      id: null
+    }
+    console.log(newreboilerdata)
+    const reboilerRegistered = registerReboiler(newreboilerdata);
+    if (reboilerRegistered !== null){
+      toast.success("Reboiler cadastrado com sucesso")
+    }
   }
 
 
@@ -180,7 +209,7 @@ const Table: React.FC = () => {
       <Navbar />
       <div className="container mx-auto py-10 pt-44">
         <div className="mb-4 flex justify-between items-center">
-          <UnitDropdown selected={unit} setSelected={setUnit} />
+          <UnitDropdown selected={unit} setSelected={() => setUnit} />
           <Button variant="outline" className="w-10 h-10 flex justify-center items-center p-0">
             <Plus className="h-5 w-5" />
           </Button>
@@ -204,21 +233,16 @@ const Table: React.FC = () => {
                 children={
                   <div>
                     <div>
-                      <label>Etapa</label>
-                      <br/>
-                      <SelectOptions options={["pré-limpeza", "pós-limpeza"]} selected={step} setSelected={setStep}/>
-                    </div>
-                    <div>
                       <label>Reboiler</label>
                       <br/>
-                      <Input type="text" name='reboiler' placeholder="Insira o reboiler a ser inspecionado" />
+                      <ReboilerDropdown name="reboiler_number" unit={unit} selected={reboiler_selected} setSelected={(reboiler)=> setReboilerSelected(reboiler as unknown as number)} />
                       <br/>
                       <label>Robô</label>
-                      <Input type="text" name="robot" placeholder="Insira o robô a ser inspecionado"/>
+                      <RobotDropdown name="robot_number" unit={unit} selected={robot_selected} setSelected={(robot)=> setRobotSelected(robot as unknown as number)} />
                       <br/>
                     </div>
                   </div>} 
-                submit_action={newProcedure}
+                submit_action={newOrder}
                 isOpen={true}>
               </Modal_template>
             </div>
@@ -235,7 +259,13 @@ const Table: React.FC = () => {
                   <div>
                     <label>Apelido</label>
                     <br/>
-                    <Input type="text" name='nickname' placeholder="Insira o apelido do robô a ser cadastrado"/>
+                    <Input 
+                      type="text" 
+                      name='nickname' 
+                      placeholder="Insira o apelido do robô a ser cadastrado"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();}}}/>
                     <br/>
                   </div>
                 </div>
@@ -257,7 +287,7 @@ const Table: React.FC = () => {
                   <div>
                     <label>Número</label>
                     <br/>
-                    <Input type="text" name='number' placeholder="Insira o número do reboiler ser cadastrado"/>
+                    <Input type="number" name='number_reboiler' placeholder="Insira o número do reboiler ser cadastrado"/>
                     <br/>
                   </div>
                 </div>
