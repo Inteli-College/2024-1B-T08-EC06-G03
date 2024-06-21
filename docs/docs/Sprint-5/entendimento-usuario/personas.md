@@ -2,14 +2,13 @@
 title: Personas e User Stories
 sidebar_position: 1
 ---
-
 ## Definição de Personas
 
-Primeiramente, a fim de desenvolver um projeto que ajude a resolver as problemáticas de maneira mais precisa, é necessário realizar uma análise dos potenciais usuários do sistema, mapear suas características, suas dores e suas necessidades. O resultado desse processo são pessoas fictícias denominadas **personas**. Dessa forma, a equipe de desenvolvimento é capaz de definir os **requisitos funcionais e não funcionais** do sistema de forma mais assertiva, visto que as personas são uma representação mais tangível das pessoas que serão de fato usuárias do projeto.
+Primeiramente, a fim de desenvolver um projeto que ajude a resolver as problemáticas de maneira mais precisa, é necessário realizar uma análise dos potenciais usuários do sistema, mapear suas características, suas dores e suas necessidades. O resultado desse processo são pessoas fictícias denominadas **personas**. Dessa forma, a equipe de desenvolvimento consegue definir os **requisitos funcionais e não funcionais** do sistema de forma mais assertiva, visto que as personas são uma representação mais tangível das pessoas que serão de fato usuárias do projeto.
 
 Assim, com uma pesquisa sobre o contexto de trabalho da Atvos e tipos de cargos semelhantes aos apresentados no kickoff pelo Linkedin e Glassdoor, foi possível entender as possíveis necessidades atreladas ao escopo do problema apresentado e construir duas personas: um Engenheiro de Manutenção e um Operador de Maquinário. 
 
-Abaixo, é possível observar pontos chaves da persona do Jairo, o engenheiro de manutenção.
+Abaixo, é possível observar pontos-chave da persona do Jairo, o engenheiro de manutenção.
 
 <div align="center">
 
@@ -21,7 +20,7 @@ Abaixo, é possível observar pontos chaves da persona do Jairo, o engenheiro de
 
 </div>
 
-Como visto acima, o Jairo é o Engenheiro de Manutenção da Atvos. Dentre as atividades dele em seu trabalho, uma delas é garantir que o trabalho de manutenção está sendo realizado de forma efetiva. Realizar essa tarefa sem os dados necessários torna-se complexo, visto que não é possivel compreender nem mapear de forma adequada o fluxo dos processos envolvidos nas rotinas de manutenção. Com os dados disponibilizados pelo projeto Desencana, entretanto, será possível realizar esse mapeamento e, dessa forma, observar padrões e oportunidades de otimizção ao determinar se cada tubos dos reboilers está de fato apropriadamente limpo e armazenar esses dados de forma sistemática.
+Como visto acima, o Jairo é o Engenheiro de Manutenção da Atvos. Dentre as atividades dele em seu trabalho, uma delas é garantir que o trabalho de manutenção está sendo realizado de forma efetiva. Realizar essa tarefa sem os dados necessários torna-se complexo, visto que não é possível compreender nem mapear de forma adequada o fluxo dos processos envolvidos nas rotinas de manutenção. Com os dados disponibilizados pelo projeto Desencana, entretanto, será possível realizar esse mapeamento e, dessa forma, observar padrões e oportunidades de otimização ao determinar se cada tubos dos reboilers está de fato apropriadamente limpo e armazenar esses dados de forma sistemática.
 
 A partir dessa persona, é possível mapear as seguintes **user stories**:
 
