@@ -7,7 +7,7 @@ sidebar_position: 3
 
 ## Contexto
 
-Para controlar os procedimentos de inspeção do robô, isto é, a verificação do nível de sujidade antes e após a limpeza manual, é necessária uma interface que permita visualizar as diferentes inspeções que ocorrem, os reboilers e a frequência de limpeza, entre outras informações essenciais tanto à persona que irá controlar o robô quanto à equipe que irá visualizar e analisar os dados coletados. Dessa forma, foram idealizadas duas telas principais na interface gráfica: a tela de operação e a interface de controle dos dados.
+Para controlar os procedimentos de inspeção do robô, isto é, a verificação do nível de sujidade antes e após a limpeza manual, é necessária uma interface que permita visualizar as diferentes inspeções que ocorrem, os reboilers e a frequência de limpeza, entre outras informações essenciais tanto à pessoa que irá controlar o robô quanto à equipe que irá visualizar e analisar os dados coletados. Dessa forma, foram idealizadas duas telas principais na interface gráfica: a tela de operação e a interface de controle dos dados.
 
 ## Tela de operação
 
@@ -17,8 +17,17 @@ A tela de operação é a interface que o operador irá utilizar enquanto contro
 - Joystick: controla o robô em diferentes angulações;
 - Botão de kill: deve ser acionado em casos de emergência, que para o robô imediatamente e o impossibilita de se mover após o acionamento do botão
 - Botão de câmera: aciona o modelo de visão computacional, processa o frame atual da câmera e retorna o resultado (sujo ou limpo) para o operador.
+- Bateria: Permite o acompanhamento da porcentagem de bateria do robô.
+
+<div align="center">
+
+**Tela de controle**
 
 ![Tela de controle](/img/front-teleop.png)
+
+**Fonte:** Elaborado pela equipe Rebólins
+
+</div>
 
 Por fim, cada botão foi posicionado com o intuito de facilitar o controle do operador. Já que essa tela foi projetada para ser utilizada em uma versão mobile, com o tablet ou o celular, por exemplo, os botões ficaram nas áreas mais extremas, com maior facilidade de controle das mãos e pilotagem, além da câmera estar no centro, facilitando o controle do robô pela interface.
 
@@ -51,7 +60,7 @@ Existe também o botão de criar unidade, posicionado ao lado da seleção de un
 ### Cadastrar robô
 ![Modal de criar](/img/front-teleop.png)
 
-Voltando aos detalhes das tabelas, na tabela de procedimentos, é possível ver mais detalhes sobre um procedimento específico, como a data de início, data de fim, reboiler associado, robô associado e o andamento de cada etapa do procedimento (pré-limpeza ou pós-limpeza). Além disso, ao clicar sobre cada inspeção, é possível ver dados sobre aquela inspeção, ou seja, imagens tiradas do reboiler e quantos canos foram identificados sujos, fornecendo informações substanciais para análise da eficiência da limpeza, trazer reflexões sobre a frequência de limpeza e identificar possíveis problemas. Por exemplo, caso um reboiler necessite constantes limpezas, mas a inspeção após limpeza identifica que muitos canos continuam sujos, a equipe de manutenção pode provisionar uma limpeza mais detalhada ou verificação de funcionamento da máquina, mitigando possíveis falhas.
+Voltando aos detalhes das tabelas, na tabela de procedimentos, é possível ver mais detalhes sobre um procedimento específico, como a data de início, data de fim, reboiler associado, robô associado e o andamento de cada etapa do procedimento (pré-limpeza ou pós-limpeza). Além disso, ao clicar sobre cada inspeção, é possível ver o detalhamento da mesma, ou seja, imagens tiradas do reboiler e quantos canos foram identificados sujos, fornecendo informações substanciais para análise da eficiência da limpeza, trazer reflexões sobre a frequência de limpeza e identificar possíveis problemas. Por exemplo, caso um reboiler necessite constantes limpezas, mas a inspeção após limpeza identifica que muitos canos continuam sujos, a equipe de manutenção pode provisionar uma limpeza mais detalhada ou verificação de funcionamento da máquina, mitigando possíveis falhas.
 
 ### Procedimento e informações sobre as inspeções
 ![detalhes do procedimento da tabela de procedimentos](/img/front-teleop.png)

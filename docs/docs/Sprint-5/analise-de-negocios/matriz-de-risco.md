@@ -57,11 +57,11 @@ Uma matriz de risco é importante em projetos de tecnologia, pois oferece uma vi
     - **Mitigação:** A equipe deve buscar por soluções que permitam a leitura mesmo em ambientes com pouca luz, como uma lanterna periférica, ou buscar por alternativas de análise que não incluam um ambiente com pouca ou nenhuma iluminação.
 
 6. A solução não permite clareza na identificação do tubo que deve ser limpo.
-   - **Explicativa:** Uma vez que o robô circulará por baixo, é necessário que envie uma forma de sinal para a persona que está limpando o tubo para identificá-lo. 
-   - **Impacto:** Muito Alto
+   - **Explicativa:** Uma vez que o robô circulará por baixo, é necessário que envie uma forma de sinal para a pessoa que está limpando o tubo para identificá-lo. 
+   - **Impacto:** Muito Alto.
    - *Justificativa:* Caso não seja permitir identificar o tubo, a solução perde seu valor agregado.
    - **Probabilidade:** 50%
-   - *Justificativa:* A probabilidade disso depende da solução de arquitetura desenvolvida pelo grupo. Como ainda não há proposta para a resolução desse problema, a probabilidade se torna de 50%.
+   - *Justificativa:* Considerando que a proposta de funcionamento do robô implica que ele funcionará de forma interna no reboiler, há a dificuldade de visualização por conta da pouca luz dispon
     - **Mitigação:** A equipe deve buscar por soluções que permitam a identificação do tubo, como um sistema de alerta ao operador que está limpando ou modificação do fluxo para que o robô inspecione o tubo antes da limpeza.
 
 ## Oportunidades 
@@ -96,10 +96,10 @@ Uma matriz de risco é importante em projetos de tecnologia, pois oferece uma vi
   
 5. Diminuição no gasto de água, tornando a empresa mais sustentável
    - **Explicativa:** Com a localização do tubo sujo através do robô, deve-se diminuir a quantidade de vezes em que tubos são limpos de forma desnecessária. Sendo assim, trazendo uma economia de água para empresa.
-  - **Impacto:** Moderado.
-  - *Justificativa:* A redução de água é favorável para empresa tanto para a redução de custos, quanto no  ambiental. Porém, como a linha de produção exige um alto gasto de água, o impacto não é tão alto.
-  - **Probabilidade:** 70%
-  - *Justificativa:* a probabilidade do evento ocorrer é alta, pois o projeto inclui a verificação dos tubos antes da limpeza.
+   - **Impacto:** Moderado.
+   - *Justificativa:* A redução de água é favorável para empresa tanto para a redução de custos, quanto no  ambiental. Porém, como a linha de produção exige um alto gasto de água, o impacto não é tão alto.
+   - **Probabilidade:** 70%
+   - *Justificativa:* a probabilidade do evento ocorrer é alta, pois o projeto inclui a verificação dos tubos antes da limpeza.
  
 6. Realocação de funcionários para tarefas mais adequadas
    - **Explicativa:** A realocação dos funcionários permitiria que a empresa possa ter um aproveito maior do funcionário, explorando melhor suas habilidades.
