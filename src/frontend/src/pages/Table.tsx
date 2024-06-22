@@ -1,127 +1,205 @@
 import React, { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react'; 
+import { Plus } from 'lucide-react';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { Examination, Order, columns } from '../components/Columns';
+import { Robot, Order, Reboiler, OrderWithDirtness, ExaminationWithDirtness, columnsExamination, columnsRobot, columnsReboiler } from '../components/Columns';
+import { getOrders, createOrder } from '@/api/orders';
+import { getRobots, createRobot } from '@/api/robot';
+import { getReboilers, createReboiler } from '@/api/reboiler';
 import { DataTable } from '../components/DataTable';
-import { NewProcessDialog } from '@/components/NewProcessDialog';
-import { UnitDropdown } from '@/components/UnitDropdown';
+import UnitDropdown from '../components/UnitDropdown';
+import RobotDropdown from '@/components/robotDropdown';
+import ReboilerDropdown from '@/components/reboilerDropdown';
 import { Button } from '@/components/ui/button';
 import Navbar from '../components/Navbar';
 import SelectOptions from '@/components/Select-options';
 import Modal_template, { SubmitFunction } from "../components/Modal_template"
-import { create } from 'domain';
 import { Input } from '@/components/ui/input';
+import { toast } from 'react-toastify';
+import { ColumnDef } from '@tanstack/react-table';
 
-
-
-async function createRobot(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
-
-async function createProcedure(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
-
-async function createReboiler(data: any ) {
-  // Fetch data from your API here.
-  console.log(data)
-}
-
-function formDataToObject(formData: FormData): { [key: string]: any } {
-  const data: { [key: string]: any } = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-  return data;
-}
 
 const Table: React.FC = () => {
-  const [data, setData] = useState<Order[]>([]);
+  const [data, setData] = useState<Order[] | Robot[] | Reboiler[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [step, setStep] = useState<string>("");
+  const [tabSelected, setTabSelected] = useState<string>("procedimentos");
+  const [typeTable, setTypeTable] = useState<ColumnDef<OrderWithDirtness | Robot | Reboiler>[] | null>();
+  const [unit, setUnit] = useState<number>(1);
+  const [reboiler_selected, setReboilerSelected] = useState<number>(0);
+  const [robot_selected, setRobotSelected] = useState<number>(1);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const [ordersResponse, examinationsResponse] = await Promise.all([
-          fetch('http://localhost:8000/api/orders', {
-            method: 'GET',
-            headers: {
-              'Cache-Control': 'no-cache',
-            },
-          }),
-          fetch('http://localhost:8000/api/examinations', {
-            method: 'GET',
-            headers: {
-              'Cache-Control': 'no-cache',
-            },
-          }),
-        ]);
-
-        if (!ordersResponse.ok || !examinationsResponse.ok) {
-          throw new Error('Failed to fetch data from one or both endpoints');
-        }
-
-        const orders = await ordersResponse.json();
-        const examinations = await examinationsResponse.json();
-
-        const combinedData = orders.map((order: Order) => ({
-          ...order,
-          examinations: examinations.filter((examination: Examination) => examination.order_id === order.id),
-        }));
-
-        setData(combinedData);
-        setLoading(false);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError(String(error));
-        }
-        setLoading(false);
-      }
+    if (tabSelected === "procedimentos") {
+      setLoading(true);
+      setTypeTable(columnsExamination as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
+      fetchOrders();
     }
+    else if (tabSelected === "robos") {
+      setLoading(true);
+      setTypeTable(columnsRobot as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
+      fetchRobots();
+    }
+    else if (tabSelected === "reboilers") {
+      setLoading(true);
+      setTypeTable(columnsReboiler as ColumnDef<OrderWithDirtness | Robot | Reboiler>[]);
+      fetchReboilers();
+    }
+  }, [tabSelected, unit]);
 
-    fetchData();
+  const fetchOrders = async () => {
+    try {
+      const orders: OrderWithDirtness[] | string = await getOrders(unit);
+      if (typeof orders === "string") {
+        setError(orders);
+      } else {
+        setData(orders);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const registerOrder = async (order: Order) => {
+    try {
+      const neworder: Order | string = await createOrder(order);
+      console.log(neworder)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.');
+    } finally {
+      setLoading(false);
+      return order
+    }
+  };
+
+  const fetchRobots = async () => {
+    try {
+      const robots: Robot[] | string = await getRobots(unit);
+      if (typeof robots === "string") {
+        setError(robots);
+      } else {
+        setData(robots);
+      }
+      console.log(robots)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const registerRobot = async (robot: Robot) => {
+    try {
+      const newrobot: Robot | string = await createRobot(robot);
+      console.log(newrobot)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.');
+    } finally {
+      setLoading(false);
+      return robot
+    }
+  };
+
+
+  const fetchReboilers = async () => {
+    try {
+      const reboilers: Reboiler[] | string = await getReboilers(unit);
+      if (typeof reboilers === "string") {
+        setError(reboilers);
+      } else {
+        setData(reboilers);
+      }
+      console.log(reboilers)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const registerReboiler = async (reboiler: Reboiler) => {
+    try {
+      const newreboiler: Reboiler | string = await createReboiler(reboiler);
+      console.log(newreboiler)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data.');
+    } finally {
+      setLoading(false);
+      return reboiler
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchOrders();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+
 
   if (error) {
     return <div>Error fetching data: {error}</div>;
   }
 
-  const newProcedure: SubmitFunction = (event) => {
+  const newOrder: SubmitFunction = (event) => {
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
-    formData.append("step", step);
-    const data = formDataToObject(formData);
-    createProcedure(data);
+    console.log(formData)
+    let neworderdata = {
+      id: null,
+      status: "active",
+      robot_id: robot_selected,
+      reboiler_id: reboiler_selected,
+      Examinations: [],
+      started_at: Math.floor(Date.now() / 1000),
+      finished_at: null,
+    };
+    console.log(neworderdata)
+    const robotRegistered = registerOrder(neworderdata);
+    if (robotRegistered !== null) {
+      toast.success("Procedimento cadastrado com sucesso")
+    }
   }
 
   const newRobot: SubmitFunction = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const data = formDataToObject(formData);
-    createRobot(data);
+    let newrobotdata = {
+      nickname: formData.get("nickname") as string,
+      unit_id: unit,
+      id: null
+    }
+    console.log(newrobotdata)
+    const robotRegistered = registerRobot(newrobotdata);
+    if (robotRegistered !== null) {
+      toast.success("Robô cadastrado com sucesso")
+    }
   }
 
   const newReboiler: SubmitFunction = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const data = formDataToObject(formData);
-    createReboiler(data);
+    let newreboilerdata = {
+      number: formData.get("number_reboiler") as unknown as number,
+      unit_id: unit,
+      id: null
+    }
+    console.log(newreboilerdata)
+    const reboilerRegistered = registerReboiler(newreboilerdata);
+    if (reboilerRegistered !== null) {
+      toast.success("Reboiler cadastrado com sucesso")
+    }
   }
 
 
@@ -130,87 +208,96 @@ const Table: React.FC = () => {
       <Navbar />
       <div className="container mx-auto py-10 pt-44">
         <div className="mb-4 flex justify-between items-center">
-          <UnitDropdown />
-          <Button variant="outline" className="w-10 h-10 flex justify-center items-center p-0">
-            <Plus className="h-5 w-5" />
-          </Button>
+          <UnitDropdown selected={unit} setSelected={() => setUnit} />
         </div>
         <Tabs defaultValue="procedimentos">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="procedimentos">Procedimentos</TabsTrigger>
-            <TabsTrigger value="robos">Robôs</TabsTrigger>
-            <TabsTrigger value="reboilers">Reboilers</TabsTrigger>
+            <TabsTrigger value="procedimentos" onFocus={() => setTabSelected("procedimentos")}>Procedimentos</TabsTrigger>
+            <TabsTrigger value="robos" onFocus={() => setTabSelected("robos")} >Robôs</TabsTrigger>
+            <TabsTrigger value="reboilers" onFocus={() => setTabSelected("reboilers")}>Reboilers</TabsTrigger>
           </TabsList>
-          <TabsContent value="procedimentos">
-            <div className="flex justify-end mb-2 mt-6">
-              <Modal_template 
-                title={"Cadastrar procedimento"}
-                button_label="cadastrar procedimento" 
-                children={
-                  <div>
+          {loading && (
+            <div><br />Loading...</div>
+          )}
+          {!loading && (<>
+            <TabsContent value="procedimentos">
+              <div className="flex justify-end mb-2 mt-6">
+                <Modal_template
+                  className="new_procedure_modal"
+                  title={"Cadastrar procedimento"}
+                  button_label="cadastrar procedimento"
+                  children={
                     <div>
-                      <label>Etapa</label>
-                      <br/>
-                      <SelectOptions options={["pré-limpeza", "pós-limpeza"]} selected={step} setSelected={setStep}/>
-                    </div>
+                      <div>
+                        <label>Reboiler</label>
+                        <br />
+                        <ReboilerDropdown name="reboiler_number" unit={unit} selected={reboiler_selected} setSelected={(reboiler) => setReboilerSelected(reboiler as unknown as number)} />
+                        <br />
+                        <label>Robô</label>
+                        <RobotDropdown name="robot_number" unit={unit} selected={robot_selected} setSelected={(robot) => setRobotSelected(robot as unknown as number)} />
+                        <br />
+                      </div>
+                    </div>}
+                  submit_action={newOrder}
+                  isOpen={true}>
+                </Modal_template>
+              </div>
+              <DataTable columns={typeTable} data={data} />
+            </TabsContent>
+            <TabsContent value="robos">
+              <div className="flex justify-end mb-2 mt-6">
+                <Modal_template
+                  className="new_robot_modal"
+                  title={"Cadastrar robô"}
+                  button_label="cadastrar robô"
+                  children={
                     <div>
-                      <label>Reboiler</label>
-                      <br/>
-                      <Input type="text" name='reboiler' placeholder="Insira o reboiler a ser inspecionado" />
-                      <br/>
-                      <label>Robô</label>
-                      <Input type="text" name="robot" placeholder="Insira o robô a ser inspecionado"/>
-                      <br/>
+                      <div>
+                        <label>Apelido</label>
+                        <br />
+                        <Input
+                          type="text"
+                          name='nickname'
+                          placeholder="Insira o apelido do robô a ser cadastrado"
+                          onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                            }
+                          }} />
+                        <br />
+                      </div>
                     </div>
-                  </div>} 
-                submit_action={newProcedure}
-                isOpen={true}>
-              </Modal_template>
-            </div>
-            <DataTable columns={columns} data={data} />
-          </TabsContent>
-          <TabsContent value="robos">
-            <div className="flex justify-end mb-2 mt-6">
-              <Modal_template 
-                title={"Cadastrar robô"}
-                button_label="cadastrar robô" 
-                children={
-                <div>
-                  <div>
-                    <label>Apelido</label>
-                    <br/>
-                    <Input type="text" name='nickname' placeholder="Insira o apelido do robô a ser cadastrado"/>
-                    <br/>
-                  </div>
-                </div>
-                } 
-                submit_action={newRobot}
-                isOpen={true}>
-              </Modal_template>
-            </div>
-            <DataTable columns={columns} data={data} />
-          </TabsContent>
-          <TabsContent value="reboilers">
-            <div className="flex justify-end mb-2 mt-6">
-              <Modal_template 
-                title={"Cadastrar reboiler"}
-                button_label="Cadastrar reboiler" 
-                children={
-                <div>
-                  <div>
-                    <label>Número</label>
-                    <br/>
-                    <Input type="text" name='number' placeholder="Insira o número do reboiler ser cadastrado"/>
-                    <br/>
-                  </div>
-                </div>
-                } 
-                submit_action={newReboiler}
-                isOpen={true}>
-              </Modal_template>
-            </div>
-            <DataTable columns={columns} data={data} />
-          </TabsContent>
+                  }
+                  submit_action={newRobot}
+                  isOpen={true}>
+                </Modal_template>
+              </div>
+              <DataTable columns={typeTable} data={data} />
+            </TabsContent>
+            <TabsContent value="reboilers">
+              <div className="flex justify-end mb-2 mt-6">
+                <Modal_template
+                  className="new_reboiler_modal"
+                  title={"Cadastrar reboiler"}
+                  button_label="Cadastrar reboiler"
+                  children={
+                    <div>
+                      <div>
+                        <label>Número</label>
+                        <br />
+                        <Input type="number" name='number_reboiler' placeholder="Insira o número do reboiler ser cadastrado" />
+                        <br />
+                      </div>
+                    </div>
+                  }
+                  submit_action={newReboiler}
+                  isOpen={true}>
+                </Modal_template>
+              </div>
+              <DataTable columns={typeTable} data={data} />
+            </TabsContent>
+          </>
+          )}
         </Tabs>
       </div>
     </div>

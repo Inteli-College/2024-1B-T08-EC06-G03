@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 export type SubmitFunction = (event: React.FormEvent<HTMLFormElement>) => void;
 
 interface ModalProps {
+    className: string;
     button_label: string;
     title: string;
     children: React.ReactNode;
@@ -25,7 +26,9 @@ const Modal_template: React.FC<ModalProps> = ({ button_label, title, children, s
         <form onSubmit={submit_action}>
             {children}
             <DialogFooter>
+            <DialogTrigger asChild>
             <Button type="submit">Enviar</Button>
+            </DialogTrigger>
         </DialogFooter>
         </form>
       </DialogContent>

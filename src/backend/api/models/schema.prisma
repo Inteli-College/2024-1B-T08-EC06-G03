@@ -45,6 +45,7 @@ model Examination {
   started_at   Int
   finished_at  Int
   order_id     Int
+  order        Order @relation(fields: [order_id], references: [id])
   TubeStates   TubeState[]
 }
 
@@ -57,6 +58,7 @@ model Order{
   reboiler_id  Int
   started_at   Int
   finished_at  Int
+  Examinations Examination[]
 }
 
 model TubeState {

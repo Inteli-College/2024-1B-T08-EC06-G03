@@ -1,5 +1,3 @@
-// Columns.ts
-
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
@@ -21,17 +19,60 @@ export type Examination = {
   order_id: number;
 };
 
-export type Order = {
+export type ExaminationWithDirtness = {
   id: number;
+  dirtness: number;
+  step: "Pré" | "Pós";
+  started_at: number;
+  finished_at: number;
+  order_id: number;
+};
+
+export type Order = {
+  id: number | null;
   status: string;
   robot_id: number;
   reboiler_id: number;
   started_at: number;
-  finished_at: number;
-  examinations: Examination[];
+  finished_at: number | null;
+  Examinations: Examination[];
 };
 
-export const columns: ColumnDef<Order>[] = [
+export type OrderWithDirtness = {
+  id: number | null;
+  status: string;
+  robot_id: number;
+  reboiler_id: number;
+  started_at: number;
+  finished_at: number | null;
+  Examinations: ExaminationWithDirtness[];
+};
+
+export type Robot = {
+  id: number | null;
+  nickname: string;
+  unit_id: number;
+}
+
+export type Reboiler = {
+  id: number | null;
+  number: number;
+  unit_id: number;
+}
+
+export type Unit = {
+  id: number;
+  city: string;
+  state: string;
+}
+
+export type dropdown = {
+  id: number;
+  label: string;
+  value: number;
+}
+
+export const columnsExamination: ColumnDef<Order>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -75,7 +116,7 @@ export const columns: ColumnDef<Order>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order.id.toString())}>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order?.id.toString())}>
               Copy Order ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -85,6 +126,33 @@ export const columns: ColumnDef<Order>[] = [
         </DropdownMenu>
       );
     },
-  },
+  }
 ];
-  
+
+
+
+export const columnsRobot: ColumnDef<Robot>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "nickname",
+    header: "Nickname",
+  },
+  {
+    accessorKey: "unit_id",
+    header: "Unit ID",
+  }
+];
+
+export const columnsReboiler: ColumnDef<Reboiler>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "number",
+    header: "Number",
+  }
+];

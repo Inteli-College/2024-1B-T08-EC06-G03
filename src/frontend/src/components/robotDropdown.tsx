@@ -8,30 +8,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { getUnities } from '@/api/unit';
-import { Unit, dropdown } from '@/components/Columns';
-import { Value } from '@radix-ui/react-select';
+import { getRobots } from '@/api/robot';
+import { Robot, dropdown } from '@/components/Columns';
 
 interface SelectOptionsProps {
+  name: string;
   selected: number;
   setSelected: (value: string) => void;
+  unit: number;
 }
 
-const UnitDropdown: React.FC<SelectOptionsProps> = ({ setSelected }) => {
+const RobotDropdown: React.FC<SelectOptionsProps> = ({ setSelected, unit }) => {
   const [options, setOptions] = React.useState<dropdown[] | []>([]);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     async function getOptions() {
       try {
-        const data: Unit[] | string = await getUnities();
+        const data: Robot[] | string = await getRobots(unit);
         if (typeof data === "string") {
           setError(data);
         } else {
-          const transformedOptions = data.map((unit) => ({
-            id: unit.id,
-            label: unit.city + " - " + unit.state,
-            value: unit.id,
+          const transformedOptions = data.map((robot) => ({
+            id: robot.id as number,
+            label: robot.nickname,
+            value: robot.id as number,
           }));
           setOptions(transformedOptions);
         }
@@ -44,13 +45,12 @@ const UnitDropdown: React.FC<SelectOptionsProps> = ({ setSelected }) => {
   }, []);
 
   return (
-    <Select onValueChange={setSelected(Number(Value))}>
+    <Select onValueChange={setSelected}>
       <SelectTrigger className="w-[300px]">
-        <SelectValue placeholder="Select a unit" />
+        <SelectValue placeholder="Selecione um robô" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Units</SelectLabel>
           {options.map((option) => (
             <SelectItem key={option.id} value={option.value.toString()}>
               {option.label}
@@ -62,4 +62,4 @@ const UnitDropdown: React.FC<SelectOptionsProps> = ({ setSelected }) => {
   );
 }
 
-export default UnitDropdown;
+export default RobotDropdown;
