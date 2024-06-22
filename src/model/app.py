@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 import base64
 
-model = YOLO("best.pt")
+model = YOLO("best_100e.pt")
 app = Flask(__name__)
 
 # Route to infer the image sent by the client
