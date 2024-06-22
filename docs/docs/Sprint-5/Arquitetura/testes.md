@@ -12,7 +12,7 @@ title: Testes
 
 #### Preparação para os testes
 
-- **Hardware:** Realizar a inicialização do robô, utilizando o método de conexão por ssh para rodar o bringup, que inicializa vários protocolos para o funcionamento do Turtlebot. Para isso, é só abrir um terminal no computador e rodar o comando `ssh bobolins@10.128.0.24`, e digitar a senha para finalizar a conexão. Após isso, é só rodar o comando de bringup, que é `ros2 launch turtlebot3_bringup robot.launch.py`. Após isso, posicionar o robô em um ambiente seguro para a testagem, como uma pista.
+- **Hardware:** Realizar a inicialização do robô, utilizando o método de conexão por ssh para rodar o bringup, que inicializa vários protocolos para o funcionamento do Turtlebot. Para isso, é só abrir um terminal no computador e rodar o comando `ssh rebolins@rebolins.local`, e digitar a senha para finalizar a conexão (lembre-se de que seu computador e o robô devem estar conectados na mesma rede). Após isso, é só rodar o comando de bringup, que é `ros2 launch turtlebot3_bringup robot.launch.py`. Após isso, posicionar o robô em um ambiente seguro para a testagem, como uma pista.
 
 - **Software:** Inicializar o Backend, composto por serviços ROS, a API da aplicação web e o modelo de visão computacional que irá avaliar as fotos dos tubos.
 

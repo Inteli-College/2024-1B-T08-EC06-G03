@@ -111,7 +111,7 @@ Para iniciar um novo procedimento, que engloba o funcionamento do robô pré e p
 
 ### Procedimento e informações sobre as inspeções
 
-Outra funcionalidade é o botão de retomada de sessão em inspeções que continuam ativas, de modo que, caos o operador do robô tenha interrompido a inspeção ou saia da página de controle, ele possa retomar. Assim, ele deve entrar na página de controle, ir ao procedimento ativo, clicar no botão retomar sessão e ele será redirecionado para a página de controle novamente.
+Outra funcionalidade é o botão de retomada de sessão em inspeções que continuam ativas, de modo que, caso o operador do robô tenha interrompido a inspeção ou saia da página de controle, ele possa retomar. Assim, ele deve entrar na página de controle, ir ao procedimento ativo, clicar no botão retomar sessão e ele será redirecionado para a página de controle novamente.
 
 Portanto, a página de controles tem o objetivo de reunir todas as funcionalidades de gerência e controle de processo em uma tela só, facilitando a visualização e análise de dados, além de permitir o cadastro de novas informações.
 
