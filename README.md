@@ -33,9 +33,6 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
         └── 📂workflows
             └── 📜static.yml
     └── 📂docs
-        └── 📂.docusaurus
-        └── 📜.gitignore
-        └── 📜babel.config.js
         └── 📂docs
             └── index.md
             └── 📂Sprint 1
@@ -43,10 +40,6 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
             └── 📂Sprint 3
             └── 📂Sprint 4
             └── 📂Sprint 5
-        └── 📜docusaurus.config.js
-        └── 📜package-lock.json
-        └── 📜package.json
-        └── 📜README.md
         └── 📂src
             └── 📂components
             └── 📂css
@@ -60,45 +53,38 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
                 └── 📂data
                 └── 📂models
                 └── 📂routes
+                └── 📂service
             └── 📂config
                 ┗ 📜express.js
             └── 📂node_modules
+            └── 📂scripts
+            ┗ 📜.env
             ┗ 📜server.js
         └── 📂bolin
             └── 📂src
                 └── 📂bolin
                     └── 📂bolin
-                    └── 📂resource
-                    └── 📂test
-                    ┗ 📜package.xml
-                    ┗ 📜setup.cfg
+                        ┗ 📜battery_mock.py
+                    ┗ 📜setup.py
+                └── 📂bolin_bringup
+                    └── 📂bolin_bringup
+                    └── 📂launch
+                        ┗ 📜launch.py
+                        ┗ 📜webots_launch.py
                     ┗ 📜setup.py
                 └── 📂bolin_camera
                     └── 📂bolin_camera
-                    └── 📂resource
-                    └── 📂test
-                    ┗ 📜package.xml
-                    ┗ 📜setup.cfg
                     ┗ 📜setup.py
-                └── 📂bolin_camera_cpp
-                    └── 📂include
-                    └── 📂src
-                    ┗ 📜CMakeLists.txt
-                    ┗ 📜package.xml
-                    ┗ 📜README.md
+                └── 📂bolin_teleop
+                    └── 📂bolin_camera
+                    ┗ 📜setup.py
                 └── 📂bolin_lidar
                     └── 📂bolin_lidar
-                    └── 📂resource
-                    └── 📂test
-                    ┗ 📜package.xml
-                    ┗ 📜setup.cfg
                     ┗ 📜setup.py
-                ┗ 📜listener.py
             ┗ 📜build.sh
         └── 📂frontend
-           └── 📂public
-                ┗ 📜vite.svg
            └── 📂src
+                └── 📂api
                 └── 📂assets
                 └── 📂components
                 └── 📂pages
@@ -113,14 +99,12 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
          ┗ 📜vite.config.js
         └── 📂model
             └── 📂runs
-                └── 📂train
-                └── 📂train2
-                └── 📂train10
-            ┗ 📜vite.config.js
-            ┗ 📜vite.config.js
-        └── 📜run.sh
-    └── 📜oloy.ipynb
-    └── 📜yolov8n.pt
+                └── 📂detect
+            ┗ 📜app.py
+            ┗ 📜best_100e.pt
+            ┗ 📜oloy_train.ipynb
+            ┗ 📜requirements.txt
+            
 ```
 
 
