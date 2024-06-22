@@ -3,7 +3,13 @@ Repositório do grupo Rebólins
 
 ## Vídeo - Demonstração 
 
+Vídeo de demonstração - Visão da plataforma web
+
 [![Vídeo de demonstração](https://img.youtube.com/vi/tj1b849KVzc/0.jpg)](https://www.youtube.com/watch?v=tj1b849KVzc)
+
+Vídeo de demonstração - Visão do robô/computador
+
+[![Vídeo de demonstração - Robô](https://img.youtube.com/vi/vlz-0ZPnVqQ/0.jpg)](https://www.youtube.com/watch?v=vlz-0ZPnVqQ)
 
 
 ## Descrição do Projeto "Desencana!"
