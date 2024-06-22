@@ -2,13 +2,11 @@
 title: Banco de Dados
 sidebar_position: 1
 ---
-
-
 # Banco de Dados
 
 ## Introdução
 
-Na seção [Visualização de Dados](/Sprint-3/visualizacao-de-dados.md), foram apresentados possíveis casos de uso dos dados que serão coletados pelo projeto. Nesta seção, haverá o detalhamento como esses dados estão armazenados dentro do **banco de dados relacional**, conforme ilustrado abaixo:
+Na seção [Visualização de Dados](/Sprint-3/visualizacao-de-dados.md), foram apresentados possíveis casos de uso dos dados que serão coletados pelo projeto. Nesta seção, haverá o detalhamento como esses dados estão armazenados no **banco de dados relacional**, conforme ilustrado abaixo:
 
 <div align="center">
 
@@ -29,7 +27,7 @@ Abaixo está uma breve descrição de cada tabela, além de explicar seus campos
 
 ### Order
 
-A entidade **Order** representa um processo de limpeza que será realizado no reboiler. Sendo assim, ela possui a entidade filha **Examinations**, a qual contém as duas examinações que serão realizadas pelo robô, antes e após a limpeza. Ademais, a tabela **Order** têm campos como **reboiler_id**  e **robot_id**, os quais identificam o reboiler que estamos tratando e o robô específico que está realizando a limpeza. 
+A entidade **Order** representa um processo de limpeza que será realizado no reboiler. Sendo assim, ela possui a entidade filha **Examinations**, a qual contém as duas examinações que serão realizadas pelo robô, antes e após a limpeza. Ademais, a tabela **Order** têm campos como **reboiler_id**  e **robot_id**, os quais identificam o reboiler que estamos tratando e o robô específico que está realizando a limpeza. 
 
 - **id**: Identificador único da verificação. (Chave primária)
 - **status**: Diz se ainda está havendo uma verificação ou se foi concluída (text).
@@ -59,7 +57,7 @@ A entidade **Image** tem como papel principal representar uma imagem de um deter
 
 ### Robot
 
-A entidade **Robot** armazena as informações de um determinado robô, contendo informações sua identificação. Sua necessidade surge para que a aplicação possa se torna escalável, tendo controle de vários operações de maneira simultânea através da plataforma web.
+A entidade **Robot** armazena as informações de um determinado robô, contendo informações sua identificação. Sua necessidade surge para a aplicação poder se torna escalável, tendo controle de vários operações de maneira simultânea através da plataforma web.
 
 - **id**: Identificador único do robô. (Chave primária, Integer)
 - **nickname**: Nome dado ao robô como forma de identificá-lo. (text)
@@ -67,7 +65,7 @@ A entidade **Robot** armazena as informações de um determinado robô, contendo
 
 ### TubeState
 
-A entidade **TubeState** serve para armazenar o estado de cada tubo de uma determinada examinação, ou seja, armazenar o estado de sujeira de um determinado tubo de um reboiler. A tabela possui uma relação de 1:1 com a tabela imagem, possibilitando rever a imagem que foi tirada do tubo e analisando a sua sujeira.
+A entidade **TubeState** permite armazenar o estado de cada tubo de uma determinada examinação, ou seja, armazenar o estado de sujeira de um determinado tubo de um reboiler. A tabela possui uma relação de 1:1 com a tabela imagem, possibilitando rever a imagem tirada do tubo e analisando a sua sujeira.
 
 - **id**: Identificador único do estado do tubo. (Chave primária, Integer)
 - **dirtness**: Booleano indicando se o tubo está sujo. (bool)
@@ -84,7 +82,7 @@ A entidade **Reboiler** tem como utilidade tornar único cada reboiler de uma de
 
 ### Unit
 
-A entidade **Unit** armazena informações sobre a unidade em que o robô operará, como estado e cidade. Com isso, é possível filtrar as limpezas por cidade, avaliando e comparando, por exemplo: o estado dos reboilers, a eficiência da limpeza e a frequência de limpezas realizadas em cada unidade.
+A entidade **Unit** armazena informações sobre a unidade onde o robô operará, como estado e cidade. Com isso, é possível filtrar as limpezas por cidade, avaliando e comparando, por exemplo: o estado dos reboilers, a eficiência da limpeza e a frequência de limpezas realizadas em cada unidade.
 
 - **id**: Identificador único da unidade. (Chave primária)
 - **city**: Cidade onde a unidade está localizada. (text)
@@ -132,8 +130,3 @@ Para a implementação do projeto, a equipe optou por utilizar o [Turso](https:/
 - **Interface Simples**: A interface intuitiva do Turso facilita a administração e o gerenciamento do banco de dados. Com uma curva de aprendizado suave, a equipe pode focar no desenvolvimento das funcionalidades do projeto sem se preocupar com a complexidade da gestão do banco de dados.
 
 Esses fatores tornam o Turso a escolha ideal para o projeto, garantindo eficiência, acessibilidade e uma gestão simplificada dos dados, alinhada com as necessidades e objetivos da equipe.
-
-
-
-
-
