@@ -110,7 +110,10 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
 
 ## Guia de instrução 
 
+## Conexão com o robô
+
 ### 1. Conexão com o Robô via SSH
+
 Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. Há um tutorial de como deve ser feito o [setup do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint-2/metodologia) Execute os seguintes passos no seu terminal:
 
 1. **Inicie o Robô**: Certifique-se de que o robô esteja ligado e pronto para conexão.
@@ -121,94 +124,121 @@ Para iniciar a conexão com o robô, é necessário utilizar o protocolo SSH. H�
      ssh rebolins@rebolins.local
      ```
 
-### 2. Clonar o projeto no robô 
+### 2. Clonar o projeto no robô
 
 ```sh
 git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
 ```
+
 Além disso, é importante ter instalado o [ROS2](https://docs.ros.org/en/humble/Installation.html).
 
 ### 3. Inicialização do Robô
-Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes necessários do robô. Execute isso no mesmo terminal do 
+
+Após estabelecer a conexão SSH, o próximo passo é inicializar os componentes necessários do robô. Execute isso no mesmo terminal do
 
 1. **Entrar na pasta de código**:
-    - É necessário entrar na pasta que os pacotes estão alocados.
-    ```bash
-    cd src/bolin
-    ```
+
+   - É necessário entrar na pasta que os pacotes estão alocados.
+
+   ```bash
+   cd src/bolin
+   ```
 
 2. **Executar o Build.sh**:
-    - É necessário rodar o arquivo de build para construir os pacotes ros.
-    ```bash
-    source build.sh
-    ```
 
-3. **Executar o Comando de Bring Up**:
+   - É necessário rodar o arquivo de build para construir os pacotes ros.
+
+   ```bash
+   source build.sh
+   ```
+
+3. **Executar o Comando de BringUp**:
+
    - No terminal SSH, execute o comando que inicializa os processos necessários no robô. Este comando pode ser encontrado na documentação técnica ou em tutoriais relevantes. Um exemplo comum para robôs baseados em ROS pode ser algo como:
      ```bash
      ros2 launch bolin_bringup launch.py
      ```
    - Este comando inicializa um listener no robô e ativa vários serviços e processos internos.
 
-### 4. Execução do Software de Controle
-Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô. 
+4. **Iniciar o ROSBridge**
+   - Execute o comando que inicia o ROSBridge
+     ```bash
+     ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+     ```
+   - Este comando inicia o ROSBridge, que é responsável por intermediar a comunicação entre o ROS e a aplicação web.
+   - Não precisa necessariamente ser executado no robô, também pode ser executado no computador.
 
-1. **Clonar o projeto no computador** 
-    - É necessário clonar o projeto no computador que vá rodar a aplicação.
-    ```bash
-    git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
-    ```
+### 4. Execução do Software de Controle
+
+Com o robô devidamente inicializado, a próxima etapa é executar o software de controle que interage com o robô.
+
+1. **Clonar o projeto no computador**
+
+   - É necessário clonar o projeto no computador que vá rodar a aplicação.
+
+   ```bash
+   git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G03.git
+   ```
 
 2. **Inicialização do Back-End**:
-    - Instale o [Node.js](https://nodejs.org/en/download/)
-    - No seu computador (não no terminal SSH), abra um novo terminal.
-    - Acesse a pasta do Back-End
 
-    ```bash
-    cd src/backend/
-    ```
+   - Instale o [Node.js](https://nodejs.org/en/download/)
+   - No seu computador (não no terminal SSH), abra um novo terminal.
+   - Acesse a pasta do Back-End
 
-    - Instale as dependências
+   ```bash
+   cd src/backend/
+   ```
 
-    ```bash
-    npm install
-    ```
-    :::warning Alerta
-    Para continuar, visualize as intruções existentes para a [configuração do database](https://inteli-college.github.io/2024-1B-T08-EC06-G03/Sprint-4/banco-de-dados.md), pois é necessário gerar o `schema.prisma` para que o back-end execute.    
-    :::
+   - Instale as dependências
 
-    - Execute o Back-End
+   ```bash
+   npm install
+   ```
+   
+   :::warning Alerta
+   Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint-5/Arquitetura/Banco-BackEnd/banco-de-dados.md), pois é a criação de um banco de dados. Como a solução utiliza Turso, existe um passo a passo para ser seguido sobre a implementação do mesmo. Segue [tutorial](/Sprint-5/Arquitetura/Banco-BackEnd/back-end.md) para mais informações.
+   :::
 
-    ```bash
-    npm start
-    ```
-    
+   - Execute o Back-End
+
+   ```bash
+   npm start
+   ```
+
 3. **Inicialização do Front-End**:
-    - Instale o [Node.js](https://nodejs.org/en/download/)
-    - No seu computador (não no terminal SSH), abra um novo terminal.
-    - Acesse a pasta do Front-End
 
-    ```bash
-    cd src/frontend/
-    ```
+   - Instale o [Node.js](https://nodejs.org/en/download/)
+   - No seu computador (não no terminal SSH), abra um novo terminal.
+   - Acesse a pasta do Front-End
 
-    - Instale as dependências
+   ```bash
+   cd src/frontend/
+   ```
 
-    ```bash
-    npm install
-    ```
+   - Instale as dependências
 
-    - Execute o Front-End
+   ```bash
+   npm install
+   ```
 
-    ```bash
-    npm run dev
-    ```
+   - Instalação da biblioteca do shadcn.
 
-    - Acesse [http://localhost:5173](http://localhost:5173) no seu navegador.
+   ```bash
+   npx shadcn-ui@latest init
+   ```
+
+   - Execute o Front-End
+
+   ```bash
+   npm run dev
+   ```
+
+   - Acesse [http://localhost:5173](http://localhost:5173) no seu navegador.
 
 ### 5. Controle do Robô
-- Utilize o joystick para controlar o robô.
 
+- Utilize o joystick para controlar o robô.
 
 **Nota:** É importante confirmar todos os comandos e caminhos exatos com a documentação técnica disponível para garantir que as instruções estejam corretas e atualizadas.
 
