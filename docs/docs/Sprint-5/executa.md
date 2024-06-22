@@ -1,9 +1,9 @@
 ---
 title: Guia de execução atualizado
-sidebar_position: 2
+sidebar_position: 5
 ---
 
-Com a recente [Migração para WebSockets com ROSBridge](Sprint-5/rosbridge.md), a arquitetura foi modificada, portanto, o guia de execução foi atualizado
+Com a recente [Migração para WebSockets com ROSBridge](Sprint-4/rosbridge.md), a arquitetura foi modificada, portanto, o guia de execução foi atualizado
 
 ---
 
@@ -92,9 +92,9 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
    ```bash
    npm install
    ```
-
+   
    :::warning Alerta
-   Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint-4/banco-de-dados.md), pois é necessário gerar o `schema.prisma` para que o back-end execute.  
+   Para continuar, visualize as intruções existentes para a [configuração do database](/Sprint-5/Arquitetura/Banco-BackEnd/banco-de-dados.md), pois é a criação de um banco de dados. Como a solução utiliza Turso, existe um passo a passo para ser seguido sobre a implementação do mesmo. Segue [tutorial](/Sprint-5/Arquitetura/Banco-BackEnd/back-end.md) para mais informações.
    :::
 
    - Execute o Back-End
@@ -117,6 +117,12 @@ Com o robô devidamente inicializado, a próxima etapa é executar o software de
 
    ```bash
    npm install
+   ```
+
+   - Instalação da biblioteca do shadcn.
+
+   ```bash
+   npx shadcn-ui@latest init
    ```
 
    - Execute o Front-End

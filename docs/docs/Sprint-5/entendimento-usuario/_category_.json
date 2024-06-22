@@ -1,0 +1,9 @@
+{
+    "label": "Entendimento do Usuário",
+    "position": 1,
+    "link": {
+      "type": "generated-index",
+      "description": "Para desenvolver um bom projeto, ele deve resolver algum problema ou necessidade e é essencial que as funcionalidades estejam voltadas para atender a esses problemas. Para tal, é necessário mapear as dores do usuário e entender quais necessidades serão sanadas. Portanto, é realizada uma pesquisa de campo com o público alvo para definir as personas envolvidas no projeto, desenvolver testes que averíguem a compatibilidade da experiência do usuário com o fluxo imaginado, além de sempre retomar as dores das personas para iterar o projeto e realinhar as funcionalidades para sanar as necessidades dos usuários. Portanto, segue o desenvolvimento e personas e user stories, bem como a arquitetura da informação:"
+    }
+  }
+  

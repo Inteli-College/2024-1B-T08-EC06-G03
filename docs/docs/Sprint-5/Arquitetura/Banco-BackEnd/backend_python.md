@@ -3,10 +3,10 @@ title: Backend Python
 sidebar_position: 3
 ---
 
-Embora o backend do projeto tenha sido majoritariamente desenvolvido em Javascript, foi implementada uma parte em Python. Foi assim para que o modelo de visão computacional, que é executado em Python, pudesse ser melhor integrado à solução.
+Embora o backend do projeto tenha sido majoritariamente desenvolvido em Javascript, foi implementada uma parte em Python. Foi assim para que o modelo de visão computacional, executado em Python, pudesse ser melhor integrado à solução.
 
 ## Da arquitetura
-Esta seção não pretende explicar a arquitetura geral do projeto, mas apenas a parte da arquitetura sobre as interações das quais participa o backend python.
+Esta seção não planeja explicar a arquitetura geral do projeto, mas apenas a parte da arquitetura sobre as interações das quais participa o backend python.
 
 <div align="center">
 
@@ -18,7 +18,7 @@ Esta seção não pretende explicar a arquitetura geral do projeto, mas apenas a
 
 </div>
 
-O backend python serve para realizar inferência em uma imagem com o modelo de visão computacional. A requisição disso começa no frontend, em que o usuário aperta um botão na interface após decidir fazer a inferência na imagem visualizada.
+O backend python permite realizar inferência em uma imagem com o modelo de visão computacional. A requisição disso começa no frontend, em que o usuário aperta um botão na interface após decidir fazer a inferência na imagem visualizada.
 
 Essa informação chega a um dos controllers do backend javascript. Esse controller envia a informação da requisição para um service. O service, por sua vez, faz o fetch para a rota do backend python. A requisição é do tipo POST, e em seu corpo é passado um JSON com a imagem codificada em base64.
 
@@ -26,7 +26,7 @@ O backend python recebe o base64 da imagem, decodifica e utiliza o modelo treina
 
 O service recebe a resposta e envia de volta para o backend javascript. Quando a resposta chega no backend javascript, ela é devidamente inserida no banco de dados.
 
-Por fim, a imagem com as bounding boxes retorna ao frontend para que o usuário visualize-a.
+Por fim, a imagem com as bounding boxes retorna ao frontend para o usuário visualizá-la.
 
 > :brain:
 > **A decisão de implementar um service foi para que a lógica do backend python estivesse o mais apartada possível da lógica do backend javascript.**
@@ -50,11 +50,11 @@ Definiu-se a rota "/infer", que aceita requisições do tipo POST. O corpo da re
 ```python
 @app.route("/infer", methods=["POST"])
 def infer():
-    data = request.json
-    base64_img = data.get("base64_img")
-    base64_inferenced_image, dirt_detected = inferencer(base64_img)
-    return {"base64_infered_img": base64_inferenced_image,
-            "dirt_detected": dirt_detected}
+    data = request.json
+    base64_img = data.get("base64_img")
+    base64_inferenced_image, dirt_detected = inferencer(base64_img)
+    return {"base64_infered_img": base64_inferenced_image,
+            "dirt_detected": dirt_detected}
 ```
 
 ---
@@ -63,39 +63,31 @@ A função "inferencer()" foi definida com um único parâmetro, o base64 da ima
 
 ```python
 def inferencer(base64_img):
-    dirt_detected = 0
-    try:
-        img = base64.b64decode(str(base64_img))
-        new_img = cv2.imdecode(np.frombuffer(img, np.uint8), cv2.IMREAD_COLOR)
-    except Exception as e:
-        return f"Erro na decodificação da imagem base64: {str(e)}"
+    dirt_detected = 0
+    try:
+        img = base64.b64decode(str(base64_img))
+        new_img = cv2.imdecode(np.frombuffer(img, np.uint8), cv2.IMREAD_COLOR)
+    except Exception as e:
+        return f"Erro na decodificação da imagem base64: {str(e)}"
 
-    results = model.predict(new_img)
+    results = model.predict(new_img)
 
-    for result in results:
-        annotator = Annotator(new_img)
-        boxes = result.boxes
+    for result in results:
+        annotator = Annotator(new_img)
+        boxes = result.boxes
 
-        for box in boxes:
-            b = box.xyxy[0]
-            c = box.cls
-            annotator.box_label(b, model.names[int(c)])
-            if model.names[int(c)] == "dirt":
-                dirt_detected = 1
+        for box in boxes:
+            b = box.xyxy[0]
+            c = box.cls
+            annotator.box_label(b, model.names[int(c)])
+            if model.names[int(c)] == "dirt":
+                dirt_detected = 1
 
-    annotated_image = annotator.result()
-    _, buffer = cv2.imencode(".jpg", annotated_image)
-    base64_inferenced_image = base64.b64encode(buffer).decode("utf-8")
-    return base64_inferenced_image, dirt_detected
+    annotated_image = annotator.result()
+    _, buffer = cv2.imencode(".jpg", annotated_image)
+    base64_inferenced_image = base64.b64encode(buffer).decode("utf-8")
+    return base64_inferenced_image, dirt_detected
 ```
 
 ## Rotas
-Para ver testes da rota implementada acima, acesse o [postman](https://www.postman.com/planetary-resonance-766487/workspace/backend-python/request/27247540-477f79a6-5265-430d-9a24-94858efd368a).
-
-
-
-
-
-
-
-
+Para ver testes da rota implementada acima, acesse o [Postman](https://www.postman.com/planetary-resonance-766487/workspace/backend-python/request/27247540-477f79a6-5265-430d-9a24-94858efd368a).
