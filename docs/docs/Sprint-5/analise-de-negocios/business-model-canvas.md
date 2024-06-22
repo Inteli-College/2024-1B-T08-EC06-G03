@@ -25,7 +25,7 @@ Atividades-chave representam as operações essenciais que uma organização dev
 - Serviços de manutenção.
 
 ## Propostas de valor (Value Propositions)
-A proposta de valor é a oferta central da empresa, detalhando os produtos e serviços que a tornam atraente para os clientes e definindo como a empresa soluciona problemas ou atende às necessidades de seus clientes de forma única e diferenciada. A partir do mapeamento das dores do cliente, é possível criar soluções para que essas dores sejam minimizadas, garantindo que as tarefas chave podem ser realizadas com mais eficiência. Ademais, a proposta de valor apresenta de forma simples os principais ganhos obtidos ao adotar a solução e explica como que esses ganhos são gerados. Por fim, a proposta lista quais são os principais produtos e serviços ofertados pela empresa. Portanto, a proposta de valor do Grupo Rebólins é:
+A proposta de valor é a oferta central da empresa, detalhando os produtos e serviços que a tornam atraente para os clientes e definindo como a empresa soluciona problemas ou atende às necessidades de seus clientes de forma única e diferenciada. A partir do mapeamento das dores do cliente, é possível criar soluções para que essas dores sejam minimizadas, garantindo que as tarefas-chave podem ser realizadas com mais eficiência. Ademais, a proposta de valor apresenta de forma simples os principais ganhos obtidos ao adotar a solução e explica como que esses ganhos são gerados. Por fim, a proposta lista quais são os principais produtos e serviços ofertados pela empresa. Portanto, a proposta de valor do Grupo Rebólins é:
 
 **Garantir a limpeza de reboilers com inspeções teleoperadas antes e após a limpeza manual e analisadas via modelo de visão computacional. A solução também fornece dados para futuros projetos de anáĺise de dados e provisiona o registro de limpezas e as condições de cada tubo via imagens.**
 ## Relacionamento com Clientes (Customer Relationships)
@@ -33,7 +33,7 @@ O relacionamento com clientes é a abordagem adotada pela empresa para interagir
 
 - Contato online por meio das redes sociais;
 - Suporte presencial nas sessões de manutenção do robô;
-- Assistência personalizada de acordo com o problema do cliente.
+- Assistência personalizada conforme o problema do cliente.
 
 ## Segmentos de Clientes (Customer Segments)
 Segmentos de clientes são os grupos específicos de consumidores que a empresa se propõe a atender. Identifica as diferentes categorias de usuários ou organizações que a empresa visa alcançar e servir.

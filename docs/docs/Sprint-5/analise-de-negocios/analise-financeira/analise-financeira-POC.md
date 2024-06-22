@@ -21,16 +21,16 @@ A prova de conceito do projeto "Desencana!" envolve a implementação de um rob�
 
 | Produto | Preço (R$) |
 |---------|-------|
-| TurtleBot3 Burger RPi4 2GB      | 3.381,81    |
-| Bateria Li-po Prismatica 3,7v 1800mah          | 85,00     | 
-| Webcam Logitech c270i 720P           | 120,00     |
-| Aparelho para usar o software          | 1.869,00     |
+| TurtleBot3 Burger RPi4 2GB      | 3.381,81    |
+| Bateria Li-po Prismatica 3,7v 1800mah          | 85,00     | 
+| Webcam Logitech c270i 720P           | 120,00     |
+| Aparelho para usar o software          | 1.869,00     |
 
 Esta tabela contempla os custos de capital necessários para a implementação da prova de conceito, incluindo o robô (convertido com uma taxa de câmbio de 1 USD = 5,12 BRL), uma bateria para energizar o robô, a webcam e o aparelho para usar o software, no caso um notebook com uma configuração mínima.
 
 #### Cálculo do preço bruto do robô:
 
-Considerando que o _TurtleBot3 Burger RPi4 2GB_ deve ser importado dos EUA para que o preço seja mais acessível, sabendo do preço líquido atual de R$ 3.381,81 (com uma taxa de câmbio de 1 USD = 5,12 BRL), de acordo com o site [Robotis](https://robotis.us), e as taxas de frete (shipping) e imposto de importação de 60% do total pago, de acordo com o [Afinz blog](https://afinz.com.br/blog/mercado/taxa-de-importacao-2024/), é possível fazer a seguinte relação:
+Considerando que o _TurtleBot3 Burger RPi4 2GB_ deve ser importado dos EUA para o preço ser mais acessível, sabendo do preço líquido atual de R$ 3.381,81 (com uma taxa de câmbio de 1 USD = 5,12 BRL), conforme o site [Robotis](https://robotis.us), e as taxas de frete (shipping) e imposto de importação de 60% do total pago, de acordo com o [Afinz blog](https://afinz.com.br/blog/mercado/taxa-de-importacao-2024/), é possível fazer a seguinte relação:
 
 ```
 Preço bruto = Preço líquido + Frete + Imposto de importação
@@ -51,7 +51,7 @@ Total de custos recorrentes em um ano: R$ 4.382,47
 
 #### Custos dos desenvolvedores:
 
-Para calcular o custo dos desenvolvedores, é necessário considerar o tempo estimado para o desenvolvimento da prova de conceito e o custo médio da hora de trabalho dos desenvolvedores. Sabendo que o desenvolvimento da prova de conceito leva aproximadamente 50 dias, que os desenvolvedores trabalharam 2 horas durante esses dias e que o custo médio da hora de trabalho dos desenvolvedores seja de R$ 50,00, o cálculo do custo dos desenvolvedores é feito da seguinte forma:
+Para calcular o custo dos desenvolvedores, é necessário considerar o tempo estimado para o desenvolvimento da prova de conceito e o custo médio da hora de trabalho dos desenvolvedores. Sabendo que o desenvolvimento da prova de conceito leva aproximadamente 50 dias, que os desenvolvedores trabalharam 2 horas durante esses dias e o custo médio da hora de trabalho dos desenvolvedores seja de R$ 50,00, o cálculo do custo dos desenvolvedores é feito da seguinte forma:
 
 ```
 Custo dos desenvolvedores = Dias de trabalho * Horas de trabalho por dia * Custo da hora de trabalho
@@ -73,22 +73,22 @@ Imposto = Preço do componente / (1 - Alíquota)
 
 | Produto | Preço (R$) |
 |---------|-------|
-| TurtleBot3 Burger RPi4 2GB      | 9.435,83    |
-| Bateria Li-po Prismatica 3,7v 1800mah          | 106,25     |
-| Webcam Logitech c270i 720P           | 166,62     |
-| Aparelho para usar o software          | 2.336,25     |
+| TurtleBot3 Burger RPi4 2GB      | 9.435,83    |
+| Bateria Li-po Prismatica 3,7v 1800mah          | 106,25     |
+| Webcam Logitech c270i 720P           | 166,62     |
+| Aparelho para usar o software          | 2.336,25     |
 
-#### Valor final da implementação (com fretes, custos adicionais  e tributos inclusos):
+#### Valor final da implementação (com fretes, custos adicionais  e tributos inclusos):
 
 | Produto | Preços finais (R$) |
 |---------|-------|
-| TurtleBot3 Burger RPi4 2GB      | 9.435,83    |
-| Bateria Li-po Prismatica 3,7v 1800mah          | 106,25     |
-| Webcam Logitech c270i 720P           | 166,62     |
-| Aparelho para usar o software          | 2.336,25     |
-| Hospedagem do software          | 4.382,47/ano     |
-| Custos dos desenvolvedores          | 35.000,00     |
-| **Total**          | **R$ 51.427,42**     |
+| TurtleBot3 Burger RPi4 2GB      | 9.435,83    |
+| Bateria Li-po Prismatica 3,7v 1800mah          | 106,25     |
+| Webcam Logitech c270i 720P           | 166,62     |
+| Aparelho para usar o software          | 2.336,25     |
+| Hospedagem do software          | 4.382,47/ano     |
+| Custos dos desenvolvedores          | 35.000,00     |
+| **Total**          | **R$ 51.427,42**     |
 
 **Nota:** _Os custos de capital foram calculados com base nos preços dos produtos e serviços no mercado atual, e os custos recorrentes foram calculados com base nos valores de hospedagem da AWS (Amazon Web Services)._
 
@@ -116,9 +116,9 @@ Para o primeiro ano da utilização do projeto "Desencana!", o investimento inic
 
 ### Benefícios esperados
 
-Os benefícios financeiros do projeto "Desencana!" incluem mas não se limitam a:
+Os benefícios financeiros do projeto "Desencana!" incluem, mas não se limitam a:
 
-- Otimização de processos de limpeza e manuntenção de ambientes, gerando redução de custos operacionais;
+- Otimização de processos de limpeza e manutenção de ambientes, gerando redução de custos operacionais;
 - Aumento da eficiência e produtividade dos funcionários;
 - Melhoria da qualidade de vida dos funcionários, que podem se dedicar a tarefas mais estratégicas e menos operacionais;
 - Melhoria na qualidade dos serviços prestados, gerando maior satisfação dos clientes.
@@ -131,7 +131,7 @@ O retorno sobre o investimento (ROI) é uma métrica financeira que mede a efici
 ROI = (Ganho obtido - Custo do investimento) / Custo do investimento
 ```
 
-Para o projeto "Desencana!", o ROI é calculado considerando o investimento inicial de R$ 65.000,00 e os benefícios esperados ao longo de um ano. Juntando estas informções, obtém-se:
+Para o projeto "Desencana!", o ROI é calculado considerando o investimento inicial de R$ 65.000,00 e os benefícios esperados ao longo de um ano. Juntando estas informações, obtém-se:
 
 ```markdown
 ROI = (Benefícios esperados - Custo do investimento) / Custo do investimento
@@ -154,17 +154,17 @@ A análise financeira da prova de conceito do projeto "Desencana!" demonstra que
 
 Para diminuir o custo da proposta, é possível considerar as seguintes estratégias:
 
-#### 1. **Otimização do Hardware**
+#### 1. **Otimização do Hardware.**
 - **Substituição por Componentes Mais Econômicos:** Avaliar a possibilidade de utilizar componentes de hardware alternativos que oferecem funcionalidades similares a um custo menor. Por exemplo, investigar se há modelos de robôs e câmeras mais acessíveis que ainda atendam aos requisitos do projeto.
-- **Compra em Volume:** Negociar descontos por compra em volume com fornecedores de hardware. Compras em grandes quantidades geralmente permitem obter preços mais baixos.
+- **Compra em Volume:** Negociar descontos por compra em volume com fornecedores de hardware. Compras em abundância geralmente permitem obter preços mais baixos.
 
-#### 2. **Reavaliação dos Serviços de Hospedagem**
+#### 2. **Reavaliação dos Serviços de Hospedagem.**
 - **Escolha de Planos Mais Econômicos:** Revisar os planos de hospedagem do AWS e optar por opções mais econômicas que ainda atendam às necessidades da implementação. Por exemplo, utilizar instâncias de EC2 menores ou otimizadas para o custo-benefício, e explorar planos de armazenamento que oferecem custos reduzidos.
-- **Utilização de Serviços Gerenciados:** Avaliar se o uso de serviços gerenciados da AWS pode reduzir os custos operacionais e de manutenção em longo prazo.
+- **Utilização de Serviços Gerenciados:** Avaliar se o uso de serviços gerenciados da AWS pode reduzir os custos operacionais e de manutenção a longo prazo.
 
-#### 3. **Revisão dos Custos Recorrentes**
+#### 3. **Revisão dos Custos Recorrentes.**
 - **Análise de Utilização:** Monitorar e ajustar a utilização dos recursos em tempo real para evitar custos desnecessários com serviços em nuvem. Por exemplo, desligar instâncias quando não estiverem em uso.
-- **Contratação de Serviços em Longo Prazo:** Aproveitar descontos oferecidos pela AWS para compromissos de longo prazo (como as instâncias reservadas), que podem oferecer economias significativas em comparação com a cobrança por demanda.
+- **Contratação de Serviços a Longo Prazo:** Aproveitar descontos oferecidos pela AWS para compromissos de longo prazo (como as instâncias reservadas), que podem oferecer economias significativas em comparação com a cobrança por demanda.
 
 #### 4. **Parcerias e Subsídios**
 - **Parcerias Estratégicas:** Buscar parcerias com outras empresas ou instituições que possam fornecer recursos, conhecimento ou infraestrutura a um custo reduzido ou até mesmo gratuitamente.
