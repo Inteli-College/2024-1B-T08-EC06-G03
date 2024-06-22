@@ -1,6 +1,11 @@
 # Desencana!
 Repositório do grupo Rebólins
 
+## Vídeo - Demonstração 
+
+[![Vídeo de demonstração](https://img.youtube.com/vi/tj1b849KVzc/0.jpg)](https://www.youtube.com/watch?v=tj1b849KVzc)
+
+
 ## Descrição do Projeto "Desencana!"
 O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínua de suas operações na indústria de processamento de cana-de-açúcar, está implementando uma solução inovadora de monitoramento e manutenção de reboilers através do "Projeto Desencana!". Este projeto visa integrar as tecnologias de robótica e visão computacional clássica para inspecionar e verificar a eficácia da limpeza dos tubos de reboilers, essenciais para a etapa de processamento da cana. Utilizando um sistema de sensores auxiliares, o robô especializado realiza uma avaliação precisa do estado de limpeza dos tubos, coletando dados críticos, que são automaticamente enviados para uma base central. Essa iniciativa não só otimiza a eficiência operacional, reduzindo tempos de inatividade devido a manutenções não planejadas, mas também garante a manutenção da qualidade e segurança no processo de produção. Através do Projeto Desencana!, a Atvos reforça seu compromisso com a inovação e a excelência operacional, estabelecendo novos padrões de manutenção preventiva na indústria.
 ## Objetivos do Projeto
@@ -106,7 +111,6 @@ O grupo Rebólins, em parceria com a Atvos, comprometida com a melhoria contínu
             ┗ 📜requirements.txt
             
 ```
-
 
 ## Guia de instrução 
 
