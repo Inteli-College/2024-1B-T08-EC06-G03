@@ -158,9 +158,9 @@ Para o teste de integração do sistema, o tempo médio de resposta da API foi d
 
 No teste de taxa de transferência de imagens, a média do intervalo entre cada transmissão de dados foi de 103ms, o que indica que o teste foi bem-sucedido. Nos diferentes cenários, vale destacar observações importantes:
 
-    - Não houve diferença entre a transmissão de imagens com iluminação adequada e com pouca iluminação, o que indica que a iluminação não impactou na latência da transmissão;
-    - Não houve diferenças significativas entre obstáculos parados ou em movimento;
-    - Não foi possível avaliar o impacto do acionamento do processamento do modelo de visão computacional dado que durante os testes a integração entre o modelo e a aplicação não estava completa.
+- Não houve diferença entre a transmissão de imagens com iluminação adequada e com pouca iluminação, o que indica que a iluminação não impactou na latência da transmissão;
+- Não houve diferenças significativas entre obstáculos parados ou em movimento;
+- Não foi possível avaliar o impacto do acionamento do processamento do modelo de visão computacional dado que durante os testes a integração entre o modelo e a aplicação não estava completa.
 
     Outro ponto a se considerar que não foi previsto no roteiro de testes foi a conexão da rede, que impacta diretamente na transmissão, ou seja, é um ponto essencial a ser avaliado quando o protótipo for testado em campo ou atualizado para a versão de mercado.
 

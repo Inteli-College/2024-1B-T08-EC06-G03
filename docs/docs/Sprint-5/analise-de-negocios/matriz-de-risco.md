@@ -21,7 +21,7 @@ Uma matriz de risco é importante em projetos de tecnologia, ao oferecer uma vis
    - *Justificativa:* Apesar do uso do robô ser uma etapa adicional no processo de limpeza, entende-se que o tempo aumentado não impacta significativamente no processo de limpeza como um todo.
    - **Probabilidade:** 70%
    - *Justificativa:* A probabilidade é alta porque se entende que a movimentação do robô, juntamente com o processo de relimpeza leva mais tempo do que apenas a relimpeza de todos os tubos.
-   - **Mitigação**: A equipe de desenvolvimento deve focar em otimizar o tempo de movimentação do robô, para que o tempo de limpeza não seja afetado.
+   - **Mitigação**: A equipe de desenvolvimento deve focar em otimizar o tempo de movimentação do robô e no processamento do algoritmo de visão computacional, para que o tempo de limpeza não seja afetado.
 
 2. O robô não é capaz de enviar informações enquanto está na canaleta.
    - **Explicativa:** Como a solução prevê que o robô ande na canaleta da linha de produção, existe o risco do robô não ser capaz de enviar informações no momento que está na canaleta. Isso ocorre devido a dificuldade de acesso ao sinal na linha de produção toda. Com isso, teríamos impacto em uma possível solução web.
