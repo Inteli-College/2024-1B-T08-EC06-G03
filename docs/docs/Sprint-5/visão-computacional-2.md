@@ -139,10 +139,12 @@ Para a organização do projeto, foi criada uma estrutura de pastas que facilita
 └── 📂runs
     └── 📂detect
         └── 📂train_5
+            ├── args.yaml
             └── 📂weights
                 ├── 📜best.pt
                 └── 📜last.pt
         └── 📂train_100
+            ├── args.yaml
             └── 📂weights
                 ├── 📜best.pt
                 └── 📜last.pt
